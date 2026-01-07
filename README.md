@@ -160,25 +160,44 @@ AI热点获取（11个数据源）
 llm:
   provider: "zhipuai"  # 或 "openai"
   zhipuai:
-    model: "glm-4-plus"  # glm-4-flash 更快更便宜
+    model: "glm-4.7"  # 最新旗舰模型（2025年12月发布）
+    # 其他可选: glm-4-flash（便宜快速）, glm-4-plus（上一代旗舰）
+    max_tokens: 8000  # 支持长文本生成
+    timeout: 300  # 5分钟超时
 
 agents:
   ai_trend_analyzer:
     enabled: true
     mock_mode: false  # false=真实API, true=模拟数据
 
+  research_agent:  # v2.2新增
+    enabled: true
+    max_docs_per_topic: 3
+
   longform_generator:
-    article_length: "medium"  # short, medium, long
+    enabled: true
+    article_length: "long"  # short, medium, long - long生成9000-13000字
+    technical_depth: "advanced"  # beginner, intermediate, advanced
+
+  code_review_agent:  # v2.2新增
+    enabled: true
+
+  fact_check_agent:  # v2.2新增
+    enabled: true
 
   xiaohongshu_refiner:
+    enabled: true
     style: "professional"  # professional, casual, humorous
+    content_density: "dense"  # light, medium, dense
 
   twitter_generator:
+    enabled: true
     style: "engaging"  # engaging, professional, casual
     thread_mode: true
-    max_tweets: 5
+    max_tweets: 8  # thread最多几条推文
 
   quality_evaluator:
+    enabled: true
     min_score: 7.0  # 质量阈值
 ```
 
