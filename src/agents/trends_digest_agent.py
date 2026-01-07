@@ -210,7 +210,7 @@ class TrendsDigestAgent(BaseAgent):
 
 摘要："""
 
-            response = self._call_llm(prompt, max_tokens=150)
+            response = self._call_llm(prompt)
             return response.strip()
         except:
             # 如果LLM调用失败，返回截断的描述
@@ -258,7 +258,7 @@ class TrendsDigestAgent(BaseAgent):
 - 适合简报刊登
 """
 
-            analysis = self._call_llm(prompt, max_tokens=500)
+            analysis = self._call_llm(prompt)
             return analysis.strip()
         except Exception as e:
             self.log(f"生成汇总分析失败: {e}", "WARNING")

@@ -6,6 +6,9 @@ Agent模块
 from src.agents.base import BaseAgent
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
 from src.agents.trends_digest_agent import TrendsDigestAgent
+from src.agents.research_agent import ResearchAgent
+from src.agents.code_review_agent import CodeReviewAgent
+from src.agents.fact_check_agent import FactCheckAgent
 from src.agents.longform_generator import LongFormGeneratorAgent
 from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
 from src.agents.twitter_generator import TwitterGeneratorAgent
@@ -19,6 +22,9 @@ __all__ = [
     "BaseAgent",
     "RealAITrendAnalyzerAgent",
     "TrendsDigestAgent",
+    "ResearchAgent",
+    "CodeReviewAgent",
+    "FactCheckAgent",
     "LongFormGeneratorAgent",
     "XiaohongshuRefinerAgent",
     "TwitterGeneratorAgent",

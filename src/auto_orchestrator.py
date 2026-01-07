@@ -17,6 +17,10 @@ from langgraph.graph import StateGraph, END
 # 本地imports
 from src.state import create_initial_state, update_state, add_agent_to_order, calculate_execution_time
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
+from src.agents.trends_digest_agent import TrendsDigestAgent
+from src.agents.research_agent import ResearchAgent
+from src.agents.code_review_agent import CodeReviewAgent
+from src.agents.fact_check_agent import FactCheckAgent
 from src.agents.longform_generator import LongFormGeneratorAgent
 from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
 from src.agents.twitter_generator import TwitterGeneratorAgent
@@ -25,7 +29,6 @@ from src.agents.image_advisor import ImageAdvisorAgent
 from src.agents.image_generator import ImageGeneratorAgent
 from src.agents.quality_evaluator import QualityEvaluatorAgent
 from src.agents.publisher import PublisherAgent
-from src.agents.trends_digest_agent import TrendsDigestAgent
 from src.utils.storage import get_storage
 
 # 日志配置
@@ -124,9 +127,21 @@ class AutoContentOrchestrator:
         if agents_config.get("trends_digest", {}).get("enabled", True):
             agents["trends_digest"] = TrendsDigestAgent(self.config, self.prompts)
 
+        # 内容研究Agent（新增）
+        if agents_config.get("research_agent", {}).get("enabled", True):
+            agents["research_agent"] = ResearchAgent(self.config, self.prompts)
+
         # 长文本生成Agent
         if agents_config.get("longform_generator", {}).get("enabled", True):
             agents["longform_generator"] = LongFormGeneratorAgent(self.config, self.prompts)
+
+        # 代码审查Agent（新增）
+        if agents_config.get("code_review_agent", {}).get("enabled", True):
+            agents["code_review_agent"] = CodeReviewAgent(self.config, self.prompts)
+
+        # 事实核查Agent（新增）
+        if agents_config.get("fact_check_agent", {}).get("enabled", True):
+            agents["fact_check_agent"] = FactCheckAgent(self.config, self.prompts)
 
         # 小红书笔记精炼Agent
         if agents_config.get("xiaohongshu_refiner", {}).get("enabled", True):
@@ -168,8 +183,7 @@ class AutoContentOrchestrator:
             workflow.add_node(agent_name, self._create_agent_node(agent))
 
         # 定义执行顺序：
-        # AI热点分析 → 热点汇总 → 长文本生成 → 小红书精炼 → Twitter → ...
-        # 全部顺序执行，避免并发冲突
+        # AI热点分析 → 热点汇总 → 内容研究 → 长文本生成 → 代码审查 → 小红书精炼 → Twitter → 标题优化 → 图像建议 → 图像生成 → 事实核查 → 质量评估 → 发布
         if "ai_trend_analyzer" in self.agents:
             workflow.set_entry_point("ai_trend_analyzer")
 
@@ -179,10 +193,20 @@ class AutoContentOrchestrator:
                 workflow.add_edge(last_node, "trends_digest")
                 last_node = "trends_digest"
 
+            # 内容研究Agent（新增）
+            if "research_agent" in self.agents:
+                workflow.add_edge(last_node, "research_agent")
+                last_node = "research_agent"
+
             # 长文本生成流程
             if "longform_generator" in self.agents:
                 workflow.add_edge(last_node, "longform_generator")
                 last_node = "longform_generator"
+
+                # 代码审查Agent（新增）
+                if "code_review_agent" in self.agents:
+                    workflow.add_edge(last_node, "code_review_agent")
+                    last_node = "code_review_agent"
 
                 # 顺序执行：长文本 -> 小红书 -> Twitter -> 标题优化
                 # 避免并发更新state导致的冲突
@@ -209,6 +233,11 @@ class AutoContentOrchestrator:
                 if "image_generator" in self.agents:
                     workflow.add_edge(last_node, "image_generator")
                     last_node = "image_generator"
+
+                # 事实核查Agent（新增）
+                if "fact_check_agent" in self.agents:
+                    workflow.add_edge(last_node, "fact_check_agent")
+                    last_node = "fact_check_agent"
 
                 if "quality_evaluator" in self.agents:
                     workflow.add_edge(last_node, "quality_evaluator")

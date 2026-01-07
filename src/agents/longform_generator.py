@@ -5,6 +5,7 @@
 
 from typing import Dict, Any
 import re
+from datetime import datetime
 from src.agents.base import BaseAgent
 
 
@@ -14,16 +15,16 @@ class LongFormGeneratorAgent(BaseAgent):
     def __init__(self, config: Dict[str, Any], prompts: Dict[str, Any]):
         super().__init__(config, prompts)
         generator_config = config.get("agents", {}).get("longform_generator", {})
-        self.article_length = generator_config.get("article_length", "medium")  # short, medium, long
-        self.technical_depth = generator_config.get("technical_depth", "intermediate")  # beginner, intermediate, advanced
-        self.max_tokens = generator_config.get("max_tokens", 4000)
+        self.article_length = generator_config.get("article_length", "long")  # 默认生成长文章
+        self.technical_depth = generator_config.get("technical_depth", "advanced")  # 默认高级技术深度
+        self.max_tokens = generator_config.get("max_tokens", 8000)  # 增加token限制以支持更长文章
         self.llm.max_tokens = self.max_tokens
         self.llm.temperature = 0.7  # 平衡创意和准确性
         self.mock_mode = config.get("agents", {}).get("ai_trend_analyzer", {}).get("mock_mode", False)
 
     def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
-        生成长文本技术文章
+        生成长文本技术文章（分阶段生成）
 
         Args:
             state: 当前工作流状态
@@ -31,7 +32,7 @@ class LongFormGeneratorAgent(BaseAgent):
         Returns:
             Dict[str, Any]: 更新后的状态
         """
-        self.log("开始生成长文本技术文章")
+        self.log("开始生成长文本技术文章（分阶段生成）")
 
         try:
             # 获取选中的热点话题
@@ -46,14 +47,8 @@ class LongFormGeneratorAgent(BaseAgent):
                 self.log("使用Mock模式生成模拟文章")
                 article = self._generate_mock_article(selected_topic)
             else:
-                # 构建提示词
-                user_prompt = self._build_prompt(state, selected_topic)
-
-                # 调用LLM生成文章
-                response = self._call_llm(user_prompt)
-
-                # 解析文章内容
-                article = self._parse_article(response, selected_topic)
+                # 分阶段生成
+                article = self._generate_article_stages(state, selected_topic)
 
             self.log(f"成功生成技术文章，字数: {article['word_count']}")
 
@@ -74,6 +69,458 @@ class LongFormGeneratorAgent(BaseAgent):
                 "current_step": "longform_generator_completed"
             }
 
+    def _generate_article_stages(self, state: Dict[str, Any], topic_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        分阶段生成文章（避免超时）
+
+        Args:
+            state: 当前状态
+            topic_data: 热点数据
+
+        Returns:
+            Dict[str, Any]: 文章数据
+        """
+        # 获取研究数据
+        research_data = state.get("research_data", {})
+        research_summary = state.get("research_summary", "")
+
+        # 第一阶段：生成大纲
+        self.log("第一阶段：生成文章大纲...")
+        outline = self._generate_outline(state, topic_data, research_data)
+
+        # 第二阶段：逐节展开
+        self.log(f"第二阶段：展开 {len(outline.get('sections', []))} 个章节...")
+        full_content = f"# {topic_data['title']}\n\n"
+        sections_content = {}
+
+        for idx, section in enumerate(outline.get('sections', []), 1):
+            self.log(f"  正在生成第 {idx}/{len(outline.get('sections', []))} 节: {section.get('title', '')}")
+
+            # 使用研究数据展开章节
+            section_content = self._expand_section(section, research_data, topic_data)
+
+            # 添加到完整内容
+            full_content += f"## {section.get('title')}\n\n{section_content}\n\n"
+            sections_content[section.get('title')] = section_content
+
+        # 第三阶段：生成总结
+        self.log("第三阶段：生成总结...")
+        summary = self._generate_summary(topic_data, outline, research_data)
+        full_content += f"## {summary.get('title', '总结')}\n\n{summary.get('content', '')}\n\n"
+
+        # 添加元数据
+        metadata = self._generate_metadata(topic_data, full_content, research_data)
+        full_content += metadata
+
+        # 计算字数
+        word_count = len(full_content)
+
+        return {
+            "title": topic_data['title'],
+            "full_content": full_content,
+            "sections": sections_content,
+            "word_count": word_count,
+            "source_topic": topic_data['title'],
+            "tags": topic_data.get('tags', []),
+            "reading_time": f"{word_count // 400}-{word_count // 300}分钟",
+            "outline": outline
+        }
+
+    def _generate_outline(self, state: Dict[str, Any], topic_data: Dict[str, Any], research_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        生成文章大纲
+
+        Args:
+            state: 当前状态
+            topic_data: 热点数据
+            research_data: 研究数据
+
+        Returns:
+            Dict[str, Any]: 大纲
+        """
+        # 构建研究背景
+        research_info = ""
+        if research_data and research_data.get("detailed_info"):
+            details = research_data["detailed_info"]
+            research_info = f"""
+**技术背景**：{details.get('background', '')}
+
+**核心特性**：{details.get('core_features', '')}
+
+**应用场景**：{details.get('use_cases', '')}
+
+**发展趋势**：{details.get('trends', '')}
+"""
+
+        prompt = f"""请为以下技术主题生成详细的文章大纲。
+
+**主题**：{topic_data['title']}
+**描述**：{topic_data.get('description', '')}
+
+{research_info}
+
+**要求**：
+1. 大纲应包含 7-8 个主要章节
+2. 每个章节要有明确的主题和要点
+3. 注明每节的预计字数
+4. 确保逻辑连贯、层次清晰
+
+**输出格式（JSON）**：
+{{
+  "title": "主标题",
+  "sections": [
+    {{"title": "引言", "words": 400, "points": ["要点1", "要点2"]}},
+    {{"title": "技术背景", "words": 600, "points": ["要点1", "要点2"]}},
+    {{"title": "核心技术解析", "words": 1500, "points": ["要点1", "要点2", "要点3"]}},
+    ...
+  ]
+}}
+
+请生成大纲：
+"""
+
+        try:
+            response = self._call_llm(prompt)
+
+            # 解析JSON响应
+            json_match = re.search(r'\{.*\}', response, re.DOTALL)
+            if json_match:
+                outline = json.loads(json_match.group())
+                return outline
+
+        except Exception as e:
+            self.log(f"大纲生成失败，使用默认大纲: {str(e)}", "WARNING")
+
+        # 返回默认大纲
+        return {
+            "title": topic_data['title'],
+            "sections": [
+                {"title": "引言", "words": 400, "points": "引入话题，说明重要性"},
+                {"title": "技术背景", "words": 600, "points": "发展历程、现状、挑战"},
+                {"title": "核心技术解析", "words": 1500, "points": "技术架构、关键特性、创新点"},
+                {"title": "实践应用", "words": 1000, "points": "实际案例、部署方法、最佳实践"},
+                {"title": "技术对比", "words": 500, "points": "与同类技术对比"},
+                {"title": "未来展望", "words": 400, "points": "发展趋势、机遇挑战"},
+                {"title": "总结", "words": 300, "points": "核心观点、行动建议"}
+            ]
+        }
+
+    def _expand_section(self, section: Dict[str, Any], research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+        """
+        展开单个章节内容
+
+        Args:
+            section: 章节信息
+            research_data: 研究数据
+            topic_data: 热点数据
+
+        Returns:
+            str: 章节内容
+        """
+        section_title = section.get('title', '')
+        section_words = section.get('words', 500)
+        section_points = section.get('points', '')
+
+        # 根据章节类型选择不同的展开策略（注意：更具体的条件要放在前面）
+        if '引言' in section_title:
+            return self._expand_introduction(section_title, section_words, topic_data)
+        elif '背景' in section_title:
+            return self._expand_background(section_title, section_words, research_data)
+        elif '对比' in section_title:
+            return self._expand_comparison(section_title, section_words, research_data, topic_data)
+        elif '核心' in section_title or '技术' in section_title:
+            return self._expand_core_tech(section_title, section_words, research_data, topic_data)
+        elif '实践' in section_title or '应用' in section_title:
+            return self._expand_practice(section_title, section_words, research_data, topic_data)
+        elif '未来' in section_title or '展望' in section_title:
+            return self._expand_future(section_title, section_words, research_data)
+        else:
+            return self._expand_generic(section_title, section_words, section_points, research_data)
+
+    def _expand_introduction(self, title: str, words: int, topic_data: Dict[str, Any]) -> str:
+        """展开引言章节"""
+        prompt = f"""请撰写文章引言部分。
+
+**主题**：{topic_data['title']}
+**要求字数**：{words}字
+
+**内容要求**：
+1. 用引人入胜的开场白
+2. 介绍技术背景和重要性
+3. 点明文章将讨论的核心问题
+
+请撰写引言（{words}字）：
+"""
+
+        response = self._call_llm(prompt)
+        return response.strip()
+
+    def _expand_background(self, title: str, words: int, research_data: Dict[str, Any]) -> str:
+        """展开技术背景章节"""
+        background = research_data.get("detailed_info", {}).get("background", "")
+
+        prompt = f"""请撰写技术背景部分。
+
+**背景资料**：{background}
+
+**要求字数**：{words}字
+
+**内容要求**：
+1. 相关技术的发展历程
+2. 当前技术现状和竞争格局
+3. 面临的挑战或问题
+
+请撰写技术背景（{words}字）：
+"""
+
+        response = self._call_llm(prompt)
+        return response.strip()
+
+    def _expand_core_tech(self, title: str, words: int, research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+        """展开核心技术解析章节（最重要）- 进一步细分为3个子节以避免超时"""
+        details = research_data.get("detailed_info", {})
+        self.log(f"    [{title}] 分为3个子节生成，避免超时...")
+
+        # 定义3个子节，每个500字
+        subsections = [
+            {
+                "subtitle": "技术架构与原理",
+                "focus": details.get('core_features', ''),
+                "words": 500,
+                "content": """
+1. 整体架构设计
+2. 核心组件和模块
+3. 工作流程和数据流
+4. 关键技术原理
+"""
+            },
+            {
+                "subtitle": "关键特性详解",
+                "focus": details.get('specs', ''),
+                "words": 500,
+                "content": """
+1. 主要功能特性
+2. 性能指标和规格
+3. 技术优势和创新点
+4. 适用场景分析
+"""
+            },
+            {
+                "subtitle": "技术对比与代码示例",
+                "focus": details.get('pros_cons', ''),
+                "words": 500,
+                "content": """
+1. 与同类技术对比
+2. 优缺点分析
+3. 代码示例（如适用）
+4. 使用注意事项
+"""
+            }
+        ]
+
+        full_content = f"\n### {title}\n\n"
+
+        for idx, subsection in enumerate(subsections, 1):
+            self.log(f"      正在生成子节 {idx}/3: {subsection['subtitle']}")
+
+            prompt = f"""请撰写核心技术解析的子章节：{subsection['subtitle']}
+
+**主题**：{topic_data['title']}
+
+**参考资料**：{subsection['focus']}
+
+**要求字数**：{subsection['words']}字
+
+**内容要求**：{subsection['content']}
+
+请使用Markdown格式，包含代码块、表格等（{subsection['words']}字，要求详细专业）：
+"""
+
+            response = self._call_llm(prompt)
+            full_content += f"\n#### {idx}. {subsection['subtitle']}\n\n{response.strip()}\n\n"
+
+        return full_content
+
+    def _expand_practice(self, title: str, words: int, research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+        """展开实践应用章节 - 分为2个子节以避免超时"""
+        use_cases = research_data.get("detailed_info", {}).get("use_cases", "")
+        self.log(f"    [{title}] 分为2个子节生成，避免超时...")
+
+        # 定义2个子节，每个500字
+        subsections = [
+            {
+                "subtitle": "应用场景与案例",
+                "words": 500,
+                "content": f"""
+1. 主要应用场景
+2. 真实案例分析（至少2个）
+3. 应用效果和成果
+
+**参考资料**：{use_cases}
+"""
+            },
+            {
+                "subtitle": "实施指南与最佳实践",
+                "words": 500,
+                "content": """
+1. 实施步骤和部署方法
+2. 最佳实践建议
+3. 常见问题和解决方案
+4. 推荐工具和资源
+"""
+            }
+        ]
+
+        full_content = f"\n### {title}\n\n"
+
+        for idx, subsection in enumerate(subsections, 1):
+            self.log(f"      正在生成子节 {idx}/2: {subsection['subtitle']}")
+
+            prompt = f"""请撰写实践应用的子章节：{subsection['subtitle']}
+
+**主题**：{topic_data['title']}
+
+{subsection['content']}
+
+**要求字数**：{subsection['words']}字
+
+请撰写实践应用子章节（{subsection['words']}字，要求实用专业）：
+"""
+
+            response = self._call_llm(prompt)
+            full_content += f"\n#### {idx}. {subsection['subtitle']}\n\n{response.strip()}\n\n"
+
+        return full_content
+
+    def _expand_comparison(self, title: str, words: int, research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+        """展开技术对比章节"""
+        prompt = f"""请撰写技术对比部分。
+
+**主题**：{topic_data['title']}
+
+**要求字数**：{words}字
+
+**内容要求**：
+1. 与同类技术的详细对比
+2. 不同场景下的选型建议
+3. 迁移路径和注意事项
+4. 使用对比表格展示
+
+请撰写技术对比（{words}字）：
+"""
+
+        response = self._call_llm(prompt)
+        return response.strip()
+
+    def _expand_future(self, title: str, words: int, research_data: Dict[str, Any]) -> str:
+        """展开未来展望章节"""
+        trends = research_data.get("detailed_info", {}).get("trends", "")
+
+        prompt = f"""请撰写未来展望部分。
+
+**发展趋势**：{trends}
+
+**要求字数**：{words}字
+
+**内容要求**：
+1. 分析技术发展趋势
+2. 讨论潜在的改进方向
+3. 预测对行业的影响
+4. 面临的挑战与机遇
+
+请撰写未来展望（{words}字）：
+"""
+
+        response = self._call_llm(prompt)
+        return response.strip()
+
+    def _expand_generic(self, title: str, words: int, points: str, research_data: Dict[str, Any]) -> str:
+        """展开通用章节"""
+        prompt = f"""请撰写"{title}"章节。
+
+**要点**：{points}
+
+**要求字数**：{words}字
+
+请撰写该章节内容（{words}字）：
+"""
+
+        response = self._call_llm(prompt)
+        return response.strip()
+
+    def _generate_summary(self, topic_data: Dict[str, Any], outline: Dict[str, Any], research_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        生成总结章节
+
+        Args:
+            topic_data: 热点数据
+            outline: 文章大纲
+            research_data: 研究数据
+
+        Returns:
+            Dict[str, Any]: 总结内容
+        """
+        trends = research_data.get("detailed_info", {}).get("trends", "")
+
+        prompt = f"""请撰写文章总结部分。
+
+**主题**：{topic_data['title']}
+
+**发展趋势**：{trends}
+
+**要求**：
+1. 总结核心观点和关键洞察
+2. 给不同角色读者（开发者、企业决策者、投资者）的具体建议
+3. 300字左右
+
+请撰写总结：
+"""
+
+        response = self._call_llm(prompt)
+
+        return {
+            "title": "总结",
+            "content": response.strip()
+        }
+
+    def _generate_metadata(self, topic_data: Dict[str, Any], content: str, research_data: Dict[str, Any]) -> str:
+        """生成元数据"""
+        word_count = len(content)
+        tags = ', '.join(topic_data.get('tags', ['AI', '技术']))
+        date_str = datetime.now().strftime("%Y-%m-%d")
+
+        return f"""
+---
+
+**关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
+
+**延伸阅读**：
+- 官方文档和GitHub仓库
+- 社区最佳实践案例
+- 相关技术论文和研究报告
+
+**互动交流**：欢迎在评论区分享你的观点和经验，让我们一起探讨技术的未来！
+
+---
+
+📌 **关键词**：{tags}
+
+📅 **发布日期**：{date_str}
+
+🔖 **字数统计**：约{word_count}字
+
+⏱️ **阅读时间**：{word_count // 400}-{word_count // 300}分钟
+
+
+---
+**元数据**:
+- 字数: {word_count}
+- 阅读时间: {word_count // 400}-{word_count // 300}分钟
+- 来源热点: {topic_data['title']}
+- 标签: {tags}
+- 生成时间: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+"""
+
     def _build_prompt(self, state: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
         """
         构建生成提示词
@@ -85,6 +532,16 @@ class LongFormGeneratorAgent(BaseAgent):
         Returns:
             str: 提示词
         """
+        # 调试：检查研究数据是否存在
+        research_data = state.get("research_data", {})
+        research_summary = state.get("research_summary", "")
+        if research_data:
+            self.log(f"研究数据存在: {len(research_data.get('search_results', []))} 条搜索结果, {len(research_data.get('official_docs', []))} 个官方文档")
+            if research_data.get("detailed_info"):
+                self.log(f"详细分析存在: {list(research_data.get('detailed_info', {}).keys())}")
+        else:
+            self.log("警告: 研究数据为空，将使用通用内容", "WARNING")
+
         prompts = self.prompts.get("prompts", {})
         prompt_template = prompts.get("longform_generator", {}).get("user", "")
 
@@ -98,74 +555,123 @@ class LongFormGeneratorAgent(BaseAgent):
 标签：{', '.join(topic_data.get('tags', []))}
 """
 
+        # 获取研究数据（ResearchAgent提供）
+        research_data = state.get("research_data", {})
+        research_summary = state.get("research_summary", "")
+
+        # 构建研究背景部分
+        research_context = ""
+        if research_data:
+            detailed_info = research_data.get("detailed_info", {})
+
+            research_context = f"""
+**深度研究资料**：
+
+### 技术背景
+{detailed_info.get('background', '暂无技术背景信息')}
+
+### 核心特性
+{detailed_info.get('core_features', '暂无核心特性信息')}
+
+### 技术规格
+{detailed_info.get('specs', '暂无技术规格信息')}
+
+### 应用场景
+{detailed_info.get('use_cases', '暂无应用场景信息')}
+
+### 优缺点分析
+{detailed_info.get('pros_cons', '暂无优缺点分析')}
+
+### 发展趋势
+{detailed_info.get('trends', '暂无发展趋势信息')}
+"""
+
+            # 添加收集到的资料统计
+            if research_data.get("search_results"):
+                research_context += f"""
+### 参考资料来源
+- 搜索结果：{len(research_data.get('search_results', []))} 条
+- 官方文档：{len(research_data.get('official_docs', []))} 个
+- GitHub项目：{len(research_data.get('github_repos', []))} 个
+- 技术文章：{len(research_data.get('technical_articles', []))} 篇
+"""
+
         # 获取目标受众
         target_audience = state.get("target_audience", "技术从业者")
 
         if prompt_template:
             return prompt_template.format(
                 topic_desc=topic_desc.strip(),
+                research_context=research_context.strip(),
+                research_summary=research_summary.strip(),
                 target_audience=target_audience,
                 article_length=self.article_length,
                 technical_depth=self.technical_depth
             )
         else:
-            # 使用默认提示词
-            return f"""你是一位资深的技术文章作者，擅长深度解析AI技术趋势。
+            # 使用默认提示词（简化版，更直接）
+            research_info = ""
+            if research_data and research_data.get("detailed_info"):
+                details = research_data["detailed_info"]
+                research_info = f"""
+**技术背景**：{details.get('background', '')}
 
-请基于以下热点话题，撰写一篇高质量的技术文章：
+**核心特性**：{details.get('core_features', '')}
 
-{topic_desc}
+**技术规格**：{details.get('specs', '')}
 
-写作要求：
+**应用场景**：{details.get('use_cases', '')}
 
-1. **文章结构**（采用Markdown格式）：
-   # 引人入胜的标题
+**优缺点**：{details.get('pros_cons', '')}
 
-   ## 引言（200-300字）
-   - 用引人入胜的开场白
-   - 介绍技术背景和重要性
-   - 点明文章将讨论的核心问题
+**发展趋势**：{details.get('trends', '')}
+"""
 
-   ## 技术背景（300-400字）
-   - 相关技术的发展历程
-   - 当前技术现状
-   - 面临的挑战或问题
+            return f"""请撰写一篇深度技术文章，字数必须达到4000-5000字。
 
-   ## 核心解析（800-1200字）
-   - 深入分析技术原理
-   - 解释关键概念和术语
-   - 提供具体示例或案例
-   - 对比不同技术方案
+**主题**：{topic_data['title']}
 
-   ## 实践应用（400-600字）
-   - 实际应用场景
-   - 实施建议或最佳实践
-   - 常见问题和解决方案
-   - 工具和资源推荐
+**研究资料**：
+{research_info}
 
-   ## 未来展望（200-300字）
-   - 技术发展趋势
-   - 潜在的改进方向
-   - 对行业的影响
+**文章结构**（按顺序展开，每部分都要详细）：
 
-   ## 总结（100-200字）
-   - 核心观点总结
-   - 给读者的建议
+## 引言（400字）
+引入话题，说明重要性
 
-2. **写作风格**：
-   - 专业但不晦涩
-   - 深入浅出，适合{target_audience}阅读
-   - 技术深度：{self.technical_depth}
-   - 文章长度：{self.article_length}
+## 技术背景（600字）
+发展历程、现状、挑战
 
-3. **内容要求**：
-   - 确保技术准确性
-   - 提供具体数据和案例
-   - 避免过度宣传
-   - 保持客观中立
-   - 代码示例使用```markdown ```代码```格式
+## 核心技术解析（1500字）
+这是最重要的部分，要详细展开：
+- 技术架构和原理
+- 关键特性和创新点
+- 与同类技术对比
+- 包含代码示例
 
-请开始撰写文章，确保内容专业、有价值、易读性强。
+## 实践应用（1000字）
+- 实际案例
+- 部署方法
+- 最佳实践
+- 常见问题
+
+## 技术对比（500字）
+与其他方案的详细对比
+
+## 未来展望（400字）
+发展趋势、机遇挑战
+
+## 总结（300字）
+核心观点、行动建议
+
+**要求**：
+1. 使用Markdown格式
+2. 每个部分都要深入展开，不要简略
+3. 使用研究资料中的具体信息
+4. 包含代码示例（如适用）
+5. 总字数4000-5000字
+
+请开始撰写：
 """
 
     def _parse_article(self, response: str, topic_data: Dict[str, Any]) -> Dict[str, Any]:

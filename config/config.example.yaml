@@ -18,7 +18,7 @@ llm:
     # Thinking 深度思考模式（GLM-4.7 专属功能）
     thinking:
       enabled: true  # 启用深度思考模式
-      type: "enabled"  # enabled=强制启用, auto=自动决定, disabled=关闭
+      type: "auto"  # enabled=强制启用, auto=自动决定, disabled=关闭
 
   # OpenAI配置（备用）
   openai:
