@@ -269,8 +269,6 @@ A: 打开 `data/YYYYMMDD/xiaohongshu/prompts_*.txt`，复制中文提示词，�
 
 - **[PROJECT_GUIDE.md](PROJECT_GUIDE.md)** - 完整项目指南
 - **[CLAUDE.md](CLAUDE.md)** - 开发者指南
-- **[STORAGE_QUICKREF.md](STORAGE_QUICKREF.md)** - 存储结构快速参考
-- **[AI_TRENDS_API_GUIDE.md](AI_TRENDS_API_GUIDE.md)** - 数据源详细说明
 - **[test/README.md](test/README.md)** - 测试文件说明
 
 ## 🔄 版本历史
