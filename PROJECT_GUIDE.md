@@ -115,22 +115,35 @@ logs/20260107/             # 日志按日期分层
 llm:
   provider: "zhipuai"  # 或 "openai"
   zhipuai:
-    model: "glm-4-plus"  # glm-4-flash 更快更便宜
+    model: "glm-4.7"  # 最新旗舰模型（2025年12月发布）
+    # 其他可选: glm-4-flash（便宜快速）, glm-4-plus（上一代旗舰）
 
 agents:
   ai_trend_analyzer:
     enabled: true
     mock_mode: false  # false=真实API, true=模拟数据
 
+  research_agent:  # v2.2新增
+    enabled: true
+
   longform_generator:
-    article_length: "medium"  # short, medium, long
-    technical_depth: "intermediate"
+    enabled: true
+    article_length: "long"  # short, medium, long - long生成9000-13000字
+    technical_depth: "advanced"  # beginner, intermediate, advanced
+
+  code_review_agent:  # v2.2新增
+    enabled: true
+
+  fact_check_agent:  # v2.2新增
+    enabled: true
 
   xiaohongshu_refiner:
+    enabled: true
     style: "professional"  # professional, casual, humorous
-    content_density: "medium"
+    content_density: "dense"  # light, medium, dense
 
   twitter_generator:
+    enabled: true
     style: "engaging"  # engaging, professional, casual
     thread_mode: true
     max_tweets: 5

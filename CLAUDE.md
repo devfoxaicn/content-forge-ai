@@ -109,7 +109,7 @@ class NewAgent(BaseAgent):
 llm:
   provider: "zhipuai"  # 或 "openai"
   zhipuai:
-    model: "glm-4-plus"  # 生产环境主力
+    model: "glm-4.7"  # 最新旗舰模型（2025年12月发布）
     base_url: "https://open.bigmodel.cn/api/paas/v4/"
   openai:
     model: "gpt-4o"
@@ -222,7 +222,7 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --s
 
 ### 降低成本
 
-- 使用 `glm-4-flash` 替代 `glm-4-plus`（成本降低约80%）
+- 使用 `glm-4-flash` 替代 `glm-4.7`（成本降低约80%）
 - 减少数据源数量（如仅保留hackernews + arxiv）
 - 降低 `max_tokens` 设置
 - 禁用不需要的Agent（设置 `enabled: false`）
