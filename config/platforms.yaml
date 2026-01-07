@@ -1,0 +1,179 @@
+# ContentForge AI - 平台配置文件
+# 多平台内容发布配置
+
+platforms:
+  # 小红书平台配置
+  xiaohongshu:
+    enabled: true
+    style: "casual"  # casual, professional
+    use_emojis: true
+    max_length: 1000
+    image_required: true
+    publish_method: "mcp"  # mcp, api, manual
+    mcp_server_url: "http://localhost:3000"
+
+    # 发布时间配置
+    publish_schedule:
+      optimal_times:
+        - "09:00-10:00"
+        - "18:00-19:00"
+        - "21:00-22:00"
+
+    # 内容特点
+    content_features:
+      use_emoji: true
+      short_paragraphs: true
+      call_to_action: true
+      hashtags_required: true
+
+  # 知乎平台配置
+  zhihu:
+    enabled: true
+    style: "professional"
+    use_markdown: true
+    max_length: 10000
+    image_required: false
+    publish_method: "api"  # api, manual
+
+    # 发布时间配置
+    publish_schedule:
+      optimal_times:
+        - "08:00-09:00"
+        - "20:00-21:00"
+        - "22:00-23:00"
+
+    # 内容特点
+    content_features:
+      use_markdown: true
+      structured_format: true
+      encourage_discussion: true
+      depth_required: true
+
+  # 微信公众号配置
+  wechat:
+    enabled: false  # 默认关闭，需要配置API
+    style: "professional"
+    use_html: true
+    max_length: 5000
+    image_required: true
+    publish_method: "api"
+
+    # API配置（需要从环境变量读取）
+    app_id: "${WECHAT_APP_ID}"
+    app_secret: "${WECHAT_APP_SECRET}"
+
+    # 发布时间配置
+    publish_schedule:
+      optimal_times:
+        - "08:00-09:00"
+        - "12:00-13:00"
+        - "18:00-19:00"
+
+    # 内容特点
+    content_features:
+      use_html: true
+      cover_image_required: true
+      subscription_reminder: true
+
+  # 抖音平台配置（视频脚本）
+  douyin:
+    enabled: false
+    style: "script"
+    video_required: true
+    max_duration: 60  # 秒
+    publish_method: "manual"
+
+    # 发布时间配置
+    publish_schedule:
+      optimal_times:
+        - "11:00-13:00"
+        - "18:00-20:00"
+        - "21:00-23:00"
+
+    # 内容特点
+    content_features:
+      script_format: true
+      scene_descriptions: true
+      voiceover_instructions: true
+
+  # B站平台配置
+  bilibili:
+    enabled: false
+    style: "professional"
+    video_required: true
+    max_duration: 300  # 5分钟
+    publish_method: "manual"
+
+    # 发布时间配置
+    publish_schedule:
+      optimal_times:
+        - "17:00-19:00"
+        - "20:00-22:00"
+        - "23:00-01:00"
+
+    # 内容特点
+    content_features:
+      article_format: true  # 支持专栏文章
+      markdown_support: true
+      cover_image_required: true
+
+# 内容矩阵配置
+content_matrix:
+  # 是否启用跨平台内容差异化
+  enable_differentiation: true
+
+  # 主内容平台（内容首发）
+  primary_platform: "xiaohongshu"
+
+  # 分发平台
+  distribution_platforms:
+    - "xiaohongshu"
+    - "zhihu"
+    - "wechat"
+
+  # 互相引流策略
+  cross_promotion:
+    enabled: true
+    strategies:
+      - type: "footer_link"
+        message: "更多干货欢迎关注：[其他平台名称]"
+      - type: "qr_code"
+        message: "扫码关注公众号"
+      - type: "teaser"
+        message: "下期预告：..."
+
+# 平台优先级配置
+platform_priority:
+  # 优先级高的平台优先发布
+  priority_order:
+    - platform: "xiaohongshu"
+      priority: 1
+      reason: "年轻用户活跃，传播快"
+    - platform: "zhihu"
+      priority: 2
+      reason: "专业深度，建立权威"
+    - platform: "wechat"
+      priority: 3
+      reason: "私域流量，用户粘性"
+
+# 发布策略配置
+publishing_strategy:
+  # 是否同时发布到所有平台
+  simultaneous_publish: false
+
+  # 是否错峰发布
+  staggered_publish: true
+  stagger_interval: 30  # 分钟
+
+  # 自动重试
+  auto_retry:
+    enabled: true
+    max_retries: 3
+    retry_delay: 60  # 秒
+
+  # 发布确认
+  require_confirmation:
+    xiaohongshu: false
+    zhihu: true
+    wechat: true
+    douyin: true

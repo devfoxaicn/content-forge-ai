@@ -1,0 +1,41 @@
+# LangChain & LangGraph
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-core>=0.1.0
+langgraph>=0.0.20
+
+# LLM API
+openai>=1.0.0
+
+# YAML配置
+pyyaml>=6.0
+
+# 日志
+loguru>=0.7.0
+
+# 数据处理
+pydantic>=2.0.0
+
+# 定时任务（未来使用）
+apscheduler>=3.10.0
+
+# HTTP请求
+requests>=2.31.0
+
+# 环境变量
+python-dotenv>=1.0.0
+
+# 类型提示
+typing-extensions>=4.8.0
+
+# Google Gemini
+google-generativeai>=0.3.0
+
+# arXiv API (用于获取AI论文)
+arxiv>=2.1.0
+
+# Reddit API (用于获取技术讨论)
+praw>=7.7.0
+
+# Stability AI (可选)
+stability-sdk>=0.8.0
