@@ -5,6 +5,7 @@
 
 from typing import Dict, Any
 import re
+import json
 from datetime import datetime
 from src.agents.base import BaseAgent
 
@@ -90,23 +91,47 @@ class LongFormGeneratorAgent(BaseAgent):
 
         # 第二阶段：逐节展开
         self.log(f"第二阶段：展开 {len(outline.get('sections', []))} 个章节...")
-        full_content = f"# {topic_data['title']}\n\n"
+        # 不在这里添加主标题，在最后统一添加
+        full_content = ""
         sections_content = {}
+        previous_sections = []  # 跟踪前面已生成的章节
+
+        # 检查是否启用上下文窗口
+        generator_config = self.config.get("agents", {}).get("longform_generator", {})
+        enable_context = generator_config.get("enable_context_window", True)
 
         for idx, section in enumerate(outline.get('sections', []), 1):
             self.log(f"  正在生成第 {idx}/{len(outline.get('sections', []))} 节: {section.get('title', '')}")
 
-            # 使用研究数据展开章节
-            section_content = self._expand_section(section, research_data, topic_data)
+            # 使用研究数据和上下文展开章节
+            if enable_context:
+                section_content = self._expand_section(section, research_data, topic_data, previous_sections)
+            else:
+                section_content = self._expand_section(section, research_data, topic_data)
+
+            # 规范化章节标题，避免重复
+            section_content = self._normalize_section_headers(section_content, section.get('title'))
 
             # 添加到完整内容
-            full_content += f"## {section.get('title')}\n\n{section_content}\n\n"
+            full_content += f"{section_content}\n\n"
             sections_content[section.get('title')] = section_content
+
+            # 记录当前章节标题，供下一节使用
+            previous_sections.append(section.get('title'))
 
         # 第三阶段：生成总结
         self.log("第三阶段：生成总结...")
         summary = self._generate_summary(topic_data, outline, research_data)
         full_content += f"## {summary.get('title', '总结')}\n\n{summary.get('content', '')}\n\n"
+
+        # 清理重复内容（在添加主标题之前）
+        generator_config = self.config.get("agents", {}).get("longform_generator", {})
+        if generator_config.get("enable_format_fix", True):
+            full_content = self._clean_duplicate_content(full_content)
+
+        # 在所有内容生成完成后，统一添加主标题
+        if not full_content.startswith('#'):
+            full_content = f"# {topic_data['title']}\n\n" + full_content
 
         # 添加元数据
         metadata = self._generate_metadata(topic_data, full_content, research_data)
@@ -205,49 +230,62 @@ class LongFormGeneratorAgent(BaseAgent):
             ]
         }
 
-    def _expand_section(self, section: Dict[str, Any], research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+    def _expand_section(self, section: Dict[str, Any], research_data: Dict[str, Any],
+                       topic_data: Dict[str, Any], previous_sections: list = None) -> str:
         """
-        展开单个章节内容
+        展开单个章节内容（增强版，包含上下文）
 
         Args:
             section: 章节信息
             research_data: 研究数据
             topic_data: 热点数据
+            previous_sections: 前面章节的标题列表（用于保持连贯性）
 
         Returns:
             str: 章节内容
         """
+        if previous_sections is None:
+            previous_sections = []
+
         section_title = section.get('title', '')
         section_words = section.get('words', 500)
         section_points = section.get('points', '')
 
+        # 构建上下文信息
+        context = self._build_section_context(section_title, previous_sections, topic_data)
+
         # 根据章节类型选择不同的展开策略（注意：更具体的条件要放在前面）
         if '引言' in section_title:
-            return self._expand_introduction(section_title, section_words, topic_data)
+            return self._expand_introduction(section_title, section_words, topic_data, context)
         elif '背景' in section_title:
-            return self._expand_background(section_title, section_words, research_data)
+            return self._expand_background(section_title, section_words, research_data, context)
         elif '对比' in section_title:
-            return self._expand_comparison(section_title, section_words, research_data, topic_data)
+            return self._expand_comparison(section_title, section_words, research_data, topic_data, context)
         elif '核心' in section_title or '技术' in section_title:
-            return self._expand_core_tech(section_title, section_words, research_data, topic_data)
+            return self._expand_core_tech(section_title, section_words, research_data, topic_data, context)
         elif '实践' in section_title or '应用' in section_title:
-            return self._expand_practice(section_title, section_words, research_data, topic_data)
+            return self._expand_practice(section_title, section_words, research_data, topic_data, context)
         elif '未来' in section_title or '展望' in section_title:
-            return self._expand_future(section_title, section_words, research_data)
+            return self._expand_future(section_title, section_words, research_data, context)
         else:
-            return self._expand_generic(section_title, section_words, section_points, research_data)
+            return self._expand_generic(section_title, section_words, section_points, research_data, context)
 
-    def _expand_introduction(self, title: str, words: int, topic_data: Dict[str, Any]) -> str:
-        """展开引言章节"""
+    def _expand_introduction(self, title: str, words: int, topic_data: Dict[str, Any],
+                          context: str = "") -> str:
+        """展开引言章节（增强版）"""
         prompt = f"""请撰写文章引言部分。
 
-**主题**：{topic_data['title']}
+**文章主题**：{topic_data['title']}
+
+{context}
+
 **要求字数**：{words}字
 
 **内容要求**：
-1. 用引人入胜的开场白
+1. 用引人入胜的开场白，吸引读者注意
 2. 介绍技术背景和重要性
 3. 点明文章将讨论的核心问题
+4. 简要概述文章结构（将在哪些方面展开）
 
 请撰写引言（{words}字）：
 """
@@ -255,11 +293,14 @@ class LongFormGeneratorAgent(BaseAgent):
         response = self._call_llm(prompt)
         return response.strip()
 
-    def _expand_background(self, title: str, words: int, research_data: Dict[str, Any]) -> str:
-        """展开技术背景章节"""
+    def _expand_background(self, title: str, words: int, research_data: Dict[str, Any],
+                          context: str = "") -> str:
+        """展开技术背景章节（增强版）"""
         background = research_data.get("detailed_info", {}).get("background", "")
 
         prompt = f"""请撰写技术背景部分。
+
+{context}
 
 **背景资料**：{background}
 
@@ -276,7 +317,8 @@ class LongFormGeneratorAgent(BaseAgent):
         response = self._call_llm(prompt)
         return response.strip()
 
-    def _expand_core_tech(self, title: str, words: int, research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+    def _expand_core_tech(self, title: str, words: int, research_data: Dict[str, Any],
+                          topic_data: Dict[str, Any], context: str = "") -> str:
         """展开核心技术解析章节（最重要）- 进一步细分为3个子节以避免超时"""
         details = research_data.get("detailed_info", {})
         self.log(f"    [{title}] 分为3个子节生成，避免超时...")
@@ -318,7 +360,8 @@ class LongFormGeneratorAgent(BaseAgent):
             }
         ]
 
-        full_content = f"\n### {title}\n\n"
+        # 不在这里添加章节标题，由上层的 _normalize_section_headers 统一处理
+        full_content = ""
 
         for idx, subsection in enumerate(subsections, 1):
             self.log(f"      正在生成子节 {idx}/3: {subsection['subtitle']}")
@@ -326,6 +369,8 @@ class LongFormGeneratorAgent(BaseAgent):
             prompt = f"""请撰写核心技术解析的子章节：{subsection['subtitle']}
 
 **主题**：{topic_data['title']}
+
+{context}
 
 **参考资料**：{subsection['focus']}
 
@@ -337,11 +382,16 @@ class LongFormGeneratorAgent(BaseAgent):
 """
 
             response = self._call_llm(prompt)
-            full_content += f"\n#### {idx}. {subsection['subtitle']}\n\n{response.strip()}\n\n"
+            # 子节标题使用 ####，但检查内容是否已包含标题
+            subsection_content = response.strip()
+            if not subsection_content.startswith('#'):
+                subsection_content = f"#### {idx}. {subsection['subtitle']}\n\n{subsection_content}"
+            full_content += f"\n{subsection_content}\n\n"
 
         return full_content
 
-    def _expand_practice(self, title: str, words: int, research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
+    def _expand_practice(self, title: str, words: int, research_data: Dict[str, Any],
+                         topic_data: Dict[str, Any], context: str = "") -> str:
         """展开实践应用章节 - 分为2个子节以避免超时"""
         use_cases = research_data.get("detailed_info", {}).get("use_cases", "")
         self.log(f"    [{title}] 分为2个子节生成，避免超时...")
@@ -371,7 +421,8 @@ class LongFormGeneratorAgent(BaseAgent):
             }
         ]
 
-        full_content = f"\n### {title}\n\n"
+        # 不在这里添加章节标题，由上层的 _normalize_section_headers 统一处理
+        full_content = ""
 
         for idx, subsection in enumerate(subsections, 1):
             self.log(f"      正在生成子节 {idx}/2: {subsection['subtitle']}")
@@ -379,6 +430,8 @@ class LongFormGeneratorAgent(BaseAgent):
             prompt = f"""请撰写实践应用的子章节：{subsection['subtitle']}
 
 **主题**：{topic_data['title']}
+
+{context}
 
 {subsection['content']}
 
@@ -388,15 +441,22 @@ class LongFormGeneratorAgent(BaseAgent):
 """
 
             response = self._call_llm(prompt)
-            full_content += f"\n#### {idx}. {subsection['subtitle']}\n\n{response.strip()}\n\n"
+            # 子节标题使用 ####，但检查内容是否已包含标题
+            subsection_content = response.strip()
+            if not subsection_content.startswith('#'):
+                subsection_content = f"#### {idx}. {subsection['subtitle']}\n\n{subsection_content}"
+            full_content += f"\n{subsection_content}\n\n"
 
         return full_content
 
-    def _expand_comparison(self, title: str, words: int, research_data: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
-        """展开技术对比章节"""
+    def _expand_comparison(self, title: str, words: int, research_data: Dict[str, Any],
+                          topic_data: Dict[str, Any], context: str = "") -> str:
+        """展开技术对比章节（增强版）"""
         prompt = f"""请撰写技术对比部分。
 
 **主题**：{topic_data['title']}
+
+{context}
 
 **要求字数**：{words}字
 
@@ -412,11 +472,14 @@ class LongFormGeneratorAgent(BaseAgent):
         response = self._call_llm(prompt)
         return response.strip()
 
-    def _expand_future(self, title: str, words: int, research_data: Dict[str, Any]) -> str:
-        """展开未来展望章节"""
+    def _expand_future(self, title: str, words: int, research_data: Dict[str, Any],
+                       context: str = "") -> str:
+        """展开未来展望章节（增强版）"""
         trends = research_data.get("detailed_info", {}).get("trends", "")
 
         prompt = f"""请撰写未来展望部分。
+
+{context}
 
 **发展趋势**：{trends}
 
@@ -434,9 +497,12 @@ class LongFormGeneratorAgent(BaseAgent):
         response = self._call_llm(prompt)
         return response.strip()
 
-    def _expand_generic(self, title: str, words: int, points: str, research_data: Dict[str, Any]) -> str:
-        """展开通用章节"""
+    def _expand_generic(self, title: str, words: int, points: str, research_data: Dict[str, Any],
+                        context: str = "") -> str:
+        """展开通用章节（增强版）"""
         prompt = f"""请撰写"{title}"章节。
+
+{context}
 
 **要点**：{points}
 
@@ -520,6 +586,161 @@ class LongFormGeneratorAgent(BaseAgent):
 - 标签: {tags}
 - 生成时间: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 """
+
+    def _normalize_section_headers(self, content: str, section_title: str) -> str:
+        """
+        规范化章节标题，避免重复
+
+        Args:
+            content: 原始章节内容
+            section_title: 章节标题
+
+        Returns:
+            str: 规范化后的内容
+        """
+        lines = content.split('\n')
+        normalized = []
+        title_added = False
+
+        for line in lines:
+            # 检查是否是标题行
+            if line.strip().startswith('#'):
+                # 如果内容已经以标题开头，不再添加章节标题
+                title_added = True
+                # 规范化标题层级（移除多余的#）
+                normalized.append(self._fix_heading_level(line))
+            elif not title_added and line.strip():
+                # 第一行非标题内容前添加章节标题
+                normalized.append(f"## {section_title}")
+                normalized.append("")
+                normalized.append(line)
+                title_added = True
+            else:
+                normalized.append(line)
+
+        # 如果整个section都是空的，添加标题
+        if not title_added:
+            normalized.append(f"## {section_title}")
+            normalized.append("")
+
+        return '\n'.join(normalized)
+
+    def _fix_heading_level(self, line: str) -> str:
+        """
+        修复标题层级
+
+        Args:
+            line: 标题行
+
+        Returns:
+            str: 修复后的标题行
+        """
+        stripped = line.strip()
+        if not stripped.startswith('#'):
+            return stripped
+
+        # 计算当前层级
+        level = 0
+        for char in stripped:
+            if char == '#':
+                level += 1
+            else:
+                break
+
+        # 规范化规则
+        # - 如果层级大于4（#####），降级到####
+        # - 移除emoji后的多余空格
+        content = stripped[level:].strip()
+
+        if level > 4:
+            level = 4
+
+        return '#' * level + ' ' + content
+
+    def _clean_duplicate_content(self, content: str) -> str:
+        """
+        清理重复内容（如重复的标题、段落）
+
+        Args:
+            content: 原始内容
+
+        Returns:
+            str: 清理后的内容
+        """
+        lines = content.split('\n')
+        cleaned = []
+        seen_titles = set()
+
+        for line in lines:
+            # 检测标题行
+            if line.strip().startswith('#'):
+                # 提取标题文本（去除#和emoji）
+                title_text = line.strip()
+                for prefix in ['#', '##', '###', '####', '#####']:
+                    if title_text.startswith(prefix):
+                        title_text = title_text[len(prefix):].strip()
+                        break
+
+                # 移除emoji（用于比较）
+                title_text_clean = re.sub(r'[^\w\s\u4e00-\u9fff]', '', title_text)
+
+                # 检查是否重复
+                if title_text_clean and title_text_clean not in seen_titles:
+                    seen_titles.add(title_text_clean)
+                    cleaned.append(line)
+                # 跳过重复的标题
+            else:
+                cleaned.append(line)
+
+        return '\n'.join(cleaned)
+
+    def _build_section_context(self, current_title: str, previous_sections: list,
+                              topic_data: Dict[str, Any]) -> str:
+        """
+        构建章节上下文信息，用于保持内容连贯性
+
+        Args:
+            current_title: 当前章节标题
+            previous_sections: 前面章节的标题列表
+            topic_data: 主题数据
+
+        Returns:
+            str: 上下文信息
+        """
+        context_parts = []
+
+        # 添加文章整体主题
+        context_parts.append(f"**文章主题**：{topic_data['title']}")
+        context_parts.append(f"**主题描述**：{topic_data.get('description', '')}")
+
+        # 添加前面章节概要
+        if previous_sections:
+            context_parts.append(f"\n**已讨论的章节**：")
+            for i, prev_title in enumerate(previous_sections, 1):
+                context_parts.append(f"{i}. {prev_title}")
+
+        # 添加当前章节在文章中的位置
+        if len(previous_sections) == 0:
+            position = "第一个章节"
+        elif len(previous_sections) == 1:
+            position = "第二个章节"
+        elif len(previous_sections) == 2:
+            position = "第三个章节"
+        else:
+            position = f"第{len(previous_sections) + 1}个章节"
+
+        context_parts.append(f"\n**当前章节位置**：{position}")
+
+        # 添加连贯性要求
+        if previous_sections:
+            last_section = previous_sections[-1]
+            context_parts.append(f"\n**连贯性要求**：")
+            context_parts.append(f"- 上一节讨论了：{last_section}")
+            context_parts.append(f"- 本节要自然承接上一节的内容")
+            context_parts.append(f"- 避免重复前面已经详细讨论的内容")
+            context_parts.append(f"- 可以引用前面提到的概念（用'如前所述'、'前面提到'等连接词）")
+
+        return "\n".join(context_parts)
 
     def _build_prompt(self, state: Dict[str, Any], topic_data: Dict[str, Any]) -> str:
         """

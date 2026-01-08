@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-ContentForge AI v2.1 是基于 LangChain/LangGraph 的多平台内容自动化生产系统，实现从AI热点追踪到多平台内容发布的全流程自动化。
+ContentForge AI v2.2 是基于 LangChain/LangGraph 的多平台内容自动化生产系统，实现从AI热点追踪到多平台内容发布的全流程自动化。
 
-**核心工作流**：AI热点获取（11个数据源）→ 热点简报 → 长文本生成 → 并行生成小红书/Twitter内容 → 标题优化 → 配图提示词 → 质量评估
+**核心工作流**：AI热点获取（11个数据源）→ 热点简报 → 深度研究（Web搜索）→ 长文本生成（分阶段）→ 质量检查（代码审查+事实核查）→ 并行生成小红书/Twitter内容 → 标题优化 → 配图提示词 → 质量评估
 
 ## 运行命令
 
@@ -40,18 +40,24 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --s
 1. **ContentOrchestrator** (`src/main.py`) - 原始工作流：基于指定topic的通用内容生成
 2. **AutoContentOrchestrator** (`src/auto_orchestrator.py`) - **自动工作流**：基于AI热点的全自动内容生成（推荐使用）
 
-### Auto工作流Agent链
+### Auto工作流Agent链（v2.2）
 
 ```
 ai_trend_analyzer (11个数据源聚合)
   ↓
 trends_digest (生成热点简报 → digest/)
   ↓
-longform_generator (2500-3500字专业文章 → longform/)
+research_agent (Web搜索深度研究，收集官方文档/GitHub/技术博客)
+  ↓
+longform_generator (分阶段生成9000-13000字专业文章 → longform/)
+  ↓
+质量检查：
+  ├─→ code_review_agent (代码审查)
+  └─→ fact_check_agent (事实核查)
   ↓
 并行处理：
-  ├─→ xiaohongshu_refiner (800-1000字小红书笔记 → xiaohongshu/)
-  └─→ twitter_generator (5条推文thread → twitter/)
+  ├─→ xiaohongshu_refiner (3000-3500字小红书笔记 → xiaohongshu/)
+  └─→ twitter_generator (5-8条推文thread → twitter/)
   ↓
 title_optimizer (标题优化)
   ↓
@@ -110,6 +116,7 @@ llm:
   provider: "zhipuai"  # 或 "openai"
   zhipuai:
     model: "glm-4.7"  # 最新旗舰模型（2025年12月发布）
+    # 其他可选: glm-4-flash（便宜快速）, glm-4-plus（上一代旗舰）
     base_url: "https://open.bigmodel.cn/api/paas/v4/"
   openai:
     model: "gpt-4o"
@@ -117,8 +124,11 @@ llm:
 ```
 
 **环境变量**：
-- `ZHIPUAI_API_KEY`：智谱AI密钥
-- `OPENAI_API_KEY`：OpenAI密钥
+- `ZHIPUAI_API_KEY`：智谱AI密钥（必需）
+- `OPENAI_API_KEY`：OpenAI密钥（可选，使用OpenAI时）
+- `TAVILY_API_KEY`：Tavily搜索API密钥（v2.2必需，用于ResearchAgent）
+
+**编码专用端点**：`config/config.yaml:11` 使用 `https://open.bigmodel.cn/api/coding/paas/v4/` 获得最强编程能力
 
 ### 按日期分层的存储系统
 
@@ -140,9 +150,9 @@ storage.save_text("xiaohongshu", "prompts.txt", text)
 data/20260107/
 ├── raw/                   # AI热点原始数据
 ├── digest/                # 热点简报
-├── longform/              # 微信公众号文章
-├── xiaohongshu/           # 小红书笔记 + 配图提示词
-└── twitter/               # Twitter帖子 + 配图提示词
+├── longform/              # 微信公众号文章（9000-13000字）
+├── xiaohongshu/           # 小红书笔记（3000-3500字） + 配图提示词
+└── twitter/               # Twitter帖子（5-8条推文） + 配图提示词
 ```
 
 ### LangGraph状态管理
@@ -154,14 +164,43 @@ from src.state import create_initial_state, update_state
 
 # 创建初始状态（topic可选，留空则自动从热点生成）
 state = create_initial_state(
-    topic=None,  # 或 "AI技术"
+    topic=None,  # 或 "AI技术"（仅作为文件标识，不影响内容）
     target_audience="技术从业者",
     content_type="干货分享"
 )
+```
 
+**v2.2重要变更**：`topic` 参数仅用于文件命名（如 `article_AI技术_*.md`），实际内容完全基于实时AI热点自动生成。即使指定topic，内容也会从当天热点中选取。
+
+```python
 # 更新状态（immutable模式）
 new_state = update_state(state, {"new_field": value})
 ```
+
+## 工作流执行顺序
+
+工作流执行顺序在 `src/auto_orchestrator.py:_build_workflow()` 中定义（`src/auto_orchestrator.py:177`）：
+
+1. AI热点分析 → 热点汇总 → 内容研究
+2. 长文本生成 → 代码审查
+3. 小红书精炼 → Twitter生成（顺序执行，避免并发冲突）
+4. 标题优化 → 图像建议 → 图像生成
+5. 事实核查 → 质量评估 → 发布
+
+**重要**：小红书和Twitter Agent顺序执行（非并行）以避免状态更新冲突（`src/auto_orchestrator.py:213`）
+
+### 提示词模板系统
+
+每个Agent的系统提示词存储在 `config/prompts.yaml` 中，按Agent名称组织：
+
+```yaml
+prompts:
+  agent_name:  # 对应Agent类名的小写形式（如 "xiaohongshu_refiner"）
+    system: "你是专业的..."
+    user_template: "请根据以下内容生成..."  # 可选的用户提示词模板
+```
+
+Agent通过 `_load_system_prompt()` 方法加载提示词（`src/agents/base.py:74`）。
 
 ## 开发指南
 
@@ -169,9 +208,11 @@ new_state = update_state(state, {"new_field": value})
 
 1. 创建Agent类（`src/agents/new_agent.py`）继承 `BaseAgent`
 2. 实现 `execute(self, state: Dict[str, Any]) -> Dict[str, Any]` 方法
-3. 在 `config/config.yaml` 的 `agents` 部分添加配置
+3. 在 `config/config.yaml` 的 `agents` 部分添加配置（参考现有Agent）
 4. 在 `src/auto_orchestrator.py` 的 `_init_agents()` 中初始化
-5. 在 `_build_workflow()` 中添加到工作流图
+5. 在 `_build_workflow()` 中添加到工作流图（定义执行顺序）
+
+**重要**：Agent必须返回完整的状态字典，使用 `{**state, "new_field": value}` 模式更新状态
 
 ### Agent配置模式
 
@@ -217,6 +258,34 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --s
 - 使用 `self.log()` 而不是 `print()`（`src/agents/base.py:125`）
 - Agent的 `execute()` 方法必须返回完整的状态字典
 - 异常处理要更新 `error_message` 和 `current_step` 字段
+
+## 架构要点
+
+### 分阶段长文本生成（v2.2核心）
+
+`LongFormGeneratorAgent` 使用三阶段生成策略避免超时（`src/agents/longform_generator.py:72`）：
+
+1. **第一阶段**：生成文章大纲
+2. **第二阶段**：逐节展开内容（循环调用LLM）
+3. **第三阶段**：生成总结
+
+这种方式可以生成9000-13000字的专业深度分析，而不会触发API超时。
+
+### Web搜索深度研究（v2.2新增）
+
+`ResearchAgent` 使用Tavily API进行Web搜索，收集：
+- 官方文档和技术规格
+- GitHub开源项目和代码示例
+- 技术博客和深度分析文章
+- 社区讨论和实践案例
+
+研究数据存储在 `state["research_data"]` 中，供后续Agent使用。
+
+### 质量保证三重检查（v2.2新增）
+
+1. **CodeReviewAgent**：审查代码示例的正确性和最佳实践
+2. **FactCheckAgent**：核查事实陈述、技术参数、日期时间
+3. **QualityEvaluatorAgent**：综合评估内容质量（打分7-10分）
 
 ## 性能优化
 
@@ -281,5 +350,5 @@ agents:
 
 ---
 
-**版本**: v2.1
-**更新**: 2026-01-07
+**版本**: v2.2
+**更新**: 2026-01-08

@@ -392,9 +392,30 @@ class AutoContentOrchestrator:
         if state.get("xiaohongshu_note"):
             note = state["xiaohongshu_note"]
             note_md_filename = f"note_{topic}_{timestamp}.md"
-            note_md_content = f"""# {note['title']}
 
-{note.get('intro', '')}
+            # 检查intro是否已经包含标题，避免重复
+            intro_text = note.get('intro', '')
+            title_text = note['title']
+
+            # 如果intro已经包含标题（检查intro开头是否与标题相似），则不再添加主标题行
+            if intro_text and title_text and title_text.strip() in intro_text.strip():
+                # intro已包含标题，直接使用intro作为开头
+                note_md_content = f"""{intro_text}
+
+{note.get('body', '')}
+
+{note.get('ending', '')}
+
+---
+**标签**: {' '.join(note.get('hashtags', []))}
+**字数**: {note.get('word_count', 0)}
+**压缩率**: {note.get('compression_ratio', 'N/A')}
+"""
+            else:
+                # intro不包含标题，添加主标题
+                note_md_content = f"""# {title_text}
+
+{intro_text}
 
 {note.get('body', '')}
 
@@ -548,7 +569,9 @@ class AutoContentOrchestrator:
         elif state.get('image_prompts'):
             print(f"图片提示词: {len(state.get('image_prompts', []))} 个（已保存）")
 
-        print(f"质量评分: {state.get('quality_report', {}).get('overall_score', 'N/A')}/10")
+        quality_report = state.get('quality_report')
+        quality_score = quality_report.get('overall_score', 'N/A') if quality_report else 'N/A'
+        print(f"质量评分: {quality_score}/10")
         print(f"是否发布: {'是' if state.get('published') else '否（已保存为草稿）'}")
         print(f"执行耗时: {state.get('execution_time', 0):.2f}秒")
 

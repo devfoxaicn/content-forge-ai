@@ -13,13 +13,13 @@ llm:
     model: "glm-4.7"  # 最新旗舰模型（2025年12月发布，强化编码和工具调用能力）
     # 其他可选模型: glm-4-flash（便宜）, glm-4-plus（上一代旗舰）
     temperature: 0.7
-    max_tokens: 2000
-    timeout: 60
+    max_tokens: 8000  # 增加到8000以支持长文本生成
+    timeout: 300  # 增加超时到5分钟以支持长文本生成
 
     # Thinking 深度思考模式（GLM-4.7 专属功能）
     thinking:
-      enabled: true  # 启用深度思考模式
-      type: "enabled"  # enabled=强制启用, auto=自动决定, disabled=关闭
+      enabled: false  # 暂时禁用，参数兼容性问题
+      type: "auto"  # enabled=强制启用, auto=自动决定, disabled=关闭
 
   # OpenAI配置（备用）
   openai:
@@ -99,31 +99,71 @@ agents:
     # 缓存配置
     cache_ttl: 3600  # 缓存时间1小时
     min_trends: 5    # 最少热点数量
-    max_trends: 10   # 最多热点数量
+    max_trends: 5    # 最多热点数量（固定输出5个）
 
   # 长文本生成Agent（新）
   longform_generator:
     enabled: true
-    article_length: "medium"  # short, medium, long
-    technical_depth: "intermediate"  # beginner, intermediate, advanced
-    max_tokens: 4000
+    article_length: "long"  # short, medium, long - 改为long以生成更长文章
+    technical_depth: "advanced"  # beginner, intermediate, advanced - 改为advanced以增加技术深度
+    max_tokens: 8000  # 增加到8000以支持长文本
     temperature: 0.7
+
+    # 格式修复配置（v2.2新增）
+    enable_format_fix: true  # 启用格式修复（去重、规范化标题）
+    remove_duplicate_titles: true  # 移除重复标题
+    normalize_headings: true  # 规范化标题层级
+
+    # 连贯性配置（v2.2新增）
+    enable_context_window: true  # 启用上下文窗口保持连贯性
+    max_context_sections: 3  # 最多传递前几个章节的上下文
 
   # 热点汇总Agent（新增）
   trends_digest:
     enabled: true
     style: "magazine"  # professional, casual, magazine（杂志风格）
     include_analysis: true  # 是否包含汇总分析
-    max_topics: 10  # 最多汇总多少个热点
+    max_topics: 5  # 最多汇总多少个热点（与ai_trend_analyzer保持一致）
     temperature: 0.6
     output_dir: "data/digest"  # 简报保存目录
+
+  # 内容研究Agent（新增）
+  research_agent:
+    enabled: true
+    max_docs_per_topic: 3
+    search_sources:
+      - "google"
+      - "github"
+      - "medium"
+      - "devto"
+    timeout: 180  # 增加到3分钟以支持LLM增强搜索
+    cache_ttl: 3600
+    llm_enhanced_search: false  # 暂时禁用LLM增强搜索（避免超时）
+    validate_quality: false  # 暂时禁用质量验证
+    min_quality_score: 50  # 最低质量分数
+    auto_enhance: false  # 暂时禁用自动增强（避免额外超时）
+
+  # 代码审查Agent（新增）
+  code_review_agent:
+    enabled: true
+    use_skill: false  # 是否使用code-review skill
+    auto_fix: false
+    min_rating: 7.0
+
+  # 事实核查Agent（新增）
+  fact_check_agent:
+    enabled: true
+    verify_claims: true
+    check_dates: true
+    cross_reference: true
+    min_confidence: 0.7
 
   # 小红书笔记精炼Agent（新）
   xiaohongshu_refiner:
     enabled: true
     style: "professional"  # professional, casual, humorous
-    content_density: "medium"  # light, medium, dense
-    max_tokens: 2000
+    content_density: "dense"  # light, medium, dense - 改为dense以增加信息密度
+    max_tokens: 3000  # 增加token数
     temperature: 0.8
 
   # Twitter帖子生成Agent（新增）
@@ -132,7 +172,7 @@ agents:
     style: "engaging"  # engaging, professional, casual
     thread_mode: true  # true=生成thread，false=单条推文
     max_tweets: 5  # thread最多几条推文
-    max_tokens: 1500
+    max_tokens: 2500  # 增加token数
     temperature: 0.9
 
   # 发布Agent

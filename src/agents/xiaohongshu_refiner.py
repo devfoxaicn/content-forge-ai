@@ -254,6 +254,7 @@ class XiaohongshuRefinerAgent(BaseAgent):
         # 提取文章标题的主标题部分（去掉冒号后的内容）
         main_title = title.split('：')[0].split(':')[0]
 
+        # 生成完整的mock内容（以标题开头）
         mock_content = f"""{main_title}✨最新技术突破太惊艳了！
 
 姐妹们👋，今天给大家分享一个超级震撼的AI技术突破！
@@ -315,12 +316,16 @@ class XiaohongshuRefinerAgent(BaseAgent):
 #AI技术 #技术分享 #干货 #职场技能
 """
 
+        # 提取body部分（去掉第一行标题，避免重复）
+        body_lines = mock_content.split('\n')[1:]  # 跳过第一行标题
+        body_content = '\n'.join(body_lines)
+
         word_count = len(mock_content)
 
         return {
             "title": main_title,
             "intro": f"{main_title}✨最新技术突破太惊艳了！",
-            "body": mock_content,
+            "body": body_content,  # 使用去掉标题的body
             "ending": "觉得有用记得点赞收藏哦！关注我，获取更多AI干货！",
             "full_content": mock_content,
             "hashtags": ["#AI技术", "#技术分享", "#干货", "#职场技能"],
