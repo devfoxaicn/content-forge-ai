@@ -29,7 +29,7 @@ from src.agents.image_advisor import ImageAdvisorAgent
 from src.agents.image_generator import ImageGeneratorAgent
 from src.agents.quality_evaluator import QualityEvaluatorAgent
 from src.agents.publisher import PublisherAgent
-from src.utils.storage import get_storage
+from src.utils.storage import get_storage, BatchStorage
 
 # 日志配置
 from loguru import logger
@@ -38,19 +38,28 @@ from loguru import logger
 class AutoContentOrchestrator:
     """自动化内容生成协调器 - 新工作流"""
 
-    def __init__(self, config_path: str = "config/config.yaml"):
+    def __init__(self, config_path: str = "config/config.yaml",
+                 storage_mode: str = "daily", batch_name: str = None):
         """
         初始化自动化协调器
 
         Args:
             config_path: 配置文件路径
+            storage_mode: 存储模式，"daily"（每日自动）或 "batch"（批量生成）
+            batch_name: 批次名称（storage_mode="batch"时必需）
         """
         self.config = self._load_config(config_path)
         self.prompts = self._load_prompts()
+        self.storage_mode = storage_mode
         self._setup_logging()
 
-        # 初始化存储管理器
-        self.storage = get_storage(self.config.get("storage", {}).get("base_dir", "data"))
+        # 根据存储模式初始化存储管理器
+        if storage_mode == "batch" and batch_name:
+            self.storage = BatchStorage(batch_name)
+            logger.info(f"批量存储模式: {batch_name}")
+        else:
+            # 初始化存储管理器（默认每日模式）
+            self.storage = get_storage(self.config.get("storage", {}).get("base_dir", "data"))
 
         # 初始化Agent
         self.agents = self._init_agents()
@@ -269,7 +278,8 @@ class AutoContentOrchestrator:
         return node_function
 
     def run(self, topic: str = None, target_audience: str = "技术从业者",
-            content_type: str = "干货分享", keywords: list = None) -> Dict[str, Any]:
+            content_type: str = "干货分享", keywords: list = None,
+            user_provided_topic: dict = None) -> Dict[str, Any]:
         """
         运行完整自动化工作流
 
@@ -278,14 +288,22 @@ class AutoContentOrchestrator:
             target_audience: 目标受众
             content_type: 内容类型
             keywords: 关键词列表
+            user_provided_topic: 用户指定的完整话题数据（包含title, description, keywords等），
+                               如果提供则跳过AI热点分析，直接使用该话题
 
         Returns:
             Dict[str, Any]: 最终输出
         """
-        # 如果没有提供topic，使用auto作为标识（实际内容基于实时热点）
-        if topic is None:
+        # 判断是否为用户指定话题模式
+        is_user_topic_mode = user_provided_topic is not None
+
+        if is_user_topic_mode:
+            # 用户指定话题模式
+            topic = topic or user_provided_topic.get("title", "user_topic")
+            logger.info(f"🎯 用户指定话题模式: {topic}")
+        elif topic is None:
             topic = "auto"
-            logger.info("开始执行自动化内容生产流程（基于实时热点）")
+            logger.info("📡 开始执行自动化内容生产流程（基于实时热点）")
         else:
             logger.info(f"开始执行自动化内容生产流程: {topic}")
 
@@ -297,6 +315,20 @@ class AutoContentOrchestrator:
             keywords=keywords,
             config=self.config
         )
+
+        # 如果是用户指定话题模式，设置选中的话题，跳过AI热点分析
+        if is_user_topic_mode:
+            state["selected_ai_topic"] = {
+                "title": user_provided_topic.get("title", topic),
+                "description": user_provided_topic.get("description", ""),
+                "source": "user_provided",
+                "url": "",
+                "tags": user_provided_topic.get("keywords", []),
+                "key_points": [user_provided_topic.get("description", "")]
+            }
+            state["ai_hot_topics"] = [state["selected_ai_topic"]]
+            state["current_step"] = "user_topic_set"
+            logger.info(f"✅ 已设置用户指定话题，跳过AI热点分析")
 
         # 执行工作流
         try:

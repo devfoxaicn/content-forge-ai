@@ -4,7 +4,7 @@
 # ==================== LLM提供商端点 ====================
 llm:
   zhipuai:
-    base_url: "https://open.bigmodel.cn/api/paas/v4/"
+    base_url: "https://open.bigmodel.cn/api/coding/paas/v4/"  # 全部使用编码专用端点（最强编程能力）
     coding_url: "https://open.bigmodel.cn/api/coding/paas/v4/"
   openai:
     base_url: "https://api.openai.com/v1"

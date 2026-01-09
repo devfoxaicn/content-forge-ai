@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-ContentForge AI v2.2 是基于 LangChain/LangGraph 的多平台内容自动化生产系统，实现从AI热点追踪到多平台内容发布的全流程自动化。
+ContentForge AI v2.4 是基于 LangChain/LangGraph 的多平台内容自动化生产系统，实现从AI热点追踪到多平台内容发布的全流程自动化。
 
 **核心工作流**：AI热点获取（11个数据源）→ 热点简报 → 深度研究（Web搜索）→ 长文本生成（分阶段）→ 质量检查（代码审查+事实核查）→ 并行生成小红书/Twitter内容 → 标题优化 → 配图提示词 → 质量评估
+
+**v2.4新增**：100期技术博客系列模式 - 系统化生成100期技术内容，覆盖从LLM原理到AI基础设施的全栈知识。
 
 ## 运行命令
 
@@ -14,11 +16,32 @@ ContentForge AI v2.2 是基于 LangChain/LangGraph 的多平台内容自动化�
 # 激活虚拟环境
 source venv/bin/activate
 
+# ===== 每日自动热点模式（默认） =====
 # 主程序：自动工作流（推荐）
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --once --workflow auto
 
-# 可选：指定topic标识（不影响内容，仅用于文件命名）
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --once --workflow auto --topic "AI技术"
+# ===== 100期技术博客系列模式（v2.4新增） =====
+# 查看生成进度
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/series_orchestrator.py --progress
+
+# 生成指定集数
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/series_orchestrator.py --episode 1
+
+# 生成整个系列
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/series_orchestrator.py --series series_1
+
+# 生成全部100期
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/series_orchestrator.py --all --start 1 --end 100
+
+# ===== 数据迁移（v2.4新增） =====
+# 查看迁移计划（演练模式）
+python scripts/migrate_data.py --dry-run
+
+# 执行数据迁移
+python scripts/migrate_data.py
+
+# 验证存储结构
+python scripts/migrate_data.py --verify
 
 # 查看日志
 tail -f logs/$(date +%Y%m%d)/app.log
@@ -33,12 +56,18 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --s
 
 ## 架构概览
 
-### 双工作流设计
-
-项目包含两个独立的工作流协调器：
+### 三种工作流协调器
 
 1. **ContentOrchestrator** (`src/main.py`) - 原始工作流：基于指定topic的通用内容生成
-2. **AutoContentOrchestrator** (`src/auto_orchestrator.py`) - **自动工作流**：基于AI热点的全自动内容生成（推荐使用）
+2. **AutoContentOrchestrator** (`src/auto_orchestrator.py`) - **自动工作流**：基于AI热点的全自动内容生成（推荐）
+3. **SeriesOrchestrator** (`src/series_orchestrator.py`) - **系列工作流**（v2.4新增）：100期技术博客系列生成
+
+**运行模式对比**：
+
+| 模式 | 触发方式 | 数据来源 | 存储位置 |
+|------|----------|----------|----------|
+| 每日自动 | 定时任务 | AI热点分析 | `data/daily/日期/` |
+| 100期系列 | 手动执行 | 100期预设 | `data/series/{系列ID}/episode_{xxx}/` |
 
 ### Auto工作流Agent链（v2.2）
 
@@ -130,7 +159,85 @@ llm:
 
 **编码专用端点**：`config/config.yaml:11` 使用 `https://open.bigmodel.cn/api/coding/paas/v4/` 获得最强编程能力
 
-### 按日期分层的存储系统
+### 统一存储系统 (v2.4优化)
+
+项目使用新的统一存储系统 `src/utils/storage_v2.py`，支持两种内容模式：
+
+#### 存储结构
+
+```
+data/
+├── daily/                    # 每日热点模式
+│   └── YYYYMMDD/
+│       ├── raw/
+│       ├── digest/
+│       ├── longform/
+│       ├── xiaohongshu/
+│       └── twitter/
+│
+├── series/                   # 100期技术博客系列 (v2.4新增)
+│   └── {series_id}/
+│       ├── episode_{xxx}/
+│       │   ├── raw/
+│       │   ├── digest/
+│       │   ├── longform/
+│       │   ├── xiaohongshu/
+│       │   └── twitter/
+│       └── series_metadata.json
+│
+└── archive/                  # 归档内容 (预留)
+```
+
+#### 使用方式
+
+```python
+from src.utils.storage_v2 import StorageFactory
+
+# 1. 每日热点模式
+daily_storage = StorageFactory.create_daily()
+daily_storage.save_markdown("longform", "article.md", content)
+
+# 2. 100期系列模式 (v2.4新增)
+series_storage = StorageFactory.create_series(
+    series_id="series_1_llm_foundation",
+    episode_number=1
+)
+series_storage.save_markdown("longform", "article.md", content)
+series_storage.save_episode_metadata(metadata)
+```
+
+#### 兼容旧版本
+
+旧版本代码仍然兼容：
+
+```python
+from src.utils.storage import get_storage  # 旧版本
+
+storage = get_storage("data")  # 使用 DailyStorage
+```
+
+#### 系列100期元数据管理 (v2.4新增)
+
+```python
+from src.utils.series_manager import get_series_metadata, print_progress_summary
+
+# 加载元数据
+metadata = get_series_metadata("config/blog_topics_100_complete.json")
+
+# 查询话题
+topic = metadata.get_topic_by_episode(1)
+series = metadata.get_series_by_id("series_1")
+
+# 更新状态
+metadata.update_topic_status("topic_001", "completed")
+
+# 查看进度
+print_progress_summary()
+```
+
+### 按日期分层的存储系统（旧版本兼容）
+
+#### DailyStorage（每日自动模式）
 
 使用 `DailyStorage` 类（`src/utils/storage.py:13`）管理按日期分层的存储：
 
@@ -145,14 +252,28 @@ storage.save_markdown("digest", "digest.md", content)
 storage.save_text("xiaohongshu", "prompts.txt", text)
 ```
 
-**目录结构**：
+#### BatchStorage（批量生成模式，v2.3新增，已移除）
+
+**注意**：BatchStorage已在v2.4中移除。如需批量生成内容，请使用100期系列模式。
+
+**存储目录结构**：
 ```
-data/20260107/
-├── raw/                   # AI热点原始数据
-├── digest/                # 热点简报
-├── longform/              # 微信公众号文章（9000-13000字）
-├── xiaohongshu/           # 小红书笔记（3000-3500字） + 配图提示词
-└── twitter/               # Twitter帖子（5-8条推文） + 配图提示词
+data/
+├── 20260107/                    # 每日自动生成
+│   ├── raw/
+│   ├── digest/
+│   ├── longform/
+│   ├── xiaohongshu/
+│   └── twitter/
+│
+└── batch/                       # 批量生成（v2.3新增）
+    └── 20260109_batch_ai_tools/  # {日期}_batch_{批次名}
+        ├── raw/
+        ├── digest/
+        ├── longform/
+        ├── xiaohongshu/
+        ├── twitter/
+        └── batch_metadata.json
 ```
 
 ### LangGraph状态管理
@@ -343,6 +464,7 @@ agents:
 ## 相关文档
 
 - **README.md** - 项目概述和快速开始
+- **BATCH_MODE_GUIDE.md** - 批量生成模式使用指南（v2.3新增）
 - **PROJECT_GUIDE.md** - 完整使用指南
 - **STORAGE_QUICKREF.md** - 存储结构快速参考
 - **AI_TRENDS_API_GUIDE.md** - 11个数据源详细说明
@@ -350,5 +472,5 @@ agents:
 
 ---
 
-**版本**: v2.2
-**更新**: 2026-01-08
+**版本**: v2.4
+**更新**: 2026-01-09

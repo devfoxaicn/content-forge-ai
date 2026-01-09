@@ -30,6 +30,11 @@ class TrendsDigestAgent(BaseAgent):
         Returns:
             Dict[str, Any]: 更新后的状态
         """
+        # 检测是否为用户指定话题模式（跳过热点汇总）
+        if state.get("selected_ai_topic", {}).get("source") == "user_provided":
+            self.log("检测到用户指定话题模式，跳过热点汇总")
+            return state  # 直接返回原状态，不做任何修改
+
         self.log("开始生成AI热点汇总简报")
 
         try:

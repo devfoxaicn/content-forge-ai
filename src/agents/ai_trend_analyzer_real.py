@@ -51,6 +51,11 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         Returns:
             Dict[str, Any]: 更新后的状态
         """
+        # 检测是否为用户指定话题模式
+        if state.get("current_step") == "user_topic_set":
+            self.log("检测到用户指定话题模式，跳过AI热点分析")
+            return state  # 直接返回原状态，不做任何修改
+
         self.log(f"开始分析AI技术热点，领域: {state['topic']}")
 
         try:

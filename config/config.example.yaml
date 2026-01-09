@@ -9,8 +9,8 @@ llm:
   # ZhipuAI配置
   zhipuai:
     api_key: "${ZHIPUAI_API_KEY}"  # 从环境变量读取
-    base_url: "https://open.bigmodel.cn/api/paas/v4/"  # 通用端点
-    # Coding专用端点: https://open.bigmodel.cn/api/coding/paas/v4/
+    base_url: "https://open.bigmodel.cn/api/coding/paas/v4/"  # 编码专用端点（最强编程能力）
+    # 通用端点: https://open.bigmodel.cn/api/paas/v4/
     model: "glm-4.7"  # 最新旗舰模型（2025年12月发布）
     # 其他可选模型: glm-4-flash（便宜快速）, glm-4-plus（上一代旗舰）
     temperature: 0.7

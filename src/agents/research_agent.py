@@ -50,22 +50,29 @@ class ResearchAgent(BaseAgent):
                 self.log("ResearchAgent已禁用，跳过研究步骤")
                 return {**state, "research_data": {}, "current_step": "research_skipped"}
 
-            # 获取热点话题列表
-            hot_topics = state.get("ai_hot_topics", [])
-            if not hot_topics:
-                raise ValueError("没有找到AI热点话题列表")
+            # 优先使用选中的话题（用户指定或AI筛选）
+            selected_topic = state.get("selected_ai_topic")
 
-            # 选择最重要的话题进行深度研究
-            primary_topic = hot_topics[0] if hot_topics else None
-            if not primary_topic:
-                raise ValueError("没有找到主要热点话题")
+            # 如果没有选中话题，从热点列表中获取
+            if not selected_topic:
+                hot_topics = state.get("ai_hot_topics", [])
+                if not hot_topics:
+                    raise ValueError("没有找到AI热点话题列表")
+                selected_topic = hot_topics[0]
 
-            topic_title = primary_topic.get("title", "未知")
-            topic_url = primary_topic.get("url", "")
+            # 检查话题来源
+            source = selected_topic.get("source", "unknown")
+            if source == "user_provided":
+                self.log(f"🎯 用户指定话题模式: {selected_topic.get('title')}")
+            else:
+                self.log(f"📡 AI筛选热点模式: {selected_topic.get('title')}")
+
+            topic_title = selected_topic.get("title", "未知")
+            topic_url = selected_topic.get("url", "")
             self.log(f"深度研究主要话题: {topic_title}")
 
             # 执行深度研究
-            research_data = self._deep_research(primary_topic)
+            research_data = self._deep_research(selected_topic)
 
             # 生成研究汇总
             research_summary = self._generate_research_summary(research_data)

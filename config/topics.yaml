@@ -1,0 +1,141 @@
+# 预设技术话题列表
+# 用于快速启动脚本的话题选择
+
+topics:
+  - id: "ai_agents"
+    title: "AI Agents 智能体"
+    description: "自主智能体技术，包括LangChain、AutoGPT等框架，实现任务自动化和决策"
+    keywords: ["AI Agents", "LangChain", "AutoGPT", "智能体", "自主代理"]
+
+  - id: "llm_rag"
+    title: "LLM + RAG 检索增强生成"
+    description: "大语言模型结合向量数据库的检索增强生成技术，提升问答准确性"
+    keywords: ["RAG", "向量数据库", "Embeddings", "知识库", "语义搜索"]
+
+  - id: "multimodal_ai"
+    title: "多模态AI大模型"
+    description: "支持文本、图像、音频、视频等多种模态的AI模型，如GPT-4V、Gemini"
+    keywords: ["多模态", "GPT-4V", "Gemini", "视觉理解", "跨模态"]
+
+  - id: "ai_coding"
+    title: "AI 编程助手"
+    description: "GitHub Copilot、Cursor等AI编程工具，改变软件开发方式"
+    keywords: ["Copilot", "Cursor", "AI编程", "代码生成", "智能补全"]
+
+  - id: "ai_video"
+    title: "AI 视频生成"
+    description: "Sora、Runway、Pika等AI视频生成工具，文本生成视频的新时代"
+    keywords: ["Sora", "Runway", "Pika", "视频生成", "AIGC"]
+
+  - id: "webassembly"
+    title: "WebAssembly 技术栈"
+    description: "Wasm在浏览器高性能计算、云原生边缘计算中的应用"
+    keywords: ["WebAssembly", "Wasm", "浏览器性能", "边缘计算"]
+
+  - id: "rust_ecosystem"
+    title: "Rust 语言生态"
+    description: "Rust在系统编程、Web开发、区块链等领域的应用和生态发展"
+    keywords: ["Rust", "内存安全", "系统编程", "WebAssembly"]
+
+  - id: "graphql_federation"
+    title: "GraphQL 联邦架构"
+    description: "微服务时代的GraphQL联邦实践，实现分布式数据聚合"
+    keywords: ["GraphQL", "联邦", "微服务", "API网关"]
+
+  - id: "kubernetes_ai"
+    title: "Kubernetes AI 调度"
+    description: "K8s集群上运行AI工作负载的最佳实践和工具链"
+    keywords: ["Kubernetes", "K8s", "AI调度", "GPU管理", "容器编排"]
+
+  - id: "serverless_ai"
+    title: "Serverless + AI"
+    description: "无服务器架构运行AI推理应用，降低成本和运维复杂度"
+    keywords: ["Serverless", "Lambda", "AI推理", "函数计算"]
+
+  - id: "vector_database"
+    title: "向量数据库"
+    description: "Pinecone、Milvus、Weaviate等向量数据库技术与应用"
+    keywords: ["向量数据库", "Pinecone", "Milvus", "相似度搜索"]
+
+  - id: "edge_ai"
+    title: "边缘计算AI"
+    description: "在边缘设备运行AI模型的技术，降低延迟和带宽需求"
+    keywords: ["边缘AI", "ONNX", "TensorRT", "端侧推理"]
+
+  - id: "ai_observability"
+    title: "AI 可观测性"
+    description: "LLM应用的可观测性工具，包括追踪、评估、监控"
+    keywords: ["可观测性", "LLM监控", " tracing", "评估工具"]
+
+  - id: "fine_tuning"
+    title: "大模型微调技术"
+    description: "LoRA、QLoRA等高效微调方法，定制领域大模型"
+    keywords: ["微调", "LoRA", "QLoRA", "训练", "模型定制"]
+
+  - id: "workflow_automation"
+    title: "AI 工作流自动化"
+    description: "LangGraph、Temporal等编排工具，构建复杂AI应用工作流"
+    keywords: ["工作流", "LangGraph", "编排", "自动化"]
+
+  - id: "code_interpreter"
+    title: "AI 代码解释器"
+    description: "AI驱动的代码执行环境，支持数据分析、可视化"
+    keywords: ["代码解释器", "数据分析", "Code Interpreter", "AI分析"]
+
+  - id: "semantic_search"
+    title: "语义搜索引擎"
+    description: "基于Embeddings的语义搜索技术，提升搜索体验"
+    keywords: ["语义搜索", "向量搜索", "Embeddings", "智能检索"]
+
+  - id: "ai_safety"
+    title: "AI 安全与对齐"
+    description: "大模型的安全防护、对齐技术、红队测试"
+    keywords: ["AI安全", "对齐", "红队测试", "提示词注入"]
+
+  - id: "database_rag"
+    title: "数据库 + RAG"
+    description: "传统数据库与向量搜索结合，实现混合查询"
+    keywords: ["pgvector", "混合查询", "数据库RAG"]
+
+  - id: "agentic_workflow"
+    title: "Agentic 工作流模式"
+    description: "Agent设计模式、工具调用、多Agent协作"
+    keywords: ["Agent模式", "工具调用", "多Agent协作", "ReAct"]
+
+# 快速启动类别
+categories:
+  hottest:
+    - "ai_agents"
+    - "llm_rag"
+    - "multimodal_ai"
+
+  ai_engineering:
+    - "ai_agents"
+    - "llm_rag"
+    - "workflow_automation"
+    - "ai_observability"
+    - "agentic_workflow"
+
+  ai_models:
+    - "multimodal_ai"
+    - "fine_tuning"
+    - "ai_video"
+
+  development:
+    - "ai_coding"
+    - "rust_ecosystem"
+    - "graphql_federation"
+
+  infrastructure:
+    - "kubernetes_ai"
+    - "serverless_ai"
+    - "edge_ai"
+    - "vector_database"
+
+  applications:
+    - "semantic_search"
+    - "code_interpreter"
+    - "database_rag"
+
+  security:
+    - "ai_safety"

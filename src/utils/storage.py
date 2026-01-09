@@ -1,6 +1,10 @@
 """
-数据存储工具
+数据存储工具 (v2 - 向后兼容)
+
 处理按日期分层的文件存储
+
+注意：v2.4版本后，BatchStorage已移除。
+如需批量生成内容，请使用100期系列模式。
 """
 
 import os
@@ -11,7 +15,10 @@ import json
 
 
 class DailyStorage:
-    """按日期分层的存储管理器"""
+    """按日期分层的存储管理器
+
+    v2.4更新：存储路径从 data/YYYYMMDD/ 改为 data/daily/YYYYMMDD/
+    """
 
     def __init__(self, base_dir: str = "data"):
         """
@@ -30,7 +37,9 @@ class DailyStorage:
         """获取或创建日期目录"""
         today = datetime.now()
         date_str = today.strftime("%Y%m%d")
-        date_dir = self.base_dir / date_str
+
+        # v2.4: 使用 daily/ 子目录
+        date_dir = self.base_dir / "daily" / date_str
 
         # 创建日期目录和子目录
         date_dir.mkdir(parents=True, exist_ok=True)
@@ -162,6 +171,22 @@ class DailyStorage:
 
         # 按修改时间排序，返回最新的
         return max(matching_files, key=lambda f: f.stat().st_mtime)
+
+
+# BatchStorage 已在 v2.4 中移除
+# 如需批量生成内容，请使用 SeriesStorage（100期技术博客系列模式）
+class BatchStorage:
+    """已弃用：BatchStorage 在 v2.4 中已移除
+
+    请使用 src/utils/storage_v2.py 中的 SeriesStorage 代替。
+    """
+
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError(
+            "BatchStorage 已在 v2.4 中移除。"
+            "请使用 src/series_orchestrator.py 生成100期技术博客系列内容，"
+            "或使用 src/utils/storage_v2.py 中的 SeriesStorage。"
+        )
 
 
 def get_storage(base_dir: str = "data") -> DailyStorage:

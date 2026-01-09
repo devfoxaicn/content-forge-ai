@@ -70,13 +70,13 @@ class BaseAgent(ABC):
                 except ValueError:
                     # Fallback到环境变量
                     api_key = os.getenv("ZHIPUAI_API_KEY")
-                    base_url = "https://open.bigmodel.cn/api/paas/v4/"
+                    base_url = "https://open.bigmodel.cn/api/coding/paas/v4/"  # 编码专用端点
                     if not api_key:
                         raise ValueError("请设置环境变量 ZHIPUAI_API_KEY")
             else:
                 # Fallback到原有逻辑
                 api_key = os.getenv("ZHIPUAI_API_KEY")
-                base_url = zhipuai_config.get("base_url", "https://open.bigmodel.cn/api/paas/v4/")
+                base_url = zhipuai_config.get("base_url", "https://open.bigmodel.cn/api/coding/paas/v4/")  # 编码专用端点
                 if not api_key:
                     raise ValueError("请设置环境变量 ZHIPUAI_API_KEY")
 
