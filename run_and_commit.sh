@@ -5,8 +5,9 @@
 
 set -e  # 遇到错误立即退出
 
-# 项目路径
-PROJECT_DIR="/Users/z/Documents/work/content-forge-ai"
+# 自动检测项目路径（从脚本位置推断）
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
 cd "$PROJECT_DIR" || exit 1
 
 # Python虚拟环境路径
@@ -19,6 +20,7 @@ DATA_DIR="$PROJECT_DIR/data"
 # 记录开始时间
 echo "==========================================" | tee -a "$LOG_FILE"
 echo "开始时间: $(date '+%Y-%m-%d %H:%M:%S')" | tee -a "$LOG_FILE"
+echo "项目路径: $PROJECT_DIR" | tee -a "$LOG_FILE"
 echo "==========================================" | tee -a "$LOG_FILE"
 
 # 1. 拉取最新代码（避免冲突）
@@ -33,8 +35,8 @@ PYTHONPATH="$PROJECT_DIR" "$VENV_PYTHON" "$PROJECT_DIR/src/main.py" --once --wor
 # 3. 检查是否有新的数据生成
 echo "[3/4] 检查新生成的数据..." | tee -a "$LOG_FILE"
 if [ -d "$DATA_DIR" ]; then
-    # 强制添加data目录（即使被.gitignore忽略）
-    git add -f data/ || true
+    # 添加data目录
+    git add data/ || true
 
     # 检查是否有暂存的更改
     if git diff --cached --quiet; then

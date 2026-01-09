@@ -1,9 +1,9 @@
-# 环境变量（包含API密钥）
+# ==================== 环境变量（包含API密钥）====================
 .env
 .env.local
 .env.*.local
 
-# Python
+# ==================== Python ====================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -16,41 +16,40 @@ ENV/
 dist/
 build/
 
-# IDE
+# ==================== IDE ====================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.DS_Store
 
-# 日志和数据
+# ==================== 操作系统 ====================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ==================== 日志 ====================
 logs/
-data/
 *.log
 
-# 测试和覆盖率
+# ==================== 测试和覆盖率 ====================
 .pytest_cache/
 .coverage
 htmlcov/
 .tox/
 
-# 临时文件
+# ==================== 临时文件 ====================
 *.tmp
 *.bak
 *.cache
 
-# Claude Code
+# ==================== Claude Code ====================
 .claude/
 
-# 备份文件
+# ==================== 备份文件 ====================
 *.backup
 *_backup.*
 
-# Jupyter Notebook
-.ipynb_checkpoints/
-
-# MacOS
-.DS_Store
-.AppleDouble
-.LSOverride
+# ==================== Jupyter Notebook ====================
+.ipynbcheckpoints/

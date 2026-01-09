@@ -1,4 +1,4 @@
-# ContentForge AI v2.2
+# ContentForge AI v2.3
 
 > 🚀 AI驱动的多平台内容自动化生产工厂
 
@@ -79,6 +79,55 @@ cat data/20260107/xiaohongshu/note_*.md
 # 查看Twitter帖子
 cat data/20260107/twitter/twitter_*.md
 ```
+
+## 🚀 部署到生产环境
+
+详细部署指南请参考 [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### 快速部署
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/Ming-H/content-forge-ai.git
+cd content-forge-ai
+
+# 2. 安装依赖
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# 3. 配置环境变量
+cp .env.example .env
+# 编辑.env文件，填入你的API密钥
+
+# 4. 测试运行
+python src/main.py --once --workflow auto
+
+# 5. 设置定时任务（每天早上3点执行）
+crontab -e
+# 添加：0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
+```
+
+### 🔐 环境变量配置
+
+创建 `.env` 文件（基于 `.env.example`）：
+
+```bash
+# 必需的密钥
+ZHIPUAI_API_KEY=your_zhipuai_api_key_here    # 智谱AI密钥（获取：https://open.bigmodel.cn/）
+TAVILY_API_KEY=your_tavily_api_key_here      # Tavily搜索密钥（获取：https://tavily.com/）
+
+# 可选的密钥
+OPENAI_API_KEY=your_openai_api_key_here      # OpenAI密钥
+GEMINI_API_KEY=your_gemini_api_key_here      # Google Gemini密钥（用于图片生成）
+NEWSAPI_KEY=your_newsapi_key_here            # NewsAPI密钥
+```
+
+**获取API密钥**：
+- [智谱AI](https://open.bigmodel.cn/) - 必需，支持国产大模型
+- [Tavily](https://tavily.com/) - 必需，用于Web搜索深度研究
+- [OpenAI](https://platform.openai.com/api-keys) - 可选
+- [Google AI Studio](https://makersuite.google.com/app/apikey) - 可选，用于图片生成
 
 ## 📂 输出结构
 
@@ -273,6 +322,15 @@ A: 打开 `data/YYYYMMDD/xiaohongshu/prompts_*.txt`，复制中文提示词，�
 
 ## 🔄 版本历史
 
+### v2.3 (2026-01-09)
+- ✅ 配置管理重构 - 提取硬编码URL到配置文件
+- ✅ 新增APIConfigManager - 统一管理API端点和密钥
+- ✅ 优化.gitignore - 改进文件忽略规则
+- ✅ 自动运行脚本改进 - 移除硬编码路径
+- ✅ 新增.env.example - 环境变量模板
+- ✅ 新增DEPLOYMENT.md - 详细部署指南
+- ✅ 文档完善 - 添加部署说明和常见问题
+
 ### v2.2 (2026-01-08)
 - ✅ 新增ResearchAgent - Web搜索增强深度研究
 - ✅ 新增CodeReviewAgent - 代码审查和质量保证
@@ -300,6 +358,6 @@ MIT License - 详见 [LICENSE](LICENSE)
 
 ---
 
-**最后更新**：2026-01-08
-**版本**：v2.2
+**最后更新**：2026-01-09
+**版本**：v2.3
 **Made with ❤️ by ContentForge AI Team**

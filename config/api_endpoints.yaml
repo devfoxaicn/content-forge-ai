@@ -1,0 +1,98 @@
+# ==================== ContentForge AI API端点配置 ====================
+# 集中管理所有API端点URL，便于维护和修改
+
+# ==================== LLM提供商端点 ====================
+llm:
+  zhipuai:
+    base_url: "https://open.bigmodel.cn/api/paas/v4/"
+    coding_url: "https://open.bigmodel.cn/api/coding/paas/v4/"
+  openai:
+    base_url: "https://api.openai.com/v1"
+
+# ==================== AI热点数据源端点 ====================
+data_sources:
+  # Hacker News
+  hackernews:
+    base_url: "https://hacker-news.firebaseio.com/v0"
+    topstories: "/topstories.json"
+    item: "/item/{id}.json"
+  
+  # GitHub Trending (第三方API)
+  github_trending:
+    api_url: "https://github-trending-api.now.sh/repositories"
+  
+  # Hugging Face
+  huggingface:
+    base_url: "https://huggingface.co/api"
+    models: "/models"
+    model_url: "https://huggingface.co/{model_id}"
+  
+  # Stack Overflow
+  stackoverflow:
+    base_url: "https://api.stackexchange.com/2.3"
+    questions: "/questions"
+    question_url: "https://stackoverflow.com/questions/{id}"
+  
+  # Reddit
+  reddit:
+    base_url: "https://www.reddit.com"
+    api_url: "https://oauth.reddit.com"
+    r_machine_learning: "/r/MachineLearning/hot"
+    r_artificial: "/r/artificial/hot"
+  
+  # NewsAPI
+  newsapi:
+    base_url: "https://newsapi.org/v2"
+    everything: "/everything"
+  
+  # Dev.to
+  devto:
+    base_url: "https://dev.to/api"
+    articles: "/articles"
+    article_url: "https://dev.to/{username}/{slug}"
+  
+  # PyPI
+  pypi:
+    stats_api: "https://pypistats.org/api/packages"
+    package_api: "https://pypi.org/pypi/{package}/json"
+    project_url: "https://pypi.org/project/{package}/"
+  
+  # GitHub
+  github:
+    api_base: "https://api.github.com"
+    search_repos: "/search/repositories"
+    search_topics: "/search/repositories"
+    repo_url: "https://github.com/{owner}/{repo}"
+  
+  # arXiv
+  arxiv:
+    base_url: "http://export.arxiv.org/api"
+    query: "/query"
+    paper_url: "https://arxiv.org/abs/{id}"
+  
+  # Kaggle
+  kaggle:
+    base_url: "https://www.kaggle.com/api/v1"
+    datasets: "/datasets/list"
+    dataset_url: "https://www.kaggle.com/datasets/{owner}/{slug}"
+
+# ==================== 发布平台端点 ====================
+publishing:
+  # 小红书
+  xiaohongshu:
+    base_url: "https://www.xiaohongshu.com"
+    explore: "/explore/{timestamp}"
+    mcp_server: "http://localhost:3000"
+  
+  # Twitter/X
+  twitter:
+    base_url: "https://twitter.com"
+    api_base: "https://api.twitter.com/2"
+
+# ==================== 研究数据源（示例） ====================
+research:
+  # 示例域名，用于测试
+  example_domains:
+    docs: "https://example.com/docs"
+    medium: "https://medium.com/@tech"
+    github: "https://github.com/example"

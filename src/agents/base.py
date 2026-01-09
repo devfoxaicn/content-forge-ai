@@ -10,6 +10,14 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 import yaml
 
+# 导入API配置管理器
+try:
+    from src.utils.api_config import get_api_config
+except ImportError:
+    # 如果导入失败，提供一个fallback
+    def get_api_config():
+        return None
+
 
 class BaseAgent(ABC):
     """Agent基类"""
@@ -52,13 +60,29 @@ class BaseAgent(ABC):
 
         if provider == "zhipuai":
             zhipuai_config = llm_config.get("zhipuai", {})
-            api_key = os.getenv("ZHIPUAI_API_KEY")
-            if not api_key:
-                raise ValueError("请设置环境变量 ZHIPUAI_API_KEY")
+
+            # 使用APIConfigManager获取密钥和端点
+            api_config = get_api_config()
+            if api_config:
+                try:
+                    api_key = api_config.get_api_key("zhipuai")
+                    base_url = api_config.get_endpoint("llm.zhipuai.base_url")
+                except ValueError:
+                    # Fallback到环境变量
+                    api_key = os.getenv("ZHIPUAI_API_KEY")
+                    base_url = "https://open.bigmodel.cn/api/paas/v4/"
+                    if not api_key:
+                        raise ValueError("请设置环境变量 ZHIPUAI_API_KEY")
+            else:
+                # Fallback到原有逻辑
+                api_key = os.getenv("ZHIPUAI_API_KEY")
+                base_url = zhipuai_config.get("base_url", "https://open.bigmodel.cn/api/paas/v4/")
+                if not api_key:
+                    raise ValueError("请设置环境变量 ZHIPUAI_API_KEY")
 
             # 基础参数
             llm_kwargs = {
-                "openai_api_base": zhipuai_config.get("base_url", "https://open.bigmodel.cn/api/paas/v4/"),
+                "openai_api_base": base_url,
                 "openai_api_key": api_key,
                 "model": zhipuai_config.get("model", "glm-4.7"),
                 "temperature": self.config.get("temperature", 0.7),
@@ -78,9 +102,20 @@ class BaseAgent(ABC):
             return ChatOpenAI(**llm_kwargs)
         elif provider == "openai":
             openai_config = llm_config.get("openai", {})
-            api_key = os.getenv("OPENAI_API_KEY")
-            if not api_key:
-                raise ValueError("请设置环境变量 OPENAI_API_KEY")
+
+            # 使用APIConfigManager获取密钥
+            api_config = get_api_config()
+            if api_config:
+                try:
+                    api_key = api_config.get_api_key("openai")
+                except ValueError:
+                    api_key = os.getenv("OPENAI_API_KEY")
+                    if not api_key:
+                        raise ValueError("请设置环境变量 OPENAI_API_KEY")
+            else:
+                api_key = os.getenv("OPENAI_API_KEY")
+                if not api_key:
+                    raise ValueError("请设置环境变量 OPENAI_API_KEY")
 
             return ChatOpenAI(
                 openai_api_key=api_key,
