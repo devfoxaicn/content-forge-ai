@@ -1,0 +1,20 @@
+{
+  "id": "topic_018",
+  "series_id": "series_2",
+  "episode": 18,
+  "title": "RAG生产环境最佳实践",
+  "description": "RAG系统生产化实践：缓存策略（语义缓存、LRU缓存）、并发控制与限流、成本优化（模型选择、Token优化）、监控告警，以及构建高可用RAG服务的经验总结。",
+  "keywords": [
+    "RAG生产环境",
+    "缓存策略",
+    "并发控制",
+    "成本优化",
+    "监控告警",
+    "高可用",
+    "生产部署"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

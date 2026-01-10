@@ -1,0 +1,20 @@
+{
+  "id": "topic_014",
+  "series_id": "series_2",
+  "episode": 14,
+  "title": "混合检索与重排序（Reranking）",
+  "description": "提升RAG准确率的关键技术：结合关键词检索（BM25）和向量检索的混合检索策略，使用Cross-encoder等重排序模型优化检索结果，以及如何平衡准确性和效率。",
+  "keywords": [
+    "混合检索",
+    "Hybrid Search",
+    "BM25",
+    "重排序",
+    "Reranking",
+    "Cross-encoder",
+    "检索优化"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

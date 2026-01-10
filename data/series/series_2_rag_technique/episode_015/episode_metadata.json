@@ -1,0 +1,19 @@
+{
+  "id": "topic_015",
+  "series_id": "series_2",
+  "episode": 15,
+  "title": "Advanced RAG：多跳检索与Self-RAG",
+  "description": "进阶RAG技术：处理复杂推理问题的多跳检索（Multi-hop Retrieval）、自反思检索（Self-RAG）、递归检索与迭代优化，以及如何让AI自主判断何时需要检索。",
+  "keywords": [
+    "Advanced RAG",
+    "多跳检索",
+    "Multi-hop Retrieval",
+    "Self-RAG",
+    "递归检索",
+    "复杂推理"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

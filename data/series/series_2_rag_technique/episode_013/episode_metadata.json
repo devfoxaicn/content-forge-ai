@@ -1,0 +1,20 @@
+{
+  "id": "topic_013",
+  "series_id": "series_2",
+  "episode": 13,
+  "title": "文档切片与Embedding策略",
+  "description": "RAG系统的两大基石：如何科学地切分文档（固定大小、语义切片、滑动窗口），如何选择和优化Embedding模型（OpenAI、Cohere、BGE等），以及这些选择如何影响检索质量。",
+  "keywords": [
+    "文档切片",
+    "Chunking",
+    "Embedding",
+    "语义切片",
+    "文本分割",
+    "向量表示",
+    "检索质量"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

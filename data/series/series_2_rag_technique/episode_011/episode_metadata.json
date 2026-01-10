@@ -1,0 +1,19 @@
+{
+  "id": "topic_011",
+  "series_id": "series_2",
+  "episode": 11,
+  "title": "RAG基础：检索增强生成入门",
+  "description": "RAG（检索增强生成）原理与实战入门：讲解RAG的核心思想、基本架构（索引→检索→生成→回答）、适用场景，以及为什么RAG成为LLM应用的主流范式。",
+  "keywords": [
+    "RAG",
+    "检索增强生成",
+    "Retrieval Augmented Generation",
+    "向量检索",
+    "知识库",
+    "LLM应用"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,141 @@
+{
+  "series_info": {
+    "id": "series_1_llm_foundation",
+    "name": "LLM原理基础系列",
+    "description": "建立LLM核心知识体系，从基础概念到深入原理",
+    "topic_count": 10,
+    "difficulty": "入门→进阶",
+    "priority": 1,
+    "status": "completed"
+  },
+  "topics": [
+    {
+      "id": "topic_001",
+      "series_id": "series_1",
+      "episode": 1,
+      "title": "Transformers 架构深度解析",
+      "description": "Transformer架构是现代大语言模型的基础。深入解析自注意力机制、编码器-解码器结构、位置编码等核心组件，以及它如何革命性地改变了NLP领域。",
+      "keywords": ["Transformer", "自注意力机制", "Self-Attention", "编码器-解码器", "Attention Is All You Need", "位置编码"],
+      "difficulty": "进阶",
+      "estimated_words": 12662,
+      "status": "completed",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_002",
+      "series_id": "series_1",
+      "episode": 2,
+      "title": "大模型原理之Tokenizer分词器",
+      "description": "Tokenizer是LLM的入口，负责将文本转换为模型可理解的token。详解BPE、WordPiece、Unigram等分词算法，以及GPT、BERT、LLaMA等主流模型的tokenizer实现。",
+      "keywords": ["Tokenizer", "分词器", "BPE", "Byte-Pair Encoding", "WordPiece", "Unigram", "Tokenization", "词汇表"],
+      "difficulty": "进阶",
+      "estimated_words": 17214,
+      "status": "completed",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_003",
+      "series_id": "series_1",
+      "episode": 3,
+      "title": "大模型原理之Pretraining预训练",
+      "description": "预训练是大模型获得智能的关键阶段。深入剖析MLM、CLM、PLM等预训练目标，海量数据训练过程，以及Scaling Law（缩放定律）如何指导模型规模扩展。",
+      "keywords": ["Pretraining", "预训练", "MLM", "CLM", "Next Token Prediction", "Scaling Law", "缩放定律", "自监督学习"],
+      "difficulty": "进阶",
+      "estimated_words": 11963,
+      "status": "completed",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_004",
+      "series_id": "series_1",
+      "episode": 4,
+      "title": "大模型原理之RLHF人类反馈强化学习",
+      "description": "RLHF使大模型与人类价值观对齐。详解Reward Model训练、PPO算法实现、Proximal Policy Optimization，以及如何通过人类偏好数据微调模型行为。",
+      "keywords": ["RLHF", "Reinforcement Learning from Human Feedback", "Reward Model", "PPO", "Proximal Policy Optimization", "对齐", "人类反馈"],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_005",
+      "series_id": "series_1",
+      "episode": 5,
+      "title": "大模型原理之强化学习基础",
+      "description": "强化学习是LLM训练的核心技术之一。讲解MDP、策略梯度、价值函数、探索与利用等RL基础概念，以及它们在大模型训练和推理中的应用。",
+      "keywords": ["强化学习", "Reinforcement Learning", "MDP", "马尔可夫决策过程", "策略梯度", "价值函数", "探索与利用", "Q-Learning"],
+      "difficulty": "入门",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_006",
+      "series_id": "series_1",
+      "episode": 6,
+      "title": "Positional Encoding 位置编码",
+      "description": "深入解析Transformer中的位置编码机制：Sinusoidal、RoPE（旋转位置编码）、ALiBi等位置表示方法，以及它们如何让模型理解序列顺序和相对位置关系。",
+      "keywords": ["Positional Encoding", "RoPE", "ALiBi", "Sinusoidal", "位置编码", "旋转位置编码", "相对位置编码"],
+      "difficulty": "入门",
+      "estimated_words": 10000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_007",
+      "series_id": "series_1",
+      "episode": 7,
+      "title": "Attention Mechanism 注意力机制全解",
+      "description": "全面解析注意力机制：从基础的Scaled Dot-Product Attention到Multi-head Attention，再到Cross-attention和Sparse Attention，深入理解注意力如何成为现代AI的核心。",
+      "keywords": ["Attention Mechanism", "注意力机制", "Multi-head Attention", "Cross-attention", "Sparse Attention", "Self-Attention", "Scaled Dot-Product"],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_008",
+      "series_id": "series_1",
+      "episode": 8,
+      "title": "Layer Normalization & 残差连接",
+      "description": "深入理解Transformer的两大稳定器：Layer Normalization如何解决内部协变量偏移问题，残差连接如何让梯度在深层网络中顺畅传播，以及它们如何让训练百层模型成为可能。",
+      "keywords": ["Layer Normalization", "残差连接", "Residual Connection", "Batch Normalization", "梯度消失", "深层网络训练"],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_009",
+      "series_id": "series_1",
+      "episode": 9,
+      "title": "激活函数演变：从ReLU到SwiGLU",
+      "description": "梳理神经网络激活函数的进化史：从ReLU、GELU、Swish到SwiGLU和GeGLU，分析不同激活函数的特性、优缺点，以及为什么现代LLM偏爱某些特定激活函数。",
+      "keywords": ["激活函数", "ReLU", "GELU", "Swish", "SwiGLU", "GeGLU", "非线性变换", "门控机制"],
+      "difficulty": "入门",
+      "estimated_words": 10000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_010",
+      "series_id": "series_1",
+      "episode": 10,
+      "title": "模型架构演进：从GPT-1到GPT-4",
+      "description": "回顾GPT系列模型的进化历程：从GPT-1的1.17亿参数到GPT-4的1.8万亿参数，分析参数规模、训练数据、能力边界的演进，理解Scaling Law如何驱动AI能力的指数级增长。",
+      "keywords": ["GPT", "GPT-1", "GPT-2", "GPT-3", "GPT-4", "模型架构演进", "参数规模", "Scaling Law"],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 10,
+    "total_estimated_words": 134839,
+    "completion_rate": 100.0,
+    "start_date": "2026-01-09",
+    "end_date": "2026-01-10"
+  }
+}

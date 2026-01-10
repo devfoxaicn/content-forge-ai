@@ -1,0 +1,117 @@
+{
+  "series_info": {
+    "id": "series_2_rag_technique",
+    "name": "RAG技术实战系列",
+    "description": "掌握检索增强生成的完整技术栈",
+    "topic_count": 8,
+    "difficulty": "实践为主",
+    "priority": 2,
+    "status": "completed"
+  },
+  "topics": [
+    {
+      "id": "topic_011",
+      "series_id": "series_2",
+      "episode": 11,
+      "title": "RAG基础：检索增强生成入门",
+      "description": "RAG（检索增强生成）原理与实战入门：讲解RAG的核心思想、基本架构（索引→检索→生成→回答）、适用场景，以及为什么RAG成为LLM应用的主流范式。",
+      "keywords": ["RAG", "检索增强生成", "Retrieval Augmented Generation", "向量检索", "知识库", "LLM应用"],
+      "difficulty": "入门",
+      "estimated_words": 10000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_012",
+      "series_id": "series_2",
+      "episode": 12,
+      "title": "向量数据库选型与实战",
+      "description": "主流向量数据库横向对比：Pinecone、Milvus、Weaviate、Chroma、Qdrant等，从性能、成本、易用性、部署方式等多维度分析，并提供实战选择建议。",
+      "keywords": ["向量数据库", "Vector Database", "Pinecone", "Milvus", "Weaviate", "Chroma", "Qdrant", "pgvector"],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_013",
+      "series_id": "series_2",
+      "episode": 13,
+      "title": "文档切片与Embedding策略",
+      "description": "RAG系统的两大基石：如何科学地切分文档（固定大小、语义切片、滑动窗口），如何选择和优化Embedding模型（OpenAI、Cohere、BGE等），以及这些选择如何影响检索质量。",
+      "keywords": ["文档切片", "Chunking", "Embedding", "语义切片", "文本分割", "向量表示", "检索质量"],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_014",
+      "series_id": "series_2",
+      "episode": 14,
+      "title": "混合检索与重排序（Reranking）",
+      "description": "提升RAG准确率的关键技术：结合关键词检索（BM25）和向量检索的混合检索策略，使用Cross-encoder等重排序模型优化检索结果，以及如何平衡准确性和效率。",
+      "keywords": ["混合检索", "Hybrid Search", "BM25", "重排序", "Reranking", "Cross-encoder", "检索优化"],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_015",
+      "series_id": "series_2",
+      "episode": 15,
+      "title": "Advanced RAG：多跳检索与Self-RAG",
+      "description": "进阶RAG技术：处理复杂推理问题的多跳检索（Multi-hop Retrieval）、自反思检索（Self-RAG）、递归检索与迭代优化，以及如何让AI自主判断何时需要检索。",
+      "keywords": ["Advanced RAG", "多跳检索", "Multi-hop Retrieval", "Self-RAG", "递归检索", "复杂推理"],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_016",
+      "series_id": "series_2",
+      "episode": 16,
+      "title": "RAG评估体系构建",
+      "description": "如何科学评估RAG系统效果：介绍RAGAS、TruLens、DeepEval等评估框架，讲解Faithfulness、Answer Relevancy、Context Precision等核心指标，以及如何构建自动化评估流程。",
+      "keywords": ["RAG评估", "RAGAS", "TruLens", "DeepEval", "Faithfulness", "Answer Relevancy", "自动化评估"],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_017",
+      "series_id": "series_2",
+      "episode": 17,
+      "title": "GraphRAG：知识图谱增强检索",
+      "description": "知识图谱与RAG的结合：GraphRAG如何利用实体关系和图结构提升检索质量、Community Detection算法、图谱构建流程，以及在结构化知识场景中的优势。",
+      "keywords": ["GraphRAG", "知识图谱", "Knowledge Graph", "图检索", "结构化数据", "实体关系", "Community Detection"],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_018",
+      "series_id": "series_2",
+      "episode": 18,
+      "title": "RAG生产环境最佳实践",
+      "description": "RAG系统生产化实践：缓存策略（语义缓存、LRU缓存）、并发控制与限流、成本优化（模型选择、Token优化）、监控告警，以及构建高可用RAG服务的经验总结。",
+      "keywords": ["RAG生产环境", "缓存策略", "并发控制", "成本优化", "监控告警", "高可用", "生产部署"],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 8,
+    "completed_episodes": 8,
+    "total_estimated_words": 109000,
+    "completion_rate": 100.0,
+    "start_date": "2026-01-10",
+    "end_date": "2026-01-10"
+  }
+}

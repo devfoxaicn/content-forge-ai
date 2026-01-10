@@ -17,6 +17,7 @@ sys.path.insert(0, str(project_root))
 from src.utils.storage_v2 import SeriesStorage, StorageFactory
 from src.utils.series_manager import (
     SeriesMetadata,
+    SeriesPathManager,
     TopicFormatter,
     get_series_metadata,
     print_progress_summary
@@ -119,10 +120,13 @@ class SeriesOrchestrator:
 
         series_id = topic["series_id"]
 
+        # 使用 SeriesPathManager 转换 series_id 为目录名
+        series_dir_name = SeriesPathManager.get_series_directory_name(series_id)
+
         # 创建存储实例
         if storage is None:
             storage = StorageFactory.create_series(
-                series_id=series_id,
+                series_id=series_dir_name,  # 使用转换后的目录名
                 episode_number=episode_number
             )
 

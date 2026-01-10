@@ -152,14 +152,14 @@ class SeriesMetadata:
 class SeriesPathManager:
     """系列路径管理器"""
 
-    # 系列ID到友好名称的映射
+    # 系列ID到友好名称的映射（与实际文件夹名称一致）
     SERIES_NAME_MAP = {
         "series_1": "llm_foundation",
-        "series_2": "rag_techniques",
+        "series_2": "rag_technique",
         "series_3": "agent_development",
         "series_4": "prompt_engineering",
         "series_5": "model_deployment",
-        "series_6": "multimodal_ai",
+        "series_6": "multimodal_frontier",
         "series_7": "ai_coding_tools",
         "series_8": "ai_data_engineering",
         "series_9": "ai_applications",

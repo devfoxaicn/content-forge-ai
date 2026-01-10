@@ -1,0 +1,20 @@
+{
+  "id": "topic_017",
+  "series_id": "series_2",
+  "episode": 17,
+  "title": "GraphRAG：知识图谱增强检索",
+  "description": "知识图谱与RAG的结合：GraphRAG如何利用实体关系和图结构提升检索质量、Community Detection算法、图谱构建流程，以及在结构化知识场景中的优势。",
+  "keywords": [
+    "GraphRAG",
+    "知识图谱",
+    "Knowledge Graph",
+    "图检索",
+    "结构化数据",
+    "实体关系",
+    "Community Detection"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}
