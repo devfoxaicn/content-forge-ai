@@ -14,7 +14,7 @@ llm:
     # 其他可选模型: glm-4-flash（便宜）, glm-4-plus（上一代旗舰）
     temperature: 0.7
     max_tokens: 8000  # 增加到8000以支持长文本生成
-    timeout: 300  # 增加超时到5分钟以支持长文本生成
+    timeout: 600  # 增加超时到10分钟以支持长文本生成
 
     # Thinking 深度思考模式（GLM-4.7 专属功能）
     thinking:
@@ -104,9 +104,10 @@ agents:
   # 长文本生成Agent（新）
   longform_generator:
     enabled: true
-    article_length: "long"  # short, medium, long - 改为long以生成更长文章
-    technical_depth: "advanced"  # beginner, intermediate, advanced - 改为advanced以增加技术深度
-    max_tokens: 8000  # 增加到8000以支持长文本
+    article_length: "long"  # short, medium, long - long生成约1.5万字专业文章
+    technical_depth: "advanced"  # beginner, intermediate, advanced - advanced增加技术深度
+    max_tokens: 8000  # 单次请求最大token数（分阶段生成避免超时）
+    target_word_count: 15000  # 目标字数：1.5万字
     temperature: 0.7
 
     # 格式修复配置（v2.2新增）

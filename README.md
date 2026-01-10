@@ -54,59 +54,81 @@ cp .env.example .env
 
 ### 运行
 
+系统使用统一入口 `src/main.py`，支持两种模式：
+
+**自动模式（基于AI热点）**：
 ```bash
-# 推荐：不指定topic，系统自动从热点生成
-python src/main.py --once --workflow auto
+# 设置PYTHONPATH（替换为你的实际项目路径）
+export PYTHONPATH=/Users/z/Documents/work/content-forge-ai
+
+# 运行自动模式
+python src/main.py --mode auto --once
 
 # 或指定topic作为文件标识（可选）
-python src/main.py --once --workflow auto --topic "AI技术"
+python src/main.py --mode auto --topic "AI技术"
+```
+
+**系列模式（100期技术博客）**：
+```bash
+# 查看进度
+python src/main.py --mode series --progress
+
+# 生成指定集数
+python src/main.py --mode series --episode 1
+
+# 生成整个系列
+python src/main.py --mode series --series series_1
+
+# 生成全部100期
+python src/main.py --mode series --all --start 1 --end 100
 ```
 
 ### 查看输出
 
 ```bash
 # 查看存储目录
-ls -la data/20260107/
+ls -la data/daily/20260107/       # 自动模式输出
+ls -la data/series/series_1_llm_foundation/  # 系列模式输出
 
 # 查看热点简报
-cat data/20260107/digest/digest_*.md
+cat data/daily/20260107/digest/digest_*.md
 
 # 查看专业文章
-cat data/20260107/longform/article_*.md
+cat data/daily/20260107/longform/article_*.md
 
 # 查看小红书笔记
-cat data/20260107/xiaohongshu/note_*.md
+cat data/daily/20260107/xiaohongshu/note_*.md
 
 # 查看Twitter帖子
-cat data/20260107/twitter/twitter_*.md
+cat data/daily/20260107/twitter/twitter_*.md
 ```
 
 ## 📚 两种内容生成模式
 
-### 1️⃣ 每日热点模式（默认）
+### 1️⃣ 自动模式（默认）
 
-基于11个AI数据源，自动追踪实时热点并生成内容。
+基于11个AI数据源，自动追踪实时热点并生成内容。适合每日定时任务。
 
 ```bash
-python src/main.py --once --workflow auto
+python src/main.py --mode auto --once
 ```
 
-### 2️⃣ 100期技术博客系列 (v2.4) 🆕
+### 2️⃣ 系列模式（100期技术博客）
 
 系统化生成100期技术博客，覆盖10大系列从LLM原理到AI基础设施的全栈内容。
 
 ```bash
 # 查看进度
-python src/series_orchestrator.py --progress
+python src/main.py --mode series --progress
 
 # 生成指定集数
-python src/series_orchestrator.py --episode 1
+python src/main.py --mode series --episode 1
 
 # 生成整个系列
-python src/series_orchestrator.py --series series_1
+python src/main.py --mode series --series series_1
 
 # 生成全部100期
-python src/series_orchestrator.py --all --start 1 --end 100
+python src/main.py --mode series --all --start 1 --end 100
 ```
 
 **100期内容规划**：
@@ -125,19 +147,14 @@ python src/series_orchestrator.py --all --start 1 --end 100
 
 ### 模式对比
 
-| 特性 | 每日热点模式 | 100期系列模式 |
-|------|-------------|--------------|
+| 特性 | 自动模式 | 系列模式 |
+|------|---------|----------|
 | 触发方式 | 定时任务 | 手动执行 |
 | 数据来源 | AI热点分析 | 100期预设 |
 | 存储位置 | `data/daily/日期/` | `data/series/{系列ID}/episode_{xxx}/` |
 | 内容特点 | 实时热点 | 系统化教程 |
 
-**详细文档**：
-- [SERIES_MODE_GUIDE.md](SERIES_MODE_GUIDE.md) - 100期系列模式指南
-
 ## 🚀 部署到生产环境
-
-详细部署指南请参考 [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ### 快速部署
 
@@ -156,11 +173,21 @@ cp .env.example .env
 # 编辑.env文件，填入你的API密钥
 
 # 4. 测试运行
-python src/main.py --once --workflow auto
+python src/main.py --mode auto --once
 
 # 5. 设置定时任务（每天早上3点执行）
 crontab -e
 # 添加：0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
+```
+
+**高级定时任务配置**：
+
+```bash
+# 每天自动生成热点内容（默认）
+0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
+
+# 或者设置为系列模式
+CONTENT_FORGE_MODE=series SERIES_EPISODE=1 0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
 ```
 
 ### 🔐 环境变量配置
@@ -377,24 +404,25 @@ A: 打开 `data/YYYYMMDD/xiaohongshu/prompts_*.txt`，复制中文提示词，�
 
 ## 📚 详细文档
 
-- **[PROJECT_GUIDE.md](PROJECT_GUIDE.md)** - 完整项目指南
-- **[BATCH_MODE_GUIDE.md](BATCH_MODE_GUIDE.md)** - 批量生成模式使用指南（v2.3新增）
-- **[CLAUDE.md](CLAUDE.md)** - 开发者指南
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - 部署指南
+- **[CLAUDE.md](CLAUDE.md)** - 开发者指南和架构说明
 - **[test/README.md](test/README.md)** - 测试文件说明
 
 ## 🔄 版本历史
 
-### v2.4 (2026-01-09) 🆕
+### v2.5 (2026-01-09) 🆕
+- ✅ **统一入口** - `src/main.py` 现在支持两种模式切换
+- ✅ **简化部署** - 更新 `run_and_commit.sh` 支持环境变量配置模式
+- ✅ **清理冗余** - 删除冗余代码和文档，简化项目结构
+- ✅ **双模式支持** - 同时支持自动热点模式和100期系列模式
+
+### v2.4 (2026-01-09)
 - ✅ **100期技术博客系列** - 系统化规划100期技术内容，覆盖10大系列
 - ✅ **存储结构优化** - 两种模式独立存储：daily/、series/
 - ✅ **SeriesStorage** - 新的系列存储管理器
 - ✅ **SeriesOrchestrator** - 100期系列生成协调器
 - ✅ **SeriesMetadata** - 元数据管理系统，支持进度追踪
-- ✅ **数据迁移脚本** - 支持从旧结构迁移到新结构
 - ✅ **StorageFactory** - 统一存储工厂模式
 - ✅ 配置文件 `blog_topics_100_complete.json` - 100期完整规划
-- ✅ 移除batch模式 - 简化项目结构，专注核心功能
 
 ### v2.2 (2026-01-08)
 - ✅ 新增ResearchAgent - Web搜索增强深度研究

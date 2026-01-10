@@ -1,0 +1,21 @@
+{
+  "id": "topic_005",
+  "series_id": "series_1",
+  "episode": 5,
+  "title": "大模型原理之强化学习基础",
+  "description": "强化学习是LLM训练的核心技术之一。讲解MDP、策略梯度、价值函数、探索与利用等RL基础概念，以及它们在大模型训练和推理中的应用。",
+  "keywords": [
+    "强化学习",
+    "Reinforcement Learning",
+    "MDP",
+    "马尔可夫决策过程",
+    "策略梯度",
+    "价值函数",
+    "探索与利用",
+    "Q-Learning"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "topic_006",
+  "series_id": "series_1",
+  "episode": 6,
+  "title": "Positional Encoding 位置编码",
+  "description": "深入解析Transformer中的位置编码机制：Sinusoidal、RoPE（旋转位置编码）、ALiBi等位置表示方法，以及它们如何让模型理解序列顺序和相对位置关系。",
+  "keywords": [
+    "Positional Encoding",
+    "RoPE",
+    "ALiBi",
+    "Sinusoidal",
+    "位置编码",
+    "旋转位置编码",
+    "相对位置编码"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "topic_009",
+  "series_id": "series_1",
+  "episode": 9,
+  "title": "激活函数演变：从ReLU到SwiGLU",
+  "description": "梳理神经网络激活函数的进化史：从ReLU、GELU、Swish到SwiGLU和GeGLU，分析不同激活函数的特性、优缺点，以及为什么现代LLM偏爱某些特定激活函数。",
+  "keywords": [
+    "激活函数",
+    "ReLU",
+    "GELU",
+    "Swish",
+    "SwiGLU",
+    "GeGLU",
+    "非线性变换",
+    "门控机制"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

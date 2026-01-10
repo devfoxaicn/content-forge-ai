@@ -1,0 +1,19 @@
+{
+  "id": "topic_008",
+  "series_id": "series_1",
+  "episode": 8,
+  "title": "Layer Normalization & 残差连接",
+  "description": "深入理解Transformer的两大稳定器：Layer Normalization如何解决内部协变量偏移问题，残差连接如何让梯度在深层网络中顺畅传播，以及它们如何让训练百层模型成为可能。",
+  "keywords": [
+    "Layer Normalization",
+    "残差连接",
+    "Residual Connection",
+    "Batch Normalization",
+    "梯度消失",
+    "深层网络训练"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

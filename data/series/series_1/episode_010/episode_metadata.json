@@ -1,0 +1,21 @@
+{
+  "id": "topic_010",
+  "series_id": "series_1",
+  "episode": 10,
+  "title": "模型架构演进：从GPT-1到GPT-4",
+  "description": "回顾GPT系列模型的进化历程：从GPT-1的1.17亿参数到GPT-4的1.8万亿参数，分析参数规模、训练数据、能力边界的演进，理解Scaling Law如何驱动AI能力的指数级增长。",
+  "keywords": [
+    "GPT",
+    "GPT-1",
+    "GPT-2",
+    "GPT-3",
+    "GPT-4",
+    "模型架构演进",
+    "参数规模",
+    "Scaling Law"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

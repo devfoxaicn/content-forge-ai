@@ -1,0 +1,20 @@
+{
+  "id": "topic_007",
+  "series_id": "series_1",
+  "episode": 7,
+  "title": "Attention Mechanism 注意力机制全解",
+  "description": "全面解析注意力机制：从基础的Scaled Dot-Product Attention到Multi-head Attention，再到Cross-attention和Sparse Attention，深入理解注意力如何成为现代AI的核心。",
+  "keywords": [
+    "Attention Mechanism",
+    "注意力机制",
+    "Multi-head Attention",
+    "Cross-attention",
+    "Sparse Attention",
+    "Self-Attention",
+    "Scaled Dot-Product"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "completed",
+  "completed_at": "2026-01-10"
+}

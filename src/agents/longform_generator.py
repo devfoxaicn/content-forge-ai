@@ -185,18 +185,34 @@ class LongFormGeneratorAgent(BaseAgent):
 {research_info}
 
 **要求**：
-1. 大纲应包含 7-8 个主要章节
+1. 大纲应包含 10-12 个主要章节（确保总字数达到1.5万字）
 2. 每个章节要有明确的主题和要点
 3. 注明每节的预计字数
 4. 确保逻辑连贯、层次清晰
+5. 重点章节（如核心技术解析、实践应用）应细分更多子节
+
+**字数分配建议**：
+- 引言: 600字
+- 技术背景: 1000字
+- 核心原理: 2000字
+- 架构设计: 1800字
+- 关键特性: 1800字
+- 实践应用: 2000字
+- 技术对比: 1200字
+- 性能优化: 1000字
+- 最佳实践: 1500字
+- 未来展望: 1000字
+- 总结: 500字
+────────────────
+总计: 约1.5万字
 
 **输出格式（JSON）**：
 {{
   "title": "主标题",
   "sections": [
-    {{"title": "引言", "words": 400, "points": ["要点1", "要点2"]}},
-    {{"title": "技术背景", "words": 600, "points": ["要点1", "要点2"]}},
-    {{"title": "核心技术解析", "words": 1500, "points": ["要点1", "要点2", "要点3"]}},
+    {{"title": "引言", "words": 600, "points": ["要点1", "要点2"]}},
+    {{"title": "技术背景", "words": 1000, "points": ["要点1", "要点2"]}},
+    {{"title": "核心原理", "words": 2000, "points": ["要点1", "要点2", "要点3"]}},
     ...
   ]
 }}
@@ -216,17 +232,21 @@ class LongFormGeneratorAgent(BaseAgent):
         except Exception as e:
             self.log(f"大纲生成失败，使用默认大纲: {str(e)}", "WARNING")
 
-        # 返回默认大纲
+        # 返回默认大纲（1.5万字版本）
         return {
             "title": topic_data['title'],
             "sections": [
-                {"title": "引言", "words": 400, "points": "引入话题，说明重要性"},
-                {"title": "技术背景", "words": 600, "points": "发展历程、现状、挑战"},
-                {"title": "核心技术解析", "words": 1500, "points": "技术架构、关键特性、创新点"},
-                {"title": "实践应用", "words": 1000, "points": "实际案例、部署方法、最佳实践"},
-                {"title": "技术对比", "words": 500, "points": "与同类技术对比"},
-                {"title": "未来展望", "words": 400, "points": "发展趋势、机遇挑战"},
-                {"title": "总结", "words": 300, "points": "核心观点、行动建议"}
+                {"title": "引言", "words": 600, "points": "引入话题，说明重要性，概述文章结构"},
+                {"title": "技术背景", "words": 1000, "points": "发展历程、现状、挑战、为什么需要这项技术"},
+                {"title": "核心原理", "words": 2000, "points": "底层原理、关键算法、技术细节"},
+                {"title": "架构设计", "words": 1800, "points": "系统架构、模块设计、数据流向"},
+                {"title": "关键特性", "words": 1800, "points": "核心功能、技术亮点、创新点"},
+                {"title": "实践应用", "words": 2000, "points": "实际案例、部署方法、应用场景"},
+                {"title": "技术对比", "words": 1200, "points": "与同类技术对比、优缺点分析"},
+                {"title": "性能优化", "words": 1000, "points": "性能瓶颈、优化策略、最佳实践"},
+                {"title": "最佳实践", "words": 1500, "points": "开发指南、避坑指南、推荐工具"},
+                {"title": "未来展望", "words": 1000, "points": "发展趋势、机遇挑战、生态建设"},
+                {"title": "总结", "words": 500, "points": "核心观点、行动建议、学习路径"}
             ]
         }
 
@@ -273,13 +293,15 @@ class LongFormGeneratorAgent(BaseAgent):
     def _expand_introduction(self, title: str, words: int, topic_data: Dict[str, Any],
                           context: str = "") -> str:
         """展开引言章节（增强版）"""
+        # 如果words小于600，使用600作为默认值
+        target_words = max(words, 600)
         prompt = f"""请撰写文章引言部分。
 
 **文章主题**：{topic_data['title']}
 
 {context}
 
-**要求字数**：{words}字
+**要求字数**：{target_words}字
 
 **内容要求**：
 1. 用引人入胜的开场白，吸引读者注意
@@ -287,7 +309,7 @@ class LongFormGeneratorAgent(BaseAgent):
 3. 点明文章将讨论的核心问题
 4. 简要概述文章结构（将在哪些方面展开）
 
-请撰写引言（{words}字）：
+请撰写引言（{target_words}字）：
 """
 
         response = self._call_llm(prompt)
@@ -297,6 +319,8 @@ class LongFormGeneratorAgent(BaseAgent):
                           context: str = "") -> str:
         """展开技术背景章节（增强版）"""
         background = research_data.get("detailed_info", {}).get("background", "")
+        # 如果words小于1000，使用1000作为默认值
+        target_words = max(words, 1000)
 
         prompt = f"""请撰写技术背景部分。
 
@@ -304,14 +328,15 @@ class LongFormGeneratorAgent(BaseAgent):
 
 **背景资料**：{background}
 
-**要求字数**：{words}字
+**要求字数**：{target_words}字
 
 **内容要求**：
 1. 相关技术的发展历程
 2. 当前技术现状和竞争格局
 3. 面临的挑战或问题
+4. 为什么需要这项技术
 
-请撰写技术背景（{words}字）：
+请撰写技术背景（{target_words}字）：
 """
 
         response = self._call_llm(prompt)
@@ -319,16 +344,16 @@ class LongFormGeneratorAgent(BaseAgent):
 
     def _expand_core_tech(self, title: str, words: int, research_data: Dict[str, Any],
                           topic_data: Dict[str, Any], context: str = "") -> str:
-        """展开核心技术解析章节（最重要）- 进一步细分为3个子节以避免超时"""
+        """展开核心技术解析章节（最重要）- 进一步细分为4-5个子节以避免超时"""
         details = research_data.get("detailed_info", {})
-        self.log(f"    [{title}] 分为3个子节生成，避免超时...")
+        self.log(f"    [{title}] 分为4个子节生成，避免超时...")
 
-        # 定义3个子节，每个500字
+        # 定义4个子节，每个500-700字，总计约2000-2800字
         subsections = [
             {
                 "subtitle": "技术架构与原理",
                 "focus": details.get('core_features', ''),
-                "words": 500,
+                "words": 700,
                 "content": """
 1. 整体架构设计
 2. 核心组件和模块
@@ -339,7 +364,7 @@ class LongFormGeneratorAgent(BaseAgent):
             {
                 "subtitle": "关键特性详解",
                 "focus": details.get('specs', ''),
-                "words": 500,
+                "words": 700,
                 "content": """
 1. 主要功能特性
 2. 性能指标和规格
@@ -348,14 +373,25 @@ class LongFormGeneratorAgent(BaseAgent):
 """
             },
             {
-                "subtitle": "技术对比与代码示例",
+                "subtitle": "核心算法与实现",
+                "focus": details.get('core_features', ''),
+                "words": 700,
+                "content": """
+1. 核心算法原理
+2. 关键数据结构
+3. 实现细节分析
+4. 代码示例与解析
+"""
+            },
+            {
+                "subtitle": "技术对比与选型",
                 "focus": details.get('pros_cons', ''),
-                "words": 500,
+                "words": 600,
                 "content": """
 1. 与同类技术对比
 2. 优缺点分析
-3. 代码示例（如适用）
-4. 使用注意事项
+3. 使用场景选型建议
+4. 迁移注意事项
 """
             }
         ]
@@ -392,30 +428,41 @@ class LongFormGeneratorAgent(BaseAgent):
 
     def _expand_practice(self, title: str, words: int, research_data: Dict[str, Any],
                          topic_data: Dict[str, Any], context: str = "") -> str:
-        """展开实践应用章节 - 分为2个子节以避免超时"""
+        """展开实践应用章节 - 分为3个子节以避免超时"""
         use_cases = research_data.get("detailed_info", {}).get("use_cases", "")
-        self.log(f"    [{title}] 分为2个子节生成，避免超时...")
+        self.log(f"    [{title}] 分为3个子节生成，避免超时...")
 
-        # 定义2个子节，每个500字
+        # 定义3个子节，每个600-700字，总计约2000字
         subsections = [
             {
                 "subtitle": "应用场景与案例",
-                "words": 500,
+                "words": 700,
                 "content": f"""
-1. 主要应用场景
-2. 真实案例分析（至少2个）
-3. 应用效果和成果
+1. 主要应用场景分析
+2. 真实案例详细解析（至少2个）
+3. 应用效果和成果展示
+4. ROI分析
 
 **参考资料**：{use_cases}
 """
             },
             {
-                "subtitle": "实施指南与最佳实践",
-                "words": 500,
+                "subtitle": "实施指南与部署方法",
+                "words": 700,
                 "content": """
-1. 实施步骤和部署方法
-2. 最佳实践建议
-3. 常见问题和解决方案
+1. 环境准备和前置条件
+2. 详细实施步骤
+3. 部署方法和配置说明
+4. 验证和测试方法
+"""
+            },
+            {
+                "subtitle": "最佳实践与避坑指南",
+                "words": 600,
+                "content": """
+1. 生产环境最佳实践
+2. 常见问题和解决方案
+3. 性能优化建议
 4. 推荐工具和资源
 """
             }
@@ -452,13 +499,15 @@ class LongFormGeneratorAgent(BaseAgent):
     def _expand_comparison(self, title: str, words: int, research_data: Dict[str, Any],
                           topic_data: Dict[str, Any], context: str = "") -> str:
         """展开技术对比章节（增强版）"""
+        # 如果words小于1200，使用1200作为默认值
+        target_words = max(words, 1200)
         prompt = f"""请撰写技术对比部分。
 
 **主题**：{topic_data['title']}
 
 {context}
 
-**要求字数**：{words}字
+**要求字数**：{target_words}字
 
 **内容要求**：
 1. 与同类技术的详细对比
@@ -466,7 +515,7 @@ class LongFormGeneratorAgent(BaseAgent):
 3. 迁移路径和注意事项
 4. 使用对比表格展示
 
-请撰写技术对比（{words}字）：
+请撰写技术对比（{target_words}字）：
 """
 
         response = self._call_llm(prompt)
@@ -476,6 +525,8 @@ class LongFormGeneratorAgent(BaseAgent):
                        context: str = "") -> str:
         """展开未来展望章节（增强版）"""
         trends = research_data.get("detailed_info", {}).get("trends", "")
+        # 如果words小于1000，使用1000作为默认值
+        target_words = max(words, 1000)
 
         prompt = f"""请撰写未来展望部分。
 
@@ -483,15 +534,16 @@ class LongFormGeneratorAgent(BaseAgent):
 
 **发展趋势**：{trends}
 
-**要求字数**：{words}字
+**要求字数**：{target_words}字
 
 **内容要求**：
 1. 分析技术发展趋势
 2. 讨论潜在的改进方向
 3. 预测对行业的影响
 4. 面临的挑战与机遇
+5. 生态建设展望
 
-请撰写未来展望（{words}字）：
+请撰写未来展望（{target_words}字）：
 """
 
         response = self._call_llm(prompt)
@@ -500,15 +552,17 @@ class LongFormGeneratorAgent(BaseAgent):
     def _expand_generic(self, title: str, words: int, points: str, research_data: Dict[str, Any],
                         context: str = "") -> str:
         """展开通用章节（增强版）"""
+        # 确保最小字数为800字
+        target_words = max(words, 800)
         prompt = f"""请撰写"{title}"章节。
 
 {context}
 
 **要点**：{points}
 
-**要求字数**：{words}字
+**要求字数**：{target_words}字
 
-请撰写该章节内容（{words}字）：
+请撰写该章节内容（{target_words}字，要求详细专业）：
 """
 
         response = self._call_llm(prompt)
@@ -537,9 +591,10 @@ class LongFormGeneratorAgent(BaseAgent):
 **要求**：
 1. 总结核心观点和关键洞察
 2. 给不同角色读者（开发者、企业决策者、投资者）的具体建议
-3. 300字左右
+3. 500字左右
+4. 提供学习路径和行动指南
 
-请撰写总结：
+请撰写总结（500字）：
 """
 
         response = self._call_llm(prompt)
@@ -848,7 +903,7 @@ class LongFormGeneratorAgent(BaseAgent):
 **发展趋势**：{details.get('trends', '')}
 """
 
-            return f"""请撰写一篇深度技术文章，字数必须达到4000-5000字。
+            return f"""请撰写一篇深度技术文章，字数必须达到1.5万字左右。
 
 **主题**：{topic_data['title']}
 
@@ -857,40 +912,45 @@ class LongFormGeneratorAgent(BaseAgent):
 
 **文章结构**（按顺序展开，每部分都要详细）：
 
-## 引言（400字）
-引入话题，说明重要性
+## 引言（600字）
+引入话题，说明重要性，概述文章结构
 
-## 技术背景（600字）
-发展历程、现状、挑战
+## 技术背景（1000字）
+发展历程、现状、挑战、为什么需要这项技术
 
-## 核心技术解析（1500字）
-这是最重要的部分，要详细展开：
-- 技术架构和原理
-- 关键特性和创新点
-- 与同类技术对比
-- 包含代码示例
+## 核心原理（2000字）
+底层原理、关键算法、技术细节
 
-## 实践应用（1000字）
-- 实际案例
-- 部署方法
-- 最佳实践
-- 常见问题
+## 架构设计（1800字）
+系统架构、模块设计、数据流向
 
-## 技术对比（500字）
-与其他方案的详细对比
+## 关键特性（1800字）
+核心功能、技术亮点、创新点
 
-## 未来展望（400字）
-发展趋势、机遇挑战
+## 实践应用（2000字）
+实际案例、部署方法、应用场景、最佳实践
 
-## 总结（300字）
-核心观点、行动建议
+## 技术对比（1200字）
+与同类技术对比、优缺点分析、选型建议
+
+## 性能优化（1000字）
+性能瓶颈、优化策略、调优方法
+
+## 最佳实践（1500字）
+开发指南、避坑指南、推荐工具
+
+## 未来展望（1000字）
+发展趋势、机遇挑战、生态建设
+
+## 总结（500字）
+核心观点、行动建议、学习路径
 
 **要求**：
 1. 使用Markdown格式
 2. 每个部分都要深入展开，不要简略
 3. 使用研究资料中的具体信息
-4. 包含代码示例（如适用）
-5. 总字数4000-5000字
+4. 包含代码示例和实际案例（如适用）
+5. 总字数1.5万字左右
 
 请开始撰写：
 """

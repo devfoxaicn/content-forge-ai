@@ -1,0 +1,20 @@
+{
+  "id": "topic_004",
+  "series_id": "series_1",
+  "episode": 4,
+  "title": "大模型原理之RLHF人类反馈强化学习",
+  "description": "RLHF使大模型与人类价值观对齐。详解Reward Model训练、PPO算法实现、Proximal Policy Optimization，以及如何通过人类偏好数据微调模型行为。",
+  "keywords": [
+    "RLHF",
+    "Reinforcement Learning from Human Feedback",
+    "Reward Model",
+    "PPO",
+    "Proximal Policy Optimization",
+    "对齐",
+    "人类反馈"
+  ],
+  "difficulty": "进阶",
+  "status": "completed",
+  "estimated_words": 13000,
+  "completed_at": "2026-01-10"
+}

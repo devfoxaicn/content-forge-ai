@@ -85,9 +85,9 @@ class BaseAgent(ABC):
                 "openai_api_base": base_url,
                 "openai_api_key": api_key,
                 "model": zhipuai_config.get("model", "glm-4.7"),
-                "temperature": self.config.get("temperature", 0.7),
-                "max_tokens": self.config.get("max_tokens", 2000),
-                "timeout": llm_config.get("timeout", 60)
+                "temperature": zhipuai_config.get("temperature", 0.7),
+                "max_tokens": zhipuai_config.get("max_tokens", 8000),
+                "timeout": zhipuai_config.get("timeout", 600)  # 默认10分钟超时
             }
 
             # Thinking 深度思考模式（GLM-4.7 专属）

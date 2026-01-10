@@ -1,0 +1,21 @@
+{
+  "id": "topic_002",
+  "series_id": "series_1",
+  "episode": 2,
+  "title": "大模型原理之Tokenizer分词器",
+  "description": "Tokenizer是LLM的入口，负责将文本转换为模型可理解的token。详解BPE、WordPiece、Unigram等分词算法，以及GPT、BERT、LLaMA等主流模型的tokenizer实现。",
+  "keywords": [
+    "Tokenizer",
+    "分词器",
+    "BPE",
+    "Byte-Pair Encoding",
+    "WordPiece",
+    "Unigram",
+    "Tokenization",
+    "词汇表"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 17214,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

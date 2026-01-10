@@ -1,0 +1,19 @@
+{
+  "id": "topic_001",
+  "series_id": "series_1",
+  "episode": 1,
+  "title": "Transformers 架构深度解析",
+  "description": "Transformer架构是现代大语言模型的基础。深入解析自注意力机制、编码器-解码器结构、位置编码等核心组件，以及它如何革命性地改变了NLP领域。",
+  "keywords": [
+    "Transformer",
+    "自注意力机制",
+    "Self-Attention",
+    "编码器-解码器",
+    "Attention Is All You Need",
+    "位置编码"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12662,
+  "status": "completed",
+  "completed_at": "2026-01-09"
+}

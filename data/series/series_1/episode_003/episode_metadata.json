@@ -1,0 +1,21 @@
+{
+  "id": "topic_003",
+  "series_id": "series_1",
+  "episode": 3,
+  "title": "大模型原理之Pretraining预训练",
+  "description": "预训练是大模型获得智能的关键阶段。深入剖析MLM、CLM、PLM等预训练目标，海量数据训练过程，以及Scaling Law（缩放定律）如何指导模型规模扩展。",
+  "keywords": [
+    "Pretraining",
+    "预训练",
+    "MLM",
+    "CLM",
+    "Next Token Prediction",
+    "Scaling Law",
+    "缩放定律",
+    "自监督学习"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 11963,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 import logging
+from datetime import datetime
 
 # 添加项目根目录到路径
 project_root = Path(__file__).parent.parent
@@ -139,8 +140,17 @@ class SeriesOrchestrator:
         )
 
         # 添加话题信息到状态
+        # 同时设置 current_topic 和 selected_ai_topic（后者是LongFormGeneratorAgent期望的字段）
         state = update_state(state, {
             "current_topic": topic,
+            "selected_ai_topic": {  # 兼容LongFormGeneratorAgent
+                "title": topic["title"],
+                "description": topic.get("description", ""),
+                "source": f"series_{series_id}_episode_{episode_number}",
+                "url": "",
+                "tags": topic.get("keywords", []),
+                "key_points": [topic.get("description", "")]
+            },
             "series_id": series_id,
             "episode_number": episode_number
         })
@@ -176,59 +186,133 @@ class SeriesOrchestrator:
         storage: SeriesStorage
     ) -> Dict[str, Any]:
         """执行内容生成工作流"""
+        import time
 
-        # 1. 长文本生成
+        # 在每个agent调用之间添加延迟，避免API并发限制
+        def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
+            """安全调用agent，处理异常"""
+            try:
+                logger.info(f"[{agent_name}] 开始执行...")
+                result = self.agents[agent_name].execute(state)
+                logger.info(f"[{agent_name}] 执行完成")
+                # 添加延迟避免API并发
+                time.sleep(2)
+                return result
+            except Exception as e:
+                logger.error(f"[{agent_name}] 执行失败: {e}")
+                # 失败时也添加延迟
+                time.sleep(2)
+                return state
+
+        # 1. 长文本生成（最重要，必须成功）
         if "longform_generator" in self.agents:
-            state = self.agents["longform_generator"].execute(state)
-            # 保存长文本
-            if "longform_content" in state:
+            state = _call_agent_safely("longform_generator", state)
+            # 保存长文本（字段名：longform_article）
+            if "longform_article" in state:
                 topic = state["current_topic"]
+                article = state["longform_article"]
+                # 构建Markdown内容
+                md_content = f"""# {article['title']}
+
+{article.get('full_content', '')}
+
+---
+**元数据**:
+- 字数: {article.get('word_count', 0)}
+- 阅读时间: {article.get('reading_time', 'N/A')}
+- 标签: {', '.join(article.get('tags', []))}
+- 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+"""
                 filename = TopicFormatter.generate_markdown_filename(topic, "article")
-                storage.save_markdown("longform", filename, state["longform_content"])
+                storage.save_markdown("longform", filename, md_content)
                 logger.info("Saved longform article")
 
         # 2. 代码审查
         if "code_review_agent" in self.agents:
-            state = self.agents["code_review_agent"].execute(state)
+            state = _call_agent_safely("code_review_agent", state)
 
         # 3. 事实核查
         if "fact_check_agent" in self.agents:
-            state = self.agents["fact_check_agent"].execute(state)
+            state = _call_agent_safely("fact_check_agent", state)
 
         # 4. 小红书精炼
         if "xiaohongshu_refiner" in self.agents:
-            state = self.agents["xiaohongshu_refiner"].execute(state)
-            if "xiaohongshu_content" in state:
+            state = _call_agent_safely("xiaohongshu_refiner", state)
+            # 保存小红书笔记（字段名：xiaohongshu_note）
+            if "xiaohongshu_note" in state:
                 topic = state["current_topic"]
+                note = state["xiaohongshu_note"]
+                # 构建Markdown内容
+                md_content = f"""# {note['title']}
+
+{note.get('intro', '')}
+
+{note.get('body', '')}
+
+{note.get('ending', '')}
+
+---
+**标签**: {' '.join(note.get('hashtags', []))}
+**字数**: {note.get('word_count', 0)}
+**压缩率**: {note.get('compression_ratio', 'N/A')}
+"""
                 filename = TopicFormatter.generate_markdown_filename(topic, "note")
-                storage.save_markdown("xiaohongshu", filename, state["xiaohongshu_content"])
+                storage.save_markdown("xiaohongshu", filename, md_content)
                 logger.info("Saved Xiaohongshu note")
 
         # 5. Twitter生成
         if "twitter_generator" in self.agents:
-            state = self.agents["twitter_generator"].execute(state)
-            if "twitter_content" in state:
+            state = _call_agent_safely("twitter_generator", state)
+            # 保存Twitter帖子（字段名：twitter_post）
+            if "twitter_post" in state:
                 topic = state["current_topic"]
+                twitter = state["twitter_post"]
+                # 构建Markdown内容
+                tweets_md = "\n\n".join([
+                    f"### Tweet {i+1}\n\n{tweet}"
+                    for i, tweet in enumerate(twitter.get('tweets', []))
+                ])
+                md_content = f"""# Twitter Thread
+
+**原文章**: {twitter.get('original_article_title', 'N/A')}
+**推文数量**: {twitter.get('tweet_count', 0)}
+**总字符数**: {twitter.get('total_characters', 0)}
+**风格**: {twitter.get('style', 'N/A')}
+
+---
+
+{tweets_md}
+
+---
+**话题标签**: {' '.join(twitter.get('hashtags', []))}
+**是否Thread**: {'是' if twitter.get('is_thread') else '否'}
+"""
                 filename = TopicFormatter.generate_markdown_filename(topic, "twitter")
-                storage.save_markdown("twitter", filename, state["twitter_content"])
+                storage.save_markdown("twitter", filename, md_content)
                 logger.info("Saved Twitter thread")
 
         # 6. 标题优化
         if "title_optimizer" in self.agents:
-            state = self.agents["title_optimizer"].execute(state)
+            state = _call_agent_safely("title_optimizer", state)
 
         # 7. 配图生成
         if "image_generator" in self.agents:
-            state = self.agents["image_generator"].execute(state)
-            if "image_prompts" in state:
+            state = _call_agent_safely("image_generator", state)
+            # 保存配图提示词（image_prompts是列表，需要转换为字符串）
+            if "image_prompts" in state and state["image_prompts"]:
                 topic = state["current_topic"]
                 prefix = TopicFormatter.generate_filename_prefix(topic)
-                storage.save_text("xiaohongshu", f"prompts_{prefix}.txt", state["image_prompts"])
+                # 将列表转换为格式化的字符串
+                prompts_text = "\n\n".join([
+                    f"图片 {i+1}:\n{prompt}"
+                    for i, prompt in enumerate(state["image_prompts"])
+                ])
+                storage.save_text("xiaohongshu", f"prompts_{prefix}.txt", prompts_text)
                 logger.info("Saved image prompts")
 
         # 8. 质量评估
         if "quality_evaluator" in self.agents:
-            state = self.agents["quality_evaluator"].execute(state)
+            state = _call_agent_safely("quality_evaluator", state)
 
         return state
 
