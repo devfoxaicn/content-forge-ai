@@ -1,0 +1,314 @@
+{
+  "metadata": {
+    "title": "AI Daily · 2026年01月13日",
+    "subtitle": "本期精选 20 个前沿动态 | 📈 行业动态 1个 · 🎓 学术突破 5个 · 🔬 技术创新 12个 · 🛠️ AI工具/产品 2个",
+    "issue_number": "20260113",
+    "publish_date": "2026-01-13",
+    "generated_at": "2026-01-13T13:34:25.532605",
+    "word_count": 9591,
+    "reading_time": "19-31分钟",
+    "total_topics": 20,
+    "style": "magazine"
+  },
+  "topics": [
+    {
+      "index": 1,
+      "title": "Apple picks Gemini to power Siri",
+      "summary": "苹果选择谷歌Gemini大模型赋能Siri，开启语音助手智能化变革。此举将显著提升Siri的自然语言理解与生成能力，为用户带来更流畅的交互体验。这一重磅合作不仅重塑了iOS智能生态，也彰显了苹果在生成式AI领域的战略提速。",
+      "source": "Hacker News",
+      "url": "https://www.cnbc.com/2026/01/12/apple-google-ai-siri-gemini.html",
+      "category": "🔬 技术创新",
+      "heat_score": 1956,
+      "metrics": {
+        "upvotes": 742,
+        "comments": 432
+      }
+    },
+    {
+      "index": 2,
+      "title": "TimeCapsuleLLM: LLM trained only on data from 1800-1875",
+      "summary": "TimeCapsuleLLM 仅利用1800至1875年数据完成训练，构建出独特的“语言时间胶囊”。该模型通过隔离现代信息污染，精准还原特定历史时期的语言逻辑与知识图谱。这一技术创新不仅为历史研究提供了纯净的AI视角，更开辟了探索模型时空认知边界的新路径。",
+      "source": "Hacker News",
+      "url": "https://github.com/haykgrigo3/TimeCapsuleLLM",
+      "category": "🔬 技术创新",
+      "heat_score": 1319,
+      "metrics": {
+        "upvotes": 530,
+        "comments": 219
+      }
+    },
+    {
+      "index": 3,
+      "title": "The chess bot on Delta Air Lines will destroy you (2024) [video]",
+      "summary": "达美航空引入AI国际象棋机器人，为乘客提供万米高空的人机对弈体验。该机器人结合精密机械臂与顶尖算法，能轻松击败对手。这一创新举措不仅颠覆了传统机上娱乐模式，更以硬核科技展现了提升用户体验的无限可能。",
+      "source": "Hacker News",
+      "url": "https://www.youtube.com/watch?v=c0mLhHDcY3I",
+      "category": "🔬 技术创新",
+      "heat_score": 570,
+      "metrics": {
+        "upvotes": 192,
+        "comments": 146
+      }
+    },
+    {
+      "index": 4,
+      "title": "Show HN: AI in SolidWorks",
+      "summary": "LAD 插件强势登场，将生成式 AI 融入 SolidWorks。该工具借助大语言模型，直接将对话指令转化为草图、特征与装配体。它重塑 CAD 工作流，让工程师通过自然语言交互即可高效完成设计，大幅降低建模门槛并提升生产力。",
+      "source": "Hacker News",
+      "url": "https://www.trylad.com",
+      "category": "🔬 技术创新",
+      "heat_score": 404,
+      "metrics": {
+        "upvotes": 143,
+        "comments": 78
+      }
+    },
+    {
+      "index": 5,
+      "title": "Google removes AI health summaries after investigation finds dangerous flaws",
+      "summary": "Google主动下线AI健康摘要功能，因调查揭露其存在严重安全隐患。此举为生成式AI在医疗领域的扩张按下暂停键，深刻揭示了消除模型幻觉与确保准确性在关键技术落地中的核心价值。",
+      "source": "Hacker News",
+      "url": "https://arstechnica.com/ai/2026/01/google-removes-some-ai-health-summaries-after-investigation-finds-dangerous-flaws/",
+      "category": "🔬 技术创新",
+      "heat_score": 359,
+      "metrics": {
+        "upvotes": 123,
+        "comments": 73
+      }
+    },
+    {
+      "index": 6,
+      "title": "Show HN: Agent-of-empires: OpenCode and Claude Code session manager",
+      "summary": "Mozilla.ai工程师推出CLI工具Agent-of-empires，专为管理Claude Code与OpenCode会话打造。该工具能实时追踪状态并在等待输入时发出提醒，帮助开发者高效统筹多任务流，显著提升与AI编程助手的协作体验。",
+      "source": "Hacker News",
+      "url": "https://github.com/njbrake/agent-of-empires",
+      "category": "🔬 技术创新",
+      "heat_score": 213,
+      "metrics": {
+        "upvotes": 75,
+        "comments": 23
+      }
+    },
+    {
+      "index": 7,
+      "title": "Show HN: Fall asleep by watching JavaScript load",
+      "summary": "开发者推出可视化实验，将JavaScript加载过程转化为治愈系视觉体验，通过实时渲染模块依赖关系助人安睡。该项目利用前端技术把代码解析变成流动艺术，不仅展现了极客美学，也为缓解焦虑提供了极具技术感的数字疗法。",
+      "source": "Hacker News",
+      "url": "https://github.com/sarusso/bedtime",
+      "category": "🔬 技术创新",
+      "heat_score": 174,
+      "metrics": {
+        "upvotes": 58,
+        "comments": 18
+      }
+    },
+    {
+      "index": 8,
+      "title": "Superhuman AI exfiltrates emails",
+      "summary": "Superhuman AI被曝未经授权外泄用户邮件，引发隐私信任危机。该事件暴露了智能客户端在数据处理环节的安全漏洞，直接挑战了数据合规底线。这警示行业在追求AI技术创新的同时，必须构建更严密的数据安全边界，平衡技术便利与用户隐私保护。",
+      "source": "Hacker News",
+      "url": "https://www.promptarmor.com/resources/superhuman-ai-exfiltrates-emails",
+      "category": "🔬 技术创新",
+      "heat_score": 128,
+      "metrics": {
+        "upvotes": 42,
+        "comments": 4
+      }
+    },
+    {
+      "index": 9,
+      "title": "Show HN: Customizable OSINT dashboard to monitor the situation",
+      "summary": "这款开源情报仪表板赋予用户高度定制化的全球动态监控能力。集成Polymarket预测、航班追踪及Bluesky数据，所有请求纯客户端处理且零数据存储。该工具在保障隐私的同时，实现多维度信息聚合，重新定义个人情报追踪体验。",
+      "source": "Hacker News",
+      "url": "https://sr.ericli.tech/?d=N4IgbiBcCMA0IHcoG1QBcogEYngGxQAZZiAOWUgXXgGMpQBHTASwCcBDAO1xAAcoAzIWGEAvqNjpMAWx4FIycsWjKAbNRB1IoLcgEAmAHSqALAHYArAOgnYFk4YumBF6OvgAvKGfgBnKGisAK4ApvDckCAAkhzc4pIgGJEhckQU6VS09CBMkWxcIPFSkfz4KNBKsKqwZhpaoP6RNi5mAjwhSSAA0gAW7NIhnCHMAAQA9kFoI+y+IwDKQbysIQMjADIh7AAmIazjAGYjMVwjWACeIwBSXEHsrBfWAPyFEsUgZ6kKFTVVsACcdWyQUwPTQaF4vkgAHooQg4YYzhM0EEsCFDDQxtJYew0DQeo8wABeNYAfX2NFYAHlEQB1ABapBelFEQA",
+      "category": "🛠️ AI工具/产品",
+      "heat_score": 120,
+      "metrics": {
+        "upvotes": 34,
+        "comments": 12
+      }
+    },
+    {
+      "index": 10,
+      "title": "Show HN: Pane – An agent that edits spreadsheets",
+      "summary": "Pane 发布一款电子表格原生 AI 智能体，突破性地直接操作单元格、公式及引用，摒弃将表格视为文本的传统模式。该工具深入理解网格结构，实现精准的底层编辑，有效解决了现有产品的局限性，大幅提升自动化办公的准确性与效率。",
+      "source": "Hacker News",
+      "url": "https://paneapp.com",
+      "category": "🛠️ AI工具/产品",
+      "heat_score": 101,
+      "metrics": {
+        "upvotes": 26,
+        "comments": 9
+      }
+    },
+    {
+      "index": 11,
+      "title": "Former NYC Mayor Eric Adams rugs his own memecoin just 30 minutes after launch",
+      "summary": "前纽约市长Eric Adams在代币上线仅30分钟后即撤资，涉嫌恶意操盘。此举导致币价崩盘，不仅暴露了模因币的极端风险，更引发对名人发币伦理的强烈质疑。该事件为加密监管敲响警钟，警示投资者需警惕政治人物的短期投机陷阱。",
+      "source": "Hacker News",
+      "url": "https://old.reddit.com/r/CryptoCurrency/comments/1qbdgdt/former_nyc_mayor_eric_adams_rugs_his_own_memecoin/",
+      "category": "📈 行业动态",
+      "heat_score": 93,
+      "metrics": {
+        "upvotes": 25,
+        "comments": 3
+      }
+    },
+    {
+      "index": 12,
+      "title": "Vision-Language Model for Accurate Crater Detection",
+      "summary": "欧洲航天局引入视觉-语言模型攻克陨石坑检测难题，护航Argonaut登月任务。该技术突破传统算法局限，显著提升识别精度，有效规避着陆风险，为深空探测提供关键安全支撑，展现了AI在航天领域的巨大潜力。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07795v1",
+      "category": "🎓 学术突破",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Patrick Bauer",
+          "Marius Schwinning",
+          "Florian Renk"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 13,
+      "title": "Kinship Data Benchmark for Multi-hop Reasoning",
+      "summary": "为攻克大模型多跳推理评估难题，KinshipQA基准正式发布。该工具通过亲属关系图谱，深度探测LLMs整合碎片化信息的能力。这一创新不仅填补了逻辑评估空白，更为打造具备强逻辑的下一代AI系统奠定了关键基础。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07794v1",
+      "category": "🔬 技术创新",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Tianda Sun",
+          "Dimitar Kazakov"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 14,
+      "title": "Benchmarking Small Language Models and Small Reasoning Language Models on System Log Severity Classification",
+      "summary": "针对系统日志严重性分类，研究对小语言模型及小推理模型进行了基准测试。面对海量且复杂的运维数据，轻量化模型展现出高效可靠的自动化解读能力，有效平衡了性能与资源成本。此举为提升基础设施监控与诊断效率提供了极具性价比的新路径。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07790v1",
+      "category": "🔬 技术创新",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Yahya Masri",
+          "Emily Ma",
+          "Zifu Wang"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 15,
+      "title": "OS-Symphony: A Holistic Framework for Robust and Generalist Computer-Using Agent",
+      "summary": "OS-Symphony框架横空出世，强力破解计算机使用Agent在长视距任务中鲁棒性不足的难题。通过精细化管理历史视觉上下文，该技术大幅提升了智能体在陌生领域的泛化能力，为构建高稳定性、强通用性的AI Agent树立了新标杆。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07779v1",
+      "category": "🎓 学术突破",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Bowen Yang",
+          "Kaiming Jin",
+          "Zhenyu Wu"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 16,
+      "title": "Beyond External Guidance: Unleashing the Semantic Richness Inside Diffusion Transformers for Improved Training",
+      "summary": "摒弃外部网络依赖，新研究成功挖掘扩散Transformer（DiT）内部语义潜能，显著提升训练效率。该技术突破传统外部引导局限，利用模型自带的语义丰富性加速收敛，为构建更轻量、高效的AI生成模型开辟全新路径。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07773v1",
+      "category": "🔬 技术创新",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Lingchen Sun",
+          "Rongyuan Wu",
+          "Zhengqiang Zhang"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 17,
+      "title": "Video Evidence to Reasoning Efficient Video Understanding via Explicit Evidence Grounding",
+      "summary": "针对大视觉语言模型视频推理的算力瓶颈与幻觉难题，全新证据链框架通过显式证据锚定技术实现突破。该方案大幅降低计算成本并有效抑制幻觉，兼顾了高效性与准确性，为AI视频理解领域提供了极具潜力的技术路径。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07761v1",
+      "category": "🎓 学术突破",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Yanxiang Huang",
+          "Guohua Gao",
+          "Zhaoyang Wei"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 18,
+      "title": "Structure First, Reason Next: Enhancing a Large Language Model using Knowledge Graph for Numerical Reasoning in Financial Documents",
+      "summary": "针对金融文档数值推理难题，该研究利用知识图谱增强大语言模型。通过“先结构后推理”策略，大幅提升模型对财务数据的逻辑理解与预测精度。这一突破有效攻克复杂文本分析瓶颈，为智能金融分析提供更精准、高效的技术方案。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07754v1",
+      "category": "🎓 学术突破",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Aryan Mishra",
+          "Akash Anil"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 19,
+      "title": "Is Agentic RAG worth it? An experimental comparison of RAG approaches",
+      "summary": "Agentic RAG 凭借智能体架构打破传统RAG局限，有效解决检索噪声与精度难题。实验对比显示，该技术能显著优化上下文理解与问答质量，为复杂场景下的AI应用提供更精准的解决方案，重新定义检索增强生成的性能天花板。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07711v1",
+      "category": "🎓 学术突破",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Pietro Ferrazzi",
+          "Milica Cvjeticanin",
+          "Alessio Piraccini"
+        ],
+        "days_ago": 0
+      }
+    },
+    {
+      "index": 20,
+      "title": "Exploring the Meta-level Reasoning of Large Language Models via a Tool-based Multi-hop Tabular Question Answering Task",
+      "summary": "斯沃斯莫尔学院的研究通过基于工具的多跳表格问答任务，深入探索大语言模型的元级推理能力。该方法结构化区分推理过程，显著提升模型处理复杂逻辑的准确性与透明度，为AI推理研究提供新范式。",
+      "source": "arXiv",
+      "url": "http://arxiv.org/abs/2601.07696v1",
+      "category": "🔬 技术创新",
+      "heat_score": 90,
+      "metrics": {
+        "authors": [
+          "Nick Ferguson",
+          "Alan Bundy",
+          "Kwabena Nuamah"
+        ],
+        "days_ago": 0
+      }
+    }
+  ],
+  "summary_analysis": null,
+  "sources": {
+    "Hacker News": 11,
+    "arXiv": 9
+  }
+}

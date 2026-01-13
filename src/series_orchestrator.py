@@ -57,31 +57,25 @@ class SeriesOrchestrator:
         logger.info(f"SeriesOrchestrator initialized with {config_path}")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化所有Agent"""
+        """初始化所有Agent（内容工厂模式：精简版）"""
         from src.agents.longform_generator import LongFormGeneratorAgent
-        from src.agents.code_review_agent import CodeReviewAgent
-        from src.agents.fact_check_agent import FactCheckAgent
         from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
         from src.agents.twitter_generator import TwitterGeneratorAgent
         from src.agents.title_optimizer import TitleOptimizerAgent
         from src.agents.image_generator import ImageGeneratorAgent
-        from src.agents.quality_evaluator import QualityEvaluatorAgent
 
         agents = {}
 
         # 获取agent配置
         agents_config = self.config.get("agents", {})
 
-        # 初始化各个agent
+        # 初始化各个agent（移除不需要的agent）
         agent_classes = {
             "longform_generator": LongFormGeneratorAgent,
-            "code_review_agent": CodeReviewAgent,
-            "fact_check_agent": FactCheckAgent,
             "xiaohongshu_refiner": XiaohongshuRefinerAgent,
             "twitter_generator": TwitterGeneratorAgent,
             "title_optimizer": TitleOptimizerAgent,
             "image_generator": ImageGeneratorAgent,
-            "quality_evaluator": QualityEvaluatorAgent,
         }
 
         for agent_name, agent_class in agent_classes.items():
@@ -284,15 +278,7 @@ class SeriesOrchestrator:
                 storage.save_markdown("longform", filename, md_content)
                 logger.info("Saved longform article")
 
-        # 2. 代码审查
-        if "code_review_agent" in self.agents:
-            state = _call_agent_safely("code_review_agent", state)
-
-        # 3. 事实核查
-        if "fact_check_agent" in self.agents:
-            state = _call_agent_safely("fact_check_agent", state)
-
-        # 4. 小红书精炼
+        # 2. 小红书精炼
         if "xiaohongshu_refiner" in self.agents:
             state = _call_agent_safely("xiaohongshu_refiner", state)
             # 保存小红书笔记（字段名：xiaohongshu_note）
@@ -366,10 +352,6 @@ class SeriesOrchestrator:
                 ])
                 storage.save_text("xiaohongshu", f"prompts_{prefix}.txt", prompts_text)
                 logger.info("Saved image prompts")
-
-        # 8. 质量评估
-        if "quality_evaluator" in self.agents:
-            state = _call_agent_safely("quality_evaluator", state)
 
         return state
 

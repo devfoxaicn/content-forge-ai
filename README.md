@@ -1,8 +1,8 @@
-# ContentForge AI v2.4
+# ContentForge AI v2.5
 
 > 🚀 AI驱动的多平台内容自动化生产工厂
 
-> 基于Web搜索的深度研究 + 分阶段生成，打造9000-13000字专业深度分析
+> **内容工厂模式**：定时产出简报 + 批量生成系列 + 手动生成长文/社交媒体内容
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -11,25 +11,25 @@
 
 ## ✨ 核心功能
 
-**ContentForge AI** 是一个基于 LangChain/LangGraph 的智能内容生产系统，实现从AI热点追踪到多平台内容发布的全流程自动化。
+**ContentForge AI** 是一个基于 LangChain/LangGraph 的智能内容生产系统，专注于高质量内容产出。
 
 ### 🎯 核心能力
 
-1. **AI热点追踪** - 11个免费数据源，实时获取AI技术热点
+1. **AI热点追踪** - 7个免费数据源，实时获取AI技术热点
 2. **热点简报** - 汇总当天热点，生成杂志风格简报（含原始链接）
-3. **深度研究** - Web搜索增强，收集官方文档、GitHub、技术博客等资料
+3. **批量系列** - 100期技术博客系列化生成，系统化输出
 4. **专业文章** - 9000-13000字深度技术分析，分阶段生成避免超时
 5. **小红书笔记** - 3000-3500字干货风格，含emoji和标签
 6. **Twitter帖子** - Thread形式（5-8条推文），精简爆款风格
-7. **质量保证** - 代码审查、事实核查、质量评估三重保障
+7. **辅助功能** - 标题优化、配图提示词生成
 
 ### 🌟 核心优势
 
-- ✅ **零人工干预** - 完全自动化，无需手动指定topic
-- ✅ **实时热点** - 基于11个数据源的真实热门内容
-- ✅ **多平台适配** - 一次生成，多平台分发
-- ✅ **高质量内容** - 13个专业Agent协作生成，基于Web搜索的深度研究
-- ✅ **成本可控** - 免费数据源 + 便宜模型选择
+- ✅ **内容工厂** - 专注内容产出，不包含发布功能
+- ✅ **实时热点** - 基于7个数据源的真实热门内容
+- ✅ **精简高效** - 移除冗余功能，专注核心内容生成
+- ✅ **双重模式** - 每日简报自动生成 + 100期系列批量生成
+- ✅ **成本可控** - 免费数据源 + GLM-4.7模型
 
 ## 🚀 快速开始
 
@@ -107,7 +107,7 @@ cat data/daily/20260107/twitter/twitter_*.md
 
 ### 1️⃣ 自动模式（默认）
 
-基于11个AI数据源，自动追踪实时热点并生成内容。适合每日定时任务。
+基于7个AI数据源，自动追踪实时热点并生成简报。适合每日定时任务。
 
 ```bash
 python src/main.py --mode auto --once
@@ -197,7 +197,6 @@ CONTENT_FORGE_MODE=series SERIES_EPISODE=1 0 3 * * * /path/to/content-forge-ai/r
 ```bash
 # 必需的密钥
 ZHIPUAI_API_KEY=your_zhipuai_api_key_here    # 智谱AI密钥（获取：https://open.bigmodel.cn/）
-TAVILY_API_KEY=your_tavily_api_key_here      # Tavily搜索密钥（获取：https://tavily.com/）
 
 # 可选的密钥
 OPENAI_API_KEY=your_openai_api_key_here      # OpenAI密钥
@@ -206,88 +205,87 @@ NEWSAPI_KEY=your_newsapi_key_here            # NewsAPI密钥
 ```
 
 **获取API密钥**：
-- [智谱AI](https://open.bigmodel.cn/) - 必需，支持国产大模型
-- [Tavily](https://tavily.com/) - 必需，用于Web搜索深度研究
-- [OpenAI](https://platform.openai.com/api-keys) - 可选
+- [智谱AI](https://open.bigmodel.cn/) - 必需，支持国产大模型GLM-4.7
+- [OpenAI](https://platform.openai.com/api-keys) - 可选，备用LLM提供商
 - [Google AI Studio](https://makersuite.google.com/app/apikey) - 可选，用于图片生成
 
-## 📂 输出结构 (v2.4优化)
+## 📂 输出结构 (v2.5内容工厂模式)
 
 ```
 data/
 ├── daily/                    # 每日热点模式
-│   └── 20260107/             # 按日期分层
+│   └── 20260113/             # 按日期分层
 │       ├── raw/              # AI热点原始数据
 │       ├── digest/           # 热点简报
-│       ├── longform/         # 长篇文章
-│       ├── xiaohongshu/      # 小红书笔记
-│       └── twitter/          # Twitter帖子
+│       ├── longform/         # 长篇文章（手动生成）
+│       ├── xiaohongshu/      # 小红书笔记（手动生成）
+│       └── twitter/          # Twitter帖子（手动生成）
 │
-├── series/                   # 100期技术博客系列 (v2.4新增)
+├── series/                   # 100期技术博客系列
 │   ├── series_1_llm_foundation/
 │   │   ├── episode_001/
 │   │   ├── episode_002/
 │   │   ├── ...
 │   │   └── series_metadata.json
-│   ├── series_2_rag_techniques/
+│   ├── series_2_rag_technique/
 │   ├── series_3_agent_development/
 │   └── ... (共10个系列)
 │
 └── archive/                  # 归档内容 (预留)
 
 logs/                        # 日志按日期分层
-└── 20260107/
+└── 20260113/
     └── app.log
 ```
 
-## 🤖 工作流程
+## 🤖 工作流程（v2.5精简版）
 
+### 每日简报自动生成
 ```
-AI热点获取（11个数据源）
+AI热点获取（7个数据源）
   ↓
 热点汇总 → 简报生成 (digest/)
   ↓
-筛选TOP 1热点
+保存到 data/daily/YYYYMMDD/
+```
+
+### 手动内容生成（可选）
+```
+从简报选择话题
   ↓
-深度研究 (ResearchAgent) - Web搜索收集官方文档、GitHub、技术博客
+长文本生成 (9000-13000字专业文章)
   ↓
-长文本生成 (LongFormGeneratorAgent) - 分阶段生成9000-13000字专业文章
+小红书精炼 (3000-3500字笔记)
   ↓
-质量检查：
-  ├─→ CodeReviewAgent (代码审查)
-  └─→ FactCheckAgent (事实核查)
+Twitter生成 (5-8条推文thread)
   ↓
-并行处理：
-  ├─→ 小红书精炼 (xiaohongshu/)
-  └─→ Twitter生成 (twitter/)
+标题优化 + 配图提示词
   ↓
-标题优化 + 配图提示词 + 质量评估
+保存到 data/daily/YYYYMMDD/
+```
+
+### 系列批量生成
+```
+读取100期配置
   ↓
-保存到 data/YYYYMMDD/
+长文本生成 → 小红书精炼 → Twitter生成 → 标题优化 → 配图提示词
+  ↓
+保存到 data/series/{系列ID}/episode_{xxx}/
 ```
 
 ## 📊 AI热点数据源
 
-### 免费无需配置（8个）✅
+### 免费无需配置（7个）✅
 
 | 数据源 | 内容 | 实时性 |
 |--------|------|--------|
-| Hacker News | 技术新闻Top 30 | ⚡⚡⚡ |
+| Hacker News | 技术新闻 | ⚡⚡⚡ |
 | arXiv | AI学术论文 | ⚡⚡ |
 | Hugging Face | AI模型趋势 | ⚡⚡⚡ |
 | Stack Overflow | 技术问答 | ⚡⚡⚡ |
 | Dev.to | 开发者博客 | ⚡⚡ |
 | PyPI | Python包统计 | ⚡⚡ |
 | GitHub Topics | 开源项目 | ⚡⚡⚡ |
-| Kaggle | AI应用案例 | ⚡ |
-
-### 可选配置（3个）
-
-| 数据源 | 说明 | 配置方法 |
-|--------|------|----------|
-| Reddit | 技术讨论 | 需要`REDDIT_CLIENT_ID` |
-| NewsAPI | 科技新闻 | 需要`NEWSAPI_KEY` |
-| GitHub Trending | 热门项目 | 第三方API（不稳定） |
 
 ## ⚙️ 配置说明
 

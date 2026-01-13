@@ -18,17 +18,11 @@ from langgraph.graph import StateGraph, END
 from src.state import create_initial_state, update_state, add_agent_to_order, calculate_execution_time
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
 from src.agents.trends_digest_agent import TrendsDigestAgent
-from src.agents.research_agent import ResearchAgent
-from src.agents.code_review_agent import CodeReviewAgent
-from src.agents.fact_check_agent import FactCheckAgent
 from src.agents.longform_generator import LongFormGeneratorAgent
 from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
 from src.agents.twitter_generator import TwitterGeneratorAgent
 from src.agents.title_optimizer import TitleOptimizerAgent
-from src.agents.image_advisor import ImageAdvisorAgent
 from src.agents.image_generator import ImageGeneratorAgent
-from src.agents.quality_evaluator import QualityEvaluatorAgent
-from src.agents.publisher import PublisherAgent
 from src.utils.storage import get_storage, BatchStorage
 
 # 日志配置
@@ -124,7 +118,7 @@ class AutoContentOrchestrator:
             )
 
     def _init_agents(self) -> Dict[str, Any]:
-        """初始化所有Agent"""
+        """初始化所有Agent（内容工厂模式：精简版）"""
         agents = {}
         agents_config = self.config.get("agents", {})
 
@@ -132,59 +126,35 @@ class AutoContentOrchestrator:
         if agents_config.get("ai_trend_analyzer", {}).get("enabled", True):
             agents["ai_trend_analyzer"] = RealAITrendAnalyzerAgent(self.config, self.prompts)
 
-        # 热点汇总Agent（新增）
+        # 热点汇总Agent
         if agents_config.get("trends_digest", {}).get("enabled", True):
             agents["trends_digest"] = TrendsDigestAgent(self.config, self.prompts)
 
-        # 内容研究Agent（新增）
-        if agents_config.get("research_agent", {}).get("enabled", True):
-            agents["research_agent"] = ResearchAgent(self.config, self.prompts)
-
-        # 长文本生成Agent
-        if agents_config.get("longform_generator", {}).get("enabled", True):
+        # 长文本生成Agent（默认禁用，手动执行时启用）
+        if agents_config.get("longform_generator", {}).get("enabled", False):
             agents["longform_generator"] = LongFormGeneratorAgent(self.config, self.prompts)
 
-        # 代码审查Agent（新增）
-        if agents_config.get("code_review_agent", {}).get("enabled", True):
-            agents["code_review_agent"] = CodeReviewAgent(self.config, self.prompts)
-
-        # 事实核查Agent（新增）
-        if agents_config.get("fact_check_agent", {}).get("enabled", True):
-            agents["fact_check_agent"] = FactCheckAgent(self.config, self.prompts)
-
-        # 小红书笔记精炼Agent
-        if agents_config.get("xiaohongshu_refiner", {}).get("enabled", True):
+        # 小红书笔记精炼Agent（默认禁用，手动执行时启用）
+        if agents_config.get("xiaohongshu_refiner", {}).get("enabled", False):
             agents["xiaohongshu_refiner"] = XiaohongshuRefinerAgent(self.config, self.prompts)
 
-        # Twitter帖子生成Agent（新增）
-        if agents_config.get("twitter_generator", {}).get("enabled", True):
+        # Twitter帖子生成Agent（默认禁用，手动执行时启用）
+        if agents_config.get("twitter_generator", {}).get("enabled", False):
             agents["twitter_generator"] = TwitterGeneratorAgent(self.config, self.prompts)
 
-        # 标题优化Agent
+        # 标题优化Agent（辅助，启用）
         if agents_config.get("title_optimizer", {}).get("enabled", True):
             agents["title_optimizer"] = TitleOptimizerAgent(self.config, self.prompts)
 
-        # 图像建议Agent
-        if agents_config.get("image_advisor", {}).get("enabled", True):
-            agents["image_advisor"] = ImageAdvisorAgent(self.config, self.prompts)
-
-        # 图片生成Agent
+        # 图片生成Agent（辅助，仅生成提示词）
         if agents_config.get("image_generator", {}).get("enabled", True):
             agents["image_generator"] = ImageGeneratorAgent(self.config, self.prompts)
-
-        # 质量评估Agent
-        if agents_config.get("quality_evaluator", {}).get("enabled", True):
-            agents["quality_evaluator"] = QualityEvaluatorAgent(self.config, self.prompts)
-
-        # 发布Agent
-        if agents_config.get("publisher", {}).get("enabled", True):
-            agents["publisher"] = PublisherAgent(self.config, self.prompts)
 
         logger.info(f"已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
         return agents
 
     def _build_workflow(self) -> StateGraph:
-        """构建自动化工作流"""
+        """构建自动化工作流（内容工厂模式：精简版）"""
         workflow = StateGraph(dict)
 
         # 添加Agent节点
@@ -192,7 +162,8 @@ class AutoContentOrchestrator:
             workflow.add_node(agent_name, self._create_agent_node(agent))
 
         # 定义执行顺序：
-        # AI热点分析 → 热点汇总 → 内容研究 → 长文本生成 → 代码审查 → 小红书精炼 → Twitter → 标题优化 → 图像建议 → 图像生成 → 事实核查 → 质量评估 → 发布
+        # 每日简报模式：AI热点分析 → 热点汇总 → END
+        # 手动内容生成模式：... → 长文本生成 → 小红书精炼 → Twitter → 标题优化 → 图像生成 → END
         if "ai_trend_analyzer" in self.agents:
             workflow.set_entry_point("ai_trend_analyzer")
 
@@ -202,62 +173,31 @@ class AutoContentOrchestrator:
                 workflow.add_edge(last_node, "trends_digest")
                 last_node = "trends_digest"
 
-            # 内容研究Agent（新增）
-            if "research_agent" in self.agents:
-                workflow.add_edge(last_node, "research_agent")
-                last_node = "research_agent"
-
-            # 长文本生成流程
+            # 手动内容生成流程（仅在启用时执行）
             if "longform_generator" in self.agents:
                 workflow.add_edge(last_node, "longform_generator")
                 last_node = "longform_generator"
 
-                # 代码审查Agent（新增）
-                if "code_review_agent" in self.agents:
-                    workflow.add_edge(last_node, "code_review_agent")
-                    last_node = "code_review_agent"
-
-                # 顺序执行：长文本 -> 小红书 -> Twitter -> 标题优化
-                # 避免并发更新state导致的冲突
-                has_xiaohongshu = "xiaohongshu_refiner" in self.agents
-                has_twitter = "twitter_generator" in self.agents
-
-                if has_xiaohongshu:
+                # 顺序执行：长文本 -> 小红书 -> Twitter -> 标题优化 -> 图像生成
+                if "xiaohongshu_refiner" in self.agents:
                     workflow.add_edge(last_node, "xiaohongshu_refiner")
                     last_node = "xiaohongshu_refiner"
 
-                if has_twitter:
+                if "twitter_generator" in self.agents:
                     workflow.add_edge(last_node, "twitter_generator")
                     last_node = "twitter_generator"
 
-                # 标题优化跟在最后
                 if "title_optimizer" in self.agents:
                     workflow.add_edge(last_node, "title_optimizer")
                     last_node = "title_optimizer"
-
-                if "image_advisor" in self.agents:
-                    workflow.add_edge(last_node, "image_advisor")
-                    last_node = "image_advisor"
 
                 if "image_generator" in self.agents:
                     workflow.add_edge(last_node, "image_generator")
                     last_node = "image_generator"
 
-                # 事实核查Agent（新增）
-                if "fact_check_agent" in self.agents:
-                    workflow.add_edge(last_node, "fact_check_agent")
-                    last_node = "fact_check_agent"
-
-                if "quality_evaluator" in self.agents:
-                    workflow.add_edge(last_node, "quality_evaluator")
-                    last_node = "quality_evaluator"
-
-                if "publisher" in self.agents:
-                    workflow.add_edge(last_node, "publisher")
-                    workflow.add_edge("publisher", END)
-                else:
-                    workflow.add_edge(last_node, END)
+                workflow.add_edge(last_node, END)
             else:
+                # 只生成简报
                 workflow.add_edge(last_node, END)
 
         return workflow.compile()

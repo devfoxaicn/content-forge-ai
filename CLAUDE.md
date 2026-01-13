@@ -430,6 +430,32 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 
 **提示词模板系统**：每个Agent的系统提示词存储在 `config/prompts.yaml` 中，按Agent类名小写组织
 
+### Agent依赖关系
+
+| Agent | 依赖字段 | 输出字段 | 说明 |
+|-------|---------|---------|------|
+| ai_trend_analyzer | - | trending_topics, selected_ai_topic | 数据源 |
+| trends_digest | trending_topics | digest_content | 可选 |
+| research_agent | selected_ai_topic | research_data, research_summary | 为longform提供研究背景 |
+| longform_generator | selected_ai_topic, research_data | longform_article | 核心内容 |
+| code_review_agent | longform_article | code_review_result | 质量保证 |
+| fact_check_agent | longform_article | fact_check_result | 质量保证 |
+| xiaohongshu_refiner | longform_article | xiaohongshu_note | 内容适配 |
+| twitter_generator | longform_article | twitter_post | 内容适配 |
+| title_optimizer | longform_article | optimized_titles | SEO优化 |
+| image_generator | xiaohongshu_note or twitter_post | image_prompts | 配图生成 |
+| quality_evaluator | 所有输出 | quality_report | 最终评估 |
+
+### 重要注意事项
+
+1. **小红书和Twitter Agent必须顺序执行**：它们都读取 `longform_article`，但不应并行运行以避免状态更新冲突（`src/auto_orchestrator.py:213`）
+
+2. **长文本生成Agent需要研究数据**：`longform_generator` 优先使用 `research_data`，如果没有则仅基于 `selected_ai_topic` 生成
+
+3. **系列模式的状态字段特殊处理**：需要同时设置 `current_topic` 和 `selected_ai_topic` 以确保兼容性（`src/series_orchestrator.py:_initialize_state()`）
+
+4. **分阶段生成避免超时**：`LongFormGeneratorAgent` 使用三阶段生成（大纲→章节展开→总结），每阶段独立LLM调用（`src/agents/longform_generator.py:73`）
+
 ## 开发指南
 
 ### 添加新Agent
@@ -476,6 +502,17 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 - `WorkflowState` TypedDict 定义了所有可能的字段，但实际使用时是普通Dict
 - Auto模式使用 `trending_topics`，Series模式使用 `current_topic` 和 `selected_ai_topic`
 - 状态更新使用不可变模式：`{**state, **updates}`
+- **实际使用的状态字段**比 `WorkflowState` TypedDict 定义更丰富，包括：
+  - `selected_ai_topic` - 选中的AI热点（Auto模式）
+  - `research_data` / `research_summary` - 研究数据
+  - `longform_article` - 长文本文章
+  - `code_review_result` - 代码审查结果
+  - `fact_check_result` - 事实核查结果
+  - `xiaohongshu_note` - 小红书笔记
+  - `twitter_post` - Twitter帖子
+  - `optimized_titles` - 优化后的标题
+  - `image_prompts` - 配图提示词
+  - `quality_report` - 质量评估报告
 
 ### 错误处理模式
 
@@ -634,6 +671,53 @@ agents:
     enabled: false
 ```
 
+**调试特定Agent**：启用mock_mode避免API调用
+```yaml
+agents:
+  ai_trend_analyzer:
+    mock_mode: true
+```
+
+## 常用工作流程
+
+### 测试单个Agent
+```bash
+cd test
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --source hackernews
+```
+
+### 生成单期系列内容
+```bash
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1
+```
+
+### 查看系列进度
+```bash
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --progress
+```
+
+### 批量生成系列（带跳过）
+```bash
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --all --start 1 --end 10
+```
+
+## 关键文件位置
+
+| 文件 | 用途 |
+|------|------|
+| `src/main.py` | 统一入口点 |
+| `src/auto_orchestrator.py` | LangGraph工作流编排 |
+| `src/series_orchestrator.py` | 系列模式协调器 |
+| `src/state.py` | 状态定义 |
+| `src/agents/base.py` | Agent基类 |
+| `src/agents/longform_generator.py` | 长文本生成（分阶段） |
+| `src/agents/ai_trend_analyzer_real.py` | AI热点分析 |
+| `src/utils/storage_v2.py` | 统一存储系统 |
+| `src/utils/series_manager.py` | 系列管理工具 |
+| `config/config.yaml` | 主配置文件 |
+| `config/blog_topics_100_complete.json` | 100期内容规划 |
+| `run_and_commit.sh` | 自动化部署脚本 |
+
 ## 相关文档
 
 - **README.md** - 项目概述和快速开始
@@ -642,19 +726,18 @@ agents:
 ---
 
 **版本**: v2.5
-**更新**: 2026-01-12
+**更新**: 2026-01-13
 
-## 改进总结 (2026-01-12)
+## 改进总结 (2026-01-13)
 
 本次更新改进了 CLAUDE.md 文档，主要包括：
 
-1. **修正协调器对比表** - 从"三种"改为"双协调器"，添加状态字段对比
-2. **完善状态字段表** - 添加更多字段说明，包括元数据字段
-3. **新增错误处理模式** - 详细说明Agent和Series模式的错误处理策略
-4. **新增系列路径管理** - 说明 SeriesPathManager 的使用方法
-5. **新增数据源实现指南** - 说明如何扩展新的数据源
-6. **新增Thinking模式说明** - 说明GLM-4.7的深度思考功能
-7. **添加重要提示** - 说明WorkflowState与实际使用的关系
+1. **新增Agent依赖关系表** - 清晰展示各Agent之间的依赖关系和数据流
+2. **新增重要注意事项** - 强调小红书/Twitter顺序执行、研究数据依赖等关键点
+3. **新增常用工作流程** - 提供测试、生成、查看进度的具体命令
+4. **新增关键文件位置表** - 快速定位重要文件
+5. **完善状态字段说明** - 补充实际使用的额外字段
+6. **新增调试技巧** - mock_mode使用、部分Agent禁用等
 
 ## 重要更新点 (2026-01-12)
 

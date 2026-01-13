@@ -1,19 +1,21 @@
 """
-真实AI热点分析Agent - 多数据源聚合版本
-整合Hacker News、arXiv、GitHub Trending、Reddit等免费数据源
+真实AI热点分析Agent - 产品+新闻+学术导向
+聚焦热门AI产品、应用、行业新闻和重大突破
+受众：广泛，非技术细节
 """
 
 from typing import Dict, Any, List, Optional
 import json
 import os
 import requests
+import feedparser
 from datetime import datetime, timedelta
 from src.agents.base import BaseAgent
 from src.utils.storage import get_storage
 
 
 class RealAITrendAnalyzerAgent(BaseAgent):
-    """真实的AI热点分析Agent - 使用免费API"""
+    """真实的AI热点分析Agent - 产品新闻学术导向"""
 
     def __init__(self, config: Dict[str, Any], prompts: Dict[str, Any]):
         super().__init__(config, prompts)
@@ -25,21 +27,26 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         # 数据源配置
         sources_config = config.get("agents", {}).get("ai_trend_analyzer", {}).get("sources", [])
         self.sources = {
+            # 产品类
+            "producthunt": "producthunt" in sources_config,
+            "github_apps": "github" in sources_config,
+            # 新闻类
+            "techcrunch_ai": "techcrunch_ai" in sources_config,
+            "verge_ai": "verge_ai" in sources_config,
+            "venturebeat_ai": "venturebeat_ai" in sources_config,
+            # 学术类（重大新闻）
+            "arxiv_news": "arxiv_news" in sources_config,
+            # 科技新闻（过滤产品类）
             "hackernews": "hackernews" in sources_config,
-            "arxiv": "arxiv" in sources_config,
-            "github_trending": "github" in sources_config,
-            "reddit": "reddit" in sources_config,
-            "huggingface": "huggingface" in sources_config,
-            "stackoverflow": "stackoverflow" in sources_config,
-            "kaggle": "kaggle" in sources_config,
-            "newsapi": "newsapi" in sources_config,
-            "devto": "devto" in sources_config,
-            "pypi": "pypi" in sources_config,
-            "github_topics": "github_topics" in sources_config
         }
 
-        # NewsAPI配置（需要API密钥）
-        self.newsapi_key = os.getenv("NEWSAPI_KEY", None)
+        # 获取配置
+        agent_config = config.get("agents", {}).get("ai_trend_analyzer", {})
+        self.max_trends = agent_config.get("max_trends", 20)
+        self.min_score = agent_config.get("min_heat_score", 60)
+
+        # 初始化分类关键词
+        self._init_category_keywords()
 
     def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -54,31 +61,37 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         # 检测是否为用户指定话题模式
         if state.get("current_step") == "user_topic_set":
             self.log("检测到用户指定话题模式，跳过AI热点分析")
-            return state  # 直接返回原状态，不做任何修改
+            return state
 
-        self.log(f"开始分析AI技术热点，领域: {state['topic']}")
+        self.log(f"开始分析AI产品与科技热点，目标: {self.max_trends}个")
 
         try:
-            topic = state['topic']
-
             # 判断是否使用mock模式
             if self.mock_mode:
                 self.log("使用Mock模式（模拟数据）")
                 from src.agents.ai_trend_analyzer import AITrendAnalyzerAgent
                 mock_agent = AITrendAnalyzerAgent(self.config, self.prompts)
-                hot_topics = mock_agent._get_mock_ai_trends(topic)
+                hot_topics = mock_agent._get_mock_ai_trends(state.get('topic', 'AI'))
             else:
-                self.log("使用真实API模式（多数据源聚合）")
-                hot_topics = self._get_real_ai_trends(topic)
+                self.log("使用真实API模式（产品+新闻+学术）")
+                hot_topics = self._get_real_ai_trends()
 
             self.log(f"成功分析出 {len(hot_topics)} 个热点话题")
 
             # 保存热点分析结果
-            self._save_trends(topic, hot_topics)
+            self._save_trends(hot_topics)
 
             # 选择热度最高的话题
-            selected_topic = hot_topics[0]
-            self.log(f"选择热点话题: {selected_topic['title']}")
+            if hot_topics:
+                selected_topic = hot_topics[0]
+                self.log(f"选择热点话题: {selected_topic['title']}")
+            else:
+                selected_topic = {
+                    "title": "AI技术发展",
+                    "description": "人工智能前沿动态",
+                    "url": "",
+                    "source": "默认"
+                }
 
             return {
                 **state,
@@ -94,116 +107,85 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                 "current_step": "ai_trend_analyzer_failed"
             }
 
-    def _get_real_ai_trends(self, topic: str = None) -> List[Dict[str, Any]]:
+    def _get_real_ai_trends(self) -> List[Dict[str, Any]]:
         """
-        从多个免费数据源获取真实AI热点（无需关键词过滤）
-
-        Args:
-            topic: 领域参数（已弃用，保留用于兼容性）
+        从多个数据源获取真实AI热点（产品+新闻+学术）
 
         Returns:
             List[Dict[str, Any]]: 热点话题列表
         """
         all_trends = []
 
-        # 1. Hacker News
+        # ===== 产品类数据源 =====
+
+        # 1. Product Hunt - 热门AI产品
+        if self.sources["producthunt"]:
+            try:
+                ph_trends = self._get_product_hunt_trends()
+                all_trends.extend(ph_trends)
+                self.log(f"Product Hunt: 获取 {len(ph_trends)} 条热点")
+            except Exception as e:
+                self.log(f"Product Hunt获取失败: {e}", "WARNING")
+
+        # 2. GitHub Trending - AI应用项目
+        if self.sources["github_apps"]:
+            try:
+                gh_trends = self._get_github_ai_apps()
+                all_trends.extend(gh_trends)
+                self.log(f"GitHub AI应用: 获取 {len(gh_trends)} 条热点")
+            except Exception as e:
+                self.log(f"GitHub AI应用获取失败: {e}", "WARNING")
+
+        # ===== 新闻类数据源 =====
+
+        # 3. TechCrunch AI
+        if self.sources["techcrunch_ai"]:
+            try:
+                tc_trends = self._get_techcrunch_ai_trends()
+                all_trends.extend(tc_trends)
+                self.log(f"TechCrunch AI: 获取 {len(tc_trends)} 条热点")
+            except Exception as e:
+                self.log(f"TechCrunch AI获取失败: {e}", "WARNING")
+
+        # 4. The Verge AI
+        if self.sources["verge_ai"]:
+            try:
+                verge_trends = self._get_verge_ai_trends()
+                all_trends.extend(verge_trends)
+                self.log(f"The Verge AI: 获取 {len(verge_trends)} 条热点")
+            except Exception as e:
+                self.log(f"The Verge AI获取失败: {e}", "WARNING")
+
+        # 5. VentureBeat AI
+        if self.sources["venturebeat_ai"]:
+            try:
+                vb_trends = self._get_venturebeat_ai_trends()
+                all_trends.extend(vb_trends)
+                self.log(f"VentureBeat AI: 获取 {len(vb_trends)} 条热点")
+            except Exception as e:
+                self.log(f"VentureBeat AI获取失败: {e}", "WARNING")
+
+        # ===== 学术类数据源（重大新闻） =====
+
+        # 6. arXiv重大论文新闻
+        if self.sources["arxiv_news"]:
+            try:
+                arxiv_trends = self._get_arxiv_major_news()
+                all_trends.extend(arxiv_trends)
+                self.log(f"arXiv重大新闻: 获取 {len(arxiv_trends)} 条热点")
+            except Exception as e:
+                self.log(f"arXiv重大新闻获取失败: {e}", "WARNING")
+
+        # ===== 科技新闻（过滤产品类） =====
+
+        # 7. HackerNews（产品类过滤）
         if self.sources["hackernews"]:
             try:
-                hn_trends = self._get_hacker_news_trends()
+                hn_trends = self._get_hacker_news_products()
                 all_trends.extend(hn_trends)
-                self.log(f"Hacker News: 获取 {len(hn_trends)} 条热点")
+                self.log(f"HackerNews产品类: 获取 {len(hn_trends)} 条热点")
             except Exception as e:
-                self.log(f"Hacker News获取失败: {e}", "WARNING")
-
-        # 2. arXiv论文
-        if self.sources["arxiv"]:
-            try:
-                arxiv_trends = self._get_arxiv_papers()
-                all_trends.extend(arxiv_trends)
-                self.log(f"arXiv: 获取 {len(arxiv_trends)} 条热点")
-            except Exception as e:
-                self.log(f"arXiv获取失败: {e}", "WARNING")
-
-        # 3. GitHub Trending
-        if self.sources["github_trending"]:
-            try:
-                github_trends = self._get_github_trending()
-                all_trends.extend(github_trends)
-                self.log(f"GitHub Trending: 获取 {len(github_trends)} 条热点")
-            except Exception as e:
-                self.log(f"GitHub Trending获取失败: {e}", "WARNING")
-
-        # 4. Reddit
-        if self.sources["reddit"]:
-            try:
-                reddit_trends = self._get_reddit_trends()
-                all_trends.extend(reddit_trends)
-                self.log(f"Reddit: 获取 {len(reddit_trends)} 条热点")
-            except Exception as e:
-                self.log(f"Reddit获取失败: {e}", "WARNING")
-
-        # 5. Hugging Face Trending Models
-        if self.sources["huggingface"]:
-            try:
-                hf_trends = self._get_huggingface_trends()
-                all_trends.extend(hf_trends)
-                self.log(f"Hugging Face: 获取 {len(hf_trends)} 条热点")
-            except Exception as e:
-                self.log(f"Hugging Face获取失败: {e}", "WARNING")
-
-        # 6. Stack Overflow Hot Questions
-        if self.sources["stackoverflow"]:
-            try:
-                so_trends = self._get_stackoverflow_trends()
-                all_trends.extend(so_trends)
-                self.log(f"Stack Overflow: 获取 {len(so_trends)} 条热点")
-            except Exception as e:
-                self.log(f"Stack Overflow获取失败: {e}", "WARNING")
-
-        # 7. Kaggle竞赛和数据集
-        if self.sources["kaggle"]:
-            try:
-                kaggle_trends = self._get_kaggle_trends()
-                all_trends.extend(kaggle_trends)
-                self.log(f"Kaggle: 获取 {len(kaggle_trends)} 条热点")
-            except Exception as e:
-                self.log(f"Kaggle获取失败: {e}", "WARNING")
-
-        # 8. NewsAPI科技新闻
-        if self.sources["newsapi"]:
-            try:
-                news_trends = self._get_newsapi_trends()
-                all_trends.extend(news_trends)
-                self.log(f"NewsAPI: 获取 {len(news_trends)} 条热点")
-            except Exception as e:
-                self.log(f"NewsAPI获取失败: {e}", "WARNING")
-
-        # 9. Dev.to开发者博客
-        if self.sources["devto"]:
-            try:
-                devto_trends = self._get_devto_trends()
-                all_trends.extend(devto_trends)
-                self.log(f"Dev.to: 获取 {len(devto_trends)} 条热点")
-            except Exception as e:
-                self.log(f"Dev.to获取失败: {e}", "WARNING")
-
-        # 10. PyPI热门包
-        if self.sources["pypi"]:
-            try:
-                pypi_trends = self._get_pypi_trends()
-                all_trends.extend(pypi_trends)
-                self.log(f"PyPI: 获取 {len(pypi_trends)} 条热点")
-            except Exception as e:
-                self.log(f"PyPI获取失败: {e}", "WARNING")
-
-        # 11. GitHub Topics（行业应用）
-        if self.sources["github_topics"]:
-            try:
-                topics_trends = self._get_github_topics_trends()
-                all_trends.extend(topics_trends)
-                self.log(f"GitHub Topics: 获取 {len(topics_trends)} 条热点")
-            except Exception as e:
-                self.log(f"GitHub Topics获取失败: {e}", "WARNING")
+                self.log(f"HackerNews产品类获取失败: {e}", "WARNING")
 
         # 按综合热度评分排序
         all_trends.sort(key=lambda x: x.get("heat_score", 0), reverse=True)
@@ -211,85 +193,301 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         # 去重（基于标题相似度）
         all_trends = self._deduplicate_trends(all_trends)
 
-        # 返回Top 10
-        return all_trends[:10]
+        # 过滤低分内容
+        all_trends = [t for t in all_trends if t.get("heat_score", 0) >= self.min_score]
 
-    def _get_hacker_news_trends(self) -> List[Dict[str, Any]]:
-        """获取Hacker News热门技术话题（直接获取Top 30）"""
+        # 对每个热点进行分类
+        for trend in all_trends:
+            classification = self._classify_trend(trend)
+            trend["category"] = classification["category"]
+            trend["category_icon"] = classification["icon"]
+            trend["category_confidence"] = classification["confidence"]
+            # 更新tags以包含分类信息
+            if "tags" not in trend:
+                trend["tags"] = []
+            trend["tags"].append(classification["category"].replace("📈 ", "").replace("🎓 ", "").replace("🔬 ", "").replace("🛠️ ", "").replace("💼 ", ""))
+
+        # 返回Top N
+        return all_trends[:self.max_trends]
+
+    # ==================== 产品类数据源 ====================
+
+    def _get_product_hunt_trends(self) -> List[Dict[str, Any]]:
+        """获取Product Hunt热门AI产品（RSS）"""
         try:
-            # 获取热门故事ID列表
-            stories_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
-            response = requests.get(stories_url, timeout=10)
-            story_ids = response.json()[:30]  # 取前30个
+            return self._get_rss_trends(
+                rss_url="https://www.producthunt.com/posts/feed",
+                source_name="Product Hunt",
+                item_type="product",
+                max_items=20
+            )
+        except Exception as e:
+            self.log(f"Product Hunt RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_github_ai_apps(self) -> List[Dict[str, Any]]:
+        """获取GitHub Trending AI应用项目（非框架库）"""
+        try:
+            api_url = "https://github-trending-api.now.sh/repositories"
+
+            # 搜索AI应用相关的语言和关键词
+            search_terms = [
+                ("", "weekly"),  # 全局热门
+                ("python", "weekly"),
+                ("javascript", "weekly"),
+                ("typescript", "weekly"),
+            ]
+
+            all_repos = []
+
+            for lang, period in search_terms:
+                try:
+                    params = {
+                        "language": lang if lang else None,
+                        "since": period
+                    }
+                    params = {k: v for k, v in params.items() if v is not None}
+
+                    response = requests.get(api_url, params=params, timeout=10)
+                    repos = response.json()
+
+                    for repo in repos[:10]:
+                        repo["fetched_language"] = lang or "multi"
+                        all_repos.append(repo)
+
+                except Exception as e:
+                    self.log(f"获取GitHub {lang}趋势失败: {e}", "WARNING")
+                    continue
 
             trends = []
 
-            for story_id in story_ids:
+            for repo in all_repos[:50]:  # 取前50个候选
+                # 过滤：保留AI应用类项目
+                name = repo.get("name", "").lower()
+                description = repo.get("description", "").lower()
+                combined = f"{name} {description}"
+
+                # 过滤掉纯技术框架/库
+                skip_keywords = [
+                    "framework", "library", "sdk", "api", "toolkit",
+                    "boilerplate", "template", "wrapper", "binding"
+                ]
+
+                if any(kw in combined for kw in skip_keywords):
+                    continue
+
+                # 优先保留AI应用类项目
+                ai_keywords = [
+                    "ai", "gpt", "chatbot", "agent", "assistant", "automation",
+                    "copilot", "llm", "openai", "claude", "gemini", "stable diffusion",
+                    "image", "video", "audio", "text", "code", "generation"
+                ]
+
+                if not any(kw in combined for kw in ai_keywords):
+                    # 非AI项目降低优先级
+                    continue
+
+                stars_str = repo.get("stars", "0")
+                stars = self._parse_stars(stars_str)
+                forks = self._parse_stars(repo.get("forks", "0"))
+
+                # 计算热度评分
+                heat_score = stars * 0.5 + forks * 0.3 + 50  # 基础分50
+
+                description = repo.get("description", "") or "AI应用项目"
+                lang = repo.get("fetched_language", repo.get("language", "Unknown"))
+
+                trends.append({
+                    "title": f"{repo['author']}/{repo['name']}",
+                    "description": description[:200],
+                    "url": repo["url"],
+                    "source": f"GitHub ({lang})",
+                    "timestamp": datetime.now().strftime("%Y-%m-%d"),
+                    "metrics": {
+                        "stars": stars_str,
+                        "forks": repo.get("forks", "0"),
+                        "language": lang
+                    },
+                    "heat_score": int(heat_score),
+                    "tags": ["AI应用", "开源", lang]
+                })
+
+            return trends[:30]  # 返回前30个
+        except Exception as e:
+            self.log(f"GitHub AI应用获取失败: {e}", "ERROR")
+            return []
+
+    # ==================== 新闻类数据源 ====================
+
+    def _get_techcrunch_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取TechCrunch AI新闻（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://techcrunch.com/category/artificial-intelligence/feed/",
+                source_name="TechCrunch AI",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"TechCrunch AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_verge_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取The Verge AI新闻（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.theverge.com/ai-artificial-intelligence/rss/index.xml",
+                source_name="The Verge AI",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"The Verge AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_venturebeat_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取VentureBeat AI新闻（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://venturebeat.com/ai/feed/",
+                source_name="VentureBeat AI",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"VentureBeat AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_rss_trends(self, rss_url: str, source_name: str, item_type: str, max_items: int = 15) -> List[Dict[str, Any]]:
+        """通用RSS获取方法"""
+        try:
+            feed = feedparser.parse(rss_url)
+
+            if feed.bozo:
+                self.log(f"{source_name} RSS解析警告: {feed.bozo}", "WARNING")
+
+            trends = []
+
+            for entry in feed.entries[:max_items]:
                 try:
-                    # 获取故事详情
-                    item_url = f"https://hacker-news.firebaseio.com/v0/item/{story_id}.json"
-                    item = requests.get(item_url, timeout=5).json()
+                    title = entry.get("title", "")
+                    description = entry.get("description", "")
 
-                    if not item or "url" not in item:
-                        continue
+                    # 清理HTML标签
+                    if description:
+                        import re
+                        description = re.sub(r'<[^>]+>', '', description)
+                        description = description.strip()[:300]
 
-                    title = item.get("title", "")
+                    url = entry.get("link", "")
+                    published = entry.get("published", "")
 
                     # 计算热度评分
-                    score = item.get("score", 0)
-                    comments = item.get("descendants", 0)
-                    heat_score = score * 2 + comments
+                    heat_score = 60  # RSS源基础分
+
+                    # 根据类型调整
+                    if item_type == "product":
+                        heat_score += 20
+                    elif item_type == "news":
+                        # 新闻类：关键词加分
+                        news_keywords = ["发布", "推出", "融资", "收购", "突破", "发布", "launch", "raises", "acquisition"]
+                        if any(kw.lower() in title.lower() for kw in news_keywords):
+                            heat_score += 15
+
+                        # 知名公司加分
+                        companies = ["OpenAI", "Google", "Meta", "Microsoft", "Anthropic", "Apple", "Amazon"]
+                        if any(company.lower() in title.lower() for company in companies):
+                            heat_score += 10
 
                     trends.append({
                         "title": title,
-                        "description": item.get("text", title)[:200],
-                        "url": item.get("url", ""),
-                        "source": "Hacker News",
-                        "timestamp": datetime.fromtimestamp(item["time"]).strftime("%Y-%m-%d %H:%M"),
+                        "description": description or title[:200],
+                        "url": url,
+                        "source": source_name,
+                        "timestamp": published[:10] if published else datetime.now().strftime("%Y-%m-%d"),
                         "metrics": {
-                            "upvotes": score,
-                            "comments": comments
+                            "published": published,
+                            "type": item_type
                         },
                         "heat_score": heat_score,
-                        "tags": ["技术新闻", "HN"]
+                        "tags": ["新闻", "AI资讯"] if item_type == "news" else ["产品", "AI工具"]
                     })
+
                 except Exception as e:
-                    self.log(f"获取HN故事 {story_id} 失败: {e}", "WARNING")
+                    self.log(f"处理{source_name}条目失败: {e}", "WARNING")
                     continue
 
             return trends
         except Exception as e:
-            self.log(f"Hacker News API调用失败: {e}", "ERROR")
+            self.log(f"{source_name} RSS获取失败: {e}", "ERROR")
             return []
 
-    def _get_arxiv_papers(self) -> List[Dict[str, Any]]:
-        """获取arXiv最新AI论文（直接获取AI相关分类）"""
+    # ==================== 学术类数据源（重大新闻） ====================
+
+    def _get_arxiv_major_news(self) -> List[Dict[str, Any]]:
+        """获取arXiv重大论文新闻（仅重大突破）"""
         try:
             import arxiv
 
-            # 搜索AI和计算机科学相关分类
-            query = "cat:cs.AI OR cat:cs.CL OR cat:cs.LG OR cat:cs.CV OR cat:cs.NE"
+            # 搜索AI相关分类
+            query = "cat:cs.AI OR cat:cs.CL OR cat:cs.LG OR cat:cs.CV"
 
-            # 搜索最近7天的论文
             search = arxiv.Search(
                 query=query,
-                max_results=20,
+                max_results=50,  # 获取更多候选
                 sort_by=arxiv.SortCriterion.SubmittedDate,
                 sort_order=arxiv.SortOrder.Descending
             )
 
             trends = []
-            cutoff_date = datetime.now() - timedelta(days=7)
+            cutoff_date = datetime.now() - timedelta(days=30)  # 扩展到30天
+
+            # 知名机构列表
+            major_institutions = [
+                "openai", "google", "deepmind", "meta", "anthropic",
+                "microsoft", "stanford", "mit", "berkeley", "carnegie",
+                "nvidia", "amazon", "apple"
+            ]
+
+            # 重大突破关键词
+            breakthrough_keywords = [
+                "gpt", "claude", "gemini", "llama", "diffusion",
+                "breakthrough", "sota", "record", "human-level",
+                "reasoning", "agent", "multimodal", "vision"
+            ]
 
             for result in search.results():
-                # 检查论文发布时间（最近7天）
                 pub_date = result.published.replace(tzinfo=None)
                 if pub_date < cutoff_date:
                     continue
 
-                # 计算热度评分（新论文加分）
+                title = result.title.lower()
+                authors = [a.name.lower() for a in result.authors]
+
+                # 过滤：必须是知名机构或重大突破
+                is_major = False
+
+                # 检查作者是否来自知名机构
+                for author in authors[:5]:
+                    if any(inst in author for inst in major_institutions):
+                        is_major = True
+                        break
+
+                # 检查标题是否包含重大突破关键词
+                if not is_major:
+                    if any(kw in title for kw in breakthrough_keywords):
+                        is_major = True
+
+                if not is_major:
+                    continue  # 跳过普通论文
+
+                # 计算热度评分
                 days_ago = (datetime.now() - pub_date).days
-                heat_score = 100 - days_ago * 10  # 越新分数越高
+                heat_score = 80 - days_ago * 2  # 基础分更高
+
+                # 重大关键词加分
+                if any(kw in title for kw in breakthrough_keywords):
+                    heat_score += 10
 
                 trends.append({
                     "title": result.title,
@@ -299,131 +497,225 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                     "timestamp": pub_date.strftime("%Y-%m-%d"),
                     "metrics": {
                         "authors": [a.name for a in result.authors[:3]],
-                        "categories": result.categories,
                         "days_ago": days_ago
                     },
                     "heat_score": heat_score,
-                    "tags": result.categories[:2] + ["论文", "学术"]
+                    "tags": ["论文", "学术", "重大突破"]
                 })
+
+                if len(trends) >= 20:
+                    break
 
             return trends
         except ImportError:
-            self.log("arXiv库未安装，跳过arXiv数据源。运行: pip install arxiv", "WARNING")
+            self.log("arXiv库未安装，跳过。运行: pip install arxiv", "WARNING")
             return []
         except Exception as e:
-            self.log(f"arXiv API调用失败: {e}", "ERROR")
+            self.log(f"arXiv重大新闻获取失败: {e}", "ERROR")
             return []
 
-    def _get_github_trending(self) -> List[Dict[str, Any]]:
-        """获取GitHub Trending热门项目（所有语言）"""
-        try:
-            # 使用第三方GitHub Trending API（不限制语言）
-            api_url = "https://github-trending-api.now.sh/repositories"
-            params = {
-                "since": "weekly",
-                "spoken_language": "en"
-            }
+    # ==================== 科技新闻（过滤产品类） ====================
 
-            response = requests.get(api_url, params=params, timeout=10)
-            repos = response.json()
+    def _get_hacker_news_products(self) -> List[Dict[str, Any]]:
+        """获取HackerNews产品类话题（过滤技术细节）"""
+        try:
+            stories_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
+            response = requests.get(stories_url, timeout=10)
+            story_ids = response.json()[:50]
 
             trends = []
 
-            for repo in repos[:15]:
-                # 解析star数字
-                stars_str = repo.get("stars", "0")
-                stars = self._parse_stars(stars_str)
+            # 保留的关键词
+            keep_keywords = [
+                "show hn:", "launch", "release", "ai", "gpt", "openai",
+                "product", "startup", "company", "raises", "funding",
+                "acquired", "microsoft", "google", "apple", "meta"
+            ]
 
-                # 计算热度评分
-                forks = self._parse_stars(repo.get("forks", "0"))
-                heat_score = stars * 0.5 + forks * 0.3
+            # 过滤的关键词（技术细节）
+            skip_keywords = [
+                "tutorial", "how to", "guide", "tips", "best practices",
+                "programming", "coding", "debug", "framework", "library"
+            ]
 
-                description = repo.get("description", "")
-
-                trends.append({
-                    "title": f"{repo['author']}/{repo['name']}",
-                    "description": description or "No description",
-                    "url": repo["url"],
-                    "source": "GitHub Trending",
-                    "timestamp": datetime.now().strftime("%Y-%m-%d"),
-                    "metrics": {
-                        "stars": stars_str,
-                        "forks": repo.get("forks", "0"),
-                        "language": repo.get("language", "Unknown")
-                    },
-                    "heat_score": int(heat_score),
-                    "tags": ["开源", repo.get("language", ""), "GitHub"]
-                })
-
-            return trends
-        except Exception as e:
-            self.log(f"GitHub Trending API调用失败: {e}", "ERROR")
-            return []
-
-    def _get_reddit_trends(self) -> List[Dict[str, Any]]:
-        """获取Reddit热门技术讨论（科技相关Subreddit）"""
-        try:
-            import praw
-
-            # 从配置读取Reddit API凭证
-            reddit_config = self.config.get("agents", {}).get("ai_trend_analyzer", {}).get("reddit", {})
-
-            client_id = reddit_config.get("client_id") or os.getenv("REDDIT_CLIENT_ID")
-            client_secret = reddit_config.get("client_secret") or os.getenv("REDDIT_CLIENT_SECRET")
-            user_agent = reddit_config.get("user_agent", "AI_Trend_Analyzer/1.0")
-
-            if not client_id or not client_secret:
-                self.log("Reddit API凭证未配置，跳过Reddit数据源", "WARNING")
-                return []
-
-            reddit = praw.Reddit(
-                client_id=client_id,
-                client_secret=client_secret,
-                user_agent=user_agent
-            )
-
-            # 固定的科技相关Subreddit
-            subreddits = ["MachineLearning", "artificial", "technology", "programming"]
-            trends = []
-
-            for sub_name in subreddits[:2]:  # 限制2个subreddit
+            for story_id in story_ids:
                 try:
-                    subreddit = reddit.subreddit(sub_name)
-                    for post in subreddit.hot(limit=5):
-                        # 过滤：只取最近3天的
-                        post_time = datetime.fromtimestamp(post.created_utc)
-                        if (datetime.now() - post_time).days > 3:
-                            continue
+                    item_url = f"https://hacker-news.firebaseio.com/v0/item/{story_id}.json"
+                    item = requests.get(item_url, timeout=5).json()
 
-                        # 计算热度评分
-                        upvotes = post.score
-                        comments = post.num_comments
-                        heat_score = upvotes + comments * 2
+                    if not item or "url" not in item:
+                        continue
 
-                        trends.append({
-                            "title": post.title,
-                            "description": post.selftext[:200] if hasattr(post, 'selftext') else "",
-                            "url": f"https://reddit.com{post.permalink}",
-                            "source": f"Reddit r/{sub_name}",
-                            "timestamp": post_time.strftime("%Y-%m-%d %H:%M"),
-                            "metrics": {
-                                "upvotes": upvotes,
-                                "comments": comments
-                            },
-                            "heat_score": heat_score,
-                            "tags": ["社区讨论", "Reddit"]
-                        })
+                    title = item.get("title", "").lower()
+
+                    # 过滤：跳过技术细节类
+                    if any(kw in title for kw in skip_keywords):
+                        continue
+
+                    # 优先保留产品类
+                    if not any(kw in title for kw in keep_keywords):
+                        # 非产品类降低优先级
+                        continue
+
+                    score = item.get("score", 0)
+                    comments = item.get("descendants", 0)
+                    heat_score = score * 2 + comments + 40  # 基础分40
+
+                    trends.append({
+                        "title": item.get("title", ""),
+                        "description": item.get("text", item.get("title", ""))[:200],
+                        "url": item.get("url", ""),
+                        "source": "Hacker News",
+                        "timestamp": datetime.fromtimestamp(item["time"]).strftime("%Y-%m-%d %H:%M"),
+                        "metrics": {
+                            "upvotes": score,
+                            "comments": comments
+                        },
+                        "heat_score": heat_score,
+                        "tags": ["科技新闻", "产品"]
+                    })
+
                 except Exception as e:
-                    self.log(f"获取Reddit r/{sub_name}失败: {e}", "WARNING")
+                    self.log(f"获取HN故事 {story_id} 失败: {e}", "WARNING")
                     continue
 
-            return trends
-        except ImportError:
-            self.log("PRAW库未安装，跳过Reddit数据源。运行: pip install praw", "WARNING")
-            return []
+            return trends[:30]
         except Exception as e:
-            self.log(f"Reddit API调用失败: {e}", "ERROR")
+            self.log(f"HackerNews产品类获取失败: {e}", "ERROR")
             return []
+
+    # ==================== 辅助方法 ====================
+
+    def _init_category_keywords(self):
+        """初始化分类关键词"""
+        # 按优先级排序的5大分类
+        self.category_keywords = {
+            "📈 行业动态": {
+                "keywords": [
+                    "raises", "funding", "investment", "acquisition", "acquired", "merger",
+                    "ipo", "valuation", "revenue", "strategy", "partnership", "collaboration",
+                    "ceo", "founder", "startup", "company", "corporation", "launch", "release",
+                    "business", "commercial", "enterprise", "deal"
+                ],
+                "icon": "📈",
+                "priority": 1
+            },
+            "🎓 学术突破": {
+                "keywords": [
+                    "paper", "research", "study", "arxiv", "publication", "publish",
+                    "university", "institute", "lab", "professor", "scientist", "researcher",
+                    "conference", "journal", "peer-reviewed", "dataset", "breakthrough",
+                    "novel", "state-of-the-art", "sota"
+                ],
+                "icon": "🎓",
+                "priority": 2
+            },
+            "🔬 技术创新": {
+                "keywords": [
+                    "model", "algorithm", "architecture", "gpt", "claude", "gemini", "llama",
+                    "diffusion", "transformer", "neural", "network", "training", "inference",
+                    "framework", "engine", "system", "upgrade", "advance", "breakthrough",
+                    "sota", "record", "human-level", "reasoning", "multimodal"
+                ],
+                "icon": "🔬",
+                "priority": 3
+            },
+            "🛠️ AI工具/产品": {
+                "keywords": [
+                    "tool", "platform", "service", "app", "software", "application",
+                    "product", "saas", "solution", "assistant", "copilot", "chatbot",
+                    "generator", "creator", "editor", "plugin", "extension", "integration",
+                    "api", "sdk", "library", "package", "release", "launch", "update"
+                ],
+                "icon": "🛠️",
+                "priority": 4
+            },
+            "💼 AI应用": {
+                "keywords": [
+                    "use case", "industry", "business", "workflow", "automation",
+                    "implementation", "deployment", "integration", "solution", "case study",
+                    "application", "enterprise", "organization", "company", "sector"
+                ],
+                "icon": "💼",
+                "priority": 5
+            }
+        }
+
+        # 数据源到分类的映射（用于初步分类）
+        self.source_category_map = {
+            "Product Hunt": "🛠️ AI工具/产品",
+            "GitHub": "💼 AI应用",
+            "TechCrunch AI": "📈 行业动态",
+            "The Verge AI": "🔬 技术创新",
+            "VentureBeat AI": "📈 行业动态",
+            "arXiv": "🎓 学术突破",
+            "Hacker News": None  # HN需要根据内容判断
+        }
+
+    def _classify_trend(self, trend: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        智能分类热点话题
+
+        Args:
+            trend: 热点数据
+
+        Returns:
+            分类信息字典
+        """
+        title = trend.get("title", "").lower()
+        description = trend.get("description", "").lower()
+        text = f"{title} {description}"
+
+        # 步骤1：基于数据源的初步分类
+        source = trend.get("source", "")
+        base_category = self.source_category_map.get(source)
+
+        # 步骤2：基于关键词计算每个类别的匹配度
+        category_scores = {}
+
+        for category, config in self.category_keywords.items():
+            keywords = config["keywords"]
+
+            # 计算关键词匹配分数
+            score = 0
+            matched_keywords = []
+
+            for keyword in keywords:
+                if keyword.lower() in text:
+                    score += 1
+                    matched_keywords.append(keyword)
+
+            # 如果有基础分类且匹配，加分
+            if base_category == category:
+                score += 2
+
+            category_scores[category] = {
+                "score": score,
+                "matched_keywords": matched_keywords
+            }
+
+        # 步骤3：选择最高分类
+        best_category = max(category_scores.items(), key=lambda x: x[1]["score"])
+        category_name = best_category[0]
+        category_info = self.category_keywords[category_name]
+
+        # 步骤4：判断是否是有效分类
+        if best_category[1]["score"] == 0:
+            # 没有匹配到任何关键词，根据数据源分配默认分类
+            if base_category:
+                category_name = base_category
+                category_info = self.category_keywords[base_category]
+            else:
+                # 兜底分类
+                category_name = "🔬 技术创新"
+                category_info = self.category_keywords[category_name]
+
+        return {
+            "category": category_name,
+            "icon": category_info["icon"],
+            "confidence": best_category[1]["score"],
+            "matched_keywords": best_category[1]["matched_keywords"]
+        }
 
     def _parse_stars(self, stars_str: str) -> int:
         """解析star数字字符串"""
@@ -462,17 +754,16 @@ class RealAITrendAnalyzerAgent(BaseAgent):
 
         return unique_trends
 
-    def _save_trends(self, topic: str, trends: List[Dict[str, Any]]):
+    def _save_trends(self, trends: List[Dict[str, Any]]):
         """保存热点分析结果到raw目录"""
         try:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"trends_{topic}_{timestamp}.json"
+            filename = f"trends_ai_{timestamp}.json"
 
             output = {
-                "topic": topic,
                 "timestamp": datetime.now().isoformat(),
-                "data_sources": list(self.sources.keys()),
                 "total_trends": len(trends),
+                "data_sources": list(self.sources.keys()),
                 "trends": trends
             }
 
@@ -482,512 +773,3 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             self.log(f"热点分析已保存: {filepath}")
         except Exception as e:
             self.log(f"保存热点分析失败: {str(e)}", "WARNING")
-
-    def _get_huggingface_trends(self) -> List[Dict[str, Any]]:
-        """获取Hugging Face热门模型（直接获取热门模型）"""
-        try:
-            # 使用Hugging Face模型搜索API（按likes排序）
-            api_url = "https://huggingface.co/api/models"
-
-            # 搜索热门模型
-            params = {
-                "limit": 20,
-                "sort": "likes",  # 按likes排序
-                "direction": -1   # 降序
-            }
-
-            response = requests.get(api_url, params=params, timeout=15, headers={
-                "User-Agent": "AI-Trend-Analyzer/1.0"
-            })
-
-            if response.status_code != 200:
-                self.log(f"Hugging Face API返回错误: {response.status_code}", "ERROR")
-                return []
-
-            # 解析JSON
-            try:
-                data = response.json()
-            except Exception as e:
-                self.log(f"Hugging Face API返回格式错误: {e}", "ERROR")
-                return []
-
-            # 检查返回数据格式
-            if isinstance(data, dict) and "models" in data:
-                models = data["models"]
-            elif isinstance(data, list):
-                models = data
-            else:
-                self.log(f"Hugging Face API返回数据格式异常: {type(data)}", "ERROR")
-                return []
-
-            if not models or len(models) == 0:
-                self.log("Hugging Face API返回空列表", "WARNING")
-                return []
-
-            trends = []
-
-            for model in models[:15]:
-                try:
-                    model_id = model.get("id", model.get("modelId", ""))
-                    likes = model.get("likes", 0)
-                    downloads = model.get("downloads", 0)
-                    pipeline = model.get("pipeline", "")
-
-                    if not model_id:
-                        continue
-
-                    # 计算热度评分
-                    heat_score = likes * 10 + downloads // 100
-
-                    # 格式化pipeline
-                    if pipeline:
-                        pipeline_name = pipeline.replace('-', ' ').replace('_', ' ').title()
-                    else:
-                        pipeline_name = "Model"
-
-                    trends.append({
-                        "title": f"🤗 {model_id}",
-                        "description": f"{pipeline_name} | {likes}👍 | {downloads}⬇️",
-                        "url": f"https://huggingface.co/{model_id}",
-                        "source": "Hugging Face",
-                        "timestamp": datetime.now().strftime("%Y-%m-%d"),
-                        "metrics": {
-                            "likes": likes,
-                            "downloads": downloads,
-                            "pipeline": pipeline or "unknown"
-                        },
-                        "heat_score": heat_score,
-                        "tags": ["模型", "HuggingFace", "AI"]
-                    })
-                except Exception as e:
-                    self.log(f"处理Hugging Face模型数据失败: {e}", "WARNING")
-                    continue
-
-            self.log(f"Hugging Face成功获取 {len(trends)} 个模型")
-            return trends
-        except Exception as e:
-            self.log(f"Hugging Face API调用失败: {e}", "ERROR")
-            return []
-
-    def _get_stackoverflow_trends(self) -> List[Dict[str, Any]]:
-        """获取Stack Overflow热门技术问题"""
-        try:
-            # Stack Exchange API
-            api_url = "https://api.stackexchange.com/2.3/questions"
-
-            # 获取热门问题
-            params = {
-                "order": "desc",
-                "sort": "hot",  # 按热度排序
-                "site": "stackoverflow",
-                "pagesize": 50  # 增加数量以获得更多候选
-            }
-
-            response = requests.get(api_url, params=params, timeout=10)
-            data = response.json()
-
-            trends = []
-
-            if "items" not in data:
-                self.log(f"Stack Overflow API返回格式异常: {data}", "WARNING")
-                return []
-
-            for item in data["items"][:30]:
-                title = item.get("title", "")
-                tags = item.get("tags", [])
-
-                # 计算热度评分
-                score = item.get("score", 0)
-                views = item.get("view_count", 0)
-                answers = item.get("answer_count", 0)
-                heat_score = score * 5 + answers * 15 + views // 200
-
-                # 获取标签和描述
-                tags_str = ", ".join(tags[:5])
-
-                # 获取问题正文（去除HTML标签）
-                body = item.get("body", "")
-                if body:
-                    # 简单去除HTML标签
-                    import re
-                    body_clean = re.sub(r'<[^>]+>', '', body)[:150].replace("\n", " ")
-                    description = body_clean if body_clean else f"Tags: {tags_str}"
-                else:
-                    description = f"Tags: {tags_str}"
-
-                trends.append({
-                    "title": title,
-                    "description": description,
-                    "url": item.get("link", ""),
-                    "source": "Stack Overflow",
-                    "timestamp": datetime.fromtimestamp(item.get("creation_date", 0)).strftime("%Y-%m-%d"),
-                    "metrics": {
-                        "score": score,
-                        "views": views,
-                        "answers": answers,
-                        "tags": tags
-                    },
-                    "heat_score": heat_score,
-                    "tags": tags[:3] + ["问答", "StackOverflow"]
-                })
-
-            self.log(f"Stack Overflow成功获取 {len(trends)} 个问题")
-            return trends
-        except Exception as e:
-            self.log(f"Stack Overflow API调用失败: {e}", "ERROR")
-            return []
-
-    def _get_kaggle_trends(self) -> List[Dict[str, Any]]:
-        """获取Kaggle竞赛和数据集（AI应用案例）"""
-        try:
-            # Kaggle不提供官方公开API，使用GitHub搜索替代
-            # 搜索机器学习和数据科学相关项目
-            search_query = "machine learning OR data science language:python"
-            api_url = "https://api.github.com/search/repositories"
-            params = {
-                "q": search_query,
-                "sort": "stars",
-                "order": "desc",
-                "per_page": 15
-            }
-
-            response = requests.get(api_url, params=params, timeout=15, headers={
-                "Accept": "application/vnd.github.v3+json"
-            })
-
-            if response.status_code != 200:
-                self.log(f"GitHub API返回错误: {response.status_code}", "WARNING")
-                return []
-
-            data = response.json()
-
-            if "items" not in data:
-                return []
-
-            trends = []
-            for item in data["items"][:15]:
-                # 计算热度评分
-                stars = item.get("stargazers_count", 0)
-                forks = item.get("forks_count", 0)
-                open_issues = item.get("open_issues_count", 0)
-                heat_score = stars * 0.5 + forks * 0.3 + open_issues * 2
-
-                trends.append({
-                    "title": item.get("full_name", ""),
-                    "description": item.get("description", "机器学习相关项目")[:200],
-                    "url": item.get("html_url", ""),
-                    "source": "ML/GitHub",
-                    "timestamp": datetime.now().strftime("%Y-%m-%d"),
-                    "metrics": {
-                        "stars": stars,
-                        "forks": forks,
-                        "open_issues": open_issues,
-                        "language": item.get("language", "Unknown")
-                    },
-                    "heat_score": heat_score,
-                    "tags": ["数据竞赛", "AI应用", "开源"]
-                })
-
-            self.log(f"GitHub机器学习项目成功获取 {len(trends)} 个项目")
-            return trends
-        except Exception as e:
-            self.log(f"Kaggle API调用失败: {e}", "ERROR")
-            return []
-
-    def _get_newsapi_trends(self) -> List[Dict[str, Any]]:
-        """获取NewsAPI科技新闻（需要API密钥）"""
-        try:
-            if not self.newsapi_key:
-                self.log("NewsAPI密钥未配置，跳过", "WARNING")
-                return []
-
-            # NewsAPI免费版每天1000次请求
-            base_url = "https://newsapi.org/v2/everything"
-
-            # 使用通用的AI技术关键词
-            query = "artificial intelligence OR machine learning OR AI OR LLM OR GPT OR Claude"
-
-            params = {
-                "q": query,
-                "language": "en",
-                "sortBy": "popularity",
-                "pageSize": 15,
-                "apiKey": self.newsapi_key
-            }
-
-            response = requests.get(base_url, params=params, timeout=15)
-
-            if response.status_code == 401:
-                self.log("NewsAPI密钥无效", "WARNING")
-                return []
-            elif response.status_code == 429:
-                self.log("NewsAPI请求超限", "WARNING")
-                return []
-            elif response.status_code != 200:
-                self.log(f"NewsAPI返回错误: {response.status_code}", "WARNING")
-                return []
-
-            data = response.json()
-
-            if data.get("status") != "ok":
-                return []
-
-            trends = []
-            for article in data.get("articles", [])[:15]:
-                if not article.get("title") or article.get("title") == "[Removed]":
-                    continue
-
-                # 计算热度评分（基于来源和时间）
-                source_name = article.get("source", {}).get("name", "")
-                published_at = article.get("publishedAt", "")
-
-                # 简单的热度评分
-                heat_score = 50  # 基础分
-
-                # 时间衰减
-                if published_at:
-                    try:
-                        pub_date = datetime.fromisoformat(published_at.replace('Z', '+00:00'))
-                        days_ago = (datetime.now(pub_date.tzinfo) - pub_date).days
-                        heat_score -= days_ago * 5
-                    except:
-                        pass
-
-                trends.append({
-                    "title": article.get("title", ""),
-                    "description": article.get("description", article.get("content", ""))[:200],
-                    "url": article.get("url", ""),
-                    "source": f"NewsAPI ({source_name})",
-                    "timestamp": published_at[:10] if published_at else datetime.now().strftime("%Y-%m-%d"),
-                    "metrics": {
-                        "source": source_name,
-                        "published_at": published_at
-                    },
-                    "heat_score": max(heat_score, 10),
-                    "tags": ["新闻", "AI资讯", "行业动态"]
-                })
-
-            self.log(f"NewsAPI成功获取 {len(trends)} 条新闻")
-            return trends
-        except Exception as e:
-            self.log(f"NewsAPI调用失败: {e}", "ERROR")
-            return []
-
-    def _get_devto_trends(self) -> List[Dict[str, Any]]:
-        """获取Dev.to开发者博客文章（热门技术文章）"""
-        try:
-            # Dev.to公开API，无需认证
-            base_url = "https://dev.to/api/articles"
-
-            # 使用热门技术标签
-            tags = ["ai", "machinelearning", "python", "javascript", "webdev"]
-            trends = []
-
-            # 对每个标签进行搜索
-            for tag in tags[:2]:  # 只取前2个标签避免过多请求
-                params = {
-                    "tag": tag,
-                    "top": "7",  # 按热度排序
-                    "per_page": 10
-                }
-
-                response = requests.get(base_url, params=params, timeout=15)
-
-                if response.status_code != 200:
-                    continue
-
-                articles = response.json()
-
-                if not isinstance(articles, list):
-                    continue
-
-                for article in articles[:7]:
-                    # 计算热度评分
-                    comments_count = article.get("comments_count", 0)
-                    positive_reactions_count = article.get("positive_reactions_count", 0)
-                    heat_score = comments_count * 10 + positive_reactions_count * 2 + 30
-
-                    # 获取标签（可能是字符串列表或字典列表）
-                    tag_list = article.get("tag_list", [])
-                    if tag_list and isinstance(tag_list[0], dict):
-                        article_tags = [t.get("name", "") for t in tag_list[:4]]
-                    else:
-                        article_tags = tag_list[:4] if isinstance(tag_list, list) else []
-
-                    trends.append({
-                        "title": article.get("title", ""),
-                        "description": article.get("description", "")[:200],
-                        "url": article.get("url", ""),
-                        "source": "Dev.to",
-                        "timestamp": article.get("published_at", "")[:10] if article.get("published_at") else datetime.now().strftime("%Y-%m-%d"),
-                        "metrics": {
-                            "comments": comments_count,
-                            "reactions": positive_reactions_count,
-                            "tags": article_tags
-                        },
-                        "heat_score": heat_score,
-                        "tags": article_tags[:3] + ["开发者博客", "Dev.to"]
-                    })
-
-            # 按热度排序并去重
-            trends.sort(key=lambda x: x.get("heat_score", 0), reverse=True)
-            seen_titles = set()
-            unique_trends = []
-            for trend in trends:
-                if trend["title"] not in seen_titles:
-                    seen_titles.add(trend["title"])
-                    unique_trends.append(trend)
-
-            self.log(f"Dev.to成功获取 {len(unique_trends)} 篇文章")
-            return unique_trends[:15]
-        except Exception as e:
-            self.log(f"Dev.to API调用失败: {e}", "ERROR")
-            return []
-
-    def _get_pypi_trends(self) -> List[Dict[str, Any]]:
-        """获取PyPI热门Python包（热门AI和数据科学包）"""
-        try:
-            # 使用pypistats.org API（完全免费）
-            base_url = "https://pypistats.org/api/packages"
-
-            # 使用热门AI和数据科学包列表
-            packages = [
-                "langchain", "openai", "anthropic", "transformers", "torch",
-                "tensorflow", "numpy", "pandas", "scikit-learn", "requests",
-                "fastapi", "pytest", "matplotlib", "plotly", "gradio"
-            ]
-            trends = []
-
-            for package in packages[:10]:  # 最多10个包
-                try:
-                    # 获取最近30天的下载统计
-                    url = f"{base_url}/{package}/recent"
-                    response = requests.get(url, timeout=10)
-
-                    if response.status_code != 200:
-                        continue
-
-                    data = response.json()
-
-                    # 获取下载量
-                    last_month = data.get("data", {}).get("last_month", 0)
-                    last_week = data.get("data", {}).get("last_week", 0)
-
-                    if last_month == 0:
-                        continue
-
-                    # 计算热度评分（下载量的对数）
-                    import math
-                    heat_score = math.log10(max(last_month, 1)) * 20
-
-                    # 获取包详情
-                    package_url = f"https://pypi.org/pypi/{package}/json"
-                    package_response = requests.get(package_url, timeout=10)
-
-                    description = ""
-                    if package_response.status_code == 200:
-                        package_info = package_response.json().get("info", {})
-                        description = package_info.get("summary", "")[:200]
-
-                    trends.append({
-                        "title": f"📦 {package}",
-                        "description": description or f"PyPI包 - 最近30天下载量: {last_month:,}",
-                        "url": f"https://pypi.org/project/{package}/",
-                        "source": "PyPI",
-                        "timestamp": datetime.now().strftime("%Y-%m-%d"),
-                        "metrics": {
-                            "last_month_downloads": last_month,
-                            "last_week_downloads": last_week
-                        },
-                        "heat_score": heat_score,
-                        "tags": ["Python", "包管理", "工具"]
-                    })
-                except Exception as e:
-                    self.log(f"获取PyPI包 {package} 失败: {e}", "WARNING")
-                    continue
-
-            # 按热度排序
-            trends.sort(key=lambda x: x.get("heat_score", 0), reverse=True)
-
-            self.log(f"PyPI成功获取 {len(trends)} 个包")
-            return trends[:15]
-        except Exception as e:
-            self.log(f"PyPI API调用失败: {e}", "ERROR")
-            return []
-
-    def _get_github_topics_trends(self) -> List[Dict[str, Any]]:
-        """获取GitHub Topics（AI和科技热门主题）"""
-        try:
-            # GitHub Topics API - 获取AI和科技相关热门主题
-            topics = [
-                "artificial-intelligence", "machine-learning", "deep-learning",
-                "llm", "generative-ai", "automation", "developer-tools"
-            ]
-            trends = []
-
-            for topic_name in topics[:3]:  # 最多3个主题
-                try:
-                    # 搜索该主题下的热门仓库
-                    api_url = "https://api.github.com/search/repositories"
-                    params = {
-                        "q": f"topic:{topic_name}",
-                        "sort": "stars",
-                        "order": "desc",
-                        "per_page": 10
-                    }
-
-                    response = requests.get(api_url, params=params, timeout=15, headers={
-                        "Accept": "application/vnd.github.v3+json"
-                    })
-
-                    if response.status_code != 200:
-                        continue
-
-                    data = response.json()
-
-                    if "items" not in data:
-                        continue
-
-                    for item in data["items"][:7]:
-                        # 计算热度评分
-                        stars = item.get("stargazers_count", 0)
-                        forks = item.get("forks_count", 0)
-                        heat_score = stars * 0.5 + forks * 0.3
-
-                        # 获取主题标签
-                        item_topics = item.get("topics", [])[:5]
-
-                        trends.append({
-                            "title": item.get("full_name", ""),
-                            "description": item.get("description", f"GitHub Topic: {topic_name}")[:200],
-                            "url": item.get("html_url", ""),
-                            "source": f"GitHub Topics ({topic_name})",
-                            "timestamp": datetime.now().strftime("%Y-%m-%d"),
-                            "metrics": {
-                                "stars": stars,
-                                "forks": forks,
-                                "topics": item_topics,
-                                "language": item.get("language", "Unknown")
-                            },
-                            "heat_score": heat_score,
-                            "tags": item_topics[:3] + ["行业应用", "开源"]
-                        })
-
-                except Exception as e:
-                    self.log(f"获取GitHub Topic {topic_name} 失败: {e}", "WARNING")
-                    continue
-
-            # 按热度排序并去重
-            trends.sort(key=lambda x: x.get("heat_score", 0), reverse=True)
-            seen_titles = set()
-            unique_trends = []
-            for trend in trends:
-                if trend["title"] not in seen_titles:
-                    seen_titles.add(trend["title"])
-                    unique_trends.append(trend)
-
-            self.log(f"GitHub Topics成功获取 {len(unique_trends)} 个项目")
-            return unique_trends[:15]
-        except Exception as e:
-            self.log(f"GitHub Topics API调用失败: {e}", "ERROR")
-            return []

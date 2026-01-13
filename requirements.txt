@@ -34,6 +34,9 @@ google-generativeai>=0.3.0
 # arXiv API (用于获取AI论文)
 arxiv>=2.1.0
 
+# RSS解析 (用于获取Product Hunt、TechCrunch等)
+feedparser>=6.0.10
+
 # Reddit API (用于获取技术讨论)
 praw>=7.7.0
 
