@@ -1,0 +1,21 @@
+{
+  "id": "topic_037",
+  "series_id": "series_5",
+  "episode": 37,
+  "title": "服务化部署：Serving与API设计",
+  "description": "LLM服务化生产实践：KServe、Triton Inference Server等 Serving框架对比、RESTful API与WebSocket接口设计、负载均衡与弹性伸缩，以及构建高并发LLM服务的经验。",
+  "keywords": [
+    "模型部署",
+    "KServe",
+    "Triton",
+    "Serving",
+    "API设计",
+    "负载均衡",
+    "弹性伸缩",
+    "生产服务"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

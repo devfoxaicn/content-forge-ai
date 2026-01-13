@@ -1,0 +1,21 @@
+{
+  "id": "topic_042",
+  "series_id": "series_6",
+  "episode": 42,
+  "title": "LVM架构：从Flamingo到GPT-4V",
+  "description": "视觉语言模型架构演进：从Flamingo、BLIP到GPT-4V、Gemini Pro Vision的架构分析，对比不同的视觉编码器和跨模态融合策略，以及多模态模型的最新进展。",
+  "keywords": [
+    "LVM",
+    "GPT-4V",
+    "Flamingo",
+    "BLIP",
+    "Gemini Vision",
+    "视觉语言模型",
+    "多模态架构",
+    "跨模态融合"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

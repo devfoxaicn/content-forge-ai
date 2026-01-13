@@ -1,0 +1,21 @@
+{
+  "id": "topic_035",
+  "series_id": "series_5",
+  "episode": 35,
+  "title": "LoRA与QLoRA微调实战",
+  "description": "参数高效微调（PEFT）实践：LoRA和QLoRA的原理与实现、如何在小显存上微调大模型、LoRA的应用场景与效果对比，以及使用Axolotl等工具进行微调的完整流程。",
+  "keywords": [
+    "LoRA",
+    "QLoRA",
+    "参数高效微调",
+    "PEFT",
+    "模型微调",
+    "显存优化",
+    "Axolotl",
+    "SFT"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

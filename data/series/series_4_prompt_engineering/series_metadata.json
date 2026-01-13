@@ -1,0 +1,141 @@
+{
+  "series_info": {
+    "id": "series_4",
+    "name": "提示工程系列",
+    "description": "掌握提示词设计的艺术与科学",
+    "topic_count": 6,
+    "difficulty": "入门→进阶",
+    "priority": 4,
+    "status": "completed"
+  },
+  "topics": [
+    {
+      "id": "topic_027",
+      "series_id": "series_4",
+      "episode": 27,
+      "title": "提示工程基础：原则与模式",
+      "description": "提示词设计的核心原则：清晰性、具体性、上下文提供、角色设定、输出格式控制等基础模式，以及如何写出高质量的提示词来激发LLM的最佳性能。",
+      "keywords": [
+        "提示工程",
+        "Prompt Engineering",
+        "提示词设计",
+        "Prompt原则",
+        "提示词模式",
+        "Prompt最佳实践"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 9000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_028",
+      "series_id": "series_4",
+      "episode": 28,
+      "title": "结构化提示：CoT与Few-shot",
+      "description": "高级提示技巧：思维链（Chain of Thought）如何引导模型逐步推理、Few-shot Learning如何通过示例学习提升性能、Zero-shot与One-shot的区别，以及如何设计有效的示例和推理路径。",
+      "keywords": [
+        "CoT",
+        "思维链",
+        "Few-shot",
+        "Zero-shot",
+        "One-shot",
+        "示例学习",
+        "推理引导",
+        "结构化输出"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 11000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_029",
+      "series_id": "series_4",
+      "episode": 29,
+      "title": "高级提示技巧",
+      "description": "更精妙的提示策略：自我一致性（Self-Consistency）通过多次采样提升准确率、生成性知识检索（RAG在提示中的集成）、思维树（Tree of Thoughts）等前沿提示技巧。",
+      "keywords": [
+        "高级提示",
+        "Self-Consistency",
+        "思维树",
+        "Tree of Thoughts",
+        "生成性知识",
+        "提示优化",
+        "复杂推理"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_030",
+      "series_id": "series_4",
+      "episode": 30,
+      "title": "提示词安全性与对抗性提示",
+      "description": "提示安全攻防战：提示注入（Prompt Injection）的原理与危害、越狱攻击的常见手法，以及如何设计防御性提示、输入验证、输出过滤来保护系统安全。",
+      "keywords": [
+        "提示安全",
+        "Prompt Injection",
+        "越狱",
+        "Jailbreak",
+        "安全防护",
+        "输入验证",
+        "对抗性提示"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 11000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_031",
+      "series_id": "series_4",
+      "episode": 31,
+      "title": "提示词评估与优化框架",
+      "description": "如何科学地评估和优化提示词：A/B测试方法、自动化评估工具（Promptfoo等）、评估指标设计（准确率、一致性、效率）、迭代优化流程，以及建立提示词版本管理的最佳实践。",
+      "keywords": [
+        "提示词评估",
+        "A/B测试",
+        "Promptfoo",
+        "自动化测试",
+        "提示词优化",
+        "评估指标",
+        "版本管理"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    },
+    {
+      "id": "topic_032",
+      "series_id": "series_4",
+      "episode": 32,
+      "title": "领域提示工程案例集",
+      "description": "不同场景的提示词模板集合：代码生成与审查、技术写作、数据分析、创意写作、问答系统等场景的最佳Prompt实践，以及如何为特定领域定制提示词策略。",
+      "keywords": [
+        "领域提示",
+        "代码生成",
+        "技术写作",
+        "数据分析",
+        "创意写作",
+        "Prompt模板",
+        "场景化提示"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-10"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 6,
+    "completed_episodes": 6,
+    "total_estimated_words": 71000,
+    "completion_rate": "100.0",
+    "start_date": "2026-01-10",
+    "end_date": "2026-01-12"
+  }
+}

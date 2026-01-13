@@ -1,0 +1,19 @@
+{
+  "id": "topic_082",
+  "series_id": "series_9",
+  "episode": 82,
+  "title": "智能运维（AIOps）实战",
+  "description": "AI驱动的运维体系：日志异常检测、故障预测、容量规划、根因分析、自动化故障恢复、运维知识库，以及构建AIOps平台的技术架构。",
+  "keywords": [
+    "AIOps",
+    "智能运维",
+    "异常检测",
+    "故障预测",
+    "根因分析",
+    "自动化运维"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

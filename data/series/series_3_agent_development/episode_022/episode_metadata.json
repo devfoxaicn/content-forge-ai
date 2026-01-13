@@ -1,0 +1,20 @@
+{
+  "id": "topic_022",
+  "series_id": "series_3",
+  "episode": 22,
+  "title": "LangChain Agent开发实战",
+  "description": "使用LangChain框架构建实战Agent：ReAct Agent推理模式、OpenAI Functions工具调用、Custom Agent自定义实现，以及Tools、Agents、Chains等核心组件的最佳实践。",
+  "keywords": [
+    "LangChain",
+    "Agent",
+    "ReAct Agent",
+    "OpenAI Functions",
+    "Custom Agent",
+    "工具调用",
+    "LangChain实战"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

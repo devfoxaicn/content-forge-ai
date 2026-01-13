@@ -1,0 +1,19 @@
+{
+  "id": "topic_097",
+  "series_id": "series_10",
+  "episode": 97,
+  "title": "MLOps全流程实践",
+  "description": "MLOps完整指南：实验管理、模型版本控制、CI/CD for ML、自动化训练pipeline、模型监控、漂移检测，以及构建端到端MLOps体系的最佳实践。",
+  "keywords": [
+    "MLOps",
+    "实验管理",
+    "模型版本",
+    "CI/CD",
+    "自动化",
+    "模型监控"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "topic_067",
+  "series_id": "series_8",
+  "episode": 67,
+  "title": "数据隐私保护技术",
+  "description": "AI数据隐私保护方案：差分隐私（Differential Privacy）、联邦学习（Federated Learning）、同态加密、安全多方计算、数据脱敏技术、隐私保护评估，以及如何在利用数据的同时保护用户隐私。",
+  "keywords": [
+    "数据隐私",
+    "差分隐私",
+    "联邦学习",
+    "同态加密",
+    "数据脱敏",
+    "隐私保护"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

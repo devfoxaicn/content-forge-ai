@@ -1,0 +1,20 @@
+{
+  "id": "topic_038",
+  "series_id": "series_5",
+  "episode": 38,
+  "title": "边缘部署：移动端与嵌入式",
+  "description": "LLM在边缘设备上的部署：CoreML、ONNX、NCNN等推理框架对比、移动端模型优化技巧、在手机和嵌入式设备上运行LLM的完整方案，以及端侧AI的应用场景。",
+  "keywords": [
+    "边缘部署",
+    "CoreML",
+    "ONNX",
+    "移动端AI",
+    "嵌入式AI",
+    "端侧推理",
+    "模型优化"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

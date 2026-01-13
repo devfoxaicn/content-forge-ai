@@ -12,6 +12,33 @@ ContentForge AI v2.5 是基于 LangChain/LangGraph 的多平台内容自动化�
 
 **核心工作流**：AI热点获取（11个数据源）→ 热点简报 → 深度研究（Web搜索）→ 长文本生成（分阶段）→ 质量检查（代码审查+事实核查）→ 小红书/Twitter内容生成 → 标题优化 → 配图提示词 → 质量评估
 
+## 项目设置
+
+### 环境配置
+
+```bash
+# 1. 创建虚拟环境
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 2. 安装依赖
+pip install -r requirements.txt
+
+# 3. 配置环境变量
+cp .env.example .env
+# 编辑.env，添加必需的API密钥
+```
+
+### 依赖管理
+
+核心依赖（requirements.txt）：
+- **LangChain/LangGraph** - Agent框架和工作流编排
+- **langchain-openai** - LLM接口（兼容ZhipuAI）
+- **loguru** - 结构化日志
+- **pyyaml** - 配置文件解析
+- **python-dotenv** - 环境变量管理
+- **arxiv, praw** - AI热点数据源客户端
+
 ## 运行命令
 
 项目使用统一入口 `src/main.py`，通过 `--mode` 参数切换模式。
@@ -39,6 +66,17 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode se
 # ===== 自动化脚本 =====
 # 自动运行并提交到GitHub（通过cron调用）
 ./run_and_commit.sh
+
+# ===== Cron定时任务配置 =====
+# 编辑crontab
+crontab -e
+
+# 每天早上3点自动运行（自动模式）
+0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
+
+# 系列模式：每天生成一期（第1-100期循环）
+CONTENT_FORGE_MODE=series SERIES_EPISODE=1 0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
+# 注：需要手动调整SERIES_EPISODE或使用SERIES_ALL批量模式
 
 # ===== 查看日志 =====
 tail -f logs/$(date +%Y%m%d)/app.log
@@ -76,7 +114,7 @@ ContentForge AI 使用多种设计模式构建可扩展的内容生成系统：
 - 实现标准的 `execute(state: Dict) -> Dict` 接口
 - 统一的日志、错误处理、LLM调用
 
-### 三种协调器对比
+### 双协调器对比
 
 | 特性 | AutoContentOrchestrator | SeriesOrchestrator |
 |------|-------------------------|-------------------|
@@ -87,6 +125,7 @@ ContentForge AI 使用多种设计模式构建可扩展的内容生成系统：
 | **Agent数量** | 完整13个Agent | 优化8个Agent |
 | **工作流** | LangGraph图式执行 | 顺序执行with错误恢复 |
 | **元数据** | 简单执行追踪 | 完整进度和状态管理 |
+| **状态字段** | 使用 `trending_topics` | 使用 `current_topic` + `selected_ai_topic` |
 
 **统一入口**：`src/main.py` 通过 `--mode` 参数选择协调器
 
@@ -125,6 +164,18 @@ publisher (可选发布)
 **免费无需配置（8个）**：Hacker News, arXiv, Hugging Face, Stack Overflow, Dev.to, PyPI, GitHub Topics, Kaggle
 
 **可选配置（3个）**：Reddit (`REDDIT_CLIENT_ID`), NewsAPI (`NEWSAPI_KEY`), GitHub Trending (第三方API)
+
+**数据源实现**：位于 `src/data_sources/` 目录，每个数据源是一个独立的类继承自 `BaseDataSource`
+
+```python
+from src.data_sources.base import BaseDataSource
+
+class CustomDataSource(BaseDataSource):
+    def fetch_trends(self, limit: int = 5) -> List[Dict]:
+        """实现数据获取逻辑"""
+        # 返回格式：[{"title": "...", "url": "...", ...}]
+        pass
+```
 
 ## 核心模式
 
@@ -188,7 +239,26 @@ llm:
 
 **编码专用端点**：`config/config.yaml:11` 使用 `https://open.bigmodel.cn/api/coding/paas/v4/` 获得最强编程能力
 
+**Thinking 深度思考模式**：GLM-4.7 支持Thinking模式（`config/config.yaml:20-22`），但目前禁用（`enabled: false`）因为参数兼容性问题。启用后可获得更强的推理能力。
+
 **API配置管理**：系统通过 `src/utils/api_config.py` 中的 `APIConfigManager` 统一管理API密钥和端点，支持环境变量和配置文件两种方式。
+
+```python
+from src.utils.api_config import get_api_config
+
+# 获取配置管理器实例
+api_config = get_api_config()
+
+# 获取API密钥
+zhipu_key = api_config.get_api_key("zhipuai")
+tavily_key = api_config.get_api_key("tavily")
+
+# 获取API端点
+base_url = api_config.get_endpoint("llm.zhipuai.base_url")
+
+# 支持环境变量和config.yaml两种配置方式
+# 优先级：环境变量 > config.yaml > 默认值
+```
 
 ### 统一存储系统
 
@@ -253,6 +323,49 @@ metadata.update_topic_status("topic_001", "completed")
 print_progress_summary()
 ```
 
+### 文件命名规范（TopicFormatter）
+
+`TopicFormatter` 类（`src/utils/series_manager.py:201`）提供统一的文件命名格式：
+
+```python
+from src.utils.series_manager import TopicFormatter
+
+# 生成文件名前缀：ep001_llm_transformer_attention_mechanism
+prefix = TopicFormatter.generate_filename_prefix(topic)
+
+# 生成Markdown文件名：ep001_llm_transformer_attention_mechanism_article.md
+filename = TopicFormatter.generate_markdown_filename(topic, "article")
+
+# 格式化话题摘要（用于日志）
+summary = TopicFormatter.format_topic_summary(topic)
+# 输出: ✅ Episode 001 | LLM的Transformer架构与注意力机制 [series_1]
+```
+
+### 系列路径管理（SeriesPathManager）
+
+`SeriesPathManager` 类（`src/utils/series_manager.py`）管理系列文件夹的命名转换：
+
+```python
+from src.utils.series_manager import SeriesPathManager
+
+# series_id 转路径文件夹
+path = SeriesPathManager.get_series_path("series_1")
+# 返回: "series_1_llm_foundation"
+
+# 路径文件夹 转 series_id
+series_id = SeriesPathManager.get_series_id_from_path("series_1_llm_foundation")
+# 返回: "series_1"
+
+# 命名映射表（硬编码）
+NAMING_MAP = {
+    "series_1": "series_1_llm_foundation",
+    "series_2": "series_2_rag_technique",
+    # ... 共10个系列
+}
+```
+
+**重要**：系列文件夹格式为 `series_X_descriptive_name`，这是 v2.5 版本的重要改进，确保存储路径的语义化。
+
 ### LangGraph状态管理
 
 使用 `WorkflowState` TypedDict（`src/state.py:61`）管理Agent之间的共享状态：
@@ -275,11 +388,38 @@ state = create_initial_state(
 new_state = update_state(state, {"new_field": value})
 ```
 
+**LangGraph节点包装器**（`src/auto_orchestrator.py:270-277`）：
+```python
+def _create_agent_node(self, agent: BaseAgent):
+    """创建LangGraph节点包装器"""
+    def node_func(state: Dict[str, Any]) -> Dict[str, Any]:
+        result = agent.execute(state)
+        # 记录执行顺序
+        return add_agent_to_order(result, agent.name)
+    return node_func
+```
+
+每个Agent的输出会通过 `{**state, **updates}` 模式合并到状态中，确保状态的不可变性。
+
 ## 工作流执行顺序
 
 **AutoContentOrchestrator**（LangGraph模式）：工作流在 `src/auto_orchestrator.py:_build_workflow()` 中定义
 
 **SeriesOrchestrator**（顺序模式）：工作流在 `src/series_orchestrator.py:_execute_workflow()` 中定义，包含安全包装和延迟机制
+
+**SeriesOrchestrator 安全执行机制**（`src/series_orchestrator.py:248-262`）：
+```python
+def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
+    """安全调用agent，处理异常"""
+    try:
+        result = self.agents[agent_name].execute(state)
+        time.sleep(2)  # 添加延迟避免API并发限制
+        return result
+    except Exception as e:
+        logger.error(f"[{agent_name}] 执行失败: {e}")
+        time.sleep(2)  # 失败时也添加延迟
+        return state  # 返回原状态，允许继续执行
+```
 
 **执行顺序**：
 1. AI热点分析 → 热点汇总 → 内容研究
@@ -308,13 +448,75 @@ new_state = update_state(state, {"new_field": value})
 
 **重要**：Agent必须返回完整的状态字典，使用 `{**state, "new_field": value}` 模式更新状态
 
+### 常用状态字段
+
+不同Agent在状态中读写的常用字段：
+
+| 状态字段 | 写入Agent | 读取Agent | 说明 |
+|---------|----------|----------|------|
+| `trending_topics` | ai_trend_analyzer | trends_digest | AI热点列表（Auto模式） |
+| `digest_content` | trends_digest | - | 热点简报内容 |
+| `research_data` | research_agent | longform_generator | Web搜索研究数据 |
+| `selected_ai_topic` | ai_trend_analyzer / series_orchestrator | longform_generator | 选中的AI话题 |
+| `current_topic` | series_orchestrator | - | 当前话题（Series模式） |
+| `longform_article` | longform_generator | code_review_agent, xiaohongshu_refiner, twitter_generator | 长文本文章 |
+| `code_review_result` | code_review_agent | - | 代码审查结果 |
+| `fact_check_result` | fact_check_agent | - | 事实核查结果 |
+| `xiaohongshu_note` | xiaohongshu_refiner | - | 小红书笔记 |
+| `twitter_post` | twitter_generator | - | Twitter帖子 |
+| `optimized_titles` | title_optimizer | - | 优化后的标题 |
+| `image_prompts` | image_generator | - | 配图提示词 |
+| `quality_report` | quality_evaluator | - | 质量评估报告 |
+| `error_message` | 任何Agent | - | 错误信息 |
+| `current_step` | 任何Agent | - | 当前执行步骤 |
+| `execution_time` | orchestrator | - | 执行时间统计 |
+| `agent_execution_order` | orchestrator | - | Agent执行顺序记录 |
+
+**重要提示**：
+- `WorkflowState` TypedDict 定义了所有可能的字段，但实际使用时是普通Dict
+- Auto模式使用 `trending_topics`，Series模式使用 `current_topic` 和 `selected_ai_topic`
+- 状态更新使用不可变模式：`{**state, **updates}`
+
+### 错误处理模式
+
+**Agent级别错误处理**：
+```python
+def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
+    try:
+        # Agent逻辑
+        result = self._call_llm("Your prompt")
+        return {**state, "new_field": result}
+    except Exception as e:
+        self.log(f"Error: {e}", "ERROR")
+        return {
+            **state,
+            "error_message": str(e),
+            "current_step": "new_agent_failed"
+        }
+```
+
+**Series模式安全执行**（`src/series_orchestrator.py:248`）：
+```python
+def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
+    """安全调用agent，处理异常"""
+    try:
+        result = self.agents[agent_name].execute(state)
+        time.sleep(2)  # 添加延迟避免API并发限制
+        return result
+    except Exception as e:
+        logger.error(f"[{agent_name}] 执行失败: {e}")
+        time.sleep(2)  # 失败时也添加延迟
+        return state  # 返回原状态，允许继续执行
+```
+
+**错误恢复策略**：
+- Agent失败时返回原状态，允许工作流继续
+- 记录 `error_message` 和 `current_step` 用于调试
+- 使用 `retry_count` 和 `max_retries` 字段控制重试（在WorkflowState中定义）
+
 ### Agent配置模式
 
 每个Agent在 `config/config.yaml` 中有独立配置块：
-
-```yaml
-agents:
-  agent_name:
     enabled: true           # 是否启用
     mock_mode: false        # 测试模式（使用模拟数据）
     max_tokens: 2000        # Token限制
@@ -340,6 +542,25 @@ agents:
 ```bash
 cd test
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --source hackernews
+```
+
+### 测试文件说明
+
+项目包含多个测试文件用于验证不同组件：
+
+| 测试文件 | 用途 |
+|---------|------|
+| `test_ai_trends.py` | 测试AI热点获取（支持单数据源测试） |
+| `test_storage.py` | 测试存储系统功能 |
+| `test_topic_logic.py` | 测试topic参数处理逻辑 |
+| `test_digest.py` | 测试热点简报生成 |
+| `test_auto_topic.py` | 测试自动模式topic处理 |
+
+**测试AI热点单个数据源**：
+```bash
+cd test
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --source hackernews
+# 可选数据源: hackernews, arxiv, huggingface, stackoverflow, devto, pypi, github_topics, kaggle
 ```
 
 ## 代码规范
@@ -421,4 +642,54 @@ agents:
 ---
 
 **版本**: v2.5
-**更新**: 2026-01-10
+**更新**: 2026-01-12
+
+## 改进总结 (2026-01-12)
+
+本次更新改进了 CLAUDE.md 文档，主要包括：
+
+1. **修正协调器对比表** - 从"三种"改为"双协调器"，添加状态字段对比
+2. **完善状态字段表** - 添加更多字段说明，包括元数据字段
+3. **新增错误处理模式** - 详细说明Agent和Series模式的错误处理策略
+4. **新增系列路径管理** - 说明 SeriesPathManager 的使用方法
+5. **新增数据源实现指南** - 说明如何扩展新的数据源
+6. **新增Thinking模式说明** - 说明GLM-4.7的深度思考功能
+7. **添加重要提示** - 说明WorkflowState与实际使用的关系
+
+## 重要更新点 (2026-01-12)
+
+### 系列存储路径命名规则
+系列文件夹使用 `SeriesPathManager` 统一管理命名，格式为 `series_X_descriptive_name`：
+- `series_1_llm_foundation` (LLM原理基础)
+- `series_2_rag_technique` (RAG技术实战)
+- `series_3_agent_development` (Agent智能体开发)
+- `series_4_prompt_engineering` (提示工程)
+- `series_5_model_deployment` (模型部署与优化)
+- `series_6_multimodal_frontier` (多模态与前沿技术)
+- `series_7_ai_coding_tools` (AI编程与开发工具)
+- `series_8_ai_data_engineering` (AI数据处理与工程)
+- `series_9_ai_applications` (AI应用场景实战)
+- `series_10_ai_infrastructure` (AI基础设施与架构)
+
+### 状态字段映射注意事项
+在 SeriesOrchestrator 模式下，需要同时设置 `current_topic` 和 `selected_ai_topic` 字段以确保与 LongFormGeneratorAgent 兼容：
+```python
+state = update_state(state, {
+    "current_topic": topic,
+    "selected_ai_topic": {  # LongFormGeneratorAgent期望的字段
+        "title": topic["title"],
+        "description": topic.get("description", ""),
+        "source": f"series_{series_id}_episode_{episode_number}",
+        "url": "",
+        "tags": topic.get("keywords", []),
+        "key_points": [topic.get("description", "")]
+    }
+})
+```
+
+### 自动化部署脚本
+`run_and_commit.sh` 支持通过环境变量配置模式：
+- `CONTENT_FORGE_MODE=auto` (默认) - 基于AI热点
+- `CONTENT_FORGE_MODE=series` - 100期技术博客
+- `SERIES_EPISODE=1` - 指定生成第1期
+- `SERIES_ALL=1 SERIES_START=1 SERIES_END=10` - 批量生成第1-10期

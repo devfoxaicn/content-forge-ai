@@ -1,0 +1,20 @@
+{
+  "id": "topic_041",
+  "series_id": "series_6",
+  "episode": 41,
+  "title": "多模态基础：CLIP与对比学习",
+  "description": "视觉与语言的桥梁：CLIP模型的架构与训练方法、对比学习（Contrastive Learning）原理、图文Embedding空间对齐，以及理解多模态模型的基础知识。",
+  "keywords": [
+    "CLIP",
+    "对比学习",
+    "Contrastive Learning",
+    "多模态",
+    "图文匹配",
+    "Embedding空间",
+    "视觉语言模型"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

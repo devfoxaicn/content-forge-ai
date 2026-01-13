@@ -1,0 +1,19 @@
+{
+  "id": "topic_065",
+  "series_id": "series_8",
+  "episode": 65,
+  "title": "向量数据库深度实践",
+  "description": "向量数据库生产级实践：大规模向量索引（HNSW、IVF）、分布式部署、高可用架构、实时索引更新、向量搜索性能优化、混合查询实现，以及PB级向量数据库的运维经验。",
+  "keywords": [
+    "向量数据库",
+    "HNSW",
+    "分布式",
+    "高可用",
+    "索引优化",
+    "大规模检索"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

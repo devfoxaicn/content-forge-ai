@@ -1,0 +1,21 @@
+{
+  "id": "topic_040",
+  "series_id": "series_5",
+  "episode": 40,
+  "title": "监控与可观测性",
+  "description": "LLM应用的监控体系：延迟监控、吞吐量监控、质量监控（准确性、相关性）、错误追踪与日志分析，以及如何建立完整的可观测性体系来保障生产环境稳定运行。",
+  "keywords": [
+    "监控",
+    "可观测性",
+    "延迟监控",
+    "质量监控",
+    "日志分析",
+    "错误追踪",
+    "APM",
+    "生产保障"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

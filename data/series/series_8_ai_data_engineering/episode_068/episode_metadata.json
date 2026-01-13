@@ -1,0 +1,19 @@
+{
+  "id": "topic_068",
+  "series_id": "series_8",
+  "episode": 68,
+  "title": "数据质量评估与监控",
+  "description": "构建数据质量保障体系：数据完整性检查、一致性验证、准确性评估、时效性监控、数据质量打分、异常数据检测，以及建立数据质量监控dashboard的实践经验。",
+  "keywords": [
+    "数据质量",
+    "完整性检查",
+    "一致性验证",
+    "数据监控",
+    "异常检测",
+    "质量评分"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

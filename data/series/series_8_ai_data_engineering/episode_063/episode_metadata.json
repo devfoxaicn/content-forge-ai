@@ -1,0 +1,19 @@
+{
+  "id": "topic_063",
+  "series_id": "series_8",
+  "episode": 63,
+  "title": "合成数据生成技术",
+  "description": "解决数据稀缺的新思路：合成数据的原理与生成方法、LLM生成训练数据、数据增强技术、对抗生成网络（GAN）在数据合成中的应用、合成数据的质量评估，以及合成数据的实战案例。",
+  "keywords": [
+    "合成数据",
+    "数据生成",
+    "数据增强",
+    "GAN",
+    "LLM数据生成",
+    "数据评估"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

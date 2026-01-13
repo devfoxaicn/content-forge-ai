@@ -1,0 +1,19 @@
+{
+  "id": "topic_091",
+  "series_id": "series_10",
+  "episode": 91,
+  "title": "AI系统高可用与容灾",
+  "description": "保障AI系统稳定运行：高可用架构设计、故障隔离、快速恢复、灾备方案、混沌工程、演练体系，以及构建99.99%可用性AI基础设施的经验。",
+  "keywords": [
+    "高可用",
+    "容灾",
+    "故障隔离",
+    "故障恢复",
+    "混沌工程",
+    "系统稳定性"
+  ],
+  "difficulty": "架构设计",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "topic_056",
+  "series_id": "series_7",
+  "episode": 56,
+  "title": "AI辅助测试生成与覆盖率分析",
+  "description": "自动化测试的AI新范式：单元测试自动生成、边界条件测试、模糊测试用例生成、测试覆盖率智能分析、测试数据生成、回归测试优化，以及AI在TDD中的应用。",
+  "keywords": [
+    "测试生成",
+    "单元测试",
+    "覆盖率分析",
+    "模糊测试",
+    "TDD",
+    "自动化测试"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

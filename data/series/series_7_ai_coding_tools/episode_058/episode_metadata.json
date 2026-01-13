@@ -1,0 +1,19 @@
+{
+  "id": "topic_058",
+  "series_id": "series_7",
+  "episode": 58,
+  "title": "AI重构与代码现代化",
+  "description": "智能代码重构：识别代码异味（Code Smell）、自动化重构建议、遗留系统现代化、语言迁移（Java→Python）、框架升级、架构优化，以及AI辅助的重构最佳实践。",
+  "keywords": [
+    "代码重构",
+    "代码异味",
+    "遗留系统",
+    "现代化",
+    "语言迁移",
+    "架构优化"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

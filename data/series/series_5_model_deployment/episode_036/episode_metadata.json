@@ -1,0 +1,20 @@
+{
+  "id": "topic_036",
+  "series_id": "series_5",
+  "episode": 36,
+  "title": "模型压缩与剪枝",
+  "description": "让模型更小更快：知识蒸馏（Knowledge Distillation）原理、结构化剪枝与非结构化剪枝、模型压缩的评估方法，以及如何在保持性能的同时大幅减小模型体积。",
+  "keywords": [
+    "模型压缩",
+    "知识蒸馏",
+    "Distillation",
+    "剪枝",
+    "Pruning",
+    "模型小型化",
+    "性能保持"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "topic_089",
+  "series_id": "series_10",
+  "episode": 89,
+  "title": "推理服务架构设计",
+  "description": "大规模推理服务架构：推理服务网格、负载均衡策略、请求路由、批处理优化、自动扩缩容、多模型部署，以及支撑百万QPS推理服务的架构实践。",
+  "keywords": [
+    "推理服务",
+    "服务架构",
+    "负载均衡",
+    "批处理",
+    "自动扩缩容",
+    "高并发"
+  ],
+  "difficulty": "架构设计",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

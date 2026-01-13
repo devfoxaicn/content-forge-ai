@@ -1,0 +1,19 @@
+{
+  "id": "topic_070",
+  "series_id": "series_8",
+  "episode": 70,
+  "title": "AI数据平台架构设计",
+  "description": "构建企业级AI数据平台：数据湖架构、ETL pipeline设计、元数据管理、数据治理、数据目录、数据访问控制、数据成本优化，以及大规模AI数据平台的架构最佳实践。",
+  "keywords": [
+    "数据平台",
+    "数据湖",
+    "ETL",
+    "元数据管理",
+    "数据治理",
+    "平台架构"
+  ],
+  "difficulty": "架构设计",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

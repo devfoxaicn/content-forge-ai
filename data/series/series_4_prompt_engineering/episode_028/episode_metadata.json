@@ -1,0 +1,21 @@
+{
+  "id": "topic_028",
+  "series_id": "series_4",
+  "episode": 28,
+  "title": "结构化提示：CoT与Few-shot",
+  "description": "高级提示技巧：思维链（Chain of Thought）如何引导模型逐步推理、Few-shot Learning如何通过示例学习提升性能、Zero-shot与One-shot的区别，以及如何设计有效的示例和推理路径。",
+  "keywords": [
+    "CoT",
+    "思维链",
+    "Few-shot",
+    "Zero-shot",
+    "One-shot",
+    "示例学习",
+    "推理引导",
+    "结构化输出"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 11000,
+  "status": "completed",
+  "completed_at": "2026-01-10"
+}

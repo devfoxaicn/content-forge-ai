@@ -1,0 +1,20 @@
+{
+  "id": "topic_023",
+  "series_id": "series_3",
+  "episode": 23,
+  "title": "AutoGPT与BabyAGI原理与实现",
+  "description": "自主Agent的里程碑项目：深入分析AutoGPT和BabyAGI的任务分解与执行机制、目标管理与循环控制、记忆系统设计，以及如何构建类似的自主任务执行Agent。",
+  "keywords": [
+    "AutoGPT",
+    "BabyAGI",
+    "自主Agent",
+    "任务分解",
+    "目标管理",
+    "自主执行",
+    "循环控制"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

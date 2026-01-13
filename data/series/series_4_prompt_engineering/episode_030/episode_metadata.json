@@ -1,0 +1,20 @@
+{
+  "id": "topic_030",
+  "series_id": "series_4",
+  "episode": 30,
+  "title": "提示词安全性与对抗性提示",
+  "description": "提示安全攻防战：提示注入（Prompt Injection）的原理与危害、越狱攻击的常见手法，以及如何设计防御性提示、输入验证、输出过滤来保护系统安全。",
+  "keywords": [
+    "提示安全",
+    "Prompt Injection",
+    "越狱",
+    "Jailbreak",
+    "安全防护",
+    "输入验证",
+    "对抗性提示"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 11000,
+  "status": "completed",
+  "completed_at": "2026-01-12"
+}

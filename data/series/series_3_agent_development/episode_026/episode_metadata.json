@@ -1,0 +1,20 @@
+{
+  "id": "topic_026",
+  "series_id": "series_3",
+  "episode": 26,
+  "title": "Agent评估与调试",
+  "description": "如何评估和调试Agent系统：Agent性能评估指标（成功率、效率、成本）、常见失败案例分析、可观测性建设、调试工具和方法论，以及提升Agent可靠性的实践经验。",
+  "keywords": [
+    "Agent评估",
+    "调试",
+    "可观测性",
+    "性能评估",
+    "失败分析",
+    "调试工具",
+    "可靠性提升"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "topic_059",
+  "series_id": "series_7",
+  "episode": 59,
+  "title": "AI调试与问题定位",
+  "description": "AI驱动的调试革命：错误日志智能分析、堆栈追踪解读、根因分析、性能瓶颈定位、内存泄漏检测、并发问题诊断，以及如何用AI加速问题排查和修复。",
+  "keywords": [
+    "AI调试",
+    "问题定位",
+    "日志分析",
+    "根因分析",
+    "性能调试",
+    "并发调试"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

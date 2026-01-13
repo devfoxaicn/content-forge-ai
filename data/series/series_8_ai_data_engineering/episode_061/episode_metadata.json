@@ -1,0 +1,19 @@
+{
+  "id": "topic_061",
+  "series_id": "series_8",
+  "episode": 61,
+  "title": "AI训练数据采集与清洗",
+  "description": "高质量数据是AI的基石：网络爬虫技术、数据源选择（Common Crawl、GitHub、Wikipedia）、数据清洗pipeline、去重与过滤、隐私信息处理、数据版权与合规，以及构建企业级数据采集系统。",
+  "keywords": [
+    "数据采集",
+    "数据清洗",
+    "网络爬虫",
+    "数据去重",
+    "隐私保护",
+    "数据合规"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

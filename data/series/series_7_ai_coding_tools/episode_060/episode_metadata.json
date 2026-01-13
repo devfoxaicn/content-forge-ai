@@ -1,0 +1,19 @@
+{
+  "id": "topic_060",
+  "series_id": "series_7",
+  "episode": 60,
+  "title": "AI编程工具生态与集成",
+  "description": "构建AI驱动的开发工具链：IDE插件集成、CI/CD流水线集成、代码仓库AI助手、团队协作工具、代码评审AI、项目管理助手，以及如何打造全流程AI辅助开发体系。",
+  "keywords": [
+    "开发工具链",
+    "IDE集成",
+    "CI/CD",
+    "团队协作",
+    "代码评审",
+    "AI工作流"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "topic_020",
+  "series_id": "series_3",
+  "episode": 20,
+  "title": "Claude Code Skills 技能系统",
+  "description": "Skills是Claude Code的插件化扩展机制。介绍如何创建自定义Skill、Skill的配置和使用、MCP Server集成，以及如何通过Skills扩展Claude的能力边界。",
+  "keywords": [
+    "Skills",
+    "Claude Code",
+    "插件系统",
+    "自定义Skill",
+    "MCP Server",
+    "工具扩展",
+    "技能配置"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

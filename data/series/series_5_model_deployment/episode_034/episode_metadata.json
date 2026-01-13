@@ -1,0 +1,21 @@
+{
+  "id": "topic_034",
+  "series_id": "series_5",
+  "episode": 34,
+  "title": "模型量化技术：从GPTQ到GGUF",
+  "description": "模型量化的完整指南：INT8/INT4量化原理、GPTQ、AWQ、GGUF等量化方法对比、量化对模型精度的影响，以及如何在端侧设备上高效运行量化模型。",
+  "keywords": [
+    "模型量化",
+    "GPTQ",
+    "GGUF",
+    "AWQ",
+    "INT8量化",
+    "INT4量化",
+    "端侧部署",
+    "量化精度"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

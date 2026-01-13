@@ -1,0 +1,20 @@
+{
+  "id": "topic_032",
+  "series_id": "series_4",
+  "episode": 32,
+  "title": "领域提示工程案例集",
+  "description": "不同场景的提示词模板集合：代码生成与审查、技术写作、数据分析、创意写作、问答系统等场景的最佳Prompt实践，以及如何为特定领域定制提示词策略。",
+  "keywords": [
+    "领域提示",
+    "代码生成",
+    "技术写作",
+    "数据分析",
+    "创意写作",
+    "Prompt模板",
+    "场景化提示"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

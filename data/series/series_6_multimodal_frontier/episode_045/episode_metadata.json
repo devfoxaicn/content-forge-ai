@@ -1,0 +1,22 @@
+{
+  "id": "topic_045",
+  "series_id": "series_6",
+  "episode": 45,
+  "title": "Claude 大模型深度介绍",
+  "description": "Anthropic出品的Claude系列模型。介绍Claude的发展历程、Constitutional AI宪法AI理念、不同版本模型（Haiku、Sonnet、Opus）的特点对比，以及Claude API的使用方法。",
+  "keywords": [
+    "Claude",
+    "Anthropic",
+    "Constitutional AI",
+    "宪法AI",
+    "Claude 3",
+    "Haiku",
+    "Sonnet",
+    "Opus",
+    "AI安全"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

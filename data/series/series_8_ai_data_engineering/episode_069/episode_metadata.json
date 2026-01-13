@@ -1,0 +1,19 @@
+{
+  "id": "topic_069",
+  "series_id": "series_8",
+  "episode": 69,
+  "title": "多模态数据处理",
+  "description": "处理文本、图像、音频、视频等多模态数据：多模态数据预处理、对齐与融合、跨模态检索、多模态标注、数据格式统一、多模态数据增强，以及构建多模态数据pipeline的实践。",
+  "keywords": [
+    "多模态数据",
+    "数据预处理",
+    "跨模态",
+    "多模态标注",
+    "数据融合",
+    "多模态pipeline"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "completed",
+  "completed_at": "2026-01-12"
+}

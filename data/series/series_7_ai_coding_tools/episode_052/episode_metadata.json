@@ -1,0 +1,19 @@
+{
+  "id": "topic_052",
+  "series_id": "series_7",
+  "episode": 52,
+  "title": "GitHub Copilot深度使用指南",
+  "description": "Copilot最佳实践：多语言代码生成、代码解释、注释生成、单元测试生成、代码重构建议，以及如何通过有效的提示获得更精准的代码建议和Copilot Labs高级功能探索。",
+  "keywords": [
+    "GitHub Copilot",
+    "代码生成",
+    "代码解释",
+    "单元测试",
+    "代码重构",
+    "Copilot Labs"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

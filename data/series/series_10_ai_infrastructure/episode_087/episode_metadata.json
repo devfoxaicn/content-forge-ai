@@ -1,0 +1,20 @@
+{
+  "id": "topic_087",
+  "series_id": "series_10",
+  "episode": 87,
+  "title": "分布式训练框架解析",
+  "description": "大规模模型训练技术：数据并行、模型并行、流水线并行、3D并行、ZeRO优化、DeepSpeed、Megatron-LM，以及如何在千卡集群上训练百亿参数模型。",
+  "keywords": [
+    "分布式训练",
+    "数据并行",
+    "模型并行",
+    "ZeRO",
+    "DeepSpeed",
+    "Megatron",
+    "大模型训练"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

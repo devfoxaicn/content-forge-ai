@@ -98,6 +98,57 @@ class SeriesOrchestrator:
 
         return agents
 
+    def _generate_series_metadata(self, series_id: str) -> dict:
+        """
+        生成系列专用的元数据（只包含该系列的信息）
+
+        Args:
+            series_id: 系列 ID（如 series_1）
+
+        Returns:
+            系列元数据字典
+        """
+        from datetime import datetime
+
+        # 获取系列信息
+        series_info = self.series_metadata.get_series_by_id(series_id)
+        if not series_info:
+            logger.warning(f"Series {series_id} not found, using default info")
+            series_info = {
+                "id": series_id,
+                "name": series_id,
+                "description": "",
+                "topic_count": 0,
+                "difficulty": "未知",
+                "priority": 0
+            }
+
+        # 获取该系列的所有话题
+        topics = self.series_metadata.get_topics_by_series(series_id)
+
+        # 统计完成情况
+        completed_episodes = sum(1 for t in topics if t.get("status") == "completed")
+        total_estimated_words = sum(t.get("estimated_words", 0) for t in topics)
+
+        # 构建系列元数据
+        metadata = {
+            "series_info": {
+                **series_info,
+                "status": "completed" if completed_episodes == len(topics) else "in_progress"
+            },
+            "topics": topics,
+            "statistics": {
+                "total_episodes": len(topics),
+                "completed_episodes": completed_episodes,
+                "total_estimated_words": total_estimated_words,
+                "completion_rate": f"{completed_episodes / len(topics) * 100:.1f}" if len(topics) > 0 else "0%",
+                "start_date": min((t.get("completed_at") for t in topics if t.get("completed_at")), default=None),
+                "end_date": max((t.get("completed_at") for t in topics if t.get("completed_at")), default=None)
+            }
+        }
+
+        return metadata
+
     def generate_episode(
         self,
         episode_number: int,
@@ -134,7 +185,9 @@ class SeriesOrchestrator:
 
         # 保存元数据
         storage.save_episode_metadata(topic)
-        storage.save_series_metadata(self.series_metadata.get_batch_info())
+        # 保存系列专用的元数据（只包含该系列的信息）
+        series_metadata = self._generate_series_metadata(series_id)
+        storage.save_series_metadata(series_metadata)
 
         # 创建初始状态
         state = create_initial_state(

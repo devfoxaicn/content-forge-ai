@@ -1,0 +1,185 @@
+{
+  "series_info": {
+    "id": "series_5",
+    "name": "模型部署与优化系列",
+    "description": "掌握LLM生产环境部署与性能优化",
+    "topic_count": 8,
+    "difficulty": "实践为主",
+    "priority": 5,
+    "status": "completed"
+  },
+  "topics": [
+    {
+      "id": "topic_033",
+      "series_id": "series_5",
+      "episode": 33,
+      "title": "模型推理基础：vLLM与TensorRT-LLM",
+      "description": "高性能推理引擎深度对比：vLLM的PagedAttention原理、TensorRT-LLM的Fusion优化、推理吞吐量和延迟的优化技巧，以及如何选择合适的推理引擎和配置参数。",
+      "keywords": [
+        "vLLM",
+        "TensorRT-LLM",
+        "推理优化",
+        "PagedAttention",
+        "吞吐量优化",
+        "延迟优化",
+        "推理引擎"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_034",
+      "series_id": "series_5",
+      "episode": 34,
+      "title": "模型量化技术：从GPTQ到GGUF",
+      "description": "模型量化的完整指南：INT8/INT4量化原理、GPTQ、AWQ、GGUF等量化方法对比、量化对模型精度的影响，以及如何在端侧设备上高效运行量化模型。",
+      "keywords": [
+        "模型量化",
+        "GPTQ",
+        "GGUF",
+        "AWQ",
+        "INT8量化",
+        "INT4量化",
+        "端侧部署",
+        "量化精度"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_035",
+      "series_id": "series_5",
+      "episode": 35,
+      "title": "LoRA与QLoRA微调实战",
+      "description": "参数高效微调（PEFT）实践：LoRA和QLoRA的原理与实现、如何在小显存上微调大模型、LoRA的应用场景与效果对比，以及使用Axolotl等工具进行微调的完整流程。",
+      "keywords": [
+        "LoRA",
+        "QLoRA",
+        "参数高效微调",
+        "PEFT",
+        "模型微调",
+        "显存优化",
+        "Axolotl",
+        "SFT"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_036",
+      "series_id": "series_5",
+      "episode": 36,
+      "title": "模型压缩与剪枝",
+      "description": "让模型更小更快：知识蒸馏（Knowledge Distillation）原理、结构化剪枝与非结构化剪枝、模型压缩的评估方法，以及如何在保持性能的同时大幅减小模型体积。",
+      "keywords": [
+        "模型压缩",
+        "知识蒸馏",
+        "Distillation",
+        "剪枝",
+        "Pruning",
+        "模型小型化",
+        "性能保持"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_037",
+      "series_id": "series_5",
+      "episode": 37,
+      "title": "服务化部署：Serving与API设计",
+      "description": "LLM服务化生产实践：KServe、Triton Inference Server等 Serving框架对比、RESTful API与WebSocket接口设计、负载均衡与弹性伸缩，以及构建高并发LLM服务的经验。",
+      "keywords": [
+        "模型部署",
+        "KServe",
+        "Triton",
+        "Serving",
+        "API设计",
+        "负载均衡",
+        "弹性伸缩",
+        "生产服务"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_038",
+      "series_id": "series_5",
+      "episode": 38,
+      "title": "边缘部署：移动端与嵌入式",
+      "description": "LLM在边缘设备上的部署：CoreML、ONNX、NCNN等推理框架对比、移动端模型优化技巧、在手机和嵌入式设备上运行LLM的完整方案，以及端侧AI的应用场景。",
+      "keywords": [
+        "边缘部署",
+        "CoreML",
+        "ONNX",
+        "移动端AI",
+        "嵌入式AI",
+        "端侧推理",
+        "模型优化"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_039",
+      "series_id": "series_5",
+      "episode": 39,
+      "title": "成本优化策略",
+      "description": "降低LLM应用成本的全面策略：Token优化技巧、智能缓存策略、模型选择与混合使用、请求合并与批处理，以及如何在保持质量的前提下大幅降低API调用成本。",
+      "keywords": [
+        "成本优化",
+        "Token优化",
+        "缓存策略",
+        "混合模型",
+        "请求批处理",
+        "API成本",
+        "降本增效"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_040",
+      "series_id": "series_5",
+      "episode": 40,
+      "title": "监控与可观测性",
+      "description": "LLM应用的监控体系：延迟监控、吞吐量监控、质量监控（准确性、相关性）、错误追踪与日志分析，以及如何建立完整的可观测性体系来保障生产环境稳定运行。",
+      "keywords": [
+        "监控",
+        "可观测性",
+        "延迟监控",
+        "质量监控",
+        "日志分析",
+        "错误追踪",
+        "APM",
+        "生产保障"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 8,
+    "completed_episodes": 8,
+    "total_estimated_words": 104000,
+    "completion_rate": "100.0",
+    "start_date": "2026-01-11",
+    "end_date": "2026-01-11"
+  }
+}

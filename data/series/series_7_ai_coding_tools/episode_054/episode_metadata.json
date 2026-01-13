@@ -1,0 +1,19 @@
+{
+  "id": "topic_054",
+  "series_id": "series_7",
+  "episode": 54,
+  "title": "Claude Code：全能AI编程助手",
+  "description": "Claude Code完整指南：Skills系统、MCP协议集成、Agent工作流、代码审查、Bug定位、性能分析，以及如何通过Claude Code实现从需求到部署的全流程AI辅助开发。",
+  "keywords": [
+    "Claude Code",
+    "AI编程",
+    "MCP",
+    "Skills",
+    "代码审查",
+    "全流程开发"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

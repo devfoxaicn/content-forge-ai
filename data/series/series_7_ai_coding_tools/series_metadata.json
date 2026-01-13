@@ -1,0 +1,211 @@
+{
+  "series_info": {
+    "id": "series_7",
+    "name": "AI编程与开发工具系列",
+    "description": "AI辅助编程工具与开发效率提升",
+    "topic_count": 10,
+    "difficulty": "实践为主",
+    "priority": 7,
+    "status": "completed"
+  },
+  "topics": [
+    {
+      "id": "topic_051",
+      "series_id": "series_7",
+      "episode": 51,
+      "title": "AI编程助手发展史与核心原理",
+      "description": "从TabNine到GitHub Copilot的演进历程：AI编程助手如何通过语言模型理解代码上下文、代码补全的技术原理、从统计模型到神经网络的范式转变，以及AI编程工具如何改变开发方式。",
+      "keywords": [
+        "AI编程助手",
+        "Copilot",
+        "代码补全",
+        "编程工具演进",
+        "代码理解",
+        "开发效率"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 11000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_052",
+      "series_id": "series_7",
+      "episode": 52,
+      "title": "GitHub Copilot深度使用指南",
+      "description": "Copilot最佳实践：多语言代码生成、代码解释、注释生成、单元测试生成、代码重构建议，以及如何通过有效的提示获得更精准的代码建议和Copilot Labs高级功能探索。",
+      "keywords": [
+        "GitHub Copilot",
+        "代码生成",
+        "代码解释",
+        "单元测试",
+        "代码重构",
+        "Copilot Labs"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_053",
+      "series_id": "series_7",
+      "episode": 53,
+      "title": "Cursor IDE：AI原生开发环境",
+      "description": "Cursor编辑器深度解析：AI Chat功能、代码库级上下文理解、多文件编辑、自然语言命令重构，以及如何将Cursor打造为AI驱动的超级开发环境。",
+      "keywords": [
+        "Cursor",
+        "AI IDE",
+        "代码库理解",
+        "AI编辑器",
+        "智能重构",
+        "开发环境"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_054",
+      "series_id": "series_7",
+      "episode": 54,
+      "title": "Claude Code：全能AI编程助手",
+      "description": "Claude Code完整指南：Skills系统、MCP协议集成、Agent工作流、代码审查、Bug定位、性能分析，以及如何通过Claude Code实现从需求到部署的全流程AI辅助开发。",
+      "keywords": [
+        "Claude Code",
+        "AI编程",
+        "MCP",
+        "Skills",
+        "代码审查",
+        "全流程开发"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_055",
+      "series_id": "series_7",
+      "episode": 55,
+      "title": "AI代码审查与质量保障",
+      "description": "AI驱动的代码质量保障：静态代码分析、Bug自动检测、安全漏洞扫描、性能瓶颈识别、代码风格统一、技术债务追踪，以及如何构建AI辅助的代码审查流程。",
+      "keywords": [
+        "代码审查",
+        "静态分析",
+        "Bug检测",
+        "安全扫描",
+        "性能分析",
+        "代码质量"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_056",
+      "series_id": "series_7",
+      "episode": 56,
+      "title": "AI辅助测试生成与覆盖率分析",
+      "description": "自动化测试的AI新范式：单元测试自动生成、边界条件测试、模糊测试用例生成、测试覆盖率智能分析、测试数据生成、回归测试优化，以及AI在TDD中的应用。",
+      "keywords": [
+        "测试生成",
+        "单元测试",
+        "覆盖率分析",
+        "模糊测试",
+        "TDD",
+        "自动化测试"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_057",
+      "series_id": "series_7",
+      "episode": 57,
+      "title": "代码理解与文档生成",
+      "description": "AI驱动的代码理解工具：代码库智能问答、API文档自动生成、代码注释补全、架构图生成、依赖关系可视化、技术文档维护，以及如何让AI成为代码库的活文档。",
+      "keywords": [
+        "代码理解",
+        "文档生成",
+        "API文档",
+        "代码注释",
+        "架构图",
+        "依赖分析"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_058",
+      "series_id": "series_7",
+      "episode": 58,
+      "title": "AI重构与代码现代化",
+      "description": "智能代码重构：识别代码异味（Code Smell）、自动化重构建议、遗留系统现代化、语言迁移（Java→Python）、框架升级、架构优化，以及AI辅助的重构最佳实践。",
+      "keywords": [
+        "代码重构",
+        "代码异味",
+        "遗留系统",
+        "现代化",
+        "语言迁移",
+        "架构优化"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_059",
+      "series_id": "series_7",
+      "episode": 59,
+      "title": "AI调试与问题定位",
+      "description": "AI驱动的调试革命：错误日志智能分析、堆栈追踪解读、根因分析、性能瓶颈定位、内存泄漏检测、并发问题诊断，以及如何用AI加速问题排查和修复。",
+      "keywords": [
+        "AI调试",
+        "问题定位",
+        "日志分析",
+        "根因分析",
+        "性能调试",
+        "并发调试"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_060",
+      "series_id": "series_7",
+      "episode": 60,
+      "title": "AI编程工具生态与集成",
+      "description": "构建AI驱动的开发工具链：IDE插件集成、CI/CD流水线集成、代码仓库AI助手、团队协作工具、代码评审AI、项目管理助手，以及如何打造全流程AI辅助开发体系。",
+      "keywords": [
+        "开发工具链",
+        "IDE集成",
+        "CI/CD",
+        "团队协作",
+        "代码评审",
+        "AI工作流"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 10,
+    "total_estimated_words": 130000,
+    "completion_rate": "100.0",
+    "start_date": "2026-01-11",
+    "end_date": "2026-01-12"
+  }
+}

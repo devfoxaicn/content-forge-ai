@@ -1,0 +1,20 @@
+{
+  "id": "topic_019",
+  "series_id": "series_3",
+  "episode": 19,
+  "title": "Agent基础：什么是智能体",
+  "description": "AI Agent的核心理念：从感知（Perception）→规划（Planning）→行动（Action）的循环，Agent与普通Chatbot的区别，自主性、目标导向性等核心特征，以及Agent的发展历史和分类体系。",
+  "keywords": [
+    "Agent",
+    "智能体",
+    "AI Agent",
+    "自主性",
+    "目标导向",
+    "感知-规划-行动",
+    "Agent架构"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

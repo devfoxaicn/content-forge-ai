@@ -1,0 +1,21 @@
+{
+  "id": "topic_046",
+  "series_id": "series_6",
+  "episode": 46,
+  "title": "OpenCode 开源代码智能平台",
+  "description": "OpenCode是面向开发者的开源代码智能平台。介绍其核心功能、代码理解能力、多语言支持、与IDE的集成方式，以及如何利用OpenCode提升开发效率。",
+  "keywords": [
+    "OpenCode",
+    "代码智能",
+    "开源",
+    "代码理解",
+    "IDE集成",
+    "开发效率",
+    "代码补全",
+    "代码搜索"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

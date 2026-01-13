@@ -1,0 +1,20 @@
+{
+  "id": "topic_050",
+  "series_id": "series_6",
+  "episode": 50,
+  "title": "技术博客第一阶段总结：知识图谱构建",
+  "description": "50期技术博客阶段性总结：串联LLM原理、RAG、Agent、提示工程、部署优化、多模态六大核心知识领域，绘制完整的技术知识图谱，为读者提供系统性的学习路径和进阶方向。",
+  "keywords": [
+    "知识图谱",
+    "学习路线",
+    "技术总结",
+    "进阶指南",
+    "持续学习",
+    "系统性学习",
+    "知识体系"
+  ],
+  "difficulty": "综合",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

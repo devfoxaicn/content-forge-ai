@@ -1,0 +1,19 @@
+{
+  "id": "topic_072",
+  "series_id": "series_9",
+  "episode": 72,
+  "title": "AI内容生成：文案与营销",
+  "description": "AIGC在营销领域的应用：营销文案生成、广告创意生成、SEO内容优化、个性化推荐文案、A/B测试文案生成、品牌语调一致性，以及构建AI内容生产平台。",
+  "keywords": [
+    "AI文案",
+    "内容生成",
+    "营销自动化",
+    "SEO优化",
+    "创意生成",
+    "AIGC营销"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

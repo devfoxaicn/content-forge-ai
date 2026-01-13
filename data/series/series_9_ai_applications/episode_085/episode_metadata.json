@@ -1,0 +1,19 @@
+{
+  "id": "topic_085",
+  "series_id": "series_9",
+  "episode": 85,
+  "title": "AI应用落地：从POC到生产",
+  "description": "AI应用生产化指南：POC验证方法、技术选型决策、性能基准测试、成本收益分析、风险评估、上线策略，以及将AI项目从原型推向生产的完整流程。",
+  "keywords": [
+    "AI落地",
+    "POC验证",
+    "生产部署",
+    "技术选型",
+    "成本分析",
+    "项目实施"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "topic_071",
+  "series_id": "series_9",
+  "episode": 71,
+  "title": "智能客服系统构建实战",
+  "description": "AI驱动的客服系统：对话管理、意图识别、实体抽取、知识库集成、多轮对话策略、情感分析、人工协作路由，以及构建高可用智能客服的完整技术方案。",
+  "keywords": [
+    "智能客服",
+    "对话系统",
+    "意图识别",
+    "知识库",
+    "多轮对话",
+    "客服自动化"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

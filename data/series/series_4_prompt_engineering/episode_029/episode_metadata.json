@@ -1,0 +1,20 @@
+{
+  "id": "topic_029",
+  "series_id": "series_4",
+  "episode": 29,
+  "title": "高级提示技巧",
+  "description": "更精妙的提示策略：自我一致性（Self-Consistency）通过多次采样提升准确率、生成性知识检索（RAG在提示中的集成）、思维树（Tree of Thoughts）等前沿提示技巧。",
+  "keywords": [
+    "高级提示",
+    "Self-Consistency",
+    "思维树",
+    "Tree of Thoughts",
+    "生成性知识",
+    "提示优化",
+    "复杂推理"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

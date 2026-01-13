@@ -1,0 +1,20 @@
+{
+  "id": "topic_033",
+  "series_id": "series_5",
+  "episode": 33,
+  "title": "模型推理基础：vLLM与TensorRT-LLM",
+  "description": "高性能推理引擎深度对比：vLLM的PagedAttention原理、TensorRT-LLM的Fusion优化、推理吞吐量和延迟的优化技巧，以及如何选择合适的推理引擎和配置参数。",
+  "keywords": [
+    "vLLM",
+    "TensorRT-LLM",
+    "推理优化",
+    "PagedAttention",
+    "吞吐量优化",
+    "延迟优化",
+    "推理引擎"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

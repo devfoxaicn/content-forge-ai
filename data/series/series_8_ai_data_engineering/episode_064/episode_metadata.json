@@ -1,0 +1,19 @@
+{
+  "id": "topic_064",
+  "series_id": "series_8",
+  "episode": 64,
+  "title": "数据版本管理与血缘追踪",
+  "description": "数据工程的MLOps实践：DVC数据版本控制、数据血缘追踪、数据pipeline编排（Airflow、Prefect）、数据质量监控、数据漂移检测，以及构建可复现的数据工程体系。",
+  "keywords": [
+    "数据版本",
+    "DVC",
+    "数据血缘",
+    "数据编排",
+    "数据质量",
+    "MLOps"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

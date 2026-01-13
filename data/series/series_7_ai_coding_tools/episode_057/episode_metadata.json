@@ -1,0 +1,19 @@
+{
+  "id": "topic_057",
+  "series_id": "series_7",
+  "episode": 57,
+  "title": "代码理解与文档生成",
+  "description": "AI驱动的代码理解工具：代码库智能问答、API文档自动生成、代码注释补全、架构图生成、依赖关系可视化、技术文档维护，以及如何让AI成为代码库的活文档。",
+  "keywords": [
+    "代码理解",
+    "文档生成",
+    "API文档",
+    "代码注释",
+    "架构图",
+    "依赖分析"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 12000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

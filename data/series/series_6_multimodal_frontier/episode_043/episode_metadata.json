@@ -1,0 +1,20 @@
+{
+  "id": "topic_043",
+  "series_id": "series_6",
+  "episode": 43,
+  "title": "图像生成：扩散模型原理",
+  "description": "生成式AI的瑰宝：从DDPM（去噪扩散概率模型）到Stable Diffusion的原理详解、前向扩散与反向去噪过程、 Conditioning机制（Classifier-free Guidance）、ControlNet等控制方法。",
+  "keywords": [
+    "扩散模型",
+    "DDPM",
+    "Stable Diffusion",
+    "图像生成",
+    "去噪过程",
+    "Classifier-free Guidance",
+    "ControlNet"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

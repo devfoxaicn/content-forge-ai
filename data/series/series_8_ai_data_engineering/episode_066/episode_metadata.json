@@ -1,0 +1,19 @@
+{
+  "id": "topic_066",
+  "series_id": "series_8",
+  "episode": 66,
+  "title": "Embedding模型训练与优化",
+  "description": "定制化Embedding模型：Embedding训练原理（对比学习、SimCSE）、领域自适应训练、多语言Embedding、Embedding评估指标、模型蒸馏与压缩，以及如何为特定场景训练专属Embedding模型。",
+  "keywords": [
+    "Embedding训练",
+    "对比学习",
+    "SimCSE",
+    "领域自适应",
+    "模型蒸馏",
+    "向量表示"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

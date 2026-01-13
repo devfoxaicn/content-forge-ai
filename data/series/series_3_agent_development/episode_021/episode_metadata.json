@@ -1,0 +1,20 @@
+{
+  "id": "topic_021",
+  "series_id": "series_3",
+  "episode": 21,
+  "title": "MCP Model Context Protocol 模型上下文协议",
+  "description": "MCP是连接AI应用与外部数据源的标准协议。详解其架构设计、服务器实现、客户端集成，以及如何通过MCP让LLM访问本地文件、数据库、API等资源。",
+  "keywords": [
+    "MCP",
+    "Model Context Protocol",
+    "模型上下文协议",
+    "Anthropic",
+    "工具集成",
+    "数据连接",
+    "上下文管理"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 10000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

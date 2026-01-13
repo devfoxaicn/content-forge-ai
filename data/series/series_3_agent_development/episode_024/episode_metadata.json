@@ -1,0 +1,20 @@
+{
+  "id": "topic_024",
+  "series_id": "series_3",
+  "episode": 24,
+  "title": "Multi-Agent系统设计",
+  "description": "多Agent协作系统：讲解多Agent架构设计、Agent间通信协议（消息传递、共享记忆）、任务分配与协作模式，以及如何实现多个专业Agent协同完成复杂任务。",
+  "keywords": [
+    "Multi-Agent",
+    "多Agent系统",
+    "Agent协作",
+    "通信协议",
+    "任务分配",
+    "角色分工",
+    "团队协作"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

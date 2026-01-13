@@ -1,0 +1,19 @@
+{
+  "id": "topic_092",
+  "series_id": "series_10",
+  "episode": 92,
+  "title": "AI系统安全防护",
+  "description": "AI基础设施安全：模型安全、对抗攻击防御、数据安全、访问控制、供应链安全、安全审计，以及构建多层防御的AI安全体系。",
+  "keywords": [
+    "AI安全",
+    "对抗攻击",
+    "数据安全",
+    "访问控制",
+    "供应链安全",
+    "安全审计"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

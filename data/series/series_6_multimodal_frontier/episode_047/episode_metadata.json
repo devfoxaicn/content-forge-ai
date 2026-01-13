@@ -1,0 +1,21 @@
+{
+  "id": "topic_047",
+  "series_id": "series_6",
+  "episode": 47,
+  "title": "AI安全与对齐技术",
+  "description": "AI安全的前沿阵地：AI对齐（Alignment）的核心挑战、红队测试（Red Teaming）方法、宪法AI（Constitutional AI）理念、对齐技术的最新进展，以及如何构建安全可靠的AI系统。",
+  "keywords": [
+    "AI安全",
+    "对齐",
+    "Alignment",
+    "红队测试",
+    "Red Teaming",
+    "宪法AI",
+    "AI安全防护",
+    "可靠AI"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 12000,
+  "status": "completed",
+  "completed_at": "2026-01-12"
+}

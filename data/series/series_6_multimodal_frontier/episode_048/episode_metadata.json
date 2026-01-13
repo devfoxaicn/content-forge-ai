@@ -1,0 +1,22 @@
+{
+  "id": "topic_048",
+  "series_id": "series_6",
+  "episode": 48,
+  "title": "开源模型生态全景",
+  "description": "开源大模型生态全景图：LLaMA系列、Mistral、Qwen、Yi、DeepSeek等主流开源模型的对比分析、不同模型的特点与适用场景、如何选择合适的开源模型，以及开源生态的发展趋势。",
+  "keywords": [
+    "开源模型",
+    "LLaMA",
+    "Mistral",
+    "Qwen",
+    "Yi",
+    "DeepSeek",
+    "模型对比",
+    "开源生态",
+    "模型选择"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

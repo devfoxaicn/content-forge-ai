@@ -1,0 +1,19 @@
+{
+  "id": "topic_062",
+  "series_id": "series_8",
+  "episode": 62,
+  "title": "数据标注：工具与最佳实践",
+  "description": "数据标注全流程：标注工具选型（Label Studio、Doccano、Prodigy）、标注项目管理、标注质量控制、主动学习策略、半监督标注、标注成本优化，以及构建高效标注团队的经验。",
+  "keywords": [
+    "数据标注",
+    "Label Studio",
+    "标注工具",
+    "主动学习",
+    "质量控制",
+    "标注效率"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

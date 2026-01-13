@@ -1,0 +1,19 @@
+{
+  "id": "topic_073",
+  "series_id": "series_9",
+  "episode": 73,
+  "title": "智能文档处理与信息提取",
+  "description": "企业文档智能化：OCR文档识别、表格提取、关键信息抽取、文档分类、合同审查、发票处理、报表分析，以及构建端到端智能文档处理系统。",
+  "keywords": [
+    "文档处理",
+    "OCR",
+    "信息提取",
+    "表格提取",
+    "合同审查",
+    "智能文档"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

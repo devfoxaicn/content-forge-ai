@@ -1,0 +1,20 @@
+{
+  "id": "topic_044",
+  "series_id": "series_6",
+  "episode": 44,
+  "title": "音频与视频理解",
+  "description": "时序多模态的前沿：Whisper语音识别模型、VideoLLaMA等视频理解模型、音频与视频的联合建模、时序对齐技术，以及多模态时序模型的应用场景。",
+  "keywords": [
+    "Whisper",
+    "视频理解",
+    "VideoLLaMA",
+    "音频理解",
+    "多模态时序",
+    "时序对齐",
+    "AV模型"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 12000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

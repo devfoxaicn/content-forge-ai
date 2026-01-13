@@ -1,0 +1,306 @@
+{
+  "series_info": {
+    "id": "series_9",
+    "name": "AI应用场景实战系列",
+    "description": "垂直行业AI应用落地案例与最佳实践",
+    "topic_count": 15,
+    "difficulty": "综合应用",
+    "priority": 9,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "topic_071",
+      "series_id": "series_9",
+      "episode": 71,
+      "title": "智能客服系统构建实战",
+      "description": "AI驱动的客服系统：对话管理、意图识别、实体抽取、知识库集成、多轮对话策略、情感分析、人工协作路由，以及构建高可用智能客服的完整技术方案。",
+      "keywords": [
+        "智能客服",
+        "对话系统",
+        "意图识别",
+        "知识库",
+        "多轮对话",
+        "客服自动化"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_072",
+      "series_id": "series_9",
+      "episode": 72,
+      "title": "AI内容生成：文案与营销",
+      "description": "AIGC在营销领域的应用：营销文案生成、广告创意生成、SEO内容优化、个性化推荐文案、A/B测试文案生成、品牌语调一致性，以及构建AI内容生产平台。",
+      "keywords": [
+        "AI文案",
+        "内容生成",
+        "营销自动化",
+        "SEO优化",
+        "创意生成",
+        "AIGC营销"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-11"
+    },
+    {
+      "id": "topic_073",
+      "series_id": "series_9",
+      "episode": 73,
+      "title": "智能文档处理与信息提取",
+      "description": "企业文档智能化：OCR文档识别、表格提取、关键信息抽取、文档分类、合同审查、发票处理、报表分析，以及构建端到端智能文档处理系统。",
+      "keywords": [
+        "文档处理",
+        "OCR",
+        "信息提取",
+        "表格提取",
+        "合同审查",
+        "智能文档"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_074",
+      "series_id": "series_9",
+      "episode": 74,
+      "title": "AI辅助法律与合规分析",
+      "description": "法律科技AI应用：法律文书审查、合规性检查、案例检索、法规解读、合同风险识别、法律知识问答，以及AI在法律行业的落地实践与伦理考量。",
+      "keywords": [
+        "法律AI",
+        "合规分析",
+        "案例检索",
+        "法规解读",
+        "法律科技",
+        "合同审查"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_075",
+      "series_id": "series_9",
+      "episode": 75,
+      "title": "金融AI：风控与量化交易",
+      "description": "AI在金融领域的应用：信用风险评估、欺诈检测、量化交易策略、市场情绪分析、智能投顾、风险预警，以及构建金融AI系统的挑战与解决方案。",
+      "keywords": [
+        "金融AI",
+        "风控",
+        "量化交易",
+        "欺诈检测",
+        "智能投顾",
+        "金融科技"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_076",
+      "series_id": "series_9",
+      "episode": 76,
+      "title": "医疗AI：诊断与药物发现",
+      "description": "AI赋能医疗健康：医学影像分析、疾病辅助诊断、药物分子设计、临床试验优化、医疗记录分析、个性化治疗，以及医疗AI的监管与伦理挑战。",
+      "keywords": [
+        "医疗AI",
+        "医学影像",
+        "疾病诊断",
+        "药物发现",
+        "临床AI",
+        "医疗科技"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_077",
+      "series_id": "series_9",
+      "episode": 77,
+      "title": "教育AI：个性化学习与智能辅导",
+      "description": "AI革命教育行业：个性化学习路径、智能题库生成、自动作业批改、学习进度追踪、知识图谱构建、AI虚拟教师，以及构建AI教育平台的实践经验。",
+      "keywords": [
+        "教育AI",
+        "个性化学习",
+        "智能辅导",
+        "作业批改",
+        "学习分析",
+        "教育科技"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_078",
+      "series_id": "series_9",
+      "episode": 78,
+      "title": "电商AI：推荐与搜索优化",
+      "description": "电商AI全栈实践：商品推荐系统、智能搜索、用户画像构建、需求预测、库存优化、动态定价、视觉搜索，以及提升转化率的AI策略。",
+      "keywords": [
+        "电商AI",
+        "推荐系统",
+        "智能搜索",
+        "用户画像",
+        "需求预测",
+        "转化率优化"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_079",
+      "series_id": "series_9",
+      "episode": 79,
+      "title": "制造AI：质检与预测性维护",
+      "description": "工业AI应用：计算机视觉质检、设备异常检测、预测性维护、生产流程优化、供应链优化、能耗优化，以及AI在工业4.0中的实践案例。",
+      "keywords": [
+        "工业AI",
+        "质量检测",
+        "预测性维护",
+        "异常检测",
+        "流程优化",
+        "工业4.0"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_080",
+      "series_id": "series_9",
+      "episode": 80,
+      "title": "AI内容审核与安全治理",
+      "description": "平台内容安全解决方案：文本审核、图像审核、视频审核、虚假信息检测、仇恨言论识别、敏感内容过滤，以及构建AI内容审核体系的最佳实践。",
+      "keywords": [
+        "内容审核",
+        "安全治理",
+        "虚假信息",
+        "仇恨言论",
+        "内容安全",
+        "AI审核"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_081",
+      "series_id": "series_9",
+      "episode": 81,
+      "title": "AI辅助创意设计",
+      "description": "AI赋能创意产业：设计稿生成、Logo设计、UI/UX设计辅助、视频剪辑、音乐创作、游戏内容生成，以及AI创意工具的边界与人类创意力的互补。",
+      "keywords": [
+        "AI设计",
+        "创意生成",
+        "UI设计",
+        "视频创作",
+        "音乐生成",
+        "创意AI"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_082",
+      "series_id": "series_9",
+      "episode": 82,
+      "title": "智能运维（AIOps）实战",
+      "description": "AI驱动的运维体系：日志异常检测、故障预测、容量规划、根因分析、自动化故障恢复、运维知识库，以及构建AIOps平台的技术架构。",
+      "keywords": [
+        "AIOps",
+        "智能运维",
+        "异常检测",
+        "故障预测",
+        "根因分析",
+        "自动化运维"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_083",
+      "series_id": "series_9",
+      "episode": 83,
+      "title": "AI翻译与本地化",
+      "description": "AI翻译技术实践：神经机器翻译、多语言模型、上下文感知翻译、领域自适应翻译、翻译质量评估、本地化策略，以及构建AI翻译系统的经验。",
+      "keywords": [
+        "AI翻译",
+        "神经机器翻译",
+        "多语言",
+        "本地化",
+        "翻译质量",
+        "跨语言"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_084",
+      "series_id": "series_9",
+      "episode": 84,
+      "title": "AI辅助决策系统",
+      "description": "构建AI决策支持系统：数据驱动决策、预测分析、情景模拟、决策优化、风险量化、决策可解释性，以及AI在企业战略决策中的应用实践。",
+      "keywords": [
+        "决策系统",
+        "预测分析",
+        "决策优化",
+        "风险量化",
+        "可解释AI",
+        "战略决策"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_085",
+      "series_id": "series_9",
+      "episode": 85,
+      "title": "AI应用落地：从POC到生产",
+      "description": "AI应用生产化指南：POC验证方法、技术选型决策、性能基准测试、成本收益分析、风险评估、上线策略，以及将AI项目从原型推向生产的完整流程。",
+      "keywords": [
+        "AI落地",
+        "POC验证",
+        "生产部署",
+        "技术选型",
+        "成本分析",
+        "项目实施"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 15,
+    "completed_episodes": 1,
+    "total_estimated_words": 199000,
+    "completion_rate": "6.7",
+    "start_date": "2026-01-09",
+    "end_date": "2026-01-11"
+  }
+}

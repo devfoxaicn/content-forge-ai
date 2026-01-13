@@ -1,0 +1,19 @@
+{
+  "id": "topic_079",
+  "series_id": "series_9",
+  "episode": 79,
+  "title": "制造AI：质检与预测性维护",
+  "description": "工业AI应用：计算机视觉质检、设备异常检测、预测性维护、生产流程优化、供应链优化、能耗优化，以及AI在工业4.0中的实践案例。",
+  "keywords": [
+    "工业AI",
+    "质量检测",
+    "预测性维护",
+    "异常检测",
+    "流程优化",
+    "工业4.0"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

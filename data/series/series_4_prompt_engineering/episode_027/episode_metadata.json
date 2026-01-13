@@ -1,0 +1,19 @@
+{
+  "id": "topic_027",
+  "series_id": "series_4",
+  "episode": 27,
+  "title": "提示工程基础：原则与模式",
+  "description": "提示词设计的核心原则：清晰性、具体性、上下文提供、角色设定、输出格式控制等基础模式，以及如何写出高质量的提示词来激发LLM的最佳性能。",
+  "keywords": [
+    "提示工程",
+    "Prompt Engineering",
+    "提示词设计",
+    "Prompt原则",
+    "提示词模式",
+    "Prompt最佳实践"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 9000,
+  "status": "completed",
+  "completed_at": "2026-01-10"
+}

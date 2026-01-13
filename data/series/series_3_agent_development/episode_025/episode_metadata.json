@@ -1,0 +1,20 @@
+{
+  "id": "topic_025",
+  "series_id": "series_3",
+  "episode": 25,
+  "title": "Agent工具调用：Function Calling全解",
+  "description": "Function Calling是Agent的动手能力：讲解工具定义与注册、参数提取与解析、错误处理与重试、并行工具调用，以及如何设计稳定可靠的工具调用系统。",
+  "keywords": [
+    "Function Calling",
+    "工具调用",
+    "Tool Use",
+    "参数提取",
+    "错误处理",
+    "并行调用",
+    "工具定义"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

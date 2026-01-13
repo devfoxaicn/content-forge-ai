@@ -1,0 +1,308 @@
+{
+  "series_info": {
+    "id": "series_10",
+    "name": "AI基础设施与架构系列",
+    "description": "大规模AI系统架构与基础设施设计",
+    "topic_count": 15,
+    "difficulty": "架构设计",
+    "priority": 10,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "topic_086",
+      "series_id": "series_10",
+      "episode": 86,
+      "title": "大规模GPU集群架构设计",
+      "description": "AI基础设施核心：GPU集群架构、RDMA网络设计、存储系统优化、散热与供电、集群监控、故障自愈，以及构建万卡级GPU集群的实践经验。",
+      "keywords": [
+        "GPU集群",
+        "集群架构",
+        "RDMA",
+        "网络设计",
+        "存储优化",
+        "大规模计算"
+      ],
+      "difficulty": "架构设计",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_087",
+      "series_id": "series_10",
+      "episode": 87,
+      "title": "分布式训练框架解析",
+      "description": "大规模模型训练技术：数据并行、模型并行、流水线并行、3D并行、ZeRO优化、DeepSpeed、Megatron-LM，以及如何在千卡集群上训练百亿参数模型。",
+      "keywords": [
+        "分布式训练",
+        "数据并行",
+        "模型并行",
+        "ZeRO",
+        "DeepSpeed",
+        "Megatron",
+        "大模型训练"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_088",
+      "series_id": "series_10",
+      "episode": 88,
+      "title": "模型训练流水线与调度",
+      "description": "高效训练pipeline设计：训练任务调度、资源动态分配、checkpoint管理、训练容错、弹性训练、混合精度训练，以及构建高利用率训练集群的最佳实践。",
+      "keywords": [
+        "训练流水线",
+        "任务调度",
+        "资源分配",
+        "checkpoint",
+        "容错机制",
+        "弹性训练"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_089",
+      "series_id": "series_10",
+      "episode": 89,
+      "title": "推理服务架构设计",
+      "description": "大规模推理服务架构：推理服务网格、负载均衡策略、请求路由、批处理优化、自动扩缩容、多模型部署，以及支撑百万QPS推理服务的架构实践。",
+      "keywords": [
+        "推理服务",
+        "服务架构",
+        "负载均衡",
+        "批处理",
+        "自动扩缩容",
+        "高并发"
+      ],
+      "difficulty": "架构设计",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_090",
+      "series_id": "series_10",
+      "episode": 90,
+      "title": "AI系统性能优化",
+      "description": "全方位性能优化：计算优化（算子融合）、内存优化（显存管理）、IO优化（数据加载）、网络优化（通信重叠），以及端到端的性能profiling和调优方法论。",
+      "keywords": [
+        "性能优化",
+        "算子融合",
+        "内存优化",
+        "IO优化",
+        "profiling",
+        "性能调优"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_091",
+      "series_id": "series_10",
+      "episode": 91,
+      "title": "AI系统高可用与容灾",
+      "description": "保障AI系统稳定运行：高可用架构设计、故障隔离、快速恢复、灾备方案、混沌工程、演练体系，以及构建99.99%可用性AI基础设施的经验。",
+      "keywords": [
+        "高可用",
+        "容灾",
+        "故障隔离",
+        "故障恢复",
+        "混沌工程",
+        "系统稳定性"
+      ],
+      "difficulty": "架构设计",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_092",
+      "series_id": "series_10",
+      "episode": 92,
+      "title": "AI系统安全防护",
+      "description": "AI基础设施安全：模型安全、对抗攻击防御、数据安全、访问控制、供应链安全、安全审计，以及构建多层防御的AI安全体系。",
+      "keywords": [
+        "AI安全",
+        "对抗攻击",
+        "数据安全",
+        "访问控制",
+        "供应链安全",
+        "安全审计"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_093",
+      "series_id": "series_10",
+      "episode": 93,
+      "title": "云原生AI架构（K8s + AI）",
+      "description": "云原生AI实践：Kubernetes上的AI工作负载调度、GPU虚拟化、Kubeflow流水线、模型注册中心、容器化推理服务、多云策略，以及构建云原生AI平台的架构设计。",
+      "keywords": [
+        "云原生AI",
+        "Kubernetes",
+        "Kubeflow",
+        "GPU虚拟化",
+        "模型注册",
+        "容器化"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_094",
+      "series_id": "series_10",
+      "episode": 94,
+      "title": "混合云AI架构",
+      "description": "混合云AI部署策略：云端训练+边缘推理、多云管理、数据主权合规、成本优化、弹性调度、统一管控，以及设计高效混合云AI架构的最佳实践。",
+      "keywords": [
+        "混合云",
+        "边缘计算",
+        "多云管理",
+        "数据主权",
+        "成本优化",
+        "混合架构"
+      ],
+      "difficulty": "架构设计",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_095",
+      "series_id": "series_10",
+      "episode": 95,
+      "title": "AI系统成本管理",
+      "description": "AI基础设施成本优化：GPU资源利用率优化、spot实例使用、自动缩排策略、成本监控与分摊、TCO分析、ROI评估，以及构建成本高效的AI基础设施。",
+      "keywords": [
+        "成本管理",
+        "资源利用率",
+        "spot实例",
+        "TCO分析",
+        "ROI评估",
+        "成本优化"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_096",
+      "series_id": "series_10",
+      "episode": 96,
+      "title": "AI系统可观测性平台",
+      "description": "构建AI可观测性体系：Metrics监控、分布式追踪、日志聚合、性能分析、资源监控、业务指标，以及打造一体化AI可观测性平台的实践经验。",
+      "keywords": [
+        "可观测性",
+        "监控",
+        "分布式追踪",
+        "日志聚合",
+        "性能分析",
+        "监控平台"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_097",
+      "series_id": "series_10",
+      "episode": 97,
+      "title": "MLOps全流程实践",
+      "description": "MLOps完整指南：实验管理、模型版本控制、CI/CD for ML、自动化训练pipeline、模型监控、漂移检测，以及构建端到端MLOps体系的最佳实践。",
+      "keywords": [
+        "MLOps",
+        "实验管理",
+        "模型版本",
+        "CI/CD",
+        "自动化",
+        "模型监控"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_098",
+      "series_id": "series_10",
+      "episode": 98,
+      "title": "AI系统容量规划",
+      "description": "AI系统容量规划方法：业务预测、资源需求评估、性能基准测试、容量预测模型、弹性策略、成本效益分析，以及科学规划AI基础设施容量的方法论。",
+      "keywords": [
+        "容量规划",
+        "资源评估",
+        "性能测试",
+        "容量预测",
+        "弹性策略",
+        "资源规划"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_099",
+      "series_id": "series_10",
+      "episode": 99,
+      "title": "AI系统迁移与升级",
+      "description": "AI系统演进管理：模型迁移、框架升级、架构演进、数据迁移、服务升级、平滑切换，以及管理AI系统全生命周期的迁移与升级策略。",
+      "keywords": [
+        "系统迁移",
+        "模型升级",
+        "架构演进",
+        "数据迁移",
+        "平滑切换",
+        "系统升级"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_100",
+      "series_id": "series_10",
+      "episode": 100,
+      "title": "100期技术博客大总结：AI技术全景与未来展望",
+      "description": "100期技术博客的完美收官：串联100期核心知识点、绘制AI技术全景图、为不同背景读者提供完整学习路线、职业发展建议、持续进阶资源推荐，以及AI技术未来的深度思考。",
+      "keywords": [
+        "技术总结",
+        "AI全景",
+        "学习路线",
+        "职业规划",
+        "未来展望",
+        "知识体系",
+        "持续进阶"
+      ],
+      "difficulty": "综合",
+      "estimated_words": 15000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 15,
+    "completed_episodes": 0,
+    "total_estimated_words": 199000,
+    "completion_rate": "0.0",
+    "start_date": "2026-01-09",
+    "end_date": "2026-01-09"
+  }
+}

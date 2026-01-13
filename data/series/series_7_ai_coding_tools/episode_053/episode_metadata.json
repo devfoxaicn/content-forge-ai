@@ -1,0 +1,19 @@
+{
+  "id": "topic_053",
+  "series_id": "series_7",
+  "episode": 53,
+  "title": "Cursor IDE：AI原生开发环境",
+  "description": "Cursor编辑器深度解析：AI Chat功能、代码库级上下文理解、多文件编辑、自然语言命令重构，以及如何将Cursor打造为AI驱动的超级开发环境。",
+  "keywords": [
+    "Cursor",
+    "AI IDE",
+    "代码库理解",
+    "AI编辑器",
+    "智能重构",
+    "开发环境"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}

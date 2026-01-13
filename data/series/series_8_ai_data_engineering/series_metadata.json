@@ -1,0 +1,211 @@
+{
+  "series_info": {
+    "id": "series_8",
+    "name": "AI数据处理与工程系列",
+    "description": "AI数据工程全流程：从采集到优化",
+    "topic_count": 10,
+    "difficulty": "实践为主",
+    "priority": 8,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "topic_061",
+      "series_id": "series_8",
+      "episode": 61,
+      "title": "AI训练数据采集与清洗",
+      "description": "高质量数据是AI的基石：网络爬虫技术、数据源选择（Common Crawl、GitHub、Wikipedia）、数据清洗pipeline、去重与过滤、隐私信息处理、数据版权与合规，以及构建企业级数据采集系统。",
+      "keywords": [
+        "数据采集",
+        "数据清洗",
+        "网络爬虫",
+        "数据去重",
+        "隐私保护",
+        "数据合规"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_062",
+      "series_id": "series_8",
+      "episode": 62,
+      "title": "数据标注：工具与最佳实践",
+      "description": "数据标注全流程：标注工具选型（Label Studio、Doccano、Prodigy）、标注项目管理、标注质量控制、主动学习策略、半监督标注、标注成本优化，以及构建高效标注团队的经验。",
+      "keywords": [
+        "数据标注",
+        "Label Studio",
+        "标注工具",
+        "主动学习",
+        "质量控制",
+        "标注效率"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    },
+    {
+      "id": "topic_063",
+      "series_id": "series_8",
+      "episode": 63,
+      "title": "合成数据生成技术",
+      "description": "解决数据稀缺的新思路：合成数据的原理与生成方法、LLM生成训练数据、数据增强技术、对抗生成网络（GAN）在数据合成中的应用、合成数据的质量评估，以及合成数据的实战案例。",
+      "keywords": [
+        "合成数据",
+        "数据生成",
+        "数据增强",
+        "GAN",
+        "LLM数据生成",
+        "数据评估"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_064",
+      "series_id": "series_8",
+      "episode": 64,
+      "title": "数据版本管理与血缘追踪",
+      "description": "数据工程的MLOps实践：DVC数据版本控制、数据血缘追踪、数据pipeline编排（Airflow、Prefect）、数据质量监控、数据漂移检测，以及构建可复现的数据工程体系。",
+      "keywords": [
+        "数据版本",
+        "DVC",
+        "数据血缘",
+        "数据编排",
+        "数据质量",
+        "MLOps"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_065",
+      "series_id": "series_8",
+      "episode": 65,
+      "title": "向量数据库深度实践",
+      "description": "向量数据库生产级实践：大规模向量索引（HNSW、IVF）、分布式部署、高可用架构、实时索引更新、向量搜索性能优化、混合查询实现，以及PB级向量数据库的运维经验。",
+      "keywords": [
+        "向量数据库",
+        "HNSW",
+        "分布式",
+        "高可用",
+        "索引优化",
+        "大规模检索"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_066",
+      "series_id": "series_8",
+      "episode": 66,
+      "title": "Embedding模型训练与优化",
+      "description": "定制化Embedding模型：Embedding训练原理（对比学习、SimCSE）、领域自适应训练、多语言Embedding、Embedding评估指标、模型蒸馏与压缩，以及如何为特定场景训练专属Embedding模型。",
+      "keywords": [
+        "Embedding训练",
+        "对比学习",
+        "SimCSE",
+        "领域自适应",
+        "模型蒸馏",
+        "向量表示"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_067",
+      "series_id": "series_8",
+      "episode": 67,
+      "title": "数据隐私保护技术",
+      "description": "AI数据隐私保护方案：差分隐私（Differential Privacy）、联邦学习（Federated Learning）、同态加密、安全多方计算、数据脱敏技术、隐私保护评估，以及如何在利用数据的同时保护用户隐私。",
+      "keywords": [
+        "数据隐私",
+        "差分隐私",
+        "联邦学习",
+        "同态加密",
+        "数据脱敏",
+        "隐私保护"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-12"
+    },
+    {
+      "id": "topic_068",
+      "series_id": "series_8",
+      "episode": 68,
+      "title": "数据质量评估与监控",
+      "description": "构建数据质量保障体系：数据完整性检查、一致性验证、准确性评估、时效性监控、数据质量打分、异常数据检测，以及建立数据质量监控dashboard的实践经验。",
+      "keywords": [
+        "数据质量",
+        "完整性检查",
+        "一致性验证",
+        "数据监控",
+        "异常检测",
+        "质量评分"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-13"
+    },
+    {
+      "id": "topic_069",
+      "series_id": "series_8",
+      "episode": 69,
+      "title": "多模态数据处理",
+      "description": "处理文本、图像、音频、视频等多模态数据：多模态数据预处理、对齐与融合、跨模态检索、多模态标注、数据格式统一、多模态数据增强，以及构建多模态数据pipeline的实践。",
+      "keywords": [
+        "多模态数据",
+        "数据预处理",
+        "跨模态",
+        "多模态标注",
+        "数据融合",
+        "多模态pipeline"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-13"
+    },
+    {
+      "id": "topic_070",
+      "series_id": "series_8",
+      "episode": 70,
+      "title": "AI数据平台架构设计",
+      "description": "构建企业级AI数据平台：数据湖架构、ETL pipeline设计、元数据管理、数据治理、数据目录、数据访问控制、数据成本优化，以及大规模AI数据平台的架构最佳实践。",
+      "keywords": [
+        "数据平台",
+        "数据湖",
+        "ETL",
+        "元数据管理",
+        "数据治理",
+        "平台架构"
+      ],
+      "difficulty": "架构设计",
+      "estimated_words": 14000,
+      "status": "pending",
+      "completed_at": "2026-01-09"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 8,
+    "total_estimated_words": 130000,
+    "completion_rate": "80.0",
+    "start_date": "2026-01-09",
+    "end_date": "2026-01-13"
+  }
+}

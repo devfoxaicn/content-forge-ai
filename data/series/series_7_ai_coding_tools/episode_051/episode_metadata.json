@@ -1,0 +1,19 @@
+{
+  "id": "topic_051",
+  "series_id": "series_7",
+  "episode": 51,
+  "title": "AI编程助手发展史与核心原理",
+  "description": "从TabNine到GitHub Copilot的演进历程：AI编程助手如何通过语言模型理解代码上下文、代码补全的技术原理、从统计模型到神经网络的范式转变，以及AI编程工具如何改变开发方式。",
+  "keywords": [
+    "AI编程助手",
+    "Copilot",
+    "代码补全",
+    "编程工具演进",
+    "代码理解",
+    "开发效率"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 11000,
+  "status": "completed",
+  "completed_at": "2026-01-11"
+}
