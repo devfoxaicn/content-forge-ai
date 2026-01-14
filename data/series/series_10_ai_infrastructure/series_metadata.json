@@ -45,8 +45,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 14000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-13"
     },
     {
       "id": "topic_088",
@@ -140,8 +140,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 12000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-13"
     },
     {
       "id": "topic_093",
@@ -299,10 +299,10 @@
   ],
   "statistics": {
     "total_episodes": 15,
-    "completed_episodes": 0,
+    "completed_episodes": 2,
     "total_estimated_words": 199000,
-    "completion_rate": "0.0",
+    "completion_rate": "13.3",
     "start_date": "2026-01-09",
-    "end_date": "2026-01-09"
+    "end_date": "2026-01-13"
   }
 }

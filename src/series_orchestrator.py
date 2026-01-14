@@ -1,7 +1,7 @@
 """
 100期技术博客系列生成协调器
 
-支持100期技术博客的系列化生成，使用新的存储结构
+只生成长文本技术博客，不生成社交内容
 """
 
 import sys
@@ -57,38 +57,24 @@ class SeriesOrchestrator:
         logger.info(f"SeriesOrchestrator initialized with {config_path}")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化所有Agent（内容工厂模式：精简版）"""
+        """初始化Agent（Series模式：只生成长文本）"""
         from src.agents.longform_generator import LongFormGeneratorAgent
-        from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
-        from src.agents.twitter_generator import TwitterGeneratorAgent
-        from src.agents.title_optimizer import TitleOptimizerAgent
-        from src.agents.image_generator import ImageGeneratorAgent
 
         agents = {}
 
         # 获取agent配置
         agents_config = self.config.get("agents", {})
 
-        # 初始化各个agent（移除不需要的agent）
-        agent_classes = {
-            "longform_generator": LongFormGeneratorAgent,
-            "xiaohongshu_refiner": XiaohongshuRefinerAgent,
-            "twitter_generator": TwitterGeneratorAgent,
-            "title_optimizer": TitleOptimizerAgent,
-            "image_generator": ImageGeneratorAgent,
-        }
-
-        for agent_name, agent_class in agent_classes.items():
-            agent_cfg = agents_config.get(agent_name, {})
-            if agent_cfg.get("enabled", True):
-                try:
-                    agents[agent_name] = agent_class(
-                        config=agent_cfg,
-                        prompts=self.prompts
-                    )
-                    logger.info(f"Initialized agent: {agent_name}")
-                except Exception as e:
-                    logger.error(f"Failed to initialize {agent_name}: {e}")
+        # 只初始化长文本生成Agent
+        if agents_config.get("longform_generator", {}).get("enabled", True):
+            try:
+                agents["longform_generator"] = LongFormGeneratorAgent(
+                    config=agents_config.get("longform_generator", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: longform_generator")
+            except Exception as e:
+                logger.error(f"Failed to initialize longform_generator: {e}")
 
         return agents
 
@@ -236,32 +222,31 @@ class SeriesOrchestrator:
         state: Dict[str, Any],
         storage: SeriesStorage
     ) -> Dict[str, Any]:
-        """执行内容生成工作流"""
+        """执行内容生成工作流（只生成长文本）"""
         import time
 
-        # 在每个agent调用之间添加延迟，避免API并发限制
         def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
             """安全调用agent，处理异常"""
             try:
                 logger.info(f"[{agent_name}] 开始执行...")
                 result = self.agents[agent_name].execute(state)
                 logger.info(f"[{agent_name}] 执行完成")
-                # 添加延迟避免API并发
                 time.sleep(2)
                 return result
             except Exception as e:
                 logger.error(f"[{agent_name}] 执行失败: {e}")
-                # 失败时也添加延迟
                 time.sleep(2)
                 return state
 
-        # 1. 长文本生成（最重要，必须成功）
+        # 长文本生成
         if "longform_generator" in self.agents:
             state = _call_agent_safely("longform_generator", state)
-            # 保存长文本（字段名：longform_article）
+
+            # 保存长文本
             if "longform_article" in state:
                 topic = state["current_topic"]
                 article = state["longform_article"]
+
                 # 构建Markdown内容
                 md_content = f"""# {article['title']}
 
@@ -276,82 +261,7 @@ class SeriesOrchestrator:
 """
                 filename = TopicFormatter.generate_markdown_filename(topic, "article")
                 storage.save_markdown("longform", filename, md_content)
-                logger.info("Saved longform article")
-
-        # 2. 小红书精炼
-        if "xiaohongshu_refiner" in self.agents:
-            state = _call_agent_safely("xiaohongshu_refiner", state)
-            # 保存小红书笔记（字段名：xiaohongshu_note）
-            if "xiaohongshu_note" in state:
-                topic = state["current_topic"]
-                note = state["xiaohongshu_note"]
-                # 构建Markdown内容
-                md_content = f"""# {note['title']}
-
-{note.get('intro', '')}
-
-{note.get('body', '')}
-
-{note.get('ending', '')}
-
----
-**标签**: {' '.join(note.get('hashtags', []))}
-**字数**: {note.get('word_count', 0)}
-**压缩率**: {note.get('compression_ratio', 'N/A')}
-"""
-                filename = TopicFormatter.generate_markdown_filename(topic, "note")
-                storage.save_markdown("xiaohongshu", filename, md_content)
-                logger.info("Saved Xiaohongshu note")
-
-        # 5. Twitter生成
-        if "twitter_generator" in self.agents:
-            state = _call_agent_safely("twitter_generator", state)
-            # 保存Twitter帖子（字段名：twitter_post）
-            if "twitter_post" in state:
-                topic = state["current_topic"]
-                twitter = state["twitter_post"]
-                # 构建Markdown内容
-                tweets_md = "\n\n".join([
-                    f"### Tweet {i+1}\n\n{tweet}"
-                    for i, tweet in enumerate(twitter.get('tweets', []))
-                ])
-                md_content = f"""# Twitter Thread
-
-**原文章**: {twitter.get('original_article_title', 'N/A')}
-**推文数量**: {twitter.get('tweet_count', 0)}
-**总字符数**: {twitter.get('total_characters', 0)}
-**风格**: {twitter.get('style', 'N/A')}
-
----
-
-{tweets_md}
-
----
-**话题标签**: {' '.join(twitter.get('hashtags', []))}
-**是否Thread**: {'是' if twitter.get('is_thread') else '否'}
-"""
-                filename = TopicFormatter.generate_markdown_filename(topic, "twitter")
-                storage.save_markdown("twitter", filename, md_content)
-                logger.info("Saved Twitter thread")
-
-        # 6. 标题优化
-        if "title_optimizer" in self.agents:
-            state = _call_agent_safely("title_optimizer", state)
-
-        # 7. 配图生成
-        if "image_generator" in self.agents:
-            state = _call_agent_safely("image_generator", state)
-            # 保存配图提示词（image_prompts是列表，需要转换为字符串）
-            if "image_prompts" in state and state["image_prompts"]:
-                topic = state["current_topic"]
-                prefix = TopicFormatter.generate_filename_prefix(topic)
-                # 将列表转换为格式化的字符串
-                prompts_text = "\n\n".join([
-                    f"图片 {i+1}:\n{prompt}"
-                    for i, prompt in enumerate(state["image_prompts"])
-                ])
-                storage.save_text("xiaohongshu", f"prompts_{prefix}.txt", prompts_text)
-                logger.info("Saved image prompts")
+                logger.info(f"Saved longform article: {filename}")
 
         return state
 

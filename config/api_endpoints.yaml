@@ -76,19 +76,6 @@ data_sources:
     datasets: "/datasets/list"
     dataset_url: "https://www.kaggle.com/datasets/{owner}/{slug}"
 
-# ==================== 发布平台端点 ====================
-publishing:
-  # 小红书
-  xiaohongshu:
-    base_url: "https://www.xiaohongshu.com"
-    explore: "/explore/{timestamp}"
-    mcp_server: "http://localhost:3000"
-  
-  # Twitter/X
-  twitter:
-    base_url: "https://twitter.com"
-    api_base: "https://api.twitter.com/2"
-
 # ==================== 研究数据源（示例） ====================
 research:
   # 示例域名，用于测试

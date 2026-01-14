@@ -1,0 +1,19 @@
+{
+  "id": "topic_078",
+  "series_id": "series_9",
+  "episode": 78,
+  "title": "电商AI：推荐与搜索优化",
+  "description": "电商AI全栈实践：商品推荐系统、智能搜索、用户画像构建、需求预测、库存优化、动态定价、视觉搜索，以及提升转化率的AI策略。",
+  "keywords": [
+    "电商AI",
+    "推荐系统",
+    "智能搜索",
+    "用户画像",
+    "需求预测",
+    "转化率优化"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "completed",
+  "completed_at": "2026-01-13"
+}

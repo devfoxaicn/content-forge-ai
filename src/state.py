@@ -51,8 +51,6 @@ class QualityReport(TypedDict):
     title_score: float
     content_value_score: float
     structure_score: float
-    platform_fit_score: float
-    viral_potential_score: float
     strengths: List[str]
     improvements: List[str]
     improved_version: Optional[str]

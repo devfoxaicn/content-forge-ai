@@ -1,0 +1,19 @@
+{
+  "id": "topic_083",
+  "series_id": "series_9",
+  "episode": 83,
+  "title": "AI翻译与本地化",
+  "description": "AI翻译技术实践：神经机器翻译、多语言模型、上下文感知翻译、领域自适应翻译、翻译质量评估、本地化策略，以及构建AI翻译系统的经验。",
+  "keywords": [
+    "AI翻译",
+    "神经机器翻译",
+    "多语言",
+    "本地化",
+    "翻译质量",
+    "跨语言"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

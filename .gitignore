@@ -51,5 +51,12 @@ htmlcov/
 *.backup
 *_backup.*
 
+# ==================== 数据目录（仅保留结构，排除临时数据）====================
+# 保留 series 目录的内容（这是核心产物）
+# 排除 daily 目录的旧数据（每日简报，保留最新即可）
+data/daily/202601*/
+data/custom/
+data/refine/
+
 # ==================== Jupyter Notebook ====================
 .ipynbcheckpoints/

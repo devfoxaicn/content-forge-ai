@@ -1,0 +1,19 @@
+{
+  "id": "topic_080",
+  "series_id": "series_9",
+  "episode": 80,
+  "title": "AI内容审核与安全治理",
+  "description": "平台内容安全解决方案：文本审核、图像审核、视频审核、虚假信息检测、仇恨言论识别、敏感内容过滤，以及构建AI内容审核体系的最佳实践。",
+  "keywords": [
+    "内容审核",
+    "安全治理",
+    "虚假信息",
+    "仇恨言论",
+    "内容安全",
+    "AI审核"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 12000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

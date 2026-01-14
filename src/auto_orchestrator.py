@@ -18,12 +18,7 @@ from langgraph.graph import StateGraph, END
 from src.state import create_initial_state, update_state, add_agent_to_order, calculate_execution_time
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
 from src.agents.trends_digest_agent import TrendsDigestAgent
-from src.agents.longform_generator import LongFormGeneratorAgent
-from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
-from src.agents.twitter_generator import TwitterGeneratorAgent
-from src.agents.title_optimizer import TitleOptimizerAgent
-from src.agents.image_generator import ImageGeneratorAgent
-from src.utils.storage import get_storage, BatchStorage
+from src.utils.storage_v2 import StorageFactory
 
 # 日志配置
 from loguru import logger
@@ -32,28 +27,21 @@ from loguru import logger
 class AutoContentOrchestrator:
     """自动化内容生成协调器 - 新工作流"""
 
-    def __init__(self, config_path: str = "config/config.yaml",
-                 storage_mode: str = "daily", batch_name: str = None):
+    def __init__(self, config_path: str = "config/config.yaml"):
         """
-        初始化自动化协调器
+        初始化自动化协调器（Auto模式：每日热点简报）
 
         Args:
             config_path: 配置文件路径
-            storage_mode: 存储模式，"daily"（每日自动）或 "batch"（批量生成）
-            batch_name: 批次名称（storage_mode="batch"时必需）
         """
         self.config = self._load_config(config_path)
         self.prompts = self._load_prompts()
-        self.storage_mode = storage_mode
         self._setup_logging()
 
-        # 根据存储模式初始化存储管理器
-        if storage_mode == "batch" and batch_name:
-            self.storage = BatchStorage(batch_name)
-            logger.info(f"批量存储模式: {batch_name}")
-        else:
-            # 初始化存储管理器（默认每日模式）
-            self.storage = get_storage(self.config.get("storage", {}).get("base_dir", "data"))
+        # 初始化存储管理器（Auto模式：每日热点）
+        self.storage = StorageFactory.create_daily(
+            base_dir=self.config.get("storage", {}).get("base_dir", "data")
+        )
 
         # 初始化Agent
         self.agents = self._init_agents()
@@ -61,8 +49,8 @@ class AutoContentOrchestrator:
         # 构建工作流
         self.workflow = self._build_workflow()
 
-        logger.info("自动化内容生成协调器初始化完成（新工作流）")
-        logger.info(f"数据存储目录: {self.storage.get_date_dir()}")
+        logger.info("自动化内容生成协调器初始化完成（Auto模式：每日热点简报）")
+        logger.info(f"数据存储目录: {self.storage.get_root_dir()}")
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """加载配置文件"""
@@ -118,10 +106,11 @@ class AutoContentOrchestrator:
             )
 
     def _init_agents(self) -> Dict[str, Any]:
-        """初始化所有Agent（内容工厂模式：精简版）"""
+        """初始化所有Agent（Auto模式：只生成简报）"""
         agents = {}
         agents_config = self.config.get("agents", {})
 
+        # Auto模式只初始化简报相关的Agent
         # AI热点分析Agent（真实API版本）
         if agents_config.get("ai_trend_analyzer", {}).get("enabled", True):
             agents["ai_trend_analyzer"] = RealAITrendAnalyzerAgent(self.config, self.prompts)
@@ -130,40 +119,21 @@ class AutoContentOrchestrator:
         if agents_config.get("trends_digest", {}).get("enabled", True):
             agents["trends_digest"] = TrendsDigestAgent(self.config, self.prompts)
 
-        # 长文本生成Agent（默认禁用，手动执行时启用）
-        if agents_config.get("longform_generator", {}).get("enabled", False):
-            agents["longform_generator"] = LongFormGeneratorAgent(self.config, self.prompts)
+        # 注意：Auto模式下不初始化长文本、小红书、Twitter等Agent
+        # 如需生成完整内容，请使用 Custom、Refine 或 Series 模式
 
-        # 小红书笔记精炼Agent（默认禁用，手动执行时启用）
-        if agents_config.get("xiaohongshu_refiner", {}).get("enabled", False):
-            agents["xiaohongshu_refiner"] = XiaohongshuRefinerAgent(self.config, self.prompts)
-
-        # Twitter帖子生成Agent（默认禁用，手动执行时启用）
-        if agents_config.get("twitter_generator", {}).get("enabled", False):
-            agents["twitter_generator"] = TwitterGeneratorAgent(self.config, self.prompts)
-
-        # 标题优化Agent（辅助，启用）
-        if agents_config.get("title_optimizer", {}).get("enabled", True):
-            agents["title_optimizer"] = TitleOptimizerAgent(self.config, self.prompts)
-
-        # 图片生成Agent（辅助，仅生成提示词）
-        if agents_config.get("image_generator", {}).get("enabled", True):
-            agents["image_generator"] = ImageGeneratorAgent(self.config, self.prompts)
-
-        logger.info(f"已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
+        logger.info(f"Auto模式已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
         return agents
 
     def _build_workflow(self) -> StateGraph:
-        """构建自动化工作流（内容工厂模式：精简版）"""
+        """构建自动化工作流（Auto模式：简报生成）"""
         workflow = StateGraph(dict)
 
         # 添加Agent节点
         for agent_name, agent in self.agents.items():
             workflow.add_node(agent_name, self._create_agent_node(agent))
 
-        # 定义执行顺序：
-        # 每日简报模式：AI热点分析 → 热点汇总 → END
-        # 手动内容生成模式：... → 长文本生成 → 小红书精炼 → Twitter → 标题优化 → 图像生成 → END
+        # 定义执行顺序：AI热点分析 → 热点汇总 → END
         if "ai_trend_analyzer" in self.agents:
             workflow.set_entry_point("ai_trend_analyzer")
 
@@ -173,32 +143,7 @@ class AutoContentOrchestrator:
                 workflow.add_edge(last_node, "trends_digest")
                 last_node = "trends_digest"
 
-            # 手动内容生成流程（仅在启用时执行）
-            if "longform_generator" in self.agents:
-                workflow.add_edge(last_node, "longform_generator")
-                last_node = "longform_generator"
-
-                # 顺序执行：长文本 -> 小红书 -> Twitter -> 标题优化 -> 图像生成
-                if "xiaohongshu_refiner" in self.agents:
-                    workflow.add_edge(last_node, "xiaohongshu_refiner")
-                    last_node = "xiaohongshu_refiner"
-
-                if "twitter_generator" in self.agents:
-                    workflow.add_edge(last_node, "twitter_generator")
-                    last_node = "twitter_generator"
-
-                if "title_optimizer" in self.agents:
-                    workflow.add_edge(last_node, "title_optimizer")
-                    last_node = "title_optimizer"
-
-                if "image_generator" in self.agents:
-                    workflow.add_edge(last_node, "image_generator")
-                    last_node = "image_generator"
-
-                workflow.add_edge(last_node, END)
-            else:
-                # 只生成简报
-                workflow.add_edge(last_node, END)
+            workflow.add_edge(last_node, END)
 
         return workflow.compile()
 
@@ -289,167 +234,26 @@ class AutoContentOrchestrator:
             raise
 
     def _save_output(self, state: Dict[str, Any]):
-        """保存输出结果到按日期分层的目录"""
+        """保存输出结果到按日期分层的目录（Auto模式：只保存原始数据和简报）"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # 确定文件标识符
-        topic = state.get("topic", "unknown")
-        if topic == "auto":
-            # 如果是auto模式，使用实际的热点标题
-            selected_topic = state.get("selected_ai_topic", {})
-            topic = selected_topic.get("title", "auto")
+        # 1. 保存AI热点原始数据（JSON格式）
+        if state.get("ai_hot_topics"):
+            topics = state["ai_hot_topics"]
+            raw_filename = f"raw_topics_{timestamp}.json"
+            raw_data = {
+                "fetched_at": datetime.now().isoformat(),
+                "total_topics": len(topics),
+                "topics": topics
+            }
+            raw_file = self.storage.save_json("raw", raw_filename, raw_data)
+            logger.info(f"AI热点原始数据已保存: {raw_file}")
 
-        # 清理文件名（移除特殊字符，限制长度）
-        topic = topic.replace(" ", "_").replace("/", "_").replace("\\", "_")[:30]
-
-        # 1. 保存完整工作流输出（JSON格式）
-        filename = f"workflow_{topic}_{timestamp}.json"
-        output_data = {
-            "workflow": "auto_v2",
-            "metadata": {
-                "generated_at": datetime.now().isoformat(),
-                "topic": state.get("topic"),
-                "selected_ai_topic": state.get("selected_ai_topic", {}).get("title"),
-                "execution_time": state.get("execution_time"),
-                "agent_execution_order": state.get("agent_execution_order", [])
-            },
-            "content": {
-                "ai_hot_topics": state.get("ai_hot_topics"),
-                "longform_article": {
-                    "title": state.get("longform_article", {}).get("title"),
-                    "word_count": state.get("longform_article", {}).get("word_count"),
-                    "reading_time": state.get("longform_article", {}).get("reading_time")
-                },
-                "xiaohongshu_note": {
-                    "title": state.get("xiaohongshu_note", {}).get("title"),
-                    "word_count": state.get("xiaohongshu_note", {}).get("word_count"),
-                    "compression_ratio": state.get("xiaohongshu_note", {}).get("compression_ratio")
-                },
-                "optimized_titles": state.get("optimized_titles"),
-                "recommended_title": state.get("recommended_title"),
-                "image_suggestions": state.get("image_suggestions"),
-                "generated_images": state.get("generated_images", []),
-                "image_prompts": state.get("image_prompts", []),
-                "quality_report": state.get("quality_report")
-            },
-            "publish": {
-                "published": state.get("published", False),
-                "publish_result": state.get("publish_result")
-            },
-            "status": "success" if not state.get("error_message") else "failed"
-        }
-
-        # 不再保存完整工作流JSON文件（精简输出）
-
-        # 2. 保存长文本文章（只保存Markdown格式）
-        if state.get("longform_article"):
-            article = state["longform_article"]
-            md_filename = f"article_{topic}_{timestamp}.md"
-            md_content = f"""# {article['title']}
-
-{article.get('full_content', '')}
-
----
-**元数据**:
-- 字数: {article.get('word_count', 0)}
-- 阅读时间: {article.get('reading_time', 'N/A')}
-- 来源热点: {article.get('source_topic', 'N/A')}
-- 标签: {', '.join(article.get('tags', []))}
-- 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-"""
-            md_file = self.storage.save_markdown("longform", md_filename, md_content)
-            logger.info(f"长文本Markdown已保存: {md_file}")
-
-        # 3. 保存小红书笔记（只保存Markdown格式）
-        if state.get("xiaohongshu_note"):
-            note = state["xiaohongshu_note"]
-            note_md_filename = f"note_{topic}_{timestamp}.md"
-
-            # 检查intro是否已经包含标题，避免重复
-            intro_text = note.get('intro', '')
-            title_text = note['title']
-
-            # 如果intro已经包含标题（检查intro开头是否与标题相似），则不再添加主标题行
-            if intro_text and title_text and title_text.strip() in intro_text.strip():
-                # intro已包含标题，直接使用intro作为开头
-                note_md_content = f"""{intro_text}
-
-{note.get('body', '')}
-
-{note.get('ending', '')}
-
----
-**标签**: {' '.join(note.get('hashtags', []))}
-**字数**: {note.get('word_count', 0)}
-**压缩率**: {note.get('compression_ratio', 'N/A')}
-"""
-            else:
-                # intro不包含标题，添加主标题
-                note_md_content = f"""# {title_text}
-
-{intro_text}
-
-{note.get('body', '')}
-
-{note.get('ending', '')}
-
----
-**标签**: {' '.join(note.get('hashtags', []))}
-**字数**: {note.get('word_count', 0)}
-**压缩率**: {note.get('compression_ratio', 'N/A')}
-"""
-            note_md_file = self.storage.save_markdown("xiaohongshu", note_md_filename, note_md_content)
-            logger.info(f"小红书笔记Markdown已保存: {note_md_file}")
-
-        # 4. 保存Twitter帖子（只保存Markdown格式）
-        if state.get("twitter_post"):
-            twitter_post = state["twitter_post"]
-            # 保存Markdown格式（用于阅读）
-            twitter_md_filename = f"twitter_{topic}_{timestamp}.md"
-            twitter_md_content = f"""# Twitter Thread
-
-**原文章**: {twitter_post.get('original_article_title', 'N/A')}
-**推文数量**: {twitter_post.get('tweet_count', 0)}
-**总字符数**: {twitter_post.get('total_characters', 0)}
-**风格**: {twitter_post.get('style', 'N/A')}
-
----
-
-{self._format_twitter_thread(twitter_post.get('tweets', []))}
-
----
-**话题标签**: {' '.join(twitter_post.get('hashtags', []))}
-**是否Thread**: {'是' if twitter_post.get('is_thread') else '否'}
-"""
-            twitter_md_file = self.storage.save_markdown("twitter", twitter_md_filename, twitter_md_content)
-            logger.info(f"Twitter帖子Markdown已保存: {twitter_md_file}")
-
-            # 保存图片提示词到twitter目录（Twitter配图）
-            if state.get("image_prompts"):
-                twitter_prompts_filename = f"prompts_{topic}_{timestamp}.txt"
-                prompts_content = "\n\n".join([
-                    f"Tweet {i+1} 配图:\n{prompt}"
-                    for i, prompt in enumerate(state["image_prompts"][:twitter_post.get('tweet_count', 1)])
-                ])
-                twitter_prompts_file = self.storage.save_text("twitter", twitter_prompts_filename, prompts_content)
-                logger.info(f"Twitter配图提示词已保存: {twitter_prompts_file}")
-
-        # 5. 保存图片提示词到对应目录（小红书）
-        if state.get("image_prompts"):
-            # 提示词通常与小红书笔记关联，保存到xiaohongshu目录
-            prompts_filename = f"prompts_{topic}_{timestamp}.txt"
-            prompts_content = "\n\n".join([
-                f"图片 {i+1}:\n{prompt}"
-                for i, prompt in enumerate(state["image_prompts"])
-            ])
-            prompts_file = self.storage.save_text("xiaohongshu", prompts_filename, prompts_content)
-            logger.info(f"图片提示词已保存: {prompts_file}")
-
-        # 5. 保存热点简报（如果有）
+        # 2. 保存热点简报
         if state.get("trends_digest"):
             self._save_digest(state)
 
-        logger.success(f"所有内容已保存到日期目录: {self.storage.get_date_dir()}")
+        logger.success(f"Auto模式内容已保存到: {self.storage.get_date_dir()}")
 
     def _format_twitter_thread(self, tweets: list) -> str:
         """格式化Twitter thread为Markdown"""
@@ -500,25 +304,10 @@ class AutoContentOrchestrator:
     def _print_summary(self, state: Dict[str, Any]):
         """打印结果摘要"""
         print("\n" + "="*60)
-        print("📝 自动化内容生成完成（新工作流）")
+        print("📝 Auto模式 - 热点简报生成完成")
         print("="*60)
 
-        print(f"主题领域: {state.get('topic', 'N/A')}")
-        print(f"AI热点话题: {state.get('selected_ai_topic', {}).get('title', 'N/A')}")
-        print(f"技术文章字数: {state.get('longform_article', {}).get('word_count', 'N/A')}")
-        print(f"小红书笔记字数: {state.get('xiaohongshu_note', {}).get('word_count', 'N/A')}")
-        print(f"内容压缩率: {state.get('xiaohongshu_note', {}).get('compression_ratio', 'N/A')}")
-
-        # Twitter帖子信息（新增）
-        if state.get('twitter_post'):
-            twitter = state['twitter_post']
-            print(f"\n🐦 Twitter帖子: {twitter.get('tweet_count', 0)} 条推文")
-            print(f"   总字符数: {twitter.get('total_characters', 0)}")
-            print(f"   平均字符: {twitter.get('average_characters', 0)} / 条")
-            print(f"   风格: {twitter.get('style', 'N/A')}")
-            print(f"   形式: {'Thread' if twitter.get('is_thread') else '单条推文'}")
-
-        # 热点简报信息（新增）
+        # 热点简报信息
         if state.get('trends_digest'):
             digest = state['trends_digest']
             print(f"\n📰 热点简报: {digest.get('title', 'N/A')}")
@@ -527,27 +316,12 @@ class AutoContentOrchestrator:
             print(f"   字数: {digest.get('word_count', 0)} 字")
             print(f"   阅读时间: {digest.get('reading_time', 'N/A')}")
 
-        # 图片生成信息
-        generated_images = state.get('generated_images', [])
-        if generated_images:
-            print(f"生成图片: {len(generated_images)} 张")
-            for i, img in enumerate(generated_images, 1):
-                if img.get('local_path'):
-                    print(f"  图片{i}: {img['local_path']}")
-                elif img.get('url'):
-                    print(f"  图片{i}: {img['url']}")
-                else:
-                    print(f"  图片{i}: 提示词已保存")
-        elif state.get('image_prompts'):
-            print(f"图片提示词: {len(state.get('image_prompts', []))} 个（已保存）")
+        # AI热点信息
+        hot_topics = state.get('ai_hot_topics', [])
+        if hot_topics:
+            print(f"\n🔥 获取到 {len(hot_topics)} 个AI热点")
 
-        quality_report = state.get('quality_report')
-        quality_score = quality_report.get('overall_score', 'N/A') if quality_report else 'N/A'
-        print(f"质量评分: {quality_score}/10")
-        print(f"是否发布: {'是' if state.get('published') else '否（已保存为草稿）'}")
-        print(f"执行耗时: {state.get('execution_time', 0):.2f}秒")
-
-        if state.get('recommended_title'):
-            print(f"\n推荐标题: {state['recommended_title']}")
-
+        print(f"\n⏱️  执行耗时: {state.get('execution_time', 0):.2f}秒")
+        print(f"📁 存储位置: {self.storage.get_date_dir()}")
+        print("\n💡 提示：如需生成完整内容，请使用 Custom、Refine 或 Series 模式")
         print("="*60 + "\n")

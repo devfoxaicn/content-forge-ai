@@ -1,9 +1,11 @@
 """
 统一存储管理系统 v2.0
 
-支持两种内容模式：
+支持四种内容模式：
 1. Daily Mode: 每日热点内容
 2. Series Mode: 100期技术博客系列
+3. Custom Mode: 用户自定义内容生成
+4. Refine Mode: 内容精炼（多平台转换）
 
 存储结构：
 data/
@@ -24,6 +26,20 @@ data/
 │       │   ├── xiaohongshu/
 │       │   └── twitter/
 │       └── metadata.json
+│
+├── custom/            # 用户自定义内容
+│   └── {timestamp}_{topic}/
+│       ├── raw/
+│       ├── longform/
+│       ├── xiaohongshu/
+│       └── twitter/
+│
+├── refine/            # 内容精炼
+│   └── {source_name}/
+│       ├── raw/
+│       ├── wechat/
+│       ├── xiaohongshu/
+│       └── twitter/
 │
 └── archive/           # 归档内容
 """
@@ -185,6 +201,93 @@ class SeriesStorage(BaseStorage):
         return filepath
 
 
+class CustomStorage(BaseStorage):
+    """自定义内容存储
+
+    路径：data/custom/{storage_id}/
+    storage_id 格式：YYYYMMDD_HHMMSS_topic
+    """
+
+    def __init__(
+        self,
+        storage_id: str,
+        base_dir: str = "data"
+    ):
+        """
+        初始化自定义内容存储
+
+        Args:
+            storage_id: 存储ID，格式为 YYYYMMDD_HHMMSS_topic
+            base_dir: 基础存储目录
+        """
+        super().__init__(base_dir)
+
+        self.storage_id = storage_id
+
+        # 创建 custom/{storage_id} 目录
+        self.custom_dir = self.base_dir / "custom" / storage_id
+        self.custom_dir.mkdir(parents=True, exist_ok=True)
+        # Custom 模式只需要 longform, xiaohongshu, twitter 目录
+        self._create_custom_subdirs(self.custom_dir)
+
+    def _create_custom_subdirs(self, parent_dir: Path) -> None:
+        """创建 Custom 模式专用子目录"""
+        subdirs = ["longform", "xiaohongshu", "twitter"]
+        for subdir in subdirs:
+            (parent_dir / subdir).mkdir(exist_ok=True)
+
+    def get_root_dir(self) -> Path:
+        return self.custom_dir
+
+    def get_storage_id(self) -> str:
+        return self.storage_id
+
+
+class RefineStorage(BaseStorage):
+    """内容精炼存储
+
+    路径：data/refine/{source_name}/
+
+    注意：Refine 模式需要支持 wechat 目录（HTML 格式）
+    """
+
+    def __init__(
+        self,
+        source_name: str,
+        base_dir: str = "data"
+    ):
+        """
+        初始化精炼内容存储
+
+        Args:
+            source_name: 源文件名称（不含扩展名）
+            base_dir: 基础存储目录
+        """
+        super().__init__(base_dir)
+
+        self.source_name = source_name
+
+        # 创建 refine/{source_name} 目录
+        self.refine_dir = self.base_dir / "refine" / source_name
+        self.refine_dir.mkdir(parents=True, exist_ok=True)
+
+        # Refine 模式需要额外的 wechat 目录
+        self._create_refine_subdirs(self.refine_dir)
+
+    def _create_refine_subdirs(self, parent_dir: Path) -> None:
+        """创建精炼模式专用子目录"""
+        # 标准子目录
+        subdirs = ["raw", "xiaohongshu", "twitter", "wechat"]
+        for subdir in subdirs:
+            (parent_dir / subdir).mkdir(exist_ok=True)
+
+    def get_root_dir(self) -> Path:
+        return self.refine_dir
+
+    def get_source_name(self) -> str:
+        return self.source_name
+
+
 class StorageFactory:
     """存储工厂类 - 统一创建存储实例"""
 
@@ -206,18 +309,36 @@ class StorageFactory:
         return SeriesStorage(series_id, episode_number, base_dir)
 
     @staticmethod
+    def create_custom(
+        storage_id: str,
+        base_dir: str = "data"
+    ) -> "CustomStorage":
+        """创建自定义内容存储"""
+        return CustomStorage(storage_id, base_dir)
+
+    @staticmethod
+    def create_refine(
+        source_name: str,
+        base_dir: str = "data"
+    ) -> "RefineStorage":
+        """创建精炼内容存储"""
+        return RefineStorage(source_name, base_dir)
+
+    @staticmethod
     def create_storage(
-        mode: Literal["daily", "series"],
+        mode: Literal["daily", "series", "custom", "refine"],
         **kwargs
     ) -> BaseStorage:
         """
         通用存储创建方法
 
         Args:
-            mode: 存储模式 ("daily", "series")
+            mode: 存储模式 ("daily", "series", "custom", "refine")
             **kwargs: 模式特定参数
                 - daily: date (可选)
                 - series: series_id, episode_number
+                - custom: storage_id
+                - refine: source_name
 
         Returns:
             BaseStorage: 对应的存储实例
@@ -231,6 +352,16 @@ class StorageFactory:
             return StorageFactory.create_series(
                 series_id=kwargs["series_id"],
                 episode_number=kwargs["episode_number"],
+                base_dir=kwargs.get("base_dir", "data")
+            )
+        elif mode == "custom":
+            return StorageFactory.create_custom(
+                storage_id=kwargs["storage_id"],
+                base_dir=kwargs.get("base_dir", "data")
+            )
+        elif mode == "refine":
+            return StorageFactory.create_refine(
+                source_name=kwargs["source_name"],
                 base_dir=kwargs.get("base_dir", "data")
             )
         else:
@@ -248,6 +379,8 @@ __all__ = [
     "BaseStorage",
     "DailyStorage",
     "SeriesStorage",
+    "CustomStorage",
+    "RefineStorage",
     "StorageFactory",
     "get_storage",
 ]
