@@ -9,37 +9,53 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Set PYTHONPATH (required for all commands)
 export PYTHONPATH=/Users/z/Documents/work/content-forge-ai
 
-# Generate single episode (series mode)
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1
+# ========== Auto Mode (AI trends-based) ==========
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --once
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --topic "AI技术"
 
-# View series progress
+# ========== Series Mode (100-episode blog series) ==========
+# View progress
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --progress
-
+# Generate single episode
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1
+# Generate entire series
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --series series_1
 # Batch generate (auto-skips completed)
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --all --start 1 --end 10
 
-# Auto mode (AI trends-based)
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --once
+# ========== Custom Mode (user-defined topics) ==========
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode custom --topic "RAG技术原理与实战"
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode custom --topic "RAG技术" --prompt "详细介绍架构和实战"
+
+# ========== Refine Mode (multi-platform content refining) ==========
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode refine --input article.md
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode refine --input article.md --platforms wechat xiaohongshu
 ```
 
 **Core Files**:
-- `src/main.py` - Unified entry point (use `--mode` to switch)
+- `src/main.py` - Unified entry point (use `--mode` to switch between auto/series/custom/refine)
 - `config/config.yaml` - Main config (LLM, agents, data sources)
 - `config/blog_topics_100_complete.json` - 100-episode content plan
 - `src/utils/series_manager.py` - Series management (SeriesMetadata, SeriesPathManager)
-- `src/utils/storage_v2.py` - Unified storage (StorageFactory)
+- `src/utils/storage_v2.py` - Unified storage (StorageFactory with 4 modes)
 
 **Key Architecture Points**:
-1. **Dual Orchestrator Pattern**: Auto mode (AI trends) vs Series mode (100 preset topics)
+1. **Four-Mode Architecture**: Auto (AI trends), Series (100 topics), Custom (user-defined), Refine (multi-platform)
 2. **Series Path Format**: `series_X_descriptive_name` (e.g., `series_1_llm_foundation`)
 3. **Immutable State Updates**: Use `{**state, **updates}` pattern
 4. **Agent Return Contract**: `execute()` must return complete state dict
 
 ## Project Overview
 
-ContentForge AI v2.5 is a LangChain/LangGraph-based automated content production system supporting dual modes:
+ContentForge AI v2.6 is a LangChain/LangGraph-based automated content production system supporting four modes:
 
-**Core Workflow**: AI trend fetching (7 data sources) → Trend digest → Deep research (web search) → Longform generation (staged) → Quality check (code review + fact check) → Xiaohongshu/Twitter generation → Title optimization → Image prompts → Quality evaluation
+**Core Workflow**: AI trend fetching (7 data sources) → Trend digest → Deep research (web search) → Longform generation (staged) → Quality check (code review + fact check) → Multi-platform generation (WeChat/Xiaohongshu/Twitter) → Title optimization → Image prompts → Quality evaluation
+
+**Four Modes**:
+1. **Auto Mode** - AI trend tracking and digest generation (daily automation)
+2. **Series Mode** - 100-episode technical blog series (systematic content library)
+3. **Custom Mode** - User-defined topic content generation (on-demand)
+4. **Refine Mode** - Multi-platform content refining (WeChat HTML, Xiaohongshu, Twitter)
 
 ## Environment Setup
 
@@ -62,10 +78,10 @@ ContentForge AI v2.5 is a LangChain/LangGraph-based automated content production
 
 ## Command Reference
 
-**Unified Entry** (`src/main.py:102-145`):
+**Unified Entry** (`src/main.py`):
 
 **Global Parameters**:
-- `--mode {auto,series}` - Mode selection (default: auto)
+- `--mode {auto,series,custom,refine}` - Mode selection (default: auto)
 
 **Auto Mode Parameters**:
 - `--topic STR` - Content topic identifier (optional, for file naming only)
@@ -84,7 +100,20 @@ ContentForge AI v2.5 is a LangChain/LangGraph-based automated content production
 - `--all` - Generate all in range
 - `--progress` - Show progress only
 
-**Important**: In auto mode, `--topic` is **only for file naming** - actual content is fully auto-generated from real-time AI trends.
+**Custom Mode Parameters**:
+- `--topic STR` - Content topic/keywords (required)
+- `--prompt STR` - Detailed content requirements (optional)
+- `--audience STR` - Target audience (default: "技术从业者")
+- `--words INT` - Target word count (optional)
+- `--style {technical,practical,tutorial}` - Article style (optional)
+
+**Refine Mode Parameters**:
+- `--input PATH` - Input file path (required)
+- `--platforms {wechat,xiaohongshu,twitter}` - Target platforms (default: all three)
+
+**Important**:
+- In auto mode, `--topic` is **only for file naming** - actual content is fully auto-generated from real-time AI trends
+- In custom mode, `--topic` is the actual content theme to generate
 
 ## Architecture Overview
 
@@ -109,18 +138,18 @@ ContentForge AI v2.5 is a LangChain/LangGraph-based automated content production
 - Implement standard `execute(state: Dict) -> Dict` interface
 - Unified logging, error handling, LLM calls
 
-### Dual Orchestrator Comparison
+### Four-Orchestrator Comparison
 
-| Feature | AutoContentOrchestrator | SeriesOrchestrator |
-|---------|-------------------------|-------------------|
-| **File** | `src/auto_orchestrator.py` | `src/series_orchestrator.py` |
-| **Data Source** | 7 real-time APIs | 100 preset topics |
-| **Trigger** | Scheduled or manual | Manual execution |
-| **Storage** | `data/daily/YYYYMMDD/` | `data/series/{id}/episode_{xxx}/` |
-| **Agents** | Full 13 agents | Optimized 8 agents |
-| **Workflow** | LangGraph graph execution | Sequential with error recovery |
-| **Metadata** | Simple execution tracking | Full progress & state management |
-| **State Fields** | Uses `trending_topics` | Uses `current_topic` + `selected_ai_topic` |
+| Feature | AutoContentOrchestrator | SeriesOrchestrator | CustomContentOrchestrator | RefineOrchestrator |
+|---------|-------------------------|-------------------|--------------------------|-------------------|
+| **File** | `src/auto_orchestrator.py` | `src/series_orchestrator.py` | `src/custom_orchestrator.py` | `src/refine_orchestrator.py` |
+| **Data Source** | 7 real-time APIs | 100 preset topics | User-defined keywords | Input file |
+| **Trigger** | Scheduled or manual | Manual execution | Manual execution | Manual execution |
+| **Storage** | `data/daily/YYYYMMDD/` | `data/series/{id}/episode_{xxx}/` | `data/custom/{timestamp}_topic/` | `data/refine/{source_name}/` |
+| **Output** | Raw data + Digest | Longform articles | Longform + Social content | Multi-platform content |
+| **Workflow** | LangGraph graph execution | Sequential with error recovery | Sequential execution | Sequential execution |
+| **State Fields** | Uses `trending_topics` | Uses `current_topic` + `selected_ai_topic` | Uses `selected_ai_topic` | Uses `longform_article` |
+| **Primary Use** | Daily trend tracking | Systematic content library | On-demand content | Multi-platform publishing |
 
 ### Auto Workflow Agent Chain
 
@@ -245,42 +274,54 @@ base_url = api_config.get_endpoint("llm.zhipuai.base_url")
 **Storage Structure**:
 ```
 data/
-├── daily/                    # Daily trends mode
+├── daily/                    # Auto mode (trends + digest)
 │   └── YYYYMMDD/
 │       ├── raw/
-│       ├── digest/
+│       └── digest/
+│
+├── series/                   # Series mode (100-episode blog series)
+│   └── {series_id}/
+│       ├── episode_{xxx}/
+│       │   └── longform/
+│       └── series_metadata.json
+│
+├── custom/                   # Custom mode (user-defined content)
+│   └── {timestamp}_{topic}/
 │       ├── longform/
 │       ├── xiaohongshu/
 │       └── twitter/
 │
-├── series/                   # 100-episode series
-│   └── {series_id}/
-│       ├── episode_{xxx}/
-│       │   ├── raw/
-│       │   ├── digest/
-│       │   ├── longform/
-│       │   ├── xiaohongshu/
-│       │   └── twitter/
-│       └── series_metadata.json
-│
-└── archive/                  # Archived content (reserved)
+└── refine/                   # Refine mode (multi-platform content)
+    └── {source_name}/
+        ├── raw/
+        ├── wechat/
+        ├── xiaohongshu/
+        └── twitter/
 ```
 
 **Usage**:
 ```python
 from src.utils.storage_v2 import StorageFactory
 
-# Daily trends mode
+# Auto mode (daily trends)
 daily_storage = StorageFactory.create_daily()
-daily_storage.save_markdown("longform", "article.md", content)
+daily_storage.save_markdown("digest", "digest.md", content)
 
-# 100-episode series mode
+# Series mode (100-episode series)
 series_storage = StorageFactory.create_series(
     series_id="series_1_llm_foundation",
     episode_number=1
 )
 series_storage.save_markdown("longform", "article.md", content)
 series_storage.save_episode_metadata(metadata)
+
+# Custom mode (user-defined content)
+custom_storage = StorageFactory.create_custom("20260114_120000_RAG技术")
+custom_storage.save_markdown("longform", "article.md", content)
+
+# Refine mode (multi-platform)
+refine_storage = StorageFactory.create_refine("my_article")
+refine_storage.save_text("wechat", "article.html", html_content)
 ```
 
 **Series Metadata Management**:
@@ -644,6 +685,7 @@ agents:
 | `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
 | `XiaohongshuRefinerAgent` | `xiaohongshu_refiner.py` | Xiaohongshu note refinement |
 | `TwitterGeneratorAgent` | `twitter_generator.py` | Twitter post generation |
+| `WechatGeneratorAgent` | `wechat_generator.py` | WeChat HTML generation |
 | `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
 | `ImageGeneratorAgent` | `image_generator.py` | Image prompt generation |
 
@@ -654,5 +696,5 @@ agents:
 
 ---
 
-**Version**: v2.5
-**Updated**: 2026-01-13
+**Version**: v2.6
+**Updated**: 2026-01-14
