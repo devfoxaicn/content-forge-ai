@@ -1,0 +1,19 @@
+{
+  "id": "topic_096",
+  "series_id": "series_10",
+  "episode": 96,
+  "title": "AI系统可观测性平台",
+  "description": "构建AI可观测性体系：Metrics监控、分布式追踪、日志聚合、性能分析、资源监控、业务指标，以及打造一体化AI可观测性平台的实践经验。",
+  "keywords": [
+    "可观测性",
+    "监控",
+    "分布式追踪",
+    "日志聚合",
+    "性能分析",
+    "监控平台"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

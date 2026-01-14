@@ -1967,8 +1967,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 12000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_096",
@@ -1986,8 +1986,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 13000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_097",
@@ -2005,8 +2005,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 14000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_098",
@@ -2024,8 +2024,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 12000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_099",
@@ -2063,8 +2063,8 @@
       ],
       "difficulty": "综合",
       "estimated_words": 15000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     }
   ],
   "agent_overrides": {
