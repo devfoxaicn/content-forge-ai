@@ -1,0 +1,19 @@
+{
+  "id": "topic_093",
+  "series_id": "series_10",
+  "episode": 93,
+  "title": "云原生AI架构（K8s + AI）",
+  "description": "云原生AI实践：Kubernetes上的AI工作负载调度、GPU虚拟化、Kubeflow流水线、模型注册中心、容器化推理服务、多云策略，以及构建云原生AI平台的架构设计。",
+  "keywords": [
+    "云原生AI",
+    "Kubernetes",
+    "Kubeflow",
+    "GPU虚拟化",
+    "模型注册",
+    "容器化"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending",
+  "completed_at": "2026-01-09"
+}

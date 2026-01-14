@@ -11,7 +11,7 @@ import requests
 import feedparser
 from datetime import datetime, timedelta
 from src.agents.base import BaseAgent
-from src.utils.storage import get_storage
+from src.utils.storage_v2 import StorageFactory
 
 
 class RealAITrendAnalyzerAgent(BaseAgent):
@@ -22,7 +22,9 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         self.mock_mode = config.get("agents", {}).get("ai_trend_analyzer", {}).get("mock_mode", False)
 
         # 使用新的存储管理器
-        self.storage = get_storage(config.get("storage", {}).get("base_dir", "data"))
+        self.storage = StorageFactory.create_daily(
+            base_dir=config.get("storage", {}).get("base_dir", "data")
+        )
 
         # 数据源配置
         sources_config = config.get("agents", {}).get("ai_trend_analyzer", {}).get("sources", [])

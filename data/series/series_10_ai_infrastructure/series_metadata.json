@@ -25,8 +25,8 @@
       ],
       "difficulty": "架构设计",
       "estimated_words": 14000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_087",
@@ -46,7 +46,7 @@
       "difficulty": "进阶",
       "estimated_words": 14000,
       "status": "completed",
-      "completed_at": "2026-01-13"
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_088",
@@ -64,8 +64,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 13000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_089",
@@ -83,8 +83,8 @@
       ],
       "difficulty": "架构设计",
       "estimated_words": 14000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_090",
@@ -102,8 +102,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 13000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_091",
@@ -121,8 +121,8 @@
       ],
       "difficulty": "架构设计",
       "estimated_words": 13000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_092",
@@ -141,7 +141,7 @@
       "difficulty": "进阶",
       "estimated_words": 12000,
       "status": "completed",
-      "completed_at": "2026-01-13"
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_093",
@@ -159,8 +159,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 14000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_094",
@@ -178,8 +178,8 @@
       ],
       "difficulty": "架构设计",
       "estimated_words": 13000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_095",
@@ -299,10 +299,10 @@
   ],
   "statistics": {
     "total_episodes": 15,
-    "completed_episodes": 2,
+    "completed_episodes": 9,
     "total_estimated_words": 199000,
-    "completion_rate": "13.3",
+    "completion_rate": "60.0",
     "start_date": "2026-01-09",
-    "end_date": "2026-01-13"
+    "end_date": "2026-01-14"
   }
 }
