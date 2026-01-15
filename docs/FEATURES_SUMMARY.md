@@ -15,7 +15,7 @@
 | 模式 | 用途 | 触发方式 | 输出 |
 |------|------|----------|------|
 | **Auto Mode** | AI热点追踪与简报 | 定时/crontab | 热点数据 + 趋势简报 |
-| **Series Mode** | 100期技术博客系列 | 手动执行 | 15000字长文 + 质量报告 |
+| **Series Mode** | 100期技术博客系列 | 手动执行 | 35000字深度长文 + 质量报告 |
 | **Custom Mode** | 用户自定义主题 | 手动执行 | 按需生成的长文（深度研究+长文生成） |
 | **Refine Mode** | 多平台内容精炼 | 手动执行 | 微信HTML + 小红书 + Twitter |
 
@@ -28,7 +28,7 @@
 | Agent | 文件 | 功能 | 状态 |
 |-------|------|------|------|
 | **AITrendAnalyzerAgent** | `ai_trend_analyzer_real.py` | 从7个数据源获取AI热点 | ✅ 原有 |
-| **LongFormGeneratorAgent** | `longform_generator.py` | 分阶段生成15000字长文 | ✅ 原有 |
+| **LongFormGeneratorAgent** | `longform_generator.py` | 分阶段生成35000字深度长文 | ✅ 原有 |
 | **ResearchAgent** | `research_agent.py` | 网络搜索获取研究资料 | ✅ 增强版 |
 
 ### 2.2 质量保证Agent - Phase 1（3个）
@@ -124,7 +124,7 @@
   └─ 输出：格式化参考文献列表 + 验证报告
 
 最终输出：
-  ├─ 长文本文章（15000字）
+  ├─ 长文本文章（30000-40000字）
   ├─ 代码审查报告
   ├─ 事实核查报告
   ├─ 质量评估报告
@@ -253,7 +253,7 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai ./venv/bin/python src/main.p
   --mode custom \
   --topic "RAG技术原理" \
   --prompt "详细介绍架构和实战案例" \
-  --words 15000
+  --words 35000
 ```
 
 **输出**：自动调用ResearchAgent（Tavily搜索）→生成长文本文章
@@ -316,4 +316,4 @@ ContentForge AI v2.7 现已具备：
 ✅ **零额外成本** - 主要使用zhipuai年包 + Python内置工具
 ✅ **世界级标准** - 对齐顶级技术博客的10大标准
 
-**可生成高质量技术文章**：15000字长文 + 代码示例 + Mermaid图表 + 质量报告
+**可生成高质量技术文章**：30000-40000字深度长文 + 代码示例 + Mermaid图表 + 质量报告

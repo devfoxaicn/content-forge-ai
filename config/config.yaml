@@ -64,7 +64,7 @@ agents:
     article_length: "long"
     technical_depth: "advanced"
     max_tokens: 8000
-    target_word_count: 15000
+    target_word_count: 35000  # 深度技术文章（实际产出30000-40000字符）
     temperature: 0.3  # 降低随机性，提高稳定性
 
     # 格式修复
