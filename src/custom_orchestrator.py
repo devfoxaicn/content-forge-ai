@@ -46,27 +46,19 @@ class CustomContentOrchestrator:
         logger.info("CustomContentOrchestrator initialized")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化所有Agent"""
+        """初始化所有Agent（Custom模式：只生成长文本，不生成社交内容）"""
         from src.agents.research_agent import ResearchAgent
         from src.agents.longform_generator import LongFormGeneratorAgent
-        from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
-        from src.agents.twitter_generator import TwitterGeneratorAgent
-        from src.agents.title_optimizer import TitleOptimizerAgent
-        from src.agents.image_generator import ImageGeneratorAgent
 
         agents = {}
 
         # 获取agent配置
         agents_config = self.config.get("agents", {})
 
-        # 初始化各个agent
+        # Custom模式只初始化研究+生成长文本的Agent
         agent_classes = {
             "research_agent": ResearchAgent,
             "longform_generator": LongFormGeneratorAgent,
-            "xiaohongshu_refiner": XiaohongshuRefinerAgent,
-            "twitter_generator": TwitterGeneratorAgent,
-            "title_optimizer": TitleOptimizerAgent,
-            "image_generator": ImageGeneratorAgent,
         }
 
         for agent_name, agent_class in agent_classes.items():
@@ -224,67 +216,6 @@ class CustomContentOrchestrator:
 """
                 storage.save_markdown("longform", "article.md", md_content)
                 logger.info("Saved longform article")
-
-        # 2. 小红书精炼
-        if "xiaohongshu_refiner" in self.agents:
-            state = _call_agent_safely("xiaohongshu_refiner", state)
-            if "xiaohongshu_note" in state:
-                note = state["xiaohongshu_note"]
-                md_content = f"""# {note['title']}
-
-{note.get('intro', '')}
-
-{note.get('body', '')}
-
-{note.get('ending', '')}
-
----
-**标签**: {' '.join(note.get('hashtags', []))}
-**字数**: {note.get('word_count', 0)}
-**压缩率**: {note.get('compression_ratio', 'N/A')}
-"""
-                storage.save_markdown("xiaohongshu", "note.md", md_content)
-                logger.info("Saved Xiaohongshu note")
-
-        # 3. Twitter生成
-        if "twitter_generator" in self.agents:
-            state = _call_agent_safely("twitter_generator", state)
-            if "twitter_post" in state:
-                twitter = state["twitter_post"]
-                tweets_md = "\n\n".join([
-                    f"### Tweet {i+1}\n\n{tweet}"
-                    for i, tweet in enumerate(twitter.get('tweets', []))
-                ])
-                md_content = f"""# Twitter Thread
-
-**原文章**: {twitter.get('original_article_title', 'N/A')}
-**推文数量**: {twitter.get('tweet_count', 0)}
-**总字符数**: {twitter.get('total_characters', 0)}
-
----
-
-{tweets_md}
-
----
-**话题标签**: {' '.join(twitter.get('hashtags', []))}
-"""
-                storage.save_markdown("twitter", "thread.md", md_content)
-                logger.info("Saved Twitter thread")
-
-        # 4. 标题优化
-        if "title_optimizer" in self.agents:
-            state = _call_agent_safely("title_optimizer", state)
-
-        # 5. 配图生成
-        if "image_generator" in self.agents:
-            state = _call_agent_safely("image_generator", state)
-            if "image_prompts" in state and state["image_prompts"]:
-                prompts_text = "\n\n".join([
-                    f"图片 {i+1}:\n{prompt}"
-                    for i, prompt in enumerate(state["image_prompts"])
-                ])
-                storage.save_text("xiaohongshu", "prompts.txt", prompts_text)
-                logger.info("Saved image prompts")
 
         return state
 

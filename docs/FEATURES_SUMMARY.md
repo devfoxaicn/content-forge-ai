@@ -16,7 +16,7 @@
 |------|------|----------|------|
 | **Auto Mode** | AI热点追踪与简报 | 定时/crontab | 热点数据 + 趋势简报 |
 | **Series Mode** | 100期技术博客系列 | 手动执行 | 15000字长文 + 质量报告 |
-| **Custom Mode** | 用户自定义主题 | 手动执行 | 按需生成的长文 + 社交内容 |
+| **Custom Mode** | 用户自定义主题 | 手动执行 | 按需生成的长文（深度研究+长文生成） |
 | **Refine Mode** | 多平台内容精炼 | 手动执行 | 微信HTML + 小红书 + Twitter |
 
 ---
@@ -246,7 +246,7 @@ data/series/series_1_llm_foundation/episode_001/
 └── episode_metadata.json
 ```
 
-### 7.2 Custom模式生成（支持ResearchAgent）
+### 7.2 Custom模式生成（仅生成长文本）
 
 ```bash
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai ./venv/bin/python src/main.py \
@@ -256,7 +256,16 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai ./venv/bin/python src/main.p
   --words 15000
 ```
 
-**输出**：自动调用ResearchAgent（Tavily搜索）→生成长文→质量检查
+**输出**：自动调用ResearchAgent（Tavily搜索）→生成长文本文章
+
+**输出位置**：
+```
+data/custom/YYYYMMDD_HHMMSS_rag技术原理/
+└── longform/
+    └── article.md
+```
+
+**注意**：Custom模式不包含质量保证Agent（代码审查、事实核查等），如需高质量内容请使用Series模式
 
 ---
 
