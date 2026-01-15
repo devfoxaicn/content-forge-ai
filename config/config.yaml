@@ -50,6 +50,13 @@ agents:
     temperature: 0.6
 
   # ========== 内容生成Agent（手动执行） ==========
+  # 研究Agent（网络搜索获取技术资料）
+  research_agent:
+    enabled: true  # 启用，提升长文本质量
+    max_results: 10
+    search_depth: "advanced"
+    mock_mode: false  # 设为true时不使用Tavily API
+
   # 长文本生成Agent（手动：从简报生成长文）
   longform_generator:
     enabled: true  # 启用以生成Series 9和10
@@ -57,7 +64,7 @@ agents:
     technical_depth: "advanced"
     max_tokens: 8000
     target_word_count: 15000
-    temperature: 0.7
+    temperature: 0.3  # 降低随机性，提高稳定性
 
     # 格式修复
     enable_format_fix: true

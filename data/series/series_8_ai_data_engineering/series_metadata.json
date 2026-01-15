@@ -6,7 +6,7 @@
     "topic_count": 10,
     "difficulty": "实践为主",
     "priority": 8,
-    "status": "in_progress"
+    "status": "completed"
   },
   "topics": [
     {
@@ -44,8 +44,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 13000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-15"
     },
     {
       "id": "topic_063",
@@ -196,16 +196,16 @@
       ],
       "difficulty": "架构设计",
       "estimated_words": 14000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-13"
     }
   ],
   "statistics": {
     "total_episodes": 10,
-    "completed_episodes": 8,
+    "completed_episodes": 10,
     "total_estimated_words": 130000,
-    "completion_rate": "80.0",
-    "start_date": "2026-01-09",
-    "end_date": "2026-01-13"
+    "completion_rate": "100.0",
+    "start_date": "2026-01-12",
+    "end_date": "2026-01-15"
   }
 }

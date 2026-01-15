@@ -696,5 +696,5 @@ agents:
 
 ---
 
-**Version**: v2.6
-**Updated**: 2026-01-14
+**Version**: v2.7
+**Updated**: 2026-01-15

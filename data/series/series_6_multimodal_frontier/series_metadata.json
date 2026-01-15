@@ -131,7 +131,7 @@
       "difficulty": "入门",
       "estimated_words": 10000,
       "status": "completed",
-      "completed_at": "2026-01-11"
+      "completed_at": "2026-01-15"
     },
     {
       "id": "topic_047",
@@ -224,6 +224,6 @@
     "total_estimated_words": 117000,
     "completion_rate": "100.0",
     "start_date": "2026-01-11",
-    "end_date": "2026-01-12"
+    "end_date": "2026-01-15"
   }
 }

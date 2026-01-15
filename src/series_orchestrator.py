@@ -57,15 +57,27 @@ class SeriesOrchestrator:
         logger.info(f"SeriesOrchestrator initialized with {config_path}")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化Agent（Series模式：只生成长文本）"""
+        """初始化Agent（Series模式：研究Agent + 长文本生成）"""
         from src.agents.longform_generator import LongFormGeneratorAgent
+        from src.agents.research_agent import ResearchAgent
 
         agents = {}
 
         # 获取agent配置
         agents_config = self.config.get("agents", {})
 
-        # 只初始化长文本生成Agent
+        # 初始化研究Agent（优先于长文本生成）
+        if agents_config.get("research_agent", {}).get("enabled", True):
+            try:
+                agents["research_agent"] = ResearchAgent(
+                    config=agents_config.get("research_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: research_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize research_agent: {e}")
+
+        # 初始化长文本生成Agent
         if agents_config.get("longform_generator", {}).get("enabled", True):
             try:
                 agents["longform_generator"] = LongFormGeneratorAgent(
@@ -222,7 +234,7 @@ class SeriesOrchestrator:
         state: Dict[str, Any],
         storage: SeriesStorage
     ) -> Dict[str, Any]:
-        """执行内容生成工作流（只生成长文本）"""
+        """执行内容生成工作流（研究Agent + 长文本生成）"""
         import time
 
         def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
@@ -238,7 +250,12 @@ class SeriesOrchestrator:
                 time.sleep(2)
                 return state
 
-        # 长文本生成
+        # 第一步：网络搜索研究（如果启用了research_agent）
+        if "research_agent" in self.agents:
+            state = _call_agent_safely("research_agent", state)
+            logger.info(f"✅ 研究完成，获取到 {len(state.get('research_data', {}).get('sources', []))} 个资料来源")
+
+        # 第二步：长文本生成
         if "longform_generator" in self.agents:
             state = _call_agent_safely("longform_generator", state)
 
