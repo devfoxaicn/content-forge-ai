@@ -121,11 +121,11 @@ class TwitterGeneratorAgent(BaseAgent):
 
 **痛点共鸣Hook**：
 ```
-"你是否也遇到过{painful problem}？"
+"你是否也遇到过{painful_problem}？"
 
 "终于找到了困扰我3年的{problem}解决方案"
 
-"不要再浪费时间在{wasteful activity}上了"
+"不要再浪费时间在{wasteful_activity}上了"
 ```
 
 ### 2️⃣ Thread叙事结构：{self.narrative_structure}
@@ -167,18 +167,18 @@ Tweet 12: CTA - 行动号召
 ```
 "我开始以为X，但后来发现Y..."
 
-"大多数人觉得{obvious answer}，但实际上{counter-intuitive truth}"
+"大多数人觉得{obvious_answer}，但实际上{counter_intuitive_truth}"
 
-"我以为{technology}会让工作更简单，没想到它彻底改变了我{work style}"
+"我以为{technology}会让工作更简单，没想到它彻底改变了我{work_style}"
 ```
 
 **因果链条**：
 ```
 "因为A → 导致B → 最终C"
 
-"不是{reason 1}，而是{real reason}"
+"不是{reason_1}，而是{real_reason}"
 
-"表面上{phenomenon}，实际上是{deep insight}"
+"表面上{phenomenon}，实际上是{deep_insight}"
 ```
 
 **情感起伏**：
