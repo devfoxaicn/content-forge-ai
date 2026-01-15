@@ -57,9 +57,12 @@ class SeriesOrchestrator:
         logger.info(f"SeriesOrchestrator initialized with {config_path}")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化Agent（Series模式：研究Agent + 长文本生成）"""
+        """初始化Agent（Series模式：研究 + 生成 + 质量保证）"""
         from src.agents.longform_generator import LongFormGeneratorAgent
         from src.agents.research_agent import ResearchAgent
+        from src.agents.code_review_agent import CodeReviewAgent
+        from src.agents.fact_check_agent import FactCheckAgent
+        from src.agents.quality_evaluator_agent import QualityEvaluatorAgent
 
         agents = {}
 
@@ -87,6 +90,39 @@ class SeriesOrchestrator:
                 logger.info("Initialized agent: longform_generator")
             except Exception as e:
                 logger.error(f"Failed to initialize longform_generator: {e}")
+
+        # 初始化代码审查Agent（Phase 1新增）
+        if agents_config.get("code_review_agent", {}).get("enabled", True):
+            try:
+                agents["code_review_agent"] = CodeReviewAgent(
+                    config=agents_config.get("code_review_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: code_review_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize code_review_agent: {e}")
+
+        # 初始化事实核查Agent（Phase 1新增）
+        if agents_config.get("fact_check_agent", {}).get("enabled", True):
+            try:
+                agents["fact_check_agent"] = FactCheckAgent(
+                    config=agents_config.get("fact_check_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: fact_check_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize fact_check_agent: {e}")
+
+        # 初始化质量评估Agent（Phase 1新增）
+        if agents_config.get("quality_evaluator_agent", {}).get("enabled", True):
+            try:
+                agents["quality_evaluator_agent"] = QualityEvaluatorAgent(
+                    config=agents_config.get("quality_evaluator_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: quality_evaluator_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize quality_evaluator_agent: {e}")
 
         return agents
 
@@ -234,7 +270,7 @@ class SeriesOrchestrator:
         state: Dict[str, Any],
         storage: SeriesStorage
     ) -> Dict[str, Any]:
-        """执行内容生成工作流（研究Agent + 长文本生成）"""
+        """执行内容生成工作流（研究 + 生成 + 质量保证）"""
         import time
 
         def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
@@ -259,13 +295,39 @@ class SeriesOrchestrator:
         if "longform_generator" in self.agents:
             state = _call_agent_safely("longform_generator", state)
 
-            # 保存长文本
-            if "longform_article" in state:
-                topic = state["current_topic"]
-                article = state["longform_article"]
+        # 第三步：代码审查（Phase 1新增）
+        if "code_review_agent" in self.agents:
+            state = _call_agent_safely("code_review_agent", state)
+            if state.get("code_review_result"):
+                review_result = state["code_review_result"]
+                logger.info(f"✅ 代码审查完成，质量分数: {review_result.get('score', 0):.1f}/10")
 
-                # 构建Markdown内容
-                md_content = f"""# {article['title']}
+        # 第四步：事实核查（Phase 1新增）
+        if "fact_check_agent" in self.agents:
+            state = _call_agent_safely("fact_check_agent", state)
+            if state.get("fact_check_result"):
+                fact_result = state["fact_check_result"]
+                logger.info(f"✅ 事实核查完成，准确率: {fact_result.get('accuracy_rate', 0):.1%}")
+
+        # 第五步：质量评估（Phase 1新增）
+        if "quality_evaluator_agent" in self.agents:
+            state = _call_agent_safely("quality_evaluator_agent", state)
+            if state.get("quality_report"):
+                quality_report = state["quality_report"]
+                overall_score = quality_report.get("overall_score", 0)
+                logger.info(f"✅ 质量评估完成，总分: {overall_score:.1f}/10")
+
+                # 如果质量低于阈值，记录警告
+                if not quality_report.get("meets_threshold", True):
+                    logger.warning(f"⚠️ 文章质量 {overall_score:.1f} 低于阈值 {self.agents['quality_evaluator_agent'].min_score}")
+
+        # 保存长文本和质量报告
+        if "longform_article" in state:
+            topic = state["current_topic"]
+            article = state["longform_article"]
+
+            # 构建Markdown内容
+            md_content = f"""# {article['title']}
 
 {article.get('full_content', '')}
 
@@ -276,11 +338,87 @@ class SeriesOrchestrator:
 - 标签: {', '.join(article.get('tags', []))}
 - 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 """
-                filename = TopicFormatter.generate_markdown_filename(topic, "article")
-                storage.save_markdown("longform", filename, md_content)
-                logger.info(f"Saved longform article: {filename}")
+            filename = TopicFormatter.generate_markdown_filename(topic, "article")
+            storage.save_markdown("longform", filename, md_content)
+            logger.info(f"Saved longform article: {filename}")
+
+        # 保存质量报告
+        if state.get("quality_report"):
+            quality_report = state["quality_report"]
+            quality_md = self._format_quality_report(quality_report)
+            storage.save_markdown("quality", "quality_report.md", quality_md)
+            logger.info("Saved quality report")
 
         return state
+
+    def _format_quality_report(self, quality_report: Dict[str, Any]) -> str:
+        """格式化质量报告为Markdown"""
+        overall_score = quality_report.get("overall_score", 0)
+        dimension_scores = quality_report.get("dimension_scores", {})
+        improvements = quality_report.get("improvements", [])
+        metadata = quality_report.get("metadata", {})
+
+        md_lines = [
+            "# 质量评估报告",
+            "",
+            f"## 总体评分",
+            f"**{overall_score:.1f}/10**",
+            "",
+            f"状态: {'✅ 达标' if quality_report.get('meets_threshold') else '⚠️ 需改进'}",
+            ""
+        ]
+
+        # 分维度评分
+        md_lines.extend([
+            "## 分维度评分",
+            ""
+        ])
+
+        dimension_names = {
+            "structure": "结构",
+            "depth": "深度",
+            "accuracy": "准确性",
+            "readability": "可读性",
+            "visual": "可视化",
+            "timeliness": "时效性"
+        }
+
+        for dim, data in dimension_scores.items():
+            score = data.get("score", 0)
+            weight = data.get("weight", 0)
+            feedback_list = data.get("feedback", [])
+            md_lines.extend([
+                f"### {dimension_names.get(dim, dim)} ({weight*100:.0f}%)",
+                f"**评分**: {score:.1f}/10",
+                ""
+            ])
+            if feedback_list:
+                md_lines.append("反馈:")
+                for fb in feedback_list:
+                    md_lines.append(f"- {fb}")
+                md_lines.append("")
+
+        # 改进建议
+        if improvements:
+            md_lines.extend([
+                "## 改进建议",
+                ""
+            ])
+            for imp in improvements[:10]:
+                md_lines.append(f"- {imp}")
+            md_lines.append("")
+
+        # 元数据
+        md_lines.extend([
+            "## 元数据",
+            "",
+            f"- 评估时间: {metadata.get('evaluated_at', 'N/A')}",
+            f"- 文章长度: {metadata.get('article_length', 0)} 字符",
+            f"- 代码块: {metadata.get('code_blocks', 0)} 个",
+            f"- 事实声明: {metadata.get('fact_claims', 0)} 个"
+        ])
+
+        return "\n".join(md_lines)
 
     def generate_series(
         self,

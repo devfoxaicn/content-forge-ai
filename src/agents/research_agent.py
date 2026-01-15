@@ -15,7 +15,14 @@ class ResearchAgent(BaseAgent):
 
     def __init__(self, config: Dict[str, Any], prompts: Dict[str, Any]):
         super().__init__(config, prompts)
-        research_config = config.get("agents", {}).get("research_agent", {})
+        # config可能是完整配置或agent-specific配置
+        # 如果有"agents"键，说明是完整配置
+        if "agents" in config:
+            research_config = config.get("agents", {}).get("research_agent", {})
+        else:
+            # 否则直接使用config作为research_agent配置
+            research_config = config
+
         self.max_results = research_config.get("max_results", 10)
         self.search_depth = research_config.get("search_depth", "advanced")
         self.mock_mode = research_config.get("mock_mode", False)
@@ -170,22 +177,28 @@ class ResearchAgent(BaseAgent):
         """使用Tavily API进行搜索"""
         try:
             from tavily import TavilyClient
+            import os
 
-            api_key = self._get_api_key("tavily")
+            api_key = os.environ.get("TAVILY_API_KEY")
+            if not api_key:
+                raise ValueError("未设置TAVILY_API_KEY环境变量")
+
             client = TavilyClient(api_key=api_key)
 
             # 构建搜索查询
             query = f"{topic} {description}".strip()
             self.log(f"Tavily搜索查询: {query}")
 
-            # 执行搜索
+            # 执行搜索（不包含raw_content以提高速度）
             search_result = client.search(
                 query=query,
                 search_depth=self.search_depth,
-                max_results=self.max_results,
-                include_raw_content=True,
-                include_domains=["github.com", "stackoverflow.com", "medium.com", "dev.to", "arxiv.org"]
+                max_results=min(self.max_results, 5),  # 限制结果数量以提高速度
+                include_raw_content=False,  # 不获取完整内容，只获取摘要
+                include_answer=True,
+                include_raw_answer=False
             )
+            self.log(f"Tavily返回 {len(search_result.get('results', []))} 个结果")
 
             # 提取关键信息
             research_data = {

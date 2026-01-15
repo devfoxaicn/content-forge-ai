@@ -47,6 +47,7 @@ class CustomContentOrchestrator:
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
         """初始化所有Agent"""
+        from src.agents.research_agent import ResearchAgent
         from src.agents.longform_generator import LongFormGeneratorAgent
         from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
         from src.agents.twitter_generator import TwitterGeneratorAgent
@@ -60,6 +61,7 @@ class CustomContentOrchestrator:
 
         # 初始化各个agent
         agent_classes = {
+            "research_agent": ResearchAgent,
             "longform_generator": LongFormGeneratorAgent,
             "xiaohongshu_refiner": XiaohongshuRefinerAgent,
             "twitter_generator": TwitterGeneratorAgent,
@@ -197,6 +199,10 @@ class CustomContentOrchestrator:
                 logger.error(f"[{agent_name}] 执行失败: {e}")
                 time.sleep(2)
                 return state
+
+        # 0. 深度研究（为长文本生成提供背景资料）
+        if "research_agent" in self.agents:
+            state = _call_agent_safely("research_agent", state)
 
         # 1. 长文本生成（核心）
         if "longform_generator" in self.agents:

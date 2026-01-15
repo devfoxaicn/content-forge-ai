@@ -53,7 +53,7 @@ agents:
   # 研究Agent（网络搜索获取技术资料）
   research_agent:
     enabled: true  # 启用，提升长文本质量
-    search_provider: "zhipuai"  # 搜索提供商: zhipuai(推荐,包含在年包中), tavily(付费), mock(离线)
+    search_provider: "tavily"  # 搜索提供商: zhipuai(推荐,包含在年包中), tavily(付费), mock(离线)
     max_results: 10
     search_depth: "advanced"
     mock_mode: false  # 设为true时不使用任何搜索API
@@ -92,6 +92,29 @@ agents:
     max_tweets: 5
     max_tokens: 2500
     temperature: 0.9
+
+  # ========== 质量保证Agent（Phase 1新增） ==========
+  # 代码审查Agent
+  code_review_agent:
+    enabled: true  # 启用，确保代码示例正确性
+    languages: ["python", "javascript", "typescript", "java", "go", "rust", "cpp", "c"]
+    check_syntax: true  # 检查语法正确性
+    check_best_practices: true  # 检查最佳实践
+    generate_improvements: true  # 生成改进建议
+
+  # 事实核查Agent
+  fact_check_agent:
+    enabled: true  # 启用，验证事实声明准确性
+    confidence_threshold: 0.8  # 置信度阈值
+    max_tavily_calls: 10  # 限制Tavily调用次数（控制成本）
+    use_tavily: true  # 是否使用Tavily验证关键声明
+
+  # 质量评估Agent
+  quality_evaluator_agent:
+    enabled: true  # 启用，综合质量评估
+    full_evaluation: true  # 完整评估（6个维度）
+    generate_improvement: true  # 生成改进建议
+    min_score: 7.0  # 质量达标阈值
 
   # ========== 辅助Agent（可选，提升质量） ==========
   # 标题优化Agent
