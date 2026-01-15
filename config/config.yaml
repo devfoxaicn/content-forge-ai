@@ -79,8 +79,8 @@ agents:
   # 小红书笔记精炼Agent（手动：从简报生成为小红书笔记）
   xiaohongshu_refiner:
     enabled: true  # 启用小红书精炼
-    style: "professional"
-    content_density: "dense"
+    style: "viral"  # viral（爆款风格）, professional, casual
+    content_density: "medium"
     max_tokens: 3000
     temperature: 0.8
 
