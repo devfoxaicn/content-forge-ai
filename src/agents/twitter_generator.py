@@ -103,29 +103,29 @@ class TwitterGeneratorAgent(BaseAgent):
 
 **反直觉Hook**：
 ```
-"我花了10年才发现，{领域}最大的误区是..."
+"我花了10年才发现，{{领域}}最大的误区是..."
 
-"大多数人都{错误做法}，但顶尖高手都在{正确做法}"
+"大多数人都{{错误做法}}，但顶尖高手都在{{正确做法}}"
 
-"如果你还在{旧方法}，那你已经被时代抛弃了"
+"如果你还在{{旧方法}}，那你已经被时代抛弃了"
 ```
 
 **数据震撼Hook**：
 ```
-"某大厂内部数据泄露：{工具}让效率提升{X}%"
+"某大厂内部数据泄露：{{工具}}让效率提升{{X}}%"
 
-"我分析了1000个项目，发现{ shocking事实 }"
+"我分析了1000个项目，发现{{shocking事实}}"
 
-"只有1%的开发者知道这个{技术秘密}"
+"只有1%的开发者知道这个{{技术秘密}}"
 ```
 
 **痛点共鸣Hook**：
 ```
-"你是否也遇到过{painful_problem}？"
+"你是否也遇到过{{painful_problem}}？"
 
-"终于找到了困扰我3年的{problem}解决方案"
+"终于找到了困扰我3年的{{problem}}解决方案"
 
-"不要再浪费时间在{wasteful_activity}上了"
+"不要再浪费时间在{{wasteful_activity}}上了"
 ```
 
 ### 2️⃣ Thread叙事结构：{self.narrative_structure}
@@ -167,18 +167,18 @@ Tweet 12: CTA - 行动号召
 ```
 "我开始以为X，但后来发现Y..."
 
-"大多数人觉得{obvious_answer}，但实际上{counter_intuitive_truth}"
+"大多数人觉得{{obvious_answer}}，但实际上{{counter_intuitive_truth}}"
 
-"我以为{technology}会让工作更简单，没想到它彻底改变了我{work_style}"
+"我以为{{technology}}会让工作更简单，没想到它彻底改变了我{{work_style}}"
 ```
 
 **因果链条**：
 ```
 "因为A → 导致B → 最终C"
 
-"不是{reason_1}，而是{real_reason}"
+"不是{{reason_1}}，而是{{real_reason}}"
 
-"表面上{phenomenon}，实际上是{deep_insight}"
+"表面上{{phenomenon}}，实际上是{{deep_insight}}"
 ```
 
 **情感起伏**：
@@ -312,7 +312,7 @@ Tweet 12: CTA - 行动号召
 ```
 "🎯 立即开始！关注我，每天分享技术干货"
 
-"🚀 别等了！现在就开始你的{topic}之旅"
+"🚀 别等了！现在就开始你的{{topic}}之旅"
 
 "💪 成为那1%的精英！从关注我开始"
 ```
@@ -328,7 +328,7 @@ Tweet 12: CTA - 行动号召
 
 **Subtle CTA**：
 ```
-"持续分享{topic}干货"
+"持续分享{{topic}}干货"
 
 "更多技巧见置顶推文"
 
