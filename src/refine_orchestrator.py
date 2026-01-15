@@ -97,6 +97,7 @@ class RefineOrchestrator:
             Dict[str, Any]: 执行结果
         """
         import time
+        from datetime import datetime
 
         # 默认平台
         if platforms is None:
@@ -105,8 +106,19 @@ class RefineOrchestrator:
         # 1. 读取输入内容
         longform_article = self._load_input_content(input_source)
 
-        # 2. 确定存储名称（使用文件名）
-        source_name = Path(input_source).stem
+        # 2. 确定存储名称（使用日期_标题格式）
+        # 获取当前日期（YYYYMMDD格式）
+        current_date = datetime.now().strftime("%Y%m%d")
+
+        # 提取标题（从文章内容或文件名）
+        title = longform_article.get('title', 'article')
+        # 清理标题，移除不适合文件名的字符
+        clean_title = title.replace(' ', '_').replace('/', '_').replace('\\', '_').replace(':', '_')
+        # 限制标题长度（避免路径过长）
+        clean_title = clean_title[:50]  # 最多50个字符
+
+        # 组合存储名称：YYYYMMDD_标题
+        source_name = f"{current_date}_{clean_title}"
         storage = StorageFactory.create_refine(source_name)
 
         # 3. 构建状态

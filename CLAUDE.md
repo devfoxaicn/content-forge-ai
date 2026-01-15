@@ -36,14 +36,17 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode re
 - `src/main.py` - Unified entry point (use `--mode` to switch between auto/series/custom/refine)
 - `config/config.yaml` - Main config (LLM, agents, data sources)
 - `config/blog_topics_100_complete.json` - 100-episode content plan
+- `config/prompts.yaml` - Agent system prompt templates
 - `src/utils/series_manager.py` - Series management (SeriesMetadata, SeriesPathManager)
 - `src/utils/storage_v2.py` - Unified storage (StorageFactory with 4 modes)
+- `src/utils/api_config.py` - API config management (APIConfigManager)
 
 **Key Architecture Points**:
 1. **Four-Mode Architecture**: Auto (AI trends), Series (100 topics), Custom (user-defined), Refine (multi-platform)
 2. **Series Path Format**: `series_X_descriptive_name` (e.g., `series_1_llm_foundation`)
-3. **Immutable State Updates**: Use `{**state, **updates}` pattern
-4. **Agent Return Contract**: `execute()` must return complete state dict
+3. **Refine Storage Format**: `YYYYMMDD_title` (e.g., `20260115_Claude_Cowork入门指南`)
+4. **Immutable State Updates**: Use `{**state, **updates}` pattern
+5. **Agent Return Contract**: `execute()` must return complete state dict
 
 ## Project Overview
 
@@ -55,7 +58,7 @@ ContentForge AI v2.6 is a LangChain/LangGraph-based automated content production
 1. **Auto Mode** - AI trend tracking and digest generation (daily automation)
 2. **Series Mode** - 100-episode technical blog series (systematic content library)
 3. **Custom Mode** - User-defined topic content generation (on-demand)
-4. **Refine Mode** - Multi-platform content refining (WeChat HTML, Xiaohongshu, Twitter)
+4. **Refine Mode** - Multi-platform content refining (WeChat HTML, Xiaohongshu long/short notes, Twitter)
 
 ## Environment Setup
 
@@ -150,6 +153,7 @@ ContentForge AI v2.6 is a LangChain/LangGraph-based automated content production
 | **Workflow** | LangGraph graph execution | Sequential with error recovery | Sequential execution | Sequential execution |
 | **State Fields** | Uses `trending_topics` | Uses `current_topic` + `selected_ai_topic` | Uses `selected_ai_topic` | Uses `longform_article` |
 | **Primary Use** | Daily trend tracking | Systematic content library | On-demand content | Multi-platform publishing |
+| **Storage Format** | `YYYYMMDD/` | `series_X_name/episode_XXX/` | `YYYYMMDD_HHMMSS_topic/` | `YYYYMMDD_title/` |
 
 ### Auto Workflow Agent Chain
 
@@ -178,6 +182,30 @@ quality_evaluator (quality evaluation)
 ```
 
 **Critical**: Xiaohongshu and Twitter agents must execute sequentially (not parallel) to avoid state update conflicts (`src/auto_orchestrator.py:213`)
+
+### Refine Mode Workflow
+
+```
+Load input file (article.md)
+  ↓
+Extract title and content
+  ↓
+Generate storage name: YYYYMMDD_title
+  ↓
+For each platform:
+  ┌─ WeChat: wechat_generator → article.html
+  ├─ Xiaohongshu: xiaohongshu_long_refiner → note_long.md (2000 chars)
+  │              xiaohongshu_short_refiner → note_short.md (500-900 chars)
+  └─ Twitter: twitter_generator → thread.md
+```
+
+**Refine Mode Key Points**:
+- Storage format: `data/refine/YYYYMMDD_title/` (e.g., `20260115_Claude_Cowork入门指南`)
+- Xiaohongshu generates **two versions**:
+  - **Long note** (~2000 chars, 6 chapters, deep content) - `xiaohongshu/note_long.md`
+  - **Short note** (500-900 chars, condensed from long) - `xiaohongshu/note_short.md`
+- Short refiner can work from either the long note or original article
+- Each platform's content is saved immediately after generation
 
 ### AI Trend Data Sources (config.yaml:30-37)
 
@@ -248,10 +276,24 @@ llm:
     model: "glm-4.7"  # Latest flagship
     # Other options: glm-4-flash (cheap fast), glm-4-plus (prev flagship)
     base_url: "https://open.bigmodel.cn/api/coding/paas/v4/"  # Coding endpoint
+    thinking:
+      enabled: false  # Enable deep thinking mode (GLM-4.7 exclusive)
+      type: "auto"    # "auto" or "enabled"
   openai:
     model: "gpt-4o"
     base_url: "https://api.openai.com/v1"
 ```
+
+**GLM-4.7 Thinking Mode** (`config/config.yaml:17-19`):
+- `thinking.enabled`: Enable deep thinking mode (GLM-4.7 exclusive feature)
+- `thinking.type`: "auto" (auto-trigger) or "enabled" (force enable)
+- Improves reasoning quality for complex tasks
+
+**Research Agent Options** (`config/config.yaml:54-59`):
+- `search_provider`: "zhipuai" (recommended, included in annual plan), "tavily" (paid), "mock" (offline)
+- `max_results`: Maximum search results
+- `search_depth`: "basic" or "advanced"
+- `mock_mode`: Set to `true` to disable all search APIs
 
 **API Config Management**: `src/utils/api_config.py` provides `APIConfigManager` for unified API key/endpoint management.
 
@@ -683,11 +725,16 @@ agents:
 | `AITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | AI trend analysis (7 data sources) |
 | `TrendsDigestAgent` | `trends_digest_agent.py` | Trend digest generation |
 | `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
-| `XiaohongshuRefinerAgent` | `xiaohongshu_refiner.py` | Xiaohongshu note refinement |
+| `XiaohongshuLongRefinerAgent` | `xiaohongshu_long_refiner.py` | Xiaohongshu long note (~2000 chars) |
+| `XiaohongshuShortRefinerAgent` | `xiaohongshu_short_refiner.py` | Xiaohongshu short note (500-900 chars) |
 | `TwitterGeneratorAgent` | `twitter_generator.py` | Twitter post generation |
 | `WechatGeneratorAgent` | `wechat_generator.py` | WeChat HTML generation |
 | `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
 | `ImageGeneratorAgent` | `image_generator.py` | Image prompt generation |
+| `ResearchAgent` | `research_agent.py` | Web search deep research |
+| `CodeReviewAgent` | `code_review_agent.py` | Code quality review |
+| `FactCheckAgent` | `fact_check_agent.py` | Fact verification |
+| `QualityEvaluatorAgent` | `quality_evaluator_agent.py` | Comprehensive quality assessment |
 
 ## Related Documentation
 
@@ -696,5 +743,5 @@ agents:
 
 ---
 
-**Version**: v2.7
+**Version**: v2.8
 **Updated**: 2026-01-15

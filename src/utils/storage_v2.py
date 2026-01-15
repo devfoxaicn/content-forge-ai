@@ -268,8 +268,8 @@ class RefineStorage(BaseStorage):
 
     def _create_refine_subdirs(self, parent_dir: Path) -> None:
         """创建精炼模式专用子目录"""
-        # 标准子目录
-        subdirs = ["raw", "xiaohongshu", "twitter", "wechat"]
+        # Refine模式只创建输出目录，不创建raw目录（原始文件由用户指定）
+        subdirs = ["xiaohongshu", "twitter", "wechat"]
         for subdir in subdirs:
             (parent_dir / subdir).mkdir(exist_ok=True)
 
