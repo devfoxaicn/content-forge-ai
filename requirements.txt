@@ -42,3 +42,4 @@ praw>=7.7.0
 
 # Stability AI (可选)
 stability-sdk>=0.8.0
+tavily-python==0.7.18
