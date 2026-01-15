@@ -47,7 +47,8 @@ class RefineOrchestrator:
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
         """初始化所有Agent"""
-        from src.agents.xiaohongshu_refiner import XiaohongshuRefinerAgent
+        from src.agents.xiaohongshu_long_refiner import XiaohongshuLongRefinerAgent
+        from src.agents.xiaohongshu_short_refiner import XiaohongshuShortRefinerAgent
         from src.agents.twitter_generator import TwitterGeneratorAgent
         from src.agents.wechat_generator import WechatGeneratorAgent
 
@@ -58,7 +59,8 @@ class RefineOrchestrator:
 
         # 初始化各个agent
         agent_classes = {
-            "xiaohongshu_refiner": XiaohongshuRefinerAgent,
+            "xiaohongshu_long_refiner": XiaohongshuLongRefinerAgent,
+            "xiaohongshu_short_refiner": XiaohongshuShortRefinerAgent,
             "twitter_generator": TwitterGeneratorAgent,
             "wechat_generator": WechatGeneratorAgent,
         }
@@ -211,22 +213,41 @@ class RefineOrchestrator:
                     logger.info(f"Saved WeChat article to {storage.get_path('wechat', 'article.html')}")
 
         elif platform == "xiaohongshu":
-            if "xiaohongshu_refiner" in self.agents:
-                state = _call_agent_safely("xiaohongshu_refiner", state)
+            # 生成长笔记
+            if "xiaohongshu_long_refiner" in self.agents:
+                state = _call_agent_safely("xiaohongshu_long_refiner", state)
 
-                # 保存小红书笔记
-                if "xiaohongshu_note" in state:
-                    note = state["xiaohongshu_note"]
-                    # 使用full_content字段而不是拆分的字段
+                # 保存长笔记
+                if "xiaohongshu_long_note" in state:
+                    note = state["xiaohongshu_long_note"]
                     md_content = f"""{note.get('full_content', '')}
 
 ---
 **标签**: {' '.join(note.get('hashtags', []))}
 **字数**: {note.get('word_count', 0)}
+**类型**: 长笔记（深度内容）
 **压缩率**: {note.get('compression_ratio', 'N/A')}
 """
-                    storage.save_markdown("xiaohongshu", "note.md", md_content)
-                    logger.info(f"Saved Xiaohongshu note to {storage.get_path('xiaohongshu', 'note.md')}")
+                    storage.save_markdown("xiaohongshu", "note_long.md", md_content)
+                    logger.info(f"Saved Xiaohongshu long note ({note.get('word_count', 0)} chars) to {storage.get_path('xiaohongshu', 'note_long.md')}")
+
+            # 生成短笔记
+            if "xiaohongshu_short_refiner" in self.agents:
+                state = _call_agent_safely("xiaohongshu_short_refiner", state)
+
+                # 保存短笔记
+                if "xiaohongshu_short_note" in state:
+                    note = state["xiaohongshu_short_note"]
+                    md_content = f"""{note.get('full_content', '')}
+
+---
+**标签**: {' '.join(note.get('hashtags', []))}
+**字数**: {note.get('word_count', 0)}
+**类型**: 短笔记（快速阅读）
+**压缩率**: {note.get('compression_ratio', 'N/A')}
+"""
+                    storage.save_markdown("xiaohongshu", "note_short.md", md_content)
+                    logger.info(f"Saved Xiaohongshu short note ({note.get('word_count', 0)} chars) to {storage.get_path('xiaohongshu', 'note_short.md')}")
 
         elif platform == "twitter":
             if "twitter_generator" in self.agents:

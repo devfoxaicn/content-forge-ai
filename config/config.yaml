@@ -76,15 +76,24 @@ agents:
     enable_context_window: true
     max_context_sections: 3
 
-  # 小红书笔记精炼Agent（手动：从简报生成为小红书笔记）
-  xiaohongshu_refiner:
-    enabled: true  # 启用小红书精炼
+  # 小红书长笔记Agent（约2000字深度内容）
+  xiaohongshu_long_refiner:
+    enabled: true
     style: "viral"  # viral（爆款风格）, professional, casual
-    content_density: "rich"  # light, medium, rich（推荐rich，1500-2000字）
-    max_tokens: 4000
-    temperature: 0.95  # 最高创造性
+    target_word_count: 2000  # 目标字数
+    max_tokens: 12000  # 长笔记需要更多token
+    temperature: 0.95
     include_test_case: true  # 包含亲身实测案例
-    use_emotional_language: true  # 情感化语言
+    use_emotional_language: true
+
+  # 小红书短笔记Agent（500-900字快速阅读）
+  xiaohongshu_short_refiner:
+    enabled: true
+    style: "viral"
+    target_word_count: 700  # 目标字数（500-900字范围）
+    max_tokens: 4000
+    temperature: 0.98  # 更高的创造性
+    include_test_case: true
 
   # Twitter帖子生成Agent（手动：从简报生成为Twitter）
   twitter_generator:
