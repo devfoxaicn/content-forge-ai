@@ -227,12 +227,12 @@ class CustomStorage(BaseStorage):
         # 创建 custom/{storage_id} 目录
         self.custom_dir = self.base_dir / "custom" / storage_id
         self.custom_dir.mkdir(parents=True, exist_ok=True)
-        # Custom 模式只需要 longform, xiaohongshu, twitter 目录
+        # Custom 模式只需要 longform 目录（只生成长文本）
         self._create_custom_subdirs(self.custom_dir)
 
     def _create_custom_subdirs(self, parent_dir: Path) -> None:
-        """创建 Custom 模式专用子目录"""
-        subdirs = ["longform", "xiaohongshu", "twitter"]
+        """创建 Custom 模式专用子目录（只生成长文本）"""
+        subdirs = ["longform"]  # Custom模式只生成长文本，不需要社交内容目录
         for subdir in subdirs:
             (parent_dir / subdir).mkdir(exist_ok=True)
 
