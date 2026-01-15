@@ -79,8 +79,7 @@ class XiaohongshuRefinerAgent(BaseAgent):
                 article_content=content_preview,
                 target_audience=target_audience,
                 style=self.style,
-                content_density=self.content_density,
-                include_test_case=self.include_test_case
+                content_density=self.content_density
             )
         else:
             # 世界级提示词 - 基于小红书顶级博主的创作方法论
