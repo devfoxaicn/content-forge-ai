@@ -219,13 +219,17 @@ class WechatGeneratorAgent(BaseAgent):
         # 生成专业级HTML
         html_content = self._generate_professional_html(full_content, title)
 
+        # 生成配图提示词
+        image_prompts = self._generate_image_prompts(full_content, title)
+
         return {
             "title": title,
             "html_content": html_content,
             "markdown_content": full_content,
             "word_count": len(full_content),
             "reading_time": f"{len(full_content) // 500 + 1}",
-            "cover_image_prompt": f"生成一个关于{title}的微信封面图，技术风格，蓝绿渐变，简洁大气，高质量",
+            "cover_image_prompt": image_prompts[0] if image_prompts else f"生成一个关于{title}的微信封面图，技术风格，蓝绿渐变，简洁大气，高质量",
+            "image_prompts": image_prompts,
             "summary": summary or full_content[:150] + "...",
             "seo_keywords": self._extract_keywords(full_content)
         }
@@ -236,6 +240,87 @@ class WechatGeneratorAgent(BaseAgent):
         tech_keywords = ["AI", "人工智能", "机器学习", "深度学习", "Python", "JavaScript", "代码", "开发", "算法", "数据", "架构", "性能", "优化", "实战"]
         found = [kw for kw in tech_keywords if kw in content]
         return found[:5] if found else ["AI技术", "开发"]
+
+    def _generate_image_prompts(self, content: str, title: str) -> list:
+        """生成文章配图提示词（用于AI绘画）"""
+        prompts = []
+
+        # 1. 封面图（最重要）
+        cover_prompt = f"""【封面图】
+位置：文章开头
+尺寸：900x500px（16:9）
+描述：生成一个关于"{title}"的微信公众号封面图
+风格要求：
+- 现代科技风格，蓝绿渐变配色（#07c160到#1890ff）
+- 扁平化设计，简洁大气
+- 包含主题相关的图标或元素
+- 高质量，适合作为首图吸引点击
+- 字体清晰易读
+- 背景干净，突出主题
+"""
+        prompts.append(cover_prompt.strip())
+
+        # 2. 概念图（技术原理）
+        concept_prompt = f"""【概念图-技术原理】
+位置：文章中段（介绍技术背景时）
+尺寸：900x500px
+描述：生成"{title}"的核心技术概念图
+风格要求：
+- 信息图表风格，清晰易懂
+- 使用流程图或架构图形式
+- 蓝白色调，专业感强
+- 展示技术流程或架构关系
+- 包含适当的图标和箭头指示
+- 适合技术类公众号配图
+"""
+        prompts.append(concept_prompt.strip())
+
+        # 3. 对比图（前后对比）
+        comparison_prompt = f"""【对比图-效果展示】
+位置：文章中后段（展示效果对比时）
+尺寸：900x500px
+描述：生成"{title}"使用前后的效果对比图
+风格要求：
+- 左右对比布局（Before vs After）
+- 使用暗色背景突出对比
+- 绿色箭头表示改进提升
+- 数据可视化风格
+- 包含具体的数字或指标
+- 视觉冲击力强
+"""
+        prompts.append(comparison_prompt.strip())
+
+        # 4. 实景图（应用场景）
+        scenario_prompt = f"""【实景图-应用场景】
+位置：文章后段（介绍应用场景时）
+尺寸：900x500px
+描述：生成"{title}"在实际工作场景中的应用图
+风格要求：
+- 办公室或工作场景
+- 电脑屏幕展示相关界面
+- 温暖的灯光效果
+- 现代简约风格
+- 人物背影或侧面（聚焦工作）
+- 专业感强
+"""
+        prompts.append(scenario_prompt.strip())
+
+        # 5. 总结图（核心要点）
+        summary_prompt = f"""【总结图-核心要点】
+位置：文章结尾（总结部分）
+尺寸：900x500px
+描述：生成"{title}"的核心要点总结图
+风格要求：
+- 清单式布局（checklist风格）
+- 3-5个关键点
+- 使用大号emoji或图标
+- 浅色背景，清晰易读
+- 绿色勾选标记
+- 适合截图分享
+"""
+        prompts.append(summary_prompt.strip())
+
+        return prompts
 
     def _generate_professional_html(self, markdown_content: str, title: str) -> str:
         """生成专业级HTML（带所有优化）"""

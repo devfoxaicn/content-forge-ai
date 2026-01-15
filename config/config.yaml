@@ -80,19 +80,23 @@ agents:
   xiaohongshu_refiner:
     enabled: true  # 启用小红书精炼
     style: "viral"  # viral（爆款风格）, professional, casual
-    content_density: "medium"
-    max_tokens: 3000
-    temperature: 0.8
+    content_density: "rich"  # light, medium, rich（推荐rich，1500-2000字）
+    max_tokens: 4000
+    temperature: 0.95  # 最高创造性
+    include_test_case: true  # 包含亲身实测案例
+    use_emotional_language: true  # 情感化语言
 
   # Twitter帖子生成Agent（手动：从简报生成为Twitter）
   twitter_generator:
     enabled: true  # 启用专家级Twitter生成
-    style: "viral"  # viral（爆款风格）, professional, casual, storytelling
+    style: "narrative"  # narrative（叙事型）, data_driven, controversy, tutorial
     thread_mode: true
-    max_tweets: 8  # 增加到8条以支持更丰富的内容
-    max_tokens: 4000
-    temperature: 0.95  # 提高创造性
-    cta_type: "engagement"  # engagement, follow, retweet, reply
+    max_tweets: 12  # 世界级Thread推荐12条
+    max_tokens: 6000
+    temperature: 0.98  # 最高创造性
+    narrative_structure: "hero_journey"  # hero_journey, problem_solution, before_after
+    include_data: true  # 包含数据驱动内容
+    cta_intensity: "strong"  # strong, medium, subtle
     use_emojis: true
     hook_strategy: "auto"  # auto, curiosity, controversy, data
 
