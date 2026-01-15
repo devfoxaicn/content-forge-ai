@@ -87,11 +87,25 @@ agents:
   # Twitter帖子生成Agent（手动：从简报生成为Twitter）
   twitter_generator:
     enabled: false  # 默认禁用，手动执行时启用
-    style: "engaging"
+    style: "viral"  # viral（爆款风格）, professional, casual, storytelling
     thread_mode: true
-    max_tweets: 5
-    max_tokens: 2500
-    temperature: 0.9
+    max_tweets: 8  # 增加到8条以支持更丰富的内容
+    max_tokens: 4000
+    temperature: 0.95  # 提高创造性
+    cta_type: "engagement"  # engagement, follow, retweet, reply
+    use_emojis: true
+    hook_strategy: "auto"  # auto, curiosity, controversy, data
+
+  # 微信公众号生成Agent（手动：从简报生成为微信HTML）
+  wechat_generator:
+    enabled: false  # 默认禁用，手动执行时启用
+    enable_toc: true  # 生成目录导航
+    enable_reading_progress: true  # 显示阅读进度
+    enable_share_buttons: true  # 显示分享按钮
+    theme: "professional"  # professional, minimal, colorful
+    max_tokens: 16000
+    temperature: 0.7
+    include_seo: true  # 包含SEO优化
 
   # ========== 质量保证Agent（Phase 1新增） ==========
   # 代码审查Agent
