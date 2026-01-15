@@ -53,9 +53,10 @@ agents:
   # 研究Agent（网络搜索获取技术资料）
   research_agent:
     enabled: true  # 启用，提升长文本质量
+    search_provider: "zhipuai"  # 搜索提供商: zhipuai(推荐,包含在年包中), tavily(付费), mock(离线)
     max_results: 10
     search_depth: "advanced"
-    mock_mode: false  # 设为true时不使用Tavily API
+    mock_mode: false  # 设为true时不使用任何搜索API
 
   # 长文本生成Agent（手动：从简报生成长文）
   longform_generator:

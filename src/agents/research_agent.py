@@ -1,5 +1,9 @@
 """
-研究Agent - 使用Tavily API进行网络搜索，为长文本生成提供背景资料
+研究Agent - 网络搜索获取技术资料，支持多种搜索方式
+1. zhipuAI联网搜索（推荐，使用年包）
+2. Open-WebSearch MCP（免费，多引擎）
+3. Tavily API（付费，需要API Key）
+4. Mock模式（离线模拟）
 """
 
 from typing import Dict, Any
@@ -15,6 +19,7 @@ class ResearchAgent(BaseAgent):
         self.max_results = research_config.get("max_results", 10)
         self.search_depth = research_config.get("search_depth", "advanced")
         self.mock_mode = research_config.get("mock_mode", False)
+        self.search_provider = research_config.get("search_provider", "zhipuai")  # zhipuai, tavily, mock
 
     def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -38,14 +43,22 @@ class ResearchAgent(BaseAgent):
             topic_description = selected_topic.get("description", "")
 
             self.log(f"研究主题: {topic_title}")
+            self.log(f"搜索提供商: {self.search_provider}")
 
-            # Mock模式或没有API key时返回模拟数据
-            if self.mock_mode or not self._has_tavily_key():
+            # 根据配置选择搜索方式
+            if self.mock_mode:
                 self.log("使用Mock模式生成研究数据")
                 research_data = self._generate_mock_research(topic_title, topic_description)
-            else:
-                # 使用Tavily API进行真实搜索
+            elif self.search_provider == "zhipuai":
+                # 使用zhipuAI联网搜索（推荐，包含在年包中）
+                research_data = self._search_with_zhipuai(topic_title, topic_description)
+            elif self.search_provider == "tavily" and self._has_tavily_key():
+                # 使用Tavily API（需要付费）
                 research_data = self._search_with_tavily(topic_title, topic_description)
+            else:
+                # 降级到Mock模式
+                self.log("未配置搜索API，使用Mock模式")
+                research_data = self._generate_mock_research(topic_title, topic_description)
 
             self.log(f"研究完成，获取到 {len(research_data.get('sources', []))} 个资料来源")
 
@@ -76,6 +89,82 @@ class ResearchAgent(BaseAgent):
         import os
         tavily_key = os.environ.get("TAVILY_API_KEY")
         return bool(tavily_key and tavily_key != "your_tavily_api_key_here")
+
+    def _search_with_zhipuai(self, topic: str, description: str) -> Dict[str, Any]:
+        """
+        使用zhipuAI联网搜索（推荐，包含在年包中）
+        通过让LLM直接搜索并整理信息
+        """
+        try:
+            # 构建搜索查询
+            query = f"{topic} {description}".strip()
+            self.log(f"zhipuAI联网搜索查询: {query}")
+
+            # 使用LLM进行联网搜索（zhipuAI内置web_search工具）
+            prompt = f"""请联网搜索关于"{query}"的技术资料，并提供以下信息：
+
+1. **技术背景**：该技术的发展历史和现状
+2. **核心特性**：主要功能和技术特点
+3. **应用场景**：实际应用领域和案例
+4. **发展趋势**：未来发展方向和挑战
+
+请搜索以下类型的资源：
+- 官方文档和GitHub仓库
+- 技术博客和教程
+- Stack Overflow和开发者社区
+- 学术论文和案例分析
+
+请以JSON格式返回搜索结果：
+{{
+  "query": "{query}",
+  "sources": [
+    {{
+      "title": "资源标题",
+      "url": "链接地址",
+      "content": "内容摘要（200字以内）"
+    }}
+  ],
+  "detailed_info": {{
+    "background": "技术背景...",
+    "core_features": "核心特性...",
+    "use_cases": "应用场景...",
+    "trends": "发展趋势..."
+  }}
+}}
+"""
+
+            # 调用LLM（zhipuAI会自动使用web_search工具）
+            response = self._call_llm(prompt)
+
+            # 解析JSON响应
+            import json
+            try:
+                # 尝试直接解析
+                research_data = json.loads(response)
+            except json.JSONDecodeError:
+                # 如果解析失败，尝试提取JSON部分
+                import re
+                json_match = re.search(r'\{[\s\S]*\}', response)
+                if json_match:
+                    research_data = json.loads(json_match.group())
+                else:
+                    # 完全失败，返回Mock数据
+                    self.log("zhipuAI搜索结果解析失败，使用Mock模式", "WARNING")
+                    return self._generate_mock_research(topic, description)
+
+            # 验证数据结构
+            if "sources" not in research_data:
+                research_data["sources"] = []
+            if "detailed_info" not in research_data:
+                research_data["detailed_info"] = {}
+
+            self.log(f"zhipuAI联网搜索成功，获取到 {len(research_data.get('sources', []))} 个资料来源")
+            return research_data
+
+        except Exception as e:
+            self.log(f"zhipuAI联网搜索失败: {e}", "ERROR")
+            # 降级到Mock模式
+            return self._generate_mock_research(topic, description)
 
     def _search_with_tavily(self, topic: str, description: str) -> Dict[str, Any]:
         """使用Tavily API进行搜索"""
@@ -168,10 +257,10 @@ class ResearchAgent(BaseAgent):
             except:
                 # JSON解析失败，返回默认结构
                 return {
-                    "background": response[:500],
-                    "core_features": response[500:1000],
-                    "use_cases": response[1000:1500],
-                    "trends": response[1500:2000]
+                    "background": response[:500] if len(response) > 500 else response,
+                    "core_features": response[500:1000] if len(response) > 1000 else "",
+                    "use_cases": response[1000:1500] if len(response) > 1500 else "",
+                    "trends": response[1500:2000] if len(response) > 2000 else ""
                 }
 
         except Exception as e:
