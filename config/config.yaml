@@ -86,7 +86,7 @@ agents:
 
   # Twitter帖子生成Agent（手动：从简报生成为Twitter）
   twitter_generator:
-    enabled: false  # 默认禁用，手动执行时启用
+    enabled: true  # 启用专家级Twitter生成
     style: "viral"  # viral（爆款风格）, professional, casual, storytelling
     thread_mode: true
     max_tweets: 8  # 增加到8条以支持更丰富的内容
@@ -98,7 +98,7 @@ agents:
 
   # 微信公众号生成Agent（手动：从简报生成为微信HTML）
   wechat_generator:
-    enabled: false  # 默认禁用，手动执行时启用
+    enabled: true  # 启用专家级微信HTML生成
     enable_toc: true  # 生成目录导航
     enable_reading_progress: true  # 显示阅读进度
     enable_share_buttons: true  # 显示分享按钮

@@ -398,7 +398,7 @@ class WechatGeneratorAgent(BaseAgent):
         }}
 
         blockquote::before {{
-            content: """;
+            content: "";
             position: absolute;
             left: 4px;
             top: 15px;
@@ -601,7 +601,7 @@ class WechatGeneratorAgent(BaseAgent):
                 html_lines.append('<ul>')
                 continue
 
-            if in_toc and line.strip().startswith(tuple('0123456789') + '.'):
+            if in_toc and any(line.strip().startswith(f'{d}.') for d in '0123456789'):
                 toc_items.append(line.strip())
                 html_lines.append(f'<li><a href="#">{line.strip()[3:]}</a></li>')
                 continue
