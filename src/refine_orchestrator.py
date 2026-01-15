@@ -217,13 +217,8 @@ class RefineOrchestrator:
                 # 保存小红书笔记
                 if "xiaohongshu_note" in state:
                     note = state["xiaohongshu_note"]
-                    md_content = f"""# {note['title']}
-
-{note.get('intro', '')}
-
-{note.get('body', '')}
-
-{note.get('ending', '')}
+                    # 使用full_content字段而不是拆分的字段
+                    md_content = f"""{note.get('full_content', '')}
 
 ---
 **标签**: {' '.join(note.get('hashtags', []))}
