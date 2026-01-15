@@ -40,9 +40,6 @@ class XiaohongshuRefinerAgent(BaseAgent):
             else:
                 user_prompt = self._build_prompt(state, article)
                 response = self._call_llm(user_prompt)
-                # 记录原始响应用于调试
-                self.log(f"LLM原始响应长度: {len(response)} 字符")
-                self.log(f"LLM原始响应预览: {response[:500]}...")
                 xhs_note = self._parse_xiaohongshu_note(response, article)
 
             self.log(f"成功生成小红书笔记，字数: {xhs_note['word_count']}")
