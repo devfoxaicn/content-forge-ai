@@ -132,6 +132,14 @@ agents:
     generate_mermaid: true  # 生成Mermaid图表代码
     min_diagrams: 3  # 最少生成3个图表
 
+  # ========== 引用格式化Agent（Phase 3新增） ==========
+  # 引用格式化Agent
+  citation_formatter_agent:
+    enabled: true  # 启用，统一引用格式
+    citation_style: "gb7714"  # 引用格式: gb7714（GB/T 7714-2015）, apa, ieee
+    auto_detect: true  # 自动检测引用类型
+    generate_reference_list: true  # 自动生成参考文献列表
+
   # ========== 辅助Agent（可选，提升质量） ==========
   # 标题优化Agent
   title_optimizer:

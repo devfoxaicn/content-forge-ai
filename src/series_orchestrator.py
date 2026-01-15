@@ -65,6 +65,7 @@ class SeriesOrchestrator:
         from src.agents.quality_evaluator_agent import QualityEvaluatorAgent
         from src.agents.consistency_checker_agent import ConsistencyCheckerAgent
         from src.agents.visualization_generator_agent import VisualizationGeneratorAgent
+        from src.agents.citation_formatter_agent import CitationFormatterAgent
 
         agents = {}
 
@@ -147,6 +148,17 @@ class SeriesOrchestrator:
                 logger.info("Initialized agent: visualization_generator_agent")
             except Exception as e:
                 logger.warning(f"Failed to initialize visualization_generator_agent: {e}")
+
+        # 初始化引用格式化Agent（Phase 3新增）
+        if agents_config.get("citation_formatter_agent", {}).get("enabled", True):
+            try:
+                agents["citation_formatter_agent"] = CitationFormatterAgent(
+                    config=agents_config.get("citation_formatter_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: citation_formatter_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize citation_formatter_agent: {e}")
 
         return agents
 
@@ -358,6 +370,13 @@ class SeriesOrchestrator:
             if state.get("visualization_result"):
                 viz_result = state["visualization_result"]
                 logger.info(f"✅ 可视化生成完成，生成 {viz_result.get('total_diagrams', 0)} 个图表")
+
+        # 第八步：引用格式化（Phase 3新增）
+        if "citation_formatter_agent" in self.agents:
+            state = _call_agent_safely("citation_formatter_agent", state)
+            if state.get("citation_formatter_result"):
+                citation_result = state["citation_formatter_result"]
+                logger.info(f"✅ 引用格式化完成，识别 {citation_result.get('inline_citation_count', 0)} 个文内引用，{citation_result.get('reference_count', 0)} 条参考文献")
 
         # 保存长文本和质量报告
         if "longform_article" in state:
