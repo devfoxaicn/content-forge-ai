@@ -200,7 +200,7 @@ class CustomContentOrchestrator:
         if "longform_generator" in self.agents:
             state = _call_agent_safely("longform_generator", state)
 
-            # 保存长文本
+            # 保存长文本（Custom模式直接保存到根目录，不创建子目录）
             if "longform_article" in state:
                 article = state["longform_article"]
                 md_content = f"""# {article['title']}
@@ -214,7 +214,8 @@ class CustomContentOrchestrator:
 - 标签: {', '.join(article.get('tags', []))}
 - 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 """
-                storage.save_markdown("longform", "article.md", md_content)
+                # Custom模式：直接保存到根目录，使用空字符串作为category
+                storage.save_markdown("", "article.md", md_content)
                 logger.info("Saved longform article")
 
         return state

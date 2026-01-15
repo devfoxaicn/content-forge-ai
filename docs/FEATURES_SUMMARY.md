@@ -261,8 +261,7 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai ./venv/bin/python src/main.p
 **输出位置**：
 ```
 data/custom/YYYYMMDD_HHMMSS_rag技术原理/
-└── longform/
-    └── article.md
+└── article.md
 ```
 
 **注意**：Custom模式不包含质量保证Agent（代码审查、事实核查等），如需高质量内容请使用Series模式

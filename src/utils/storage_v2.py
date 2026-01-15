@@ -29,10 +29,7 @@ data/
 │
 ├── custom/            # 用户自定义内容
 │   └── {timestamp}_{topic}/
-│       ├── raw/
-│       ├── longform/
-│       ├── xiaohongshu/
-│       └── twitter/
+│       └── article.md  # 直接在根目录，不创建子目录
 │
 ├── refine/            # 内容精炼
 │   └── {source_name}/
@@ -206,6 +203,8 @@ class CustomStorage(BaseStorage):
 
     路径：data/custom/{storage_id}/
     storage_id 格式：YYYYMMDD_HHMMSS_topic
+
+    注意：Custom模式直接在根目录保存文件，不创建子目录
     """
 
     def __init__(
@@ -224,17 +223,10 @@ class CustomStorage(BaseStorage):
 
         self.storage_id = storage_id
 
-        # 创建 custom/{storage_id} 目录
+        # 创建 custom/{storage_id} 目录（不创建子目录）
         self.custom_dir = self.base_dir / "custom" / storage_id
         self.custom_dir.mkdir(parents=True, exist_ok=True)
-        # Custom 模式只需要 longform 目录（只生成长文本）
-        self._create_custom_subdirs(self.custom_dir)
-
-    def _create_custom_subdirs(self, parent_dir: Path) -> None:
-        """创建 Custom 模式专用子目录（只生成长文本）"""
-        subdirs = ["longform"]  # Custom模式只生成长文本，不需要社交内容目录
-        for subdir in subdirs:
-            (parent_dir / subdir).mkdir(exist_ok=True)
+        # Custom模式不需要创建任何子目录
 
     def get_root_dir(self) -> Path:
         return self.custom_dir
