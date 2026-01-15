@@ -116,6 +116,22 @@ agents:
     generate_improvement: true  # 生成改进建议
     min_score: 7.0  # 质量达标阈值
 
+  # ========== 一致性检查Agent（Phase 2新增） ==========
+  # 一致性检查Agent
+  consistency_checker_agent:
+    enabled: true  # 启用，确保术语、引用、数据一致性
+    use_memory_mcp: false  # 是否使用Memory MCP（暂不启用MCP）
+    check_terminology: true  # 检查术语一致性
+    check_citations: true  # 检查引用完整性
+    check_data: true  # 检查数据一致性
+
+  # ========== 可视化生成Agent（Phase 2新增） ==========
+  # 可视化生成Agent
+  visualization_generator_agent:
+    enabled: true  # 启用，自动生成图表
+    generate_mermaid: true  # 生成Mermaid图表代码
+    min_diagrams: 3  # 最少生成3个图表
+
   # ========== 辅助Agent（可选，提升质量） ==========
   # 标题优化Agent
   title_optimizer:

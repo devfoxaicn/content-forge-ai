@@ -57,12 +57,14 @@ class SeriesOrchestrator:
         logger.info(f"SeriesOrchestrator initialized with {config_path}")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化Agent（Series模式：研究 + 生成 + 质量保证）"""
+        """初始化Agent（Series模式：研究 + 生成 + 质量保证 + 可视化）"""
         from src.agents.longform_generator import LongFormGeneratorAgent
         from src.agents.research_agent import ResearchAgent
         from src.agents.code_review_agent import CodeReviewAgent
         from src.agents.fact_check_agent import FactCheckAgent
         from src.agents.quality_evaluator_agent import QualityEvaluatorAgent
+        from src.agents.consistency_checker_agent import ConsistencyCheckerAgent
+        from src.agents.visualization_generator_agent import VisualizationGeneratorAgent
 
         agents = {}
 
@@ -123,6 +125,28 @@ class SeriesOrchestrator:
                 logger.info("Initialized agent: quality_evaluator_agent")
             except Exception as e:
                 logger.warning(f"Failed to initialize quality_evaluator_agent: {e}")
+
+        # 初始化一致性检查Agent（Phase 2新增）
+        if agents_config.get("consistency_checker_agent", {}).get("enabled", True):
+            try:
+                agents["consistency_checker_agent"] = ConsistencyCheckerAgent(
+                    config=agents_config.get("consistency_checker_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: consistency_checker_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize consistency_checker_agent: {e}")
+
+        # 初始化可视化生成Agent（Phase 2新增）
+        if agents_config.get("visualization_generator_agent", {}).get("enabled", True):
+            try:
+                agents["visualization_generator_agent"] = VisualizationGeneratorAgent(
+                    config=agents_config.get("visualization_generator_agent", {}),
+                    prompts=self.prompts
+                )
+                logger.info("Initialized agent: visualization_generator_agent")
+            except Exception as e:
+                logger.warning(f"Failed to initialize visualization_generator_agent: {e}")
 
         return agents
 
@@ -320,6 +344,20 @@ class SeriesOrchestrator:
                 # 如果质量低于阈值，记录警告
                 if not quality_report.get("meets_threshold", True):
                     logger.warning(f"⚠️ 文章质量 {overall_score:.1f} 低于阈值 {self.agents['quality_evaluator_agent'].min_score}")
+
+        # 第六步：一致性检查（Phase 2新增）
+        if "consistency_checker_agent" in self.agents:
+            state = _call_agent_safely("consistency_checker_agent", state)
+            if state.get("consistency_check_result"):
+                consistency_result = state["consistency_check_result"]
+                logger.info(f"✅ 一致性检查完成，分数: {consistency_result.get('score', 0):.1f}/10")
+
+        # 第七步：可视化生成（Phase 2新增）
+        if "visualization_generator_agent" in self.agents:
+            state = _call_agent_safely("visualization_generator_agent", state)
+            if state.get("visualization_result"):
+                viz_result = state["visualization_result"]
+                logger.info(f"✅ 可视化生成完成，生成 {viz_result.get('total_diagrams', 0)} 个图表")
 
         # 保存长文本和质量报告
         if "longform_article" in state:
