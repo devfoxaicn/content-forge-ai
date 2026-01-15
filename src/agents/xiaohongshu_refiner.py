@@ -16,7 +16,7 @@ class XiaohongshuRefinerAgent(BaseAgent):
         refiner_config = config.get("agents", {}).get("xiaohongshu_refiner", {})
         self.style = refiner_config.get("style", "viral")  # viral, professional, casual
         self.content_density = refiner_config.get("content_density", "rich")  # light, medium, rich
-        self.max_tokens = refiner_config.get("max_tokens", 4000)  # 增加token
+        self.max_tokens = refiner_config.get("max_tokens", 8000)  # 增加到8000避免截断
         self.llm.max_tokens = self.max_tokens
         self.llm.temperature = 0.95  # 提高创造性
         self.include_test_case = refiner_config.get("include_test_case", True)  # 包含实测案例
@@ -40,6 +40,9 @@ class XiaohongshuRefinerAgent(BaseAgent):
             else:
                 user_prompt = self._build_prompt(state, article)
                 response = self._call_llm(user_prompt)
+                # 记录原始响应用于调试
+                self.log(f"LLM原始响应长度: {len(response)} 字符")
+                self.log(f"LLM原始响应预览: {response[:500]}...")
                 xhs_note = self._parse_xiaohongshu_note(response, article)
 
             self.log(f"成功生成小红书笔记，字数: {xhs_note['word_count']}")
@@ -516,33 +519,40 @@ class XiaohongshuRefinerAgent(BaseAgent):
 
     def _parse_xiaohongshu_note(self, response: str, article: Dict[str, Any]) -> Dict[str, Any]:
         """解析小红书笔记"""
+        # 提取markdown代码块内容（如果被```markdown包裹）
+        markdown_match = re.search(r'```markdown\n(.*?)```', response, re.DOTALL)
+        if markdown_match:
+            content = markdown_match.group(1).strip()
+        else:
+            content = response.strip()
+
         # 提取标题
-        title_match = re.search(r'^#\s+(.+)$', response, re.MULTILINE)
+        title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
         title = title_match.group(1).strip() if title_match else article['title']
 
         # 提取标签
         hashtags = []
-        hashtag_match = re.search(r'标签[:：](.+)', response)
+        hashtag_match = re.search(r'标签[:：](.+)', content)
         if hashtag_match:
             hashtag_text = hashtag_match.group(1).strip()
             hashtags = [tag.strip() for tag in re.findall(r'#[\w\u4e00-\u9fff]+', hashtag_text)]
 
         if not hashtags:
-            hashtags = re.findall(r'#[\w\u4e00-\u9fff]+', response)
+            hashtags = re.findall(r'#[\w\u4e00-\u9fff]+', content)
 
         # 继承原文章的标签
         original_tags = article.get('tags', [])
         all_tags = list(set(hashtags + [f"#{tag}" for tag in original_tags]))[:8]
 
         # 计算字数
-        word_count = len(response)
+        word_count = len(content)
 
         # 计算emoji数量
-        emoji_count = len(re.findall(r'[🚀🔥💡⚡✅📊📈💰⏱️🎯📌❌⚠️🚨🎁✨🏆💪👇💬🔄❤️😭😱]', response))
+        emoji_count = len(re.findall(r'[🚀🔥💡⚡✅📊📈💰⏱️🎯📌❌⚠️🚨🎁✨🏆💪👇💬🔄❤️😭😱]', content))
 
         return {
             "title": title,
-            "full_content": response,
+            "full_content": content,
             "hashtags": all_tags,
             "word_count": word_count,
             "original_article_word_count": article.get('word_count', 0),
