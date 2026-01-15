@@ -78,7 +78,7 @@ agents:
 
   # 小红书笔记精炼Agent（手动：从简报生成为小红书笔记）
   xiaohongshu_refiner:
-    enabled: false  # 默认禁用，手动执行时启用
+    enabled: true  # 启用小红书精炼
     style: "professional"
     content_density: "dense"
     max_tokens: 3000

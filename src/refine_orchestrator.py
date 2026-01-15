@@ -107,10 +107,7 @@ class RefineOrchestrator:
         source_name = Path(input_source).stem
         storage = StorageFactory.create_refine(source_name)
 
-        # 3. 保存原始输入
-        storage.save_text("raw", "input.md", longform_article['full_content'])
-
-        # 4. 构建状态
+        # 3. 构建状态
         state = {
             "longform_article": longform_article,
             "target_platforms": platforms
