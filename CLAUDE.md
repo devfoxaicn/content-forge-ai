@@ -50,7 +50,7 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode re
 
 ## Project Overview
 
-ContentForge AI v2.6 is a LangChain/LangGraph-based automated content production system supporting four modes:
+ContentForge AI v2.8 is a LangChain/LangGraph-based automated content production system supporting four modes:
 
 **Core Workflow**: AI trend fetching (7 data sources) → Trend digest → Deep research (web search) → Longform generation (staged) → Quality check (code review + fact check) → Multi-platform generation (WeChat/Xiaohongshu/Twitter) → Title optimization → Image prompts → Quality evaluation
 
@@ -195,7 +195,7 @@ Generate storage name: YYYYMMDD_title
 For each platform:
   ┌─ WeChat: wechat_generator → article.html
   ├─ Xiaohongshu: xiaohongshu_long_refiner → note_long.md (2000 chars)
-  │              xiaohongshu_short_refiner → note_short.md (500-900 chars)
+  │              xiaohongshu_short_refiner → note_short.md (800-1000 chars, viral baokuan style)
   └─ Twitter: twitter_generator → thread.md
 ```
 
@@ -203,8 +203,8 @@ For each platform:
 - Storage format: `data/refine/YYYYMMDD_title/` (e.g., `20260115_Claude_Cowork入门指南`)
 - Xiaohongshu generates **two versions**:
   - **Long note** (~2000 chars, 6 chapters, deep content) - `xiaohongshu/note_long.md`
-  - **Short note** (500-900 chars, condensed from long) - `xiaohongshu/note_short.md`
-- Short refiner can work from either the long note or original article
+  - **Short note** (800-1000 chars, viral baokuan style with ## 1️⃣ 2️⃣ 3️⃣ numbered chapters) - `xiaohongshu/note_short.md`
+- Short refiner uses viral content style with numbered chapters, colloquial language ("太绝了", "扒一皮"), and strong comparisons
 - Each platform's content is saved immediately after generation
 
 ### AI Trend Data Sources (config.yaml:30-37)
@@ -726,7 +726,7 @@ agents:
 | `TrendsDigestAgent` | `trends_digest_agent.py` | Trend digest generation |
 | `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
 | `XiaohongshuLongRefinerAgent` | `xiaohongshu_long_refiner.py` | Xiaohongshu long note (~2000 chars) |
-| `XiaohongshuShortRefinerAgent` | `xiaohongshu_short_refiner.py` | Xiaohongshu short note (500-900 chars) |
+| `XiaohongshuShortRefinerAgent` | `xiaohongshu_short_refiner.py` | Xiaohongshu short note (800-1000 chars, viral baokuan style) |
 | `TwitterGeneratorAgent` | `twitter_generator.py` | Twitter post generation |
 | `WechatGeneratorAgent` | `wechat_generator.py` | WeChat HTML generation |
 | `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
@@ -744,4 +744,4 @@ agents:
 ---
 
 **Version**: v2.8
-**Updated**: 2026-01-15
+**Updated**: 2026-01-16

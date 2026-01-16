@@ -44,6 +44,10 @@ class XiaohongshuShortRefinerAgent(BaseAgent):
                 source_content = article['full_content']
                 source_title = article['title']
 
+            # 预处理：移除长笔记中的---分隔符，避免LLM模仿原文格式
+            source_content = source_content.replace('---', '\n')
+            self.log("已预处理：移除原文分隔符以避免格式模仿")
+
             if self.mock_mode:
                 self.log("使用Mock模式生成短笔记")
                 xhs_note = self._generate_mock_note(article or {"title": source_title, "full_content": source_content})
@@ -159,7 +163,100 @@ class XiaohongshuShortRefinerAgent(BaseAgent):
         else:
             content = response.strip()
 
-        # 提取标题
+        # 后处理：将---分隔符转换为## 1️⃣ 2️⃣ 3️⃣编号格式
+        content = self._convert_to_numbered_format(content)
+        self.log("已后处理：转换分隔符为编号格式")
+
+    def _convert_to_numbered_format(self, content: str) -> str:
+        """将---分隔符转换为## 1️⃣ 2️⃣ 3️⃣编号格式"""
+        # 定义章节编号emoji
+        number_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣']
+        # 定义章节类型映射（根据内容特征）
+        section_types = [
+            '核心发现',      # 第1节
+            '架构设计',      # 第2节
+            '实测效果',      # 第3节
+            '实战技巧',      # 第4节
+            '避坑指南',      # 第5节
+            '总结'          # 第6节
+        ]
+
+        # 按分隔符分割内容
+        parts = content.split('---')
+
+        # 过滤空部分
+        parts = [p.strip() for p in parts if p.strip()]
+
+        # 如果没有分隔符，返回原内容
+        if len(parts) <= 1:
+            return content
+
+        # 第一部分是标题和开头，保持不变
+        result = parts[0].strip() + '\n\n'
+
+        # 检查是否有"## 开头先说痛点"，如果没有则添加
+        if '## 开头先说痛点' not in result and '有没有发现' in result:
+            # 找到开头的位置，在其前插入标题
+            lines = result.split('\n')
+            for i, line in enumerate(lines):
+                if '有没有发现' in line or '凌晨' in line or '今天分享' in line:
+                    lines.insert(i, '## 开头先说痛点')
+                    lines.insert(i + 1, '')
+                    break
+            result = '\n'.join(lines)
+
+        # 处理后续部分，添加编号
+        for i, part in enumerate(parts[1:], start=1):
+            if i > len(number_emojis):
+                break
+
+            # 跳过空行
+            if not part.strip():
+                continue
+
+            # 提取第一行作为小标题，如果没有则使用默认类型
+            part_lines = part.strip().split('\n')
+            first_line = part_lines[0].strip() if part_lines else ''
+
+            # 判断第一行是否像标题（短且没有句号）
+            if len(first_line) < 30 and '。' not in first_line and '！' not in first_line and first_line and not first_line.startswith('#'):
+                # 第一行作为小标题
+                section_title = first_line
+                remaining_content = '\n'.join(part_lines[1:]) if len(part_lines) > 1 else ''
+            else:
+                # 使用默认类型
+                section_title = section_types[min(i-1, len(section_types)-1)]
+                remaining_content = part.strip()
+
+            # 添加编号章节
+            result += f'## {number_emojis[i-1]} {section_title}\n\n'
+            if remaining_content.strip():
+                result += remaining_content.strip() + '\n\n'
+
+        # 确保结尾有"## 总结一下"
+        if '## 总结一下' not in result:
+            # 检查最后一段是否像总结
+            last_part = parts[-1].strip() if parts else ''
+            if last_part and len(last_part) < 200 and ('效率' in last_part or '工具' in last_part or '立刻' in last_part):
+                # 最后一段作为总结
+                result = result.rstrip() + '\n\n## 总结一下\n\n' + last_part + '\n\n'
+
+        return result.rstrip()
+
+    def _parse_xiaohongshu_note(self, response: str, article: Dict[str, Any]) -> Dict[str, Any]:
+        """解析小红书短笔记"""
+        # 提取markdown代码块内容（如果被```markdown包裹）
+        markdown_match = re.search(r'```markdown\n(.*?)```', response, re.DOTALL)
+        if markdown_match:
+            content = markdown_match.group(1).strip()
+        else:
+            content = response.strip()
+
+        # 后处理：将---分隔符转换为## 1️⃣ 2️⃣ 3️⃣编号格式
+        content = self._convert_to_numbered_format(content)
+        self.log("已后处理：转换分隔符为编号格式")
+
+        # 提取标题（使用转换后的content）
         title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
         title = title_match.group(1).strip() if title_match else article['title']
 
@@ -194,6 +291,82 @@ class XiaohongshuShortRefinerAgent(BaseAgent):
             "note_type": "short",
             "target_word_count": self.target_word_count
         }
+
+    def _convert_to_numbered_format(self, content: str) -> str:
+        """将---分隔符转换为## 1️⃣ 2️⃣ 3️⃣编号格式"""
+        # 定义章节编号emoji
+        number_emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣']
+        # 定义章节类型映射（根据内容特征）
+        section_types = [
+            '核心发现',      # 第1节
+            '架构设计',      # 第2节
+            '实测效果',      # 第3节
+            '实战技巧',      # 第4节
+            '避坑指南',      # 第5节
+            '总结'          # 第6节
+        ]
+
+        # 按分隔符分割内容
+        parts = content.split('---')
+
+        # 过滤空部分
+        parts = [p.strip() for p in parts if p.strip()]
+
+        # 如果没有分隔符，返回原内容
+        if len(parts) <= 1:
+            return content
+
+        # 第一部分是标题和开头，保持不变
+        result = parts[0].strip() + '\n\n'
+
+        # 检查是否有"## 开头先说痛点"，如果没有则添加
+        if '## 开头先说痛点' not in result and '有没有发现' in result:
+            # 找到开头的位置，在其前插入标题
+            lines = result.split('\n')
+            for i, line in enumerate(lines):
+                if '有没有发现' in line or '凌晨' in line or '今天分享' in line:
+                    lines.insert(i, '## 开头先说痛点')
+                    lines.insert(i + 1, '')
+                    break
+            result = '\n'.join(lines)
+
+        # 处理后续部分，添加编号
+        for i, part in enumerate(parts[1:], start=1):
+            if i > len(number_emojis):
+                break
+
+            # 跳过空行
+            if not part.strip():
+                continue
+
+            # 提取第一行作为小标题，如果没有则使用默认类型
+            part_lines = part.strip().split('\n')
+            first_line = part_lines[0].strip() if part_lines else ''
+
+            # 判断第一行是否像标题（短且没有句号）
+            if len(first_line) < 30 and '。' not in first_line and '！' not in first_line and first_line and not first_line.startswith('#'):
+                # 第一行作为小标题
+                section_title = first_line
+                remaining_content = '\n'.join(part_lines[1:]) if len(part_lines) > 1 else ''
+            else:
+                # 使用默认类型
+                section_title = section_types[min(i-1, len(section_types)-1)]
+                remaining_content = part.strip()
+
+            # 添加编号章节
+            result += f'## {number_emojis[i-1]} {section_title}\n\n'
+            if remaining_content.strip():
+                result += remaining_content.strip() + '\n\n'
+
+        # 确保结尾有"## 总结一下"
+        if '## 总结一下' not in result:
+            # 检查最后一段是否像总结
+            last_part = parts[-1].strip() if parts else ''
+            if last_part and len(last_part) < 200 and ('效率' in last_part or '工具' in last_part or '立刻' in last_part):
+                # 最后一段作为总结
+                result = result.rstrip() + '\n\n## 总结一下\n\n' + last_part + '\n\n'
+
+        return result.rstrip()
 
     def _generate_mock_note(self, article: Dict[str, Any]) -> Dict[str, Any]:
         """生成模拟小红书短笔记（世界级标准）"""
