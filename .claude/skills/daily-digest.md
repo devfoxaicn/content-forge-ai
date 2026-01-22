@@ -14,21 +14,33 @@ description: 一键生成AI新闻简报并提交到GitHub。自动从14个顶级
 
 ## 使用方法
 
-### 方式一：直接运行脚本（推荐）
+### 方式一：快捷脚本（推荐）⭐
 
 ```bash
+./daily_digest.sh
+```
+
+该脚本会自动：
+- 检查并使用项目虚拟环境 `/Users/z/Documents/work/content-forge-ai/venv`
+- 运行完整流程
+
+### 方式二：手动使用虚拟环境
+
+```bash
+# 激活虚拟环境
+source /Users/z/Documents/work/content-forge-ai/venv/bin/activate
+
+# 运行脚本
 python scripts/daily_digest.py
 ```
 
-或使用PYTHONPATH：
+### 方式三：使用main.py
 
 ```bash
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python scripts/daily_digest.py
-```
+# 激活虚拟环境
+source /Users/z/Documents/work/content-forge-ai/venv/bin/activate
 
-### 方式二：使用main.py
-
-```bash
+# 运行auto模式
 python src/main.py --mode auto --once
 ```
 
@@ -38,6 +50,20 @@ python src/main.py --mode auto --once
 git add -A
 git commit -m "docs: AI每日热点"
 git push origin main
+```
+
+## 环境要求
+
+- **虚拟环境**: `/Users/z/Documents/work/content-forge-ai/venv`
+- **Python**: 3.8+
+- **依赖**: 在虚拟环境中运行 `pip install -r requirements.txt`
+
+如果虚拟环境不存在，创建方式：
+
+```bash
+python -m venv /Users/z/Documents/work/content-forge-ai/venv
+source /Users/z/Documents/work/content-forge-ai/venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## 输出
@@ -50,9 +76,9 @@ git push origin main
 ## 执行流程
 
 ```
-Step 1/3: 生成AI新闻简报
+Step 1/3: 生成AI新闻简报 (~9分钟)
   ↓
-Step 2/3: 提交到Git
+Step 2/3: 提交到Git (~10秒)
   ↓
 Step 3/3: 完成
 ```

@@ -8,6 +8,11 @@ AI Daily Digest - 一键生成简报并提交GitHub
 3. 使用LLM批量翻译生成高质量中文简报
 4. 保存到 data/daily/YYYYMMDD/digest/ 目录
 5. 自动提交并推送到GitHub
+
+环境要求：
+- 虚拟环境: /Users/z/Documents/work/content-forge-ai/venv
+- Python 3.8+
+- 依赖: pip install -r requirements.txt
 """
 
 import os
@@ -24,6 +29,10 @@ load_dotenv()
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+# 检查虚拟环境
+VENV_PATH = PROJECT_ROOT / "venv"
+IN_VENV = sys.prefix == str(VENV_PATH) or hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix)
+
 from src.auto_orchestrator import AutoContentOrchestrator
 from src.utils.github_publisher import GitHubPublisher
 from loguru import logger
@@ -31,6 +40,16 @@ from loguru import logger
 
 def main():
     """主函数：执行完整流程"""
+
+    # 检查虚拟环境
+    if not IN_VENV:
+        print("⚠️  警告：未检测到虚拟环境")
+        print(f"   建议使用虚拟环境: {VENV_PATH}")
+        print(f"   激活方式: source {VENV_PATH}/bin/activate")
+        print()
+    else:
+        print(f"📦 虚拟环境: {sys.prefix}")
+        print()
 
     print("=" * 60)
     print("🚀 AI Daily Digest - 一键生成简报并提交GitHub")
