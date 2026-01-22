@@ -17,7 +17,8 @@ from langgraph.graph import StateGraph, END
 # 本地imports
 from src.state import create_initial_state, update_state, add_agent_to_order, calculate_execution_time
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
-from src.agents.trends_digest_agent import TrendsDigestAgent
+from src.agents.trend_categorizer_agent import TrendCategorizerAgent
+from src.agents.world_class_digest_agent import WorldClassDigestAgent
 from src.utils.storage_v2 import StorageFactory
 
 # 日志配置
@@ -106,42 +107,51 @@ class AutoContentOrchestrator:
             )
 
     def _init_agents(self) -> Dict[str, Any]:
-        """初始化所有Agent（Auto模式：只生成简报）"""
+        """初始化所有Agent（Auto模式 v4.0：全中文顶级新闻简报）"""
         agents = {}
         agents_config = self.config.get("agents", {})
 
-        # Auto模式只初始化简报相关的Agent
-        # AI热点分析Agent（真实API版本）
+        # Auto模式初始化新的Agent链
+        # 1. AI热点分析Agent（真实API版本）
         if agents_config.get("ai_trend_analyzer", {}).get("enabled", True):
             agents["ai_trend_analyzer"] = RealAITrendAnalyzerAgent(self.config, self.prompts)
 
-        # 热点汇总Agent
+        # 2. 热点分类Agent
         if agents_config.get("trends_digest", {}).get("enabled", True):
-            agents["trends_digest"] = TrendsDigestAgent(self.config, self.prompts)
+            agents["trend_categorizer"] = TrendCategorizerAgent(self.config, self.prompts)
+
+        # 3. 世界顶级中文简报Agent
+        if agents_config.get("trends_digest", {}).get("enabled", True):
+            agents["world_class_digest"] = WorldClassDigestAgent(self.config, self.prompts)
 
         # 注意：Auto模式下不初始化长文本、小红书、Twitter等Agent
         # 如需生成完整内容，请使用 Custom、Refine 或 Series 模式
 
-        logger.info(f"Auto模式已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
+        logger.info(f"Auto模式 v4.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
         return agents
 
     def _build_workflow(self) -> StateGraph:
-        """构建自动化工作流（Auto模式：简报生成）"""
+        """构建自动化工作流（Auto模式 v4.0：全中文顶级新闻简报）"""
         workflow = StateGraph(dict)
 
         # 添加Agent节点
         for agent_name, agent in self.agents.items():
             workflow.add_node(agent_name, self._create_agent_node(agent))
 
-        # 定义执行顺序：AI热点分析 → 热点汇总 → END
+        # 定义执行顺序：AI热点分析 → 热点分类 → 世界顶级简报 → END
         if "ai_trend_analyzer" in self.agents:
             workflow.set_entry_point("ai_trend_analyzer")
 
-            # 热点汇总Agent
+            # 热点分类Agent
             last_node = "ai_trend_analyzer"
-            if "trends_digest" in self.agents:
-                workflow.add_edge(last_node, "trends_digest")
-                last_node = "trends_digest"
+            if "trend_categorizer" in self.agents:
+                workflow.add_edge(last_node, "trend_categorizer")
+                last_node = "trend_categorizer"
+
+            # 世界顶级中文简报Agent
+            if "world_class_digest" in self.agents:
+                workflow.add_edge(last_node, "world_class_digest")
+                last_node = "world_class_digest"
 
             workflow.add_edge(last_node, END)
 
@@ -234,24 +244,28 @@ class AutoContentOrchestrator:
             raise
 
     def _save_output(self, state: Dict[str, Any]):
-        """保存输出结果到按日期分层的目录（Auto模式：只保存原始数据和简报）"""
+        """保存输出结果到按日期分层的目录（Auto模式 v3.0：原始数据+分类简报）"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # 1. 保存AI热点原始数据（JSON格式）
-        if state.get("ai_hot_topics"):
-            topics = state["ai_hot_topics"]
+        # 1. 保存AI热点原始数据（JSON格式）- 包含trends_by_source
+        if state.get("trends_by_source"):
+            trends_by_source = state["trends_by_source"]
             raw_filename = f"raw_topics_{timestamp}.json"
             raw_data = {
                 "fetched_at": datetime.now().isoformat(),
-                "total_topics": len(topics),
-                "topics": topics
+                "total_topics": state.get("total_trends_count", 0),
+                "data_sources": list(trends_by_source.keys()),
+                "trends_by_source": trends_by_source,
+                # 兼容旧格式
+                "topics": state.get("ai_hot_topics", [])
             }
             raw_file = self.storage.save_json("raw", raw_filename, raw_data)
             logger.info(f"AI热点原始数据已保存: {raw_file}")
 
-        # 2. 保存热点简报
-        if state.get("trends_digest"):
-            self._save_digest(state)
+        # 2. 保存热点简报（兼容新旧字段）
+        digest = state.get("trends_digest") or state.get("news_digest")
+        if digest:
+            self._save_digest(state, digest)
 
         logger.success(f"Auto模式内容已保存到: {self.storage.get_date_dir()}")
 
@@ -262,17 +276,17 @@ class AutoContentOrchestrator:
             formatted_tweets.append(f"### Tweet {i}\n\n{tweet}\n")
         return "\n".join(formatted_tweets)
 
-    def _save_digest(self, state: Dict[str, Any]):
+    def _save_digest(self, state: Dict[str, Any], digest: Dict[str, Any]):
         """保存热点简报到digest目录"""
         try:
-            digest = state.get("trends_digest")
             if not digest:
                 return
 
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            base_filename = f"digest_{digest.get('issue_number', timestamp)}"
+            issue_number = digest.get('issue_number', timestamp)
+            base_filename = f"digest_{issue_number}"
 
-            # 保存Markdown格式（主要格式）
+            # 保存Markdown格式（主要格式，符合aibook要求）
             md_filename = f"{base_filename}.md"
             md_file = self.storage.save_markdown("digest", md_filename, digest.get('full_content', ''))
             logger.info(f"热点简报Markdown已保存: {md_file}")
@@ -283,13 +297,13 @@ class AutoContentOrchestrator:
                 "metadata": {
                     "title": digest.get("title"),
                     "subtitle": digest.get("subtitle"),
-                    "issue_number": digest.get("issue_number"),
+                    "issue_number": issue_number,
                     "publish_date": digest.get("publish_date"),
                     "generated_at": datetime.now().isoformat(),
                     "word_count": digest.get("word_count"),
                     "reading_time": digest.get("reading_time"),
                     "total_topics": digest.get("total_topics"),
-                    "style": digest.get("style")
+                    "version": digest.get("version", "v3.0")
                 },
                 "topics": digest.get("topics", []),
                 "summary_analysis": digest.get("summary_analysis"),
@@ -304,22 +318,31 @@ class AutoContentOrchestrator:
     def _print_summary(self, state: Dict[str, Any]):
         """打印结果摘要"""
         print("\n" + "="*60)
-        print("📝 Auto模式 - 热点简报生成完成")
+        print("📝 Auto模式 v4.0 - 世界顶级AI新闻简报生成完成")
         print("="*60)
 
         # 热点简报信息
-        if state.get('trends_digest'):
-            digest = state['trends_digest']
+        digest = state.get('news_digest')
+        if digest:
             print(f"\n📰 热点简报: {digest.get('title', 'N/A')}")
             print(f"   期号: #{digest.get('issue_number', 'N/A')}")
             print(f"   热点数量: {digest.get('total_topics', 0)} 个")
+            print(f"   版本: {digest.get('version', 'v4.0')}")
             print(f"   字数: {digest.get('word_count', 0)} 字")
             print(f"   阅读时间: {digest.get('reading_time', 'N/A')}")
 
         # AI热点信息
-        hot_topics = state.get('ai_hot_topics', [])
-        if hot_topics:
-            print(f"\n🔥 获取到 {len(hot_topics)} 个AI热点")
+        total_count = state.get('total_trends_count', 0)
+        if total_count > 0:
+            print(f"\n🔥 获取到 {total_count} 个AI热点（按数据源汇总）")
+
+            # 打印数据源统计
+            trends_by_source = state.get('trends_by_source', {})
+            if trends_by_source:
+                print("\n📊 数据源统计:")
+                for source, items in trends_by_source.items():
+                    if items:
+                        print(f"   {source}: {len(items)} 条")
 
         print(f"\n⏱️  执行耗时: {state.get('execution_time', 0):.2f}秒")
         print(f"📁 存储位置: {self.storage.get_date_dir()}")

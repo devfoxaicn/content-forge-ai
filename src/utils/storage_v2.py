@@ -110,6 +110,7 @@ class DailyStorage(BaseStorage):
     """每日热点模式存储
 
     路径：data/daily/YYYYMMDD/
+    只创建 raw 和 digest 目录
     """
 
     def __init__(self, date: Optional[str] = None, base_dir: str = "data"):
@@ -130,13 +131,25 @@ class DailyStorage(BaseStorage):
         # 创建 daily/{日期} 目录
         self.daily_dir = self.base_dir / "daily" / self.date_str
         self.daily_dir.mkdir(parents=True, exist_ok=True)
-        self._create_subdirs(self.daily_dir)
+
+        # 只创建 raw 和 digest 目录
+        self._create_daily_subdirs(self.daily_dir)
 
     def get_root_dir(self) -> Path:
         return self.daily_dir
 
+    def get_date_dir(self) -> Path:
+        """获取日期目录路径"""
+        return self.daily_dir
+
     def get_date_string(self) -> str:
         return self.date_str
+
+    def _create_daily_subdirs(self, parent_dir: Path) -> None:
+        """创建Daily模式专用子目录（只创建raw和digest）"""
+        subdirs = ["raw", "digest"]
+        for subdir in subdirs:
+            (parent_dir / subdir).mkdir(exist_ok=True)
 
 
 class SeriesStorage(BaseStorage):

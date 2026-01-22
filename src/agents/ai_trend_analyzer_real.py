@@ -36,6 +36,7 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             "techcrunch_ai": "techcrunch_ai" in sources_config,
             "verge_ai": "verge_ai" in sources_config,
             "venturebeat_ai": "venturebeat_ai" in sources_config,
+            "newsapi": "newsapi" in sources_config,
             # 学术类（重大新闻）
             "arxiv_news": "arxiv_news" in sources_config,
             # 科技新闻（过滤产品类）
@@ -83,9 +84,18 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             # 保存热点分析结果
             self._save_trends(hot_topics)
 
-            # 选择热度最高的话题
-            if hot_topics:
-                selected_topic = hot_topics[0]
+            # 计算总数量
+            total_count = sum(len(trends) for trends in hot_topics.values())
+
+            # 选择热度最高的话题（用于兼容旧代码）
+            all_trends_flat = []
+            for trends in hot_topics.values():
+                all_trends_flat.extend(trends)
+
+            if all_trends_flat:
+                # 按热度排序
+                all_trends_flat.sort(key=lambda x: x.get("heat_score", 0), reverse=True)
+                selected_topic = all_trends_flat[0]
                 self.log(f"选择热点话题: {selected_topic['title']}")
             else:
                 selected_topic = {
@@ -97,7 +107,9 @@ class RealAITrendAnalyzerAgent(BaseAgent):
 
             return {
                 **state,
-                "ai_hot_topics": hot_topics,
+                "trends_by_source": hot_topics,
+                "total_trends_count": total_count,
+                "ai_hot_topics": all_trends_flat[:20],  # 保留旧字段兼容
                 "selected_ai_topic": selected_topic,
                 "current_step": "ai_trend_analyzer_completed"
             }
@@ -167,6 +179,15 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             except Exception as e:
                 self.log(f"VentureBeat AI获取失败: {e}", "WARNING")
 
+        # 6. NewsAPI.org
+        if self.sources["newsapi"]:
+            try:
+                newsapi_trends = self._get_newsapi_trends()
+                all_trends.extend(newsapi_trends)
+                self.log(f"NewsAPI: 获取 {len(newsapi_trends)} 条热点")
+            except Exception as e:
+                self.log(f"NewsAPI获取失败: {e}", "WARNING")
+
         # ===== 学术类数据源（重大新闻） =====
 
         # 6. arXiv重大论文新闻
@@ -189,28 +210,48 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             except Exception as e:
                 self.log(f"HackerNews产品类获取失败: {e}", "WARNING")
 
-        # 按综合热度评分排序
-        all_trends.sort(key=lambda x: x.get("heat_score", 0), reverse=True)
+        # 不再排序、去重、过滤，保留所有数据源的完整内容
+        # 按数据源组织返回
+        trends_by_source = {
+            "Product Hunt": [],
+            "GitHub": [],
+            "TechCrunch AI": [],
+            "The Verge AI": [],
+            "VentureBeat AI": [],
+            "NewsAPI": [],
+            "arXiv": [],
+            "Hacker News": []
+        }
 
-        # 去重（基于标题相似度）
-        all_trends = self._deduplicate_trends(all_trends)
-
-        # 过滤低分内容
-        all_trends = [t for t in all_trends if t.get("heat_score", 0) >= self.min_score]
-
-        # 对每个热点进行分类
+        # 将热点按数据源分类
         for trend in all_trends:
-            classification = self._classify_trend(trend)
-            trend["category"] = classification["category"]
-            trend["category_icon"] = classification["icon"]
-            trend["category_confidence"] = classification["confidence"]
-            # 更新tags以包含分类信息
-            if "tags" not in trend:
-                trend["tags"] = []
-            trend["tags"].append(classification["category"].replace("📈 ", "").replace("🎓 ", "").replace("🔬 ", "").replace("🛠️ ", "").replace("💼 ", ""))
+            source = trend.get("source", "")
+            # 确定数据源分类
+            if "Product Hunt" in source:
+                trends_by_source["Product Hunt"].append(trend)
+            elif "GitHub" in source:
+                trends_by_source["GitHub"].append(trend)
+            elif "TechCrunch" in source:
+                trends_by_source["TechCrunch AI"].append(trend)
+            elif "Verge" in source:
+                trends_by_source["The Verge AI"].append(trend)
+            elif "VentureBeat" in source:
+                trends_by_source["VentureBeat AI"].append(trend)
+            elif "NewsAPI" in source:
+                trends_by_source["NewsAPI"].append(trend)
+            elif "arXiv" in source:
+                trends_by_source["arXiv"].append(trend)
+            elif "Hacker" in source:
+                trends_by_source["Hacker News"].append(trend)
 
-        # 返回Top N
-        return all_trends[:self.max_trends]
+        total_count = sum(len(trends) for trends in trends_by_source.values())
+
+        self.log(f"数据源汇总完成: 共{total_count}条热点")
+        for source, trends in trends_by_source.items():
+            if trends:
+                self.log(f"  {source}: {len(trends)}条")
+
+        return trends_by_source
 
     # ==================== 产品类数据源 ====================
 
@@ -358,6 +399,126 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             )
         except Exception as e:
             self.log(f"VentureBeat AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_newsapi_trends(self) -> List[Dict[str, Any]]:
+        """获取NewsAPI.org AI新闻"""
+        try:
+            from src.utils.api_config import APIConfigManager
+
+            api_config = APIConfigManager()
+            api_key = api_config.get_api_key("newsapi")
+
+            # NewsAPI endpoint for everything
+            url = "https://newsapi.org/v2/everything"
+
+            # AI相关关键词搜索
+            ai_keywords = [
+                "artificial intelligence",
+                "machine learning",
+                "deep learning",
+                "AI model",
+                "ChatGPT",
+                "GPT-4",
+                "LLM",
+                "large language model",
+                "OpenAI",
+                "Anthropic",
+                "Google Gemini",
+                "Claude",
+                "neural network",
+                "computer vision",
+                "NLP"
+            ]
+
+            # 将关键词用 OR 连接
+            query = " OR ".join(ai_keywords[:10])  # 限制关键词数量
+
+            params = {
+                "q": query,
+                "apiKey": api_key,
+                "language": "en",
+                "sortBy": "publishedAt",
+                "pageSize": 20,
+                "searchIn": "title,description"
+            }
+
+            response = requests.get(url, params=params, timeout=15)
+            response.raise_for_status()
+
+            data = response.json()
+
+            if data.get("status") != "ok":
+                self.log(f"NewsAPI返回错误: {data.get('message', 'Unknown error')}", "ERROR")
+                return []
+
+            articles = data.get("articles", [])
+            trends = []
+
+            for article in articles:
+                try:
+                    title = article.get("title", "")
+                    description = article.get("description", "")
+                    url = article.get("url", "")
+                    published = article.get("publishedAt", "")
+                    source_name = article.get("source", {}).get("name", "NewsAPI")
+
+                    # 过滤掉无标题或无URL的文章
+                    if not title or not url or title == "[Removed]":
+                        continue
+
+                    # 清理描述
+                    if description:
+                        import re
+                        description = re.sub(r'<[^>]+>', '', description)
+                        description = description.strip()[:300]
+
+                    # 计算热度评分
+                    heat_score = 65  # NewsAPI基础分
+
+                    # 根据关键词加分
+                    title_lower = title.lower()
+                    high_value_keywords = [
+                        "breakthrough", "launch", "release", "announce", "unveil",
+                        "openai", "gpt-4", "claude", "gemini", "llama", "mistral",
+                        "billion", "funding", "investment", "acquisition"
+                    ]
+
+                    for keyword in high_value_keywords:
+                        if keyword.lower() in title_lower:
+                            heat_score += 5
+                            break
+
+                    trends.append({
+                        "title": title,
+                        "description": description or title[:200],
+                        "url": url,
+                        "source": f"NewsAPI ({source_name})",
+                        "timestamp": published[:10] if published else datetime.now().strftime("%Y-%m-%d"),
+                        "metrics": {
+                            "published": published,
+                            "source": source_name,
+                            "type": "news"
+                        },
+                        "heat_score": heat_score,
+                        "tags": ["AI新闻", "行业资讯"]
+                    })
+
+                except Exception as e:
+                    self.log(f"处理NewsAPI文章失败: {e}", "WARNING")
+                    continue
+
+            return trends[:20]  # 返回前20条
+
+        except ValueError as e:
+            # API密钥未配置
+            self.log(f"NewsAPI密钥未配置: {e}", "WARNING")
+            return []
+        except requests.exceptions.RequestException as e:
+            self.log(f"NewsAPI请求失败: {e}", "ERROR")
+            return []
+        except Exception as e:
+            self.log(f"NewsAI获取失败: {e}", "ERROR")
             return []
 
     def _get_rss_trends(self, rss_url: str, source_name: str, item_type: str, max_items: int = 15) -> List[Dict[str, Any]]:
@@ -756,18 +917,26 @@ class RealAITrendAnalyzerAgent(BaseAgent):
 
         return unique_trends
 
-    def _save_trends(self, trends: List[Dict[str, Any]]):
+    def _save_trends(self, trends_by_source: Dict[str, List[Dict[str, Any]]]):
         """保存热点分析结果到raw目录"""
         try:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             filename = f"trends_ai_{timestamp}.json"
 
+            total_count = sum(len(trends) for trends in trends_by_source.values())
+
             output = {
                 "timestamp": datetime.now().isoformat(),
-                "total_trends": len(trends),
-                "data_sources": list(self.sources.keys()),
-                "trends": trends
+                "total_trends": total_count,
+                "data_sources": list(trends_by_source.keys()),
+                "trends_by_source": trends_by_source,
+                # 保留旧格式兼容
+                "trends": []
             }
+
+            # 展平所有趋势到旧格式
+            for source, trends in trends_by_source.items():
+                output["trends"].extend(trends)
 
             # 使用新的存储管理器，保存到raw目录
             filepath = self.storage.save_json("raw", filename, output)

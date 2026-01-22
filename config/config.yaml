@@ -35,6 +35,7 @@ agents:
       - "venturebeat_ai"   # VentureBeat AI RSS
       - "arxiv_news"       # arXiv API
       - "hackernews"       # Hacker News API
+      - "newsapi"          # NewsAPI.org
 
     # 热点配置
     max_trends: 20
