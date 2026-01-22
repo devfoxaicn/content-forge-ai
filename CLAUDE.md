@@ -9,95 +9,133 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Set PYTHONPATH (required for all commands)
 export PYTHONPATH=/Users/z/Documents/work/content-forge-ai
 
-# ========== Auto Mode (AI trends-based) ==========
+# ========== Auto Mode v4.0 (Chinese AI News Digest) ==========
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --once
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --topic "AI技术"
 
 # ========== Series Mode (100-episode blog series) ==========
 # View progress
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --progress
 # Generate single episode
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1
-# Generate entire series
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --series series_1
-# Batch generate (auto-skips completed)
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --all --start 1 --end 10
 
 # ========== Custom Mode (user-defined topics) ==========
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode custom --topic "RAG技术原理与实战"
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode custom --topic "RAG技术" --prompt "详细介绍架构和实战"
 
 # ========== Refine Mode (multi-platform content refining) ==========
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode refine --input article.md
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode refine --input article.md --platforms wechat xiaohongshu
 ```
 
 **Core Files**:
-- `src/main.py` - Unified entry point (use `--mode` to switch between auto/series/custom/refine)
-- `config/config.yaml` - Main config (LLM, agents, data sources)
+- `src/main.py` - Unified entry point (use `--mode` to switch)
+- `config/config.yaml` - Main config (LLM, agents, 8 data sources)
 - `config/blog_topics_100_complete.json` - 100-episode content plan
 - `config/prompts.yaml` - Agent system prompt templates
-- `src/utils/series_manager.py` - Series management (SeriesMetadata, SeriesPathManager)
-- `src/utils/storage_v2.py` - Unified storage (StorageFactory with 4 modes)
-- `src/utils/api_config.py` - API config management (APIConfigManager)
+- `src/utils/storage_v2.py` - Unified storage (StorageFactory)
 
 **Key Architecture Points**:
-1. **Four-Mode Architecture**: Auto (AI trends), Series (100 topics), Custom (user-defined), Refine (multi-platform)
-2. **Series Path Format**: `series_X_descriptive_name` (e.g., `series_1_llm_foundation`)
-3. **Refine Storage Format**: `YYYYMMDD_title` (e.g., `20260115_Claude_Cowork入门指南`)
+1. **Four-Mode Architecture**: Auto (v4.0 Chinese digest), Series (100 topics), Custom (user-defined), Refine (multi-platform)
+2. **Auto Mode v4.0**: 8 data sources → 分类组织 → 全中文简报
+3. **DailyStorage**: Only creates `raw/` and `digest/` directories
 4. **Immutable State Updates**: Use `{**state, **updates}` pattern
-5. **Agent Return Contract**: `execute()` must return complete state dict
 
 ## Project Overview
 
-ContentForge AI v2.8 is a LangChain/LangGraph-based automated content production system supporting four modes:
+ContentForge AI v4.0 is a LangChain/LangGraph-based automated content production system.
 
-**Core Workflow**: AI trend fetching (7 data sources) → Trend digest → Deep research (web search) → Longform generation (staged) → Quality check (code review + fact check) → Multi-platform generation (WeChat/Xiaohongshu/Twitter) → Title optimization → Image prompts → Quality evaluation
+**Auto Mode v4.0** (Latest):
+- **8 Data Sources**: Product Hunt, GitHub, TechCrunch AI, The Verge AI, VentureBeat AI, NewsAPI, arXiv, Hacker News
+- **3 Agents**: AI Trend Analyzer → Trend Categorizer → World Class Digest (全中文)
+- **5 Categories**: 产业动态(35条), 学术前沿(15条), 技术创新(4条), 产品工具(1条), 行业应用
+- **Output**: `data/daily/YYYYMMDD/digest/digest_YYYYMMDD.md` (全中文)
 
-**Four Modes**:
-1. **Auto Mode** - AI trend tracking and digest generation (daily automation)
-2. **Series Mode** - 100-episode technical blog series (systematic content library)
-3. **Custom Mode** - User-defined topic content generation (on-demand)
-4. **Refine Mode** - Multi-platform content refining (WeChat HTML, Xiaohongshu long/short notes, Twitter)
+**Other Modes**:
+- **Series Mode**: 100-episode technical blog series
+- **Custom Mode**: User-defined topic content generation
+- **Refine Mode**: Multi-platform content (WeChat/Xiaohongshu/Twitter)
 
 ## Environment Setup
 
 **Required API Keys** (`.env`):
 - `ZHIPUAI_API_KEY` - Primary LLM provider (https://open.bigmodel.cn/)
-- `TAVILY_API_KEY` - Web search for ResearchAgent (https://tavily.com/)
 
 **Optional Keys**:
+- `TAVILY_API_KEY` - Web search (for ResearchAgent)
+- `NEWSAPI_KEY` - NewsAPI.org data source
 - `OPENAI_API_KEY` - Backup LLM
-- `GEMINI_API_KEY` - Image generation
-- `NEWSAPI_KEY`, `REDDIT_CLIENT_ID/SECRET` - Extended data sources
 
-**Dependencies** (requirements.txt):
-- LangChain/LangGraph - Agent framework
-- langchain-openai - LLM interface (ZhipuAI compatible)
-- loguru - Structured logging
-- pyyaml - Config parsing
-- python-dotenv - Env management
-- arxiv, praw - Data source clients
+**Dependencies**:
+```bash
+pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arxiv praw
+```
+
+## Auto Mode v4.0 Architecture
+
+**Workflow**:
+```
+1. AITrendAnalyzerAgent
+   - 从8个数据源获取热点
+   - 保留所有内容（不去重、不排序）
+   - 输出: trends_by_source
+
+2. TrendCategorizerAgent
+   - 按分类组织热点
+   - 5大分类：产业动态、学术前沿、技术创新、产品工具、行业应用
+   - 输出: categorized_trends
+
+3. WorldClassDigestAgent
+   - 生成全中文世界顶级新闻简报
+   - 翻译所有标题、描述
+   - 生成核心洞察和深度观察
+   - 输出: news_digest (全中文)
+```
+
+**Data Sources** (8):
+| 数据源 | 类型 | 内容 |
+|--------|------|------|
+| Product Hunt | 产品 | 热门AI产品 |
+| GitHub | 产品 | AI应用开源项目 |
+| TechCrunch AI | 新闻 | AI行业新闻 |
+| The Verge AI | 新闻 | AI技术创新 |
+| VentureBeat AI | 新闻 | AI商业动态 |
+| **NewsAPI** | **新闻** | **全球AI新闻聚合** |
+| arXiv | 学术 | AI重大论文 |
+| Hacker News | 社区 | 科技热点讨论 |
+
+**Output Format**:
+```markdown
+# AI每日热点 · 2026年01月22日
+
+## 💡 核心洞察
+- 多智能体协作范式确立...
+
+## 📰 深度观察
+**AI产业观察：从云端竞逐到端侧重构的范式转移**
+
+## 🔍 本期热点
+### 📈 产业动态（35条）
+#### [据报Apple研发AI可穿戴设备](链接)
+**来源**：TechCrunch AI  ·  **热度**：70
+...
+```
 
 ## Command Reference
 
-**Unified Entry** (`src/main.py`):
+**Auto Mode**:
+- `--mode auto --once` - 生成一次简报
+- `--topic STR` - 文件命名（不影响内容）
 
-**Global Parameters**:
-- `--mode {auto,series,custom,refine}` - Mode selection (default: auto)
+**Series Mode**:
+- `--mode series --progress` - 查看进度
+- `--mode series --episode INT` - 生成指定集
+- `--mode series --all` - 生成全部
 
-**Auto Mode Parameters**:
-- `--topic STR` - Content topic identifier (optional, for file naming only)
-- `--audience STR` - Target audience (default: "技术从业者")
-- `--type STR` - Content type (default: "干货分享")
-- `--keywords [STR ...]` - Keyword list
-- `--once` - Generate once immediately
+**Custom Mode**:
+- `--mode custom --topic STR` - 指定主题
+- `--prompt STR` - 详细要求
 
-**Series Mode Parameters**:
-- `--config PATH` - Global config (default: "config/config.yaml")
-- `--series-config PATH` - 100-episode config (default: "config/blog_topics_100_complete.json")
-- `--episode INT` - Generate specific episode
-- `--series STR` - Generate specific series (e.g., series_1)
+**Refine Mode**:
+- `--mode refine --input PATH` - 输入文件
+- `--platforms LIST` - 目标平台
 - `--start INT` - Start episode (default: 1)
 - `--end INT` - End episode (default: 100)
 - `--all` - Generate all in range
@@ -155,33 +193,43 @@ ContentForge AI v2.8 is a LangChain/LangGraph-based automated content production
 | **Primary Use** | Daily trend tracking | Systematic content library | On-demand content | Multi-platform publishing |
 | **Storage Format** | `YYYYMMDD/` | `series_X_name/episode_XXX/` | `YYYYMMDD_HHMMSS_topic/` | `YYYYMMDD_title/` |
 
-### Auto Workflow Agent Chain
+### Auto Workflow Agent Chain (v4.0)
 
 ```
-ai_trend_analyzer (7 data sources aggregation)
+ai_trend_analyzer (8 data sources aggregation)
   ↓
-trends_digest (generate trend digest → digest/)
+  输出: trends_by_source (按数据源组织，保留所有内容)
+
+trend_categorizer (按5大分类重新组织)
   ↓
-research_agent (web search deep research, collect docs/GitHub/blogs)
+  输出: categorized_trends (产业动态/学术前沿/技术创新/产品工具/行业应用)
+
+world_class_digest (生成全中文世界顶级新闻简报)
   ↓
-longform_generator (staged 9000-13000 word article → longform/)
-  ↓
-quality check:
-  ├─→ code_review_agent (code review)
-  └─→ fact_check_agent (fact checking)
-  ↓
-sequential execution:
-  ├─→ xiaohongshu_refiner (3000-3500 word note → xiaohongshu/)
-  └─→ twitter_generator (5-8 tweet thread → twitter/)
-  ↓
-title_optimizer (title optimization)
-  ↓
-image_generator (generate CN image prompts → prompts_*.txt)
-  ↓
-quality_evaluator (quality evaluation)
+  输出: news_digest (全中文digest.md)
 ```
 
-**Critical**: Xiaohongshu and Twitter agents must execute sequentially (not parallel) to avoid state update conflicts (`src/auto_orchestrator.py:213`)
+### Storage Structure (v4.0)
+
+```
+data/
+├── daily/                     # Auto模式
+│   └── YYYYMMDD/
+│       ├── raw/              # 原始数据（按数据源）
+│       └── digest/           # 全中文简报
+│           ├── digest_YYYYMMDD.md
+│           └── digest_YYYYMMDD.json
+│
+├── series/                    # Series模式
+│   └── {series_id}/
+│       └── episode_{xxx}/
+│
+├── custom/                    # Custom模式
+│   └── {timestamp}_topic/
+│
+└── refine/                    # Refine模式
+    └── {source_name}/
+```
 
 ### Refine Mode Workflow
 
