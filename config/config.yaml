@@ -25,17 +25,27 @@ agents:
   ai_trend_analyzer:
     enabled: true
     mock_mode: false
+    github_publish: false  # 是否自动推送到GitHub（默认关闭）
 
-    # 数据源配置
+    # 数据源配置（仅保留工作正常的数据源）
     sources:
-      - "producthunt"      # Product Hunt RSS
-      - "github"           # GitHub Trending
-      - "techcrunch_ai"    # TechCrunch AI RSS
-      - "verge_ai"         # The Verge AI RSS
-      - "venturebeat_ai"   # VentureBeat AI RSS
-      - "arxiv_news"       # arXiv API
-      - "hackernews"       # Hacker News API
-      - "newsapi"          # NewsAPI.org
+      # ========== 顶级科技媒体（工作正常） ==========
+      - "techcrunch_ai"      # TechCrunch AI RSS
+      - "newsapi"            # NewsAPI.org
+      - "hackernews"         # Hacker News API
+      - "mit_tech_review"    # MIT Technology Review RSS
+      - "openai_blog"        # OpenAI Blog RSS
+      # ========== 学术/研究机构（工作正常） ==========
+      - "bair_blog"          # Berkeley AI Research Blog (顶级学术)
+      - "microsoft_research" # Microsoft Research Blog (官方)
+      - "arxiv_news"         # arXiv API
+      # ========== AI行业媒体（工作正常） ==========
+      - "marktechpost"       # MarkTechPost (AI研究新闻)
+      - "kdnuggets"          # KDnuggets (数据科学权威)
+      - "ai_business"        # AI Business (行业新闻)
+      - "the_gradient"       # The Gradient (AI研究期刊)
+      - "infoq_ai"           # InfoQ AI (技术媒体)
+      - "hugging_face_blog"  # Hugging Face Blog (官方)
 
     # 热点配置
     max_trends: 20

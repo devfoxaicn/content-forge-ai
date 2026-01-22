@@ -8,6 +8,8 @@ from typing import Dict, Any, List, Optional
 import json
 import os
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import feedparser
 from datetime import datetime, timedelta
 from src.agents.base import BaseAgent
@@ -31,12 +33,30 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         self.sources = {
             # 产品类
             "producthunt": "producthunt" in sources_config,
-            "github_apps": "github" in sources_config,
             # 新闻类
             "techcrunch_ai": "techcrunch_ai" in sources_config,
             "verge_ai": "verge_ai" in sources_config,
             "venturebeat_ai": "venturebeat_ai" in sources_config,
             "newsapi": "newsapi" in sources_config,
+            # 原有权威媒体
+            "mit_tech_review": "mit_tech_review" in sources_config,
+            "openai_blog": "openai_blog" in sources_config,
+            "google_ai_blog": "google_ai_blog" in sources_config,
+            "deepmind_blog": "deepmind_blog" in sources_config,
+            "wired_ai": "wired_ai" in sources_config,
+            # ========== 新增权威AI媒体源 ==========
+            "bair_blog": "bair_blog" in sources_config,
+            "microsoft_research": "microsoft_research" in sources_config,
+            "meta_ai_blog": "meta_ai_blog" in sources_config,
+            "anthropic_blog": "anthropic_blog" in sources_config,
+            "marktechpost": "marktechpost" in sources_config,
+            "kdnuggets": "kdnuggets" in sources_config,
+            "ai_business": "ai_business" in sources_config,
+            "unite_ai": "unite_ai" in sources_config,
+            "the_gradient": "the_gradient" in sources_config,
+            "fastcompany_ai": "fastcompany_ai" in sources_config,
+            "infoq_ai": "infoq_ai" in sources_config,
+            "hugging_face_blog": "hugging_face_blog" in sources_config,
             # 学术类（重大新闻）
             "arxiv_news": "arxiv_news" in sources_config,
             # 科技新闻（过滤产品类）
@@ -50,6 +70,54 @@ class RealAITrendAnalyzerAgent(BaseAgent):
 
         # 初始化分类关键词
         self._init_category_keywords()
+
+        # 创建带重试机制的session
+        self.session = self._create_retry_session()
+
+        # 数据源状态追踪
+        self.source_status = {}
+
+    def _create_retry_session(self) -> requests.Session:
+        """创建带重试机制的HTTP session"""
+        session = requests.Session()
+
+        # 配置重试策略
+        retry_strategy = Retry(
+            total=3,  # 总共重试3次
+            backoff_factor=1,  # 重试间隔递增因子
+            status_forcelist=[429, 500, 502, 503, 504],  # 需要重试的HTTP状态码
+            allowed_methods=["HEAD", "GET", "OPTIONS", "POST"]
+        )
+
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        session.mount("http://", adapter)
+        session.mount("https://", adapter)
+
+        # 设置默认超时和headers
+        session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+        })
+
+        return session
+
+    def _safe_request(self, url: str, timeout: int = 15, params: dict = None) -> Optional[requests.Response]:
+        """安全的HTTP请求，带重试和错误处理"""
+        try:
+            response = self.session.get(url, timeout=timeout, params=params)
+            response.raise_for_status()
+            return response
+        except requests.exceptions.SSLError as e:
+            self.log(f"SSL错误 {url}: {e}", "WARNING")
+            return None
+        except requests.exceptions.Timeout:
+            self.log(f"请求超时 {url}", "WARNING")
+            return None
+        except requests.exceptions.RequestException as e:
+            self.log(f"请求失败 {url}: {e}", "WARNING")
+            return None
+        except Exception as e:
+            self.log(f"未知错误 {url}: {e}", "ERROR")
+            return None
 
     def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -67,6 +135,8 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             return state
 
         self.log(f"开始分析AI产品与科技热点，目标: {self.max_trends}个")
+        # 重置数据源状态
+        self.source_status = {}
 
         try:
             # 判断是否使用mock模式
@@ -105,9 +175,13 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                     "source": "默认"
                 }
 
+            # 打印数据源状态汇总
+            self._log_source_summary()
+
             return {
                 **state,
                 "trends_by_source": hot_topics,
+                "source_status": self.source_status,  # 新增：数据源状态
                 "total_trends_count": total_count,
                 "ai_hot_topics": all_trends_flat[:20],  # 保留旧字段兼容
                 "selected_ai_topic": selected_topic,
@@ -121,12 +195,27 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                 "current_step": "ai_trend_analyzer_failed"
             }
 
-    def _get_real_ai_trends(self) -> List[Dict[str, Any]]:
+    def _log_source_summary(self):
+        """打印数据源状态汇总"""
+        self.log("=" * 50)
+        self.log("数据源获取状态汇总:")
+        self.log("=" * 50)
+        success_count = 0
+        for source, status in self.source_status.items():
+            status_icon = "✅" if status["success"] else "❌"
+            self.log(f"{status_icon} {source}: {status['count']}条 ({status['message']})")
+            if status["success"]:
+                success_count += 1
+        self.log("=" * 50)
+        self.log(f"成功: {success_count}/{len(self.source_status)} 个数据源")
+        self.log("=" * 50)
+
+    def _get_real_ai_trends(self) -> Dict[str, List[Dict[str, Any]]]:
         """
         从多个数据源获取真实AI热点（产品+新闻+学术）
 
         Returns:
-            List[Dict[str, Any]]: 热点话题列表
+            Dict[str, List[Dict[str, Any]]]: 按数据源组织的热点
         """
         all_trends = []
 
@@ -134,91 +223,423 @@ class RealAITrendAnalyzerAgent(BaseAgent):
 
         # 1. Product Hunt - 热门AI产品
         if self.sources["producthunt"]:
-            try:
-                ph_trends = self._get_product_hunt_trends()
-                all_trends.extend(ph_trends)
-                self.log(f"Product Hunt: 获取 {len(ph_trends)} 条热点")
-            except Exception as e:
-                self.log(f"Product Hunt获取失败: {e}", "WARNING")
-
-        # 2. GitHub Trending - AI应用项目
-        if self.sources["github_apps"]:
-            try:
-                gh_trends = self._get_github_ai_apps()
-                all_trends.extend(gh_trends)
-                self.log(f"GitHub AI应用: 获取 {len(gh_trends)} 条热点")
-            except Exception as e:
-                self.log(f"GitHub AI应用获取失败: {e}", "WARNING")
+            ph_trends = self._get_product_hunt_trends()
+            all_trends.extend(ph_trends)
+            self.source_status["Product Hunt"] = {
+                "success": len(ph_trends) > 0,
+                "count": len(ph_trends),
+                "message": "正常" if len(ph_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Product Hunt"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
         # ===== 新闻类数据源 =====
 
-        # 3. TechCrunch AI
+        # 2. TechCrunch AI
         if self.sources["techcrunch_ai"]:
-            try:
-                tc_trends = self._get_techcrunch_ai_trends()
-                all_trends.extend(tc_trends)
-                self.log(f"TechCrunch AI: 获取 {len(tc_trends)} 条热点")
-            except Exception as e:
-                self.log(f"TechCrunch AI获取失败: {e}", "WARNING")
+            tc_trends = self._get_techcrunch_ai_trends()
+            all_trends.extend(tc_trends)
+            self.source_status["TechCrunch AI"] = {
+                "success": len(tc_trends) > 0,
+                "count": len(tc_trends),
+                "message": "正常" if len(tc_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["TechCrunch AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
-        # 4. The Verge AI
+        # 3. The Verge AI
         if self.sources["verge_ai"]:
-            try:
-                verge_trends = self._get_verge_ai_trends()
-                all_trends.extend(verge_trends)
-                self.log(f"The Verge AI: 获取 {len(verge_trends)} 条热点")
-            except Exception as e:
-                self.log(f"The Verge AI获取失败: {e}", "WARNING")
+            verge_trends = self._get_verge_ai_trends()
+            all_trends.extend(verge_trends)
+            self.source_status["The Verge AI"] = {
+                "success": len(verge_trends) > 0,
+                "count": len(verge_trends),
+                "message": "正常" if len(verge_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["The Verge AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
-        # 5. VentureBeat AI
+        # 4. VentureBeat AI
         if self.sources["venturebeat_ai"]:
-            try:
-                vb_trends = self._get_venturebeat_ai_trends()
-                all_trends.extend(vb_trends)
-                self.log(f"VentureBeat AI: 获取 {len(vb_trends)} 条热点")
-            except Exception as e:
-                self.log(f"VentureBeat AI获取失败: {e}", "WARNING")
+            vb_trends = self._get_venturebeat_ai_trends()
+            all_trends.extend(vb_trends)
+            self.source_status["VentureBeat AI"] = {
+                "success": len(vb_trends) > 0,
+                "count": len(vb_trends),
+                "message": "正常" if len(vb_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["VentureBeat AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
-        # 6. NewsAPI.org
+        # 5. NewsAPI.org
         if self.sources["newsapi"]:
-            try:
-                newsapi_trends = self._get_newsapi_trends()
-                all_trends.extend(newsapi_trends)
-                self.log(f"NewsAPI: 获取 {len(newsapi_trends)} 条热点")
-            except Exception as e:
-                self.log(f"NewsAPI获取失败: {e}", "WARNING")
+            newsapi_trends = self._get_newsapi_trends()
+            all_trends.extend(newsapi_trends)
+            self.source_status["NewsAPI"] = {
+                "success": len(newsapi_trends) > 0,
+                "count": len(newsapi_trends),
+                "message": "正常" if len(newsapi_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["NewsAPI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # ===== 新增权威媒体 =====
+
+        # 6. MIT Technology Review
+        if self.sources["mit_tech_review"]:
+            mit_trends = self._get_mit_tech_review_trends()
+            all_trends.extend(mit_trends)
+            self.source_status["MIT Technology Review"] = {
+                "success": len(mit_trends) > 0,
+                "count": len(mit_trends),
+                "message": "正常" if len(mit_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["MIT Technology Review"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 7. OpenAI Blog
+        if self.sources["openai_blog"]:
+            openai_trends = self._get_openai_blog_trends()
+            all_trends.extend(openai_trends)
+            self.source_status["OpenAI Blog"] = {
+                "success": len(openai_trends) > 0,
+                "count": len(openai_trends),
+                "message": "正常" if len(openai_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["OpenAI Blog"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 8. Google AI Blog
+        if self.sources["google_ai_blog"]:
+            google_trends = self._get_google_ai_blog_trends()
+            all_trends.extend(google_trends)
+            self.source_status["Google AI Blog"] = {
+                "success": len(google_trends) > 0,
+                "count": len(google_trends),
+                "message": "正常" if len(google_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Google AI Blog"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 9. DeepMind Blog
+        if self.sources["deepmind_blog"]:
+            deepmind_trends = self._get_deepmind_blog_trends()
+            all_trends.extend(deepmind_trends)
+            self.source_status["DeepMind Blog"] = {
+                "success": len(deepmind_trends) > 0,
+                "count": len(deepmind_trends),
+                "message": "正常" if len(deepmind_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["DeepMind Blog"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 10. Wired AI
+        if self.sources["wired_ai"]:
+            wired_trends = self._get_wired_ai_trends()
+            all_trends.extend(wired_trends)
+            self.source_status["Wired"] = {
+                "success": len(wired_trends) > 0,
+                "count": len(wired_trends),
+                "message": "正常" if len(wired_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Wired"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
         # ===== 学术类数据源（重大新闻） =====
 
-        # 6. arXiv重大论文新闻
+        # 11. arXiv重大论文新闻
         if self.sources["arxiv_news"]:
-            try:
-                arxiv_trends = self._get_arxiv_major_news()
-                all_trends.extend(arxiv_trends)
-                self.log(f"arXiv重大新闻: 获取 {len(arxiv_trends)} 条热点")
-            except Exception as e:
-                self.log(f"arXiv重大新闻获取失败: {e}", "WARNING")
+            arxiv_trends = self._get_arxiv_major_news()
+            all_trends.extend(arxiv_trends)
+            self.source_status["arXiv"] = {
+                "success": len(arxiv_trends) > 0,
+                "count": len(arxiv_trends),
+                "message": "正常" if len(arxiv_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["arXiv"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # ===== 新增权威AI媒体源 =====
+
+        # 13. BAIR Blog (Berkeley AI Research)
+        if self.sources["bair_blog"]:
+            bair_trends = self._get_bair_blog_trends()
+            all_trends.extend(bair_trends)
+            self.source_status["BAIR Blog"] = {
+                "success": len(bair_trends) > 0,
+                "count": len(bair_trends),
+                "message": "正常" if len(bair_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["BAIR Blog"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 14. Microsoft Research
+        if self.sources["microsoft_research"]:
+            ms_trends = self._get_microsoft_research_trends()
+            all_trends.extend(ms_trends)
+            self.source_status["Microsoft Research"] = {
+                "success": len(ms_trends) > 0,
+                "count": len(ms_trends),
+                "message": "正常" if len(ms_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Microsoft Research"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 15. Meta AI Blog
+        if self.sources["meta_ai_blog"]:
+            meta_trends = self._get_meta_ai_blog_trends()
+            all_trends.extend(meta_trends)
+            self.source_status["Meta AI"] = {
+                "success": len(meta_trends) > 0,
+                "count": len(meta_trends),
+                "message": "正常" if len(meta_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Meta AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 16. Anthropic Blog
+        if self.sources["anthropic_blog"]:
+            anthropic_trends = self._get_anthropic_blog_trends()
+            all_trends.extend(anthropic_trends)
+            self.source_status["Anthropic"] = {
+                "success": len(anthropic_trends) > 0,
+                "count": len(anthropic_trends),
+                "message": "正常" if len(anthropic_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Anthropic"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 17. MarkTechPost
+        if self.sources["marktechpost"]:
+            mtp_trends = self._get_marktechpost_trends()
+            all_trends.extend(mtp_trends)
+            self.source_status["MarkTechPost"] = {
+                "success": len(mtp_trends) > 0,
+                "count": len(mtp_trends),
+                "message": "正常" if len(mtp_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["MarkTechPost"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 18. KDnuggets
+        if self.sources["kdnuggets"]:
+            kd_trends = self._get_kdnuggets_trends()
+            all_trends.extend(kd_trends)
+            self.source_status["KDnuggets"] = {
+                "success": len(kd_trends) > 0,
+                "count": len(kd_trends),
+                "message": "正常" if len(kd_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["KDnuggets"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 19. AI Business
+        if self.sources["ai_business"]:
+            aib_trends = self._get_ai_business_trends()
+            all_trends.extend(aib_trends)
+            self.source_status["AI Business"] = {
+                "success": len(aib_trends) > 0,
+                "count": len(aib_trends),
+                "message": "正常" if len(aib_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["AI Business"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 20. Unite.AI
+        if self.sources["unite_ai"]:
+            unite_trends = self._get_unite_ai_trends()
+            all_trends.extend(unite_trends)
+            self.source_status["Unite.AI"] = {
+                "success": len(unite_trends) > 0,
+                "count": len(unite_trends),
+                "message": "正常" if len(unite_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Unite.AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 21. The Gradient
+        if self.sources["the_gradient"]:
+            gradient_trends = self._get_gradient_trends()
+            all_trends.extend(gradient_trends)
+            self.source_status["The Gradient"] = {
+                "success": len(gradient_trends) > 0,
+                "count": len(gradient_trends),
+                "message": "正常" if len(gradient_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["The Gradient"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 22. Fast Company AI
+        if self.sources["fastcompany_ai"]:
+            fastcompany_trends = self._get_fastcompany_ai_trends()
+            all_trends.extend(fastcompany_trends)
+            self.source_status["Fast Company"] = {
+                "success": len(fastcompany_trends) > 0,
+                "count": len(fastcompany_trends),
+                "message": "正常" if len(fastcompany_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Fast Company"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 23. InfoQ AI
+        if self.sources["infoq_ai"]:
+            infoq_trends = self._get_infoq_ai_trends()
+            all_trends.extend(infoq_trends)
+            self.source_status["InfoQ"] = {
+                "success": len(infoq_trends) > 0,
+                "count": len(infoq_trends),
+                "message": "正常" if len(infoq_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["InfoQ"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 24. Hugging Face Blog
+        if self.sources["hugging_face_blog"]:
+            hf_trends = self._get_hugging_face_blog_trends()
+            all_trends.extend(hf_trends)
+            self.source_status["Hugging Face"] = {
+                "success": len(hf_trends) > 0,
+                "count": len(hf_trends),
+                "message": "正常" if len(hf_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Hugging Face"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
         # ===== 科技新闻（过滤产品类） =====
 
-        # 7. HackerNews（产品类过滤）
+        # 25. HackerNews（产品类过滤）
         if self.sources["hackernews"]:
-            try:
-                hn_trends = self._get_hacker_news_products()
-                all_trends.extend(hn_trends)
-                self.log(f"HackerNews产品类: 获取 {len(hn_trends)} 条热点")
-            except Exception as e:
-                self.log(f"HackerNews产品类获取失败: {e}", "WARNING")
+            hn_trends = self._get_hacker_news_products()
+            all_trends.extend(hn_trends)
+            self.source_status["Hacker News"] = {
+                "success": len(hn_trends) > 0,
+                "count": len(hn_trends),
+                "message": "正常" if len(hn_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Hacker News"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
 
         # 不再排序、去重、过滤，保留所有数据源的完整内容
         # 按数据源组织返回
         trends_by_source = {
             "Product Hunt": [],
-            "GitHub": [],
             "TechCrunch AI": [],
             "The Verge AI": [],
             "VentureBeat AI": [],
             "NewsAPI": [],
+            "MIT Technology Review": [],
+            "OpenAI Blog": [],
+            "Google AI Blog": [],
+            "DeepMind Blog": [],
+            "Wired": [],
+            "BAIR Blog": [],
+            "Microsoft Research": [],
+            "Meta AI": [],
+            "Anthropic": [],
+            "MarkTechPost": [],
+            "KDnuggets": [],
+            "AI Business": [],
+            "Unite.AI": [],
+            "The Gradient": [],
+            "Fast Company": [],
+            "InfoQ": [],
+            "Hugging Face": [],
             "arXiv": [],
             "Hacker News": []
         }
@@ -229,8 +650,6 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             # 确定数据源分类
             if "Product Hunt" in source:
                 trends_by_source["Product Hunt"].append(trend)
-            elif "GitHub" in source:
-                trends_by_source["GitHub"].append(trend)
             elif "TechCrunch" in source:
                 trends_by_source["TechCrunch AI"].append(trend)
             elif "Verge" in source:
@@ -239,6 +658,40 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                 trends_by_source["VentureBeat AI"].append(trend)
             elif "NewsAPI" in source:
                 trends_by_source["NewsAPI"].append(trend)
+            elif "MIT" in source:
+                trends_by_source["MIT Technology Review"].append(trend)
+            elif "OpenAI" in source:
+                trends_by_source["OpenAI Blog"].append(trend)
+            elif "Google AI" in source:
+                trends_by_source["Google AI Blog"].append(trend)
+            elif "DeepMind" in source:
+                trends_by_source["DeepMind Blog"].append(trend)
+            elif "Wired" in source:
+                trends_by_source["Wired"].append(trend)
+            elif "BAIR" in source:
+                trends_by_source["BAIR Blog"].append(trend)
+            elif "Microsoft Research" in source:
+                trends_by_source["Microsoft Research"].append(trend)
+            elif "Meta AI" in source:
+                trends_by_source["Meta AI"].append(trend)
+            elif "Anthropic" in source:
+                trends_by_source["Anthropic"].append(trend)
+            elif "MarkTechPost" in source:
+                trends_by_source["MarkTechPost"].append(trend)
+            elif "KDnuggets" in source:
+                trends_by_source["KDnuggets"].append(trend)
+            elif "AI Business" in source:
+                trends_by_source["AI Business"].append(trend)
+            elif "Unite.AI" in source:
+                trends_by_source["Unite.AI"].append(trend)
+            elif "The Gradient" in source:
+                trends_by_source["The Gradient"].append(trend)
+            elif "Fast Company" in source:
+                trends_by_source["Fast Company"].append(trend)
+            elif "InfoQ" in source:
+                trends_by_source["InfoQ"].append(trend)
+            elif "Hugging Face" in source:
+                trends_by_source["Hugging Face"].append(trend)
             elif "arXiv" in source:
                 trends_by_source["arXiv"].append(trend)
             elif "Hacker" in source:
@@ -267,6 +720,75 @@ class RealAITrendAnalyzerAgent(BaseAgent):
         except Exception as e:
             self.log(f"Product Hunt RSS解析失败: {e}", "ERROR")
             return []
+
+    # ==================== 新增权威媒体数据源 ====================
+
+    def _get_mit_tech_review_trends(self) -> List[Dict[str, Any]]:
+        """获取MIT Technology Review AI相关文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.technologyreview.com/feed/",
+                source_name="MIT Technology Review",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"MIT Technology Review RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_openai_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取OpenAI官方博客文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://openai.com/news/rss.xml",
+                source_name="OpenAI Blog",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"OpenAI Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_google_ai_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取Google AI博客文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://ai.googleblog.com/feeds/posts/default",
+                source_name="Google AI Blog",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"Google AI Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_deepmind_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取DeepMind博客文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://deepmind.com/feed",
+                source_name="DeepMind Blog",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"DeepMind Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_wired_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取Wired AI相关文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.wired.com/feed/tag/artificial-intelligence/",
+                source_name="Wired",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"Wired AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    # ==================== 原有新闻类数据源 ====================
 
     def _get_github_ai_apps(self) -> List[Dict[str, Any]]:
         """获取GitHub Trending AI应用项目（非框架库）"""
@@ -745,6 +1267,164 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             return trends[:30]
         except Exception as e:
             self.log(f"HackerNews产品类获取失败: {e}", "ERROR")
+            return []
+
+    # ==================== 新增权威AI媒体数据源 ====================
+
+    def _get_bair_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取BAIR Blog文章（RSS）- 顶级学术研究"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://bair.berkeley.edu/blog/feed.xml",
+                source_name="BAIR Blog",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"BAIR Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_microsoft_research_trends(self) -> List[Dict[str, Any]]:
+        """获取Microsoft Research Blog文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.microsoft.com/en-us/research/feed/",
+                source_name="Microsoft Research",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"Microsoft Research RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_meta_ai_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取Meta AI Blog文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://ai.meta.com/blog/feed/",
+                source_name="Meta AI",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"Meta AI Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_anthropic_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取Anthropic Blog文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.anthropic.com/blog/rss.xml",
+                source_name="Anthropic",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"Anthropic Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_marktechpost_trends(self) -> List[Dict[str, Any]]:
+        """获取MarkTechPost文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.marktechpost.com/feed",
+                source_name="MarkTechPost",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"MarkTechPost RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_kdnuggets_trends(self) -> List[Dict[str, Any]]:
+        """获取KDnuggets文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.kdnuggets.com/feed",
+                source_name="KDnuggets",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"KDnuggets RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_ai_business_trends(self) -> List[Dict[str, Any]]:
+        """获取AI Business文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://aibusiness.com/rss.xml",
+                source_name="AI Business",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"AI Business RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_unite_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取Unite.AI文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://unite.ai/feed",
+                source_name="Unite.AI",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"Unite.AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_gradient_trends(self) -> List[Dict[str, Any]]:
+        """获取The Gradient文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://thegradient.pub/rss",
+                source_name="The Gradient",
+                item_type="news",
+                max_items=8
+            )
+        except Exception as e:
+            self.log(f"The Gradient RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_fastcompany_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取Fast Company AI文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.fastcompany.com/section/artificial-intelligence/feed",
+                source_name="Fast Company",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"Fast Company AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_infoq_ai_trends(self) -> List[Dict[str, Any]]:
+        """获取InfoQ AI文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://feed.infoq.com/ai-ml-data-eng",
+                source_name="InfoQ",
+                item_type="news",
+                max_items=12
+            )
+        except Exception as e:
+            self.log(f"InfoQ AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_hugging_face_blog_trends(self) -> List[Dict[str, Any]]:
+        """获取Hugging Face Blog文章（RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://huggingface.co/blog/feed.xml",
+                source_name="Hugging Face",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"Hugging Face Blog RSS解析失败: {e}", "ERROR")
             return []
 
     # ==================== 辅助方法 ====================

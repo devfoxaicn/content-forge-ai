@@ -20,6 +20,7 @@ from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
 from src.agents.trend_categorizer_agent import TrendCategorizerAgent
 from src.agents.world_class_digest_agent import WorldClassDigestAgent
 from src.utils.storage_v2 import StorageFactory
+from src.utils.github_publisher import GitHubPublisher
 
 # 日志配置
 from loguru import logger
@@ -312,8 +313,47 @@ class AutoContentOrchestrator:
             json_file = self.storage.save_json("digest", json_filename, digest_data)
             logger.success(f"热点简报已保存: {md_file} (MD) + {json_file} (JSON)")
 
+            # ========== GitHub自动发布 ==========
+            self._publish_to_github(md_file, json_file, digest)
+
         except Exception as e:
             logger.error(f"保存热点简报失败: {e}")
+
+    def _publish_to_github(self, md_file: str, json_file: str, digest: Dict[str, Any]):
+        """发布简报到GitHub"""
+        try:
+            # 检查是否启用GitHub发布
+            enable_github_publish = self.config.get("agents", {}).get("ai_trend_analyzer", {}).get("github_publish", False)
+            if not enable_github_publish:
+                logger.info("GitHub发布功能未启用，跳过自动推送")
+                return
+
+            logger.info("开始发布简报到GitHub...")
+
+            try:
+                publisher = GitHubPublisher()
+
+                # 检查Git状态
+                status = publisher.check_git_status()
+                logger.info(f"当前分支: {status['branch']}, 有更改: {status['has_changes']}")
+
+                # 发布简报
+                success = publisher.publish_daily_digest(
+                    digest_file=md_file,
+                    json_file=json_file
+                )
+
+                if success:
+                    logger.success(f"✅ 简报已成功推送到GitHub: {digest.get('title')}")
+                else:
+                    logger.warning("⚠️ GitHub推送失败，但简报已保存到本地")
+
+            except Exception as e:
+                logger.warning(f"GitHub发布功能不可用或失败: {e}")
+                logger.info("简报已保存到本地，可手动提交到GitHub")
+
+        except Exception as e:
+            logger.error(f"GitHub发布失败: {e}")
 
     def _print_summary(self, state: Dict[str, Any]):
         """打印结果摘要"""

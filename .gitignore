@@ -55,8 +55,12 @@ htmlcov/
 # 保留 series 目录的内容（这是核心产物）
 # 保留 custom 目录（用户自定义生成内容）
 # 保留 refine 目录（多平台精炼内容）
-# 排除 daily 目录的旧数据（每日简报，保留最新即可）
-data/daily/202601*/
+# 保留 daily 目录的最新简报（*.md, *.json），排除临时raw数据
+data/daily/*/raw/
+
+# 但保留最终的 digest 文件（使用否定规则）
+!data/daily/*/digest/*.md
+!data/daily/*/digest/*.json
 
 # ==================== Jupyter Notebook ====================
 .ipynbcheckpoints/
