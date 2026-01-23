@@ -18,6 +18,7 @@ from langgraph.graph import StateGraph, END
 from src.state import create_initial_state, update_state, add_agent_to_order, calculate_execution_time
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
 from src.agents.trend_categorizer_agent import TrendCategorizerAgent
+from src.agents.news_scoring_agent import NewsScoringAgent
 from src.agents.world_class_digest_agent import WorldClassDigestAgent
 from src.utils.storage_v2 import StorageFactory
 from src.utils.github_publisher import GitHubPublisher
@@ -108,7 +109,7 @@ class AutoContentOrchestrator:
             )
 
     def _init_agents(self) -> Dict[str, Any]:
-        """初始化所有Agent（Auto模式 v4.0：全中文顶级新闻简报）"""
+        """初始化所有Agent（Auto模式 v7.0：全中文顶级新闻简报）"""
         agents = {}
         agents_config = self.config.get("agents", {})
 
@@ -121,25 +122,29 @@ class AutoContentOrchestrator:
         if agents_config.get("trends_digest", {}).get("enabled", True):
             agents["trend_categorizer"] = TrendCategorizerAgent(self.config, self.prompts)
 
-        # 3. 世界顶级中文简报Agent
-        if agents_config.get("trends_digest", {}).get("enabled", True):
+        # 3. 新闻评分Agent（新增 v7.0）
+        if agents_config.get("news_scoring", {}).get("enabled", True):
+            agents["news_scoring"] = NewsScoringAgent(self.config, self.prompts)
+
+        # 4. 世界顶级中文简报Agent（v7.0）
+        if agents_config.get("world_class_digest", {}).get("enabled", True):
             agents["world_class_digest"] = WorldClassDigestAgent(self.config, self.prompts)
 
         # 注意：Auto模式下不初始化长文本、小红书、Twitter等Agent
         # 如需生成完整内容，请使用 Custom、Refine 或 Series 模式
 
-        logger.info(f"Auto模式 v4.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
+        logger.info(f"Auto模式 v7.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
         return agents
 
     def _build_workflow(self) -> StateGraph:
-        """构建自动化工作流（Auto模式 v4.0：全中文顶级新闻简报）"""
+        """构建自动化工作流（Auto模式 v7.0：全中文顶级新闻简报）"""
         workflow = StateGraph(dict)
 
         # 添加Agent节点
         for agent_name, agent in self.agents.items():
             workflow.add_node(agent_name, self._create_agent_node(agent))
 
-        # 定义执行顺序：AI热点分析 → 热点分类 → 世界顶级简报 → END
+        # 定义执行顺序：AI热点分析 → 热点分类 → 新闻评分 → 世界顶级简报 → END
         if "ai_trend_analyzer" in self.agents:
             workflow.set_entry_point("ai_trend_analyzer")
 
@@ -148,6 +153,11 @@ class AutoContentOrchestrator:
             if "trend_categorizer" in self.agents:
                 workflow.add_edge(last_node, "trend_categorizer")
                 last_node = "trend_categorizer"
+
+            # 新闻评分Agent（新增 v7.0）
+            if "news_scoring" in self.agents:
+                workflow.add_edge(last_node, "news_scoring")
+                last_node = "news_scoring"
 
             # 世界顶级中文简报Agent
             if "world_class_digest" in self.agents:
@@ -278,7 +288,7 @@ class AutoContentOrchestrator:
         return "\n".join(formatted_tweets)
 
     def _save_digest(self, state: Dict[str, Any], digest: Dict[str, Any]):
-        """保存热点简报到digest目录"""
+        """保存热点简报到digest目录（v7.0：支持增强JSON格式）"""
         try:
             if not digest:
                 return
@@ -287,30 +297,47 @@ class AutoContentOrchestrator:
             issue_number = digest.get('issue_number', timestamp)
             base_filename = f"digest_{issue_number}"
 
+            # 兼容 v7.0 新格式和旧格式
+            markdown_content = digest.get('markdown_content') or digest.get('full_content', '')
+
             # 保存Markdown格式（主要格式，符合aibook要求）
             md_filename = f"{base_filename}.md"
-            md_file = self.storage.save_markdown("digest", md_filename, digest.get('full_content', ''))
+            md_file = self.storage.save_markdown("digest", md_filename, markdown_content)
             logger.info(f"热点简报Markdown已保存: {md_file}")
 
             # 保存JSON格式（用于网站API）
             json_filename = f"{base_filename}.json"
-            digest_data = {
-                "metadata": {
-                    "title": digest.get("title"),
-                    "subtitle": digest.get("subtitle"),
-                    "issue_number": issue_number,
-                    "publish_date": digest.get("publish_date"),
-                    "generated_at": datetime.now().isoformat(),
-                    "word_count": digest.get("word_count"),
-                    "reading_time": digest.get("reading_time"),
-                    "total_topics": digest.get("total_topics"),
-                    "version": digest.get("version", "v3.0")
-                },
-                "topics": digest.get("topics", []),
-                "summary_analysis": digest.get("summary_analysis"),
-                "sources": digest.get("sources")
-            }
-            json_file = self.storage.save_json("digest", json_filename, digest_data)
+
+            # v7.0 格式：digest 本身就是完整的JSON数据
+            # 只需要确保没有 markdown_content 字段的重复（已经在外层了）
+            json_data_to_save = dict(digest)
+
+            # 如果是旧格式，转换为新格式
+            if "editors_pick" not in json_data_to_save and "categories" not in json_data_to_save:
+                # 旧格式转换
+                json_data_to_save = {
+                    "metadata": {
+                        "title": digest.get("title"),
+                        "subtitle": digest.get("subtitle"),
+                        "issue_number": issue_number,
+                        "publish_date": digest.get("publish_date"),
+                        "generated_at": datetime.now().isoformat(),
+                        "word_count": digest.get("word_count"),
+                        "reading_time": digest.get("reading_time"),
+                        "total_topics": digest.get("total_topics"),
+                        "version": digest.get("version", "v3.0")
+                    },
+                    "editors_pick": [],
+                    "categories": [],
+                    "core_insights": [],
+                    "trending_topics": [],
+                    "sources": digest.get("sources", []),
+                    "topics": digest.get("topics", []),
+                    "summary_analysis": digest.get("summary_analysis"),
+                    "markdown_content": markdown_content
+                }
+
+            json_file = self.storage.save_json("digest", json_filename, json_data_to_save)
             logger.success(f"热点简报已保存: {md_file} (MD) + {json_file} (JSON)")
 
             # ========== GitHub自动发布 ==========

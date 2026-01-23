@@ -60,6 +60,36 @@ agents:
     max_topics: 20
     temperature: 0.6
 
+  # 新闻评分Agent（v7.0新增）
+  news_scoring:
+    enabled: true
+    max_items: 30  # 最终筛选的新闻数量
+    min_per_category: 2  # 每个分类至少保留2条
+    max_per_category: 8  # 每个分类最多保留8条
+
+    # 评分权重（总和100）
+    scoring_weights:
+      source_authority: 30  # 来源权威度
+      engagement: 20  # 互动数据
+      freshness: 15  # 时效性
+      category_balance: 15  # 分类平衡
+      content_quality: 10  # 内容质量
+      diversity: 10  # 多样性
+
+  # 世界顶级简报Agent（v7.0）
+  world_class_digest:
+    enabled: true
+    translate_enabled: true  # 启用翻译
+    batch_size: 5  # 批量翻译大小
+
+    # v7.0: 增强功能
+    enable_background_analysis: true  # 为重要新闻生成背景分析
+    enable_core_insights: true  # 提取核心洞察
+    enable_trending_topics: true  # 识别热门话题
+    importance_threshold: 70  # 重要性评分阈值，高于此值生成详细分析
+
+    max_items_per_category: 15  # 每个分类最多显示数量（兼容旧版）
+
   # ========== 内容生成Agent（手动执行） ==========
   # 研究Agent（网络搜索获取技术资料）
   research_agent:
