@@ -39,7 +39,6 @@ jobs:
       - name: Run daily digest generation
         env:
           ZHIPUAI_API_KEY: ${{ secrets.ZHIPUAI_API_KEY }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
           PYTHONPATH: ${{ github.workspace }}
         run: |
