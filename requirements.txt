@@ -1,46 +1,52 @@
-# LangChain & LangGraph
-langchain>=0.3.0
-langchain-openai>=0.2.0
-langchain-core>=0.3.0
-langgraph>=0.2.0
-langgraph-sdk>=0.2.0
+# ============================================================
+# ContentForge AI - 依赖管理
+# ============================================================
 
-# LLM API
+# ------------------ LangChain & LangGraph ------------------
+# 使用固定版本确保兼容性
+langchain==0.3.14
+langchain-openai==0.2.14
+langchain-core==0.3.29
+langchain-community==0.3.17
+langgraph==0.2.55
+langgraph-sdk==0.2.9
+langgraph-checkpoint==2.1.2
+
+# ------------------ LLM API ------------------
 openai>=1.0.0
 
-# YAML配置
+# ------------------ 配置管理 ------------------
 pyyaml>=6.0
-
-# 日志
-loguru>=0.7.0
-
-# 数据处理
-pydantic>=2.0.0
-
-# 定时任务（未来使用）
-apscheduler>=3.10.0
-
-# HTTP请求
-requests>=2.31.0
-
-# 环境变量
 python-dotenv>=1.0.0
 
-# 类型提示
+# ------------------ 日志 ------------------
+loguru>=0.7.0
+
+# ------------------ 数据验证 ------------------
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# ------------------ HTTP & API ------------------
+requests>=2.31.0
+urllib3>=2.0.0
+
+# ------------------ 数据处理 ------------------
 typing-extensions>=4.8.0
 
-# Google Gemini
+# ------------------ AI/ML 相关 ------------------
+arxiv>=2.1.0
 google-generativeai>=0.3.0
 
-# arXiv API (用于获取AI论文)
-arxiv>=2.1.0
-
-# RSS解析 (用于获取Product Hunt、TechCrunch等)
+# ------------------ RSS/内容获取 ------------------
 feedparser>=6.0.10
-
-# Reddit API (用于获取技术讨论)
 praw>=7.7.0
 
-# Stability AI (可选)
-stability-sdk>=0.8.0
+# ------------------ 搜索服务 ------------------
 tavily-python==0.7.18
+
+# ------------------ 可选依赖 ------------------
+# Stability AI (图片生成)
+stability-sdk>=0.8.0
+
+# 定时任务
+apscheduler>=3.10.0
