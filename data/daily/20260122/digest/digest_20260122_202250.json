@@ -1,0 +1,1675 @@
+{
+  "metadata": {
+    "title": "AI每日热点 · 2026年01月22日",
+    "issue_number": "20260122",
+    "publish_date": "2026-01-22",
+    "generated_at": "2026-01-22T20:12:30.686981",
+    "word_count": 31081,
+    "reading_time": "19分钟",
+    "total_items": 79,
+    "version": "v7.0"
+  },
+  "editors_pick": [
+    {
+      "id": "ep_001",
+      "title": "Horizon 1000: Advancing AI for primary healthcare",
+      "title_cn": "Horizon 1000: Advancing AI for primary healthcare",
+      "summary": "OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,000 clinics by 2028.",
+      "summary_cn": "OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,0",
+      "url": "https://openai.com/index/horizon-1000",
+      "source": "OpenAI Blog",
+      "category": "产业动态",
+      "importance_score": 60.5,
+      "published_at": "Tue, 20 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 1
+    },
+    {
+      "id": "ep_002",
+      "title": "AI for self empowerment",
+      "title_cn": "AI for self empowerment",
+      "summary": "How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and opportunity.",
+      "summary_cn": "How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and oppo",
+      "url": "https://openai.com/index/ai-for-self-empowerment",
+      "source": "OpenAI Blog",
+      "category": "产业动态",
+      "importance_score": 60.0,
+      "published_at": "Sun, 18 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 2
+    },
+    {
+      "id": "ep_003",
+      "title": "Strengthening the U.S. AI supply chain through domestic manufacturing",
+      "title_cn": "Strengthening the U.S. AI supply chain through domestic manufacturing",
+      "summary": "OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.",
+      "summary_cn": "OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.",
+      "url": "https://openai.com/index/strengthening-the-us-ai-supply-chain",
+      "source": "OpenAI Blog",
+      "category": "产业动态",
+      "importance_score": 60.0,
+      "published_at": "Thu, 15 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 3
+    },
+    {
+      "id": "ep_004",
+      "title": "Investing in Merge Labs",
+      "title_cn": "Investing in Merge Labs",
+      "summary": "OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human ability, agency, and experience.",
+      "summary_cn": "OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human abilit",
+      "url": "https://openai.com/index/investing-in-merge-labs",
+      "source": "OpenAI Blog",
+      "category": "🎓 学术突破",
+      "importance_score": 60.0,
+      "published_at": "Thu, 15 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 4
+    },
+    {
+      "id": "ep_005",
+      "title": "How Higgsfield turns simple ideas into cinematic social videos",
+      "title_cn": "How Higgsfield turns simple ideas into cinematic social videos",
+      "summary": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+      "summary_cn": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+      "url": "https://openai.com/index/higgsfield",
+      "source": "OpenAI Blog",
+      "category": "技术创新",
+      "importance_score": 60.0,
+      "published_at": "Wed, 21 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 5
+    }
+  ],
+  "categories": [
+    {
+      "id": "industry",
+      "name": "产业动态",
+      "icon": "📈",
+      "count": 20,
+      "items": [
+        {
+          "id": "industry_73e746",
+          "title": "Horizon 1000: Advancing AI for primary healthcare",
+          "title_cn": "Horizon 1000: Advancing AI for primary healthcare",
+          "summary": "OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,000 clinics by 2028.",
+          "summary_cn": "OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,0",
+          "url": "https://openai.com/index/horizon-1000",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.5,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_52a919",
+          "title": "AI for self empowerment",
+          "title_cn": "AI for self empowerment",
+          "summary": "How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and opportunity.",
+          "summary_cn": "How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and oppo",
+          "url": "https://openai.com/index/ai-for-self-empowerment",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.0,
+          "published_at": "Sun, 18 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_6b7d66",
+          "title": "Strengthening the U.S. AI supply chain through domestic manufacturing",
+          "title_cn": "Strengthening the U.S. AI supply chain through domestic manufacturing",
+          "summary": "OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.",
+          "summary_cn": "OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.",
+          "url": "https://openai.com/index/strengthening-the-us-ai-supply-chain",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.0,
+          "published_at": "Thu, 15 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_05043c",
+          "title": "OptiMind: A small language model with optimization expertise",
+          "title_cn": "OptiMind: A small language model with optimization expertise",
+          "summary": "OptiMind is a small language model that converts business operation challenges, described naturally, into mathematical formulations that optimization software can solve. It reduces formulation time &#",
+          "summary_cn": "OptiMind is a small language model that converts business operation challenges, described naturally, into mathematical formulations that optimization ",
+          "url": "https://www.microsoft.com/en-us/research/blog/optimind-a-small-language-model-with-optimization-expertise/",
+          "source": "Microsoft Research",
+          "category": "产业动态",
+          "importance_score": 57.0,
+          "published_at": "Thu, 15 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_8742fe",
+          "title": "Ideas: Community building, machine learning, and the future of AI",
+          "title_cn": "Ideas: Community building, machine learning, and the future of AI",
+          "summary": "As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hanna Wallach reflect on WiML’s evolution, navigating ",
+          "summary_cn": "As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hann",
+          "url": "https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/",
+          "source": "Microsoft Research",
+          "category": "产业动态",
+          "importance_score": 57.0,
+          "published_at": "Mon, 01 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_bed409",
+          "title": "Reimagining ERP for the agentic AI era",
+          "title_cn": "Reimagining ERP for the agentic AI era",
+          "summary": "The story of enterprise resource planning (ERP) is really a story of businesses learning to organize themselves around the latest, greatest technology of the times. In the 1960s through the ’80s, main",
+          "summary_cn": "The story of enterprise resource planning (ERP) is really a story of businesses learning to organize themselves around the latest, greatest technology",
+          "url": "https://www.technologyreview.com/2026/01/20/1129965/reimagining-erp-for-the-agentic-ai-era/",
+          "source": "MIT Technology Review",
+          "category": "产业动态",
+          "importance_score": 55.5,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_0aeb58",
+          "title": "Sources: Project SGLang spins out as RadixArk with $400M valuation as inference market explodes",
+          "title_cn": "Sources: Project SGLang spins out as RadixArk with $400M valuation as inference market explodes",
+          "summary": "SGLang, which originated as an open source research project at Ion Stoica’s UC Berkeley lab, has raised capital from Accel.",
+          "summary_cn": "SGLang, which originated as an open source research project at Ion Stoica’s UC Berkeley lab, has raised capital from Accel.",
+          "url": "https://techcrunch.com/2026/01/21/sources-project-sglang-spins-out-as-radixark-with-400m-valuation-as-inference-market-explodes/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_6bcc9d",
+          "title": "A timeline of the US semiconductor market in 2025",
+          "title_cn": "A timeline of the US semiconductor market in 2025",
+          "summary": "From leadership changes at legacy semiconductor companies to wishy washy policy around chip exports, a lot happened last year.",
+          "summary_cn": "From leadership changes at legacy semiconductor companies to wishy washy policy around chip exports, a lot happened last year.",
+          "url": "https://techcrunch.com/2026/01/21/a-timeline-of-the-u-s-semiconductor-market-in-2025/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_874bb7",
+          "title": "OpenAI aims to ship its first device in 2026, and it could be earbuds",
+          "title_cn": "OpenAI aims to ship its first device in 2026, and it could be earbuds",
+          "summary": "The AI startup is on track to announce its first hardware device in the second half of this year, OpenAI Chief Global Affairs Officer Chris Lehane said during an interview at Davos.",
+          "summary_cn": "The AI startup is on track to announce its first hardware device in the second half of this year, OpenAI Chief Global Affairs Officer Chris Lehane sai",
+          "url": "https://techcrunch.com/2026/01/21/openai-aims-to-ship-its-first-device-in-2026-and-it-could-be-earbuds/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_c4f22f",
+          "title": "TechCrunch Disrupt 2026 tickets now on sale: Lowest rates all year",
+          "title_cn": "TechCrunch Disrupt 2026 tickets now on sale: Lowest rates all year",
+          "summary": "TechCrunch Disrupt 2026 tickets are officially on sale. Save up to $680 on your ticket and be among the first 500 registrants to score a plus-one pass at 50% off. Don't miss 10,000 tech leaders, found",
+          "summary_cn": "TechCrunch Disrupt 2026 tickets are officially on sale. Save up to $680 on your ticket and be among the first 500 registrants to score a plus-one pass",
+          "url": "https://techcrunch.com/2026/01/21/techcrunch-disrupt-2026-tickets-now-on-sale-lowest-rates-all-year/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_3f90a6",
+          "title": "Zanskar thinks 1 TW of geothermal power is being overlooked",
+          "title_cn": "Zanskar thinks 1 TW of geothermal power is being overlooked",
+          "summary": "Zanskar has raised $115 million to find about a dozen geothermal resources that could help power the grid throughout the U.S. West.",
+          "summary_cn": "Zanskar has raised $115 million to find about a dozen geothermal resources that could help power the grid throughout the U.S. West.",
+          "url": "https://techcrunch.com/2026/01/21/zanskar-thinks-1-tw-of-geothermal-power-is-being-overlooked/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_b17a2c",
+          "title": "Quadric rides the shift from cloud AI to on-device inference — and it’s paying off",
+          "title_cn": "Quadric rides the shift from cloud AI to on-device inference — and it’s paying off",
+          "summary": "Quadric aims to help companies and governments build programmable on-device AI chips that can run fast-changing models locally.",
+          "summary_cn": "Quadric aims to help companies and governments build programmable on-device AI chips that can run fast-changing models locally.",
+          "url": "https://techcrunch.com/2026/01/22/quadric-rides-the-shift-from-cloud-ai-to-on-device-inference-and-its-paying-off/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_a57945",
+          "title": "Former Google trio is building an interactive AI-powered learning app for kids",
+          "title_cn": "Former Google trio is building an interactive AI-powered learning app for kids",
+          "summary": "Big tech companies and upcoming startups want to use generative AI to build software and hardware for kids. A lot of those experiences are limited to text or voice, and kids might not find that captiv",
+          "summary_cn": "Big tech companies and upcoming startups want to use generative AI to build software and hardware for kids. A lot of those experiences are limited to ",
+          "url": "https://techcrunch.com/2026/01/22/former-google-trio-is-building-an-interactive-ai-powered-learning-app-for-kids/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_08dedf",
+          "title": "Not to be outdone by OpenAI, Apple is reportedly developing an AI wearable",
+          "title_cn": "Not to be outdone by OpenAI, Apple is reportedly developing an AI wearable",
+          "summary": "Should this wearable materialize, it could be released as early as 2027, according to a report on the device.",
+          "summary_cn": "Should this wearable materialize, it could be released as early as 2027, according to a report on the device.",
+          "url": "https://techcrunch.com/2026/01/21/not-to-be-outdone-by-openai-apple-is-reportedly-developing-an-ai-wearable/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_5761bf",
+          "title": "Todoist’s app now lets you add tasks to your to-do list by speaking to its AI",
+          "title_cn": "Todoist’s app now lets you add tasks to your to-do list by speaking to its AI",
+          "summary": "The feature, now public, lets you create to-do's and action items by speaking naturally to the app's AI.",
+          "summary_cn": "The feature, now public, lets you create to-do's and action items by speaking naturally to the app's AI.",
+          "url": "https://techcrunch.com/2026/01/21/todoists-app-now-lets-you-add-tasks-to-your-to-do-list-by-speaking-to-its-ai/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_276a7a",
+          "title": "Apple plans to make Siri an AI chatbot, report says",
+          "title_cn": "Apple plans to make Siri an AI chatbot, report says",
+          "summary": "Siri could look more like ChatGPT than its current state as an integrated feature across Apple products.",
+          "summary_cn": "Siri could look more like ChatGPT than its current state as an integrated feature across Apple products.",
+          "url": "https://techcrunch.com/2026/01/21/apple-plans-to-make-siri-an-ai-chatbot-report-says/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_f56a6a",
+          "title": "Anthropic revises Claude’s ‘Constitution,’ and hints at chatbot consciousness",
+          "title_cn": "Anthropic revises Claude’s ‘Constitution,’ and hints at chatbot consciousness",
+          "summary": "The newly revised document offers a roadmap for what Anthropic says is a safer and more helpful chatbot experience.",
+          "summary_cn": "The newly revised document offers a roadmap for what Anthropic says is a safer and more helpful chatbot experience.",
+          "url": "https://techcrunch.com/2026/01/21/anthropic-revises-claudes-constitution-and-hints-at-chatbot-consciousness/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_9420c6",
+          "title": "Irony alert: Hallucinated citations found in papers from NeurIPS, the prestigious AI conference",
+          "title_cn": "Irony alert: Hallucinated citations found in papers from NeurIPS, the prestigious AI conference",
+          "summary": "Research from startup GPTZero points to the impossible problem prestigious conferences face in the age of AI slop.",
+          "summary_cn": "Research from startup GPTZero points to the impossible problem prestigious conferences face in the age of AI slop.",
+          "url": "https://techcrunch.com/2026/01/21/irony-alert-hallucinated-citations-found-in-papers-from-neurips-the-prestigious-ai-conference/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_83d0c2",
+          "title": "YouTube will soon let creators make Shorts with their own AI likeness",
+          "title_cn": "YouTube will soon let creators make Shorts with their own AI likeness",
+          "summary": "YouTube Shorts viewers might soon see AI versions of their favorite creators when scrolling through their feeds.",
+          "summary_cn": "YouTube Shorts viewers might soon see AI versions of their favorite creators when scrolling through their feeds.",
+          "url": "https://techcrunch.com/2026/01/21/youtube-will-soon-let-creators-make-shorts-with-their-own-ai-likeness/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_fd4df0",
+          "title": "Adobe Acrobat now lets you edit files using prompts, generate podcast summaries",
+          "title_cn": "Adobe Acrobat now lets you edit files using prompts, generate podcast summaries",
+          "summary": "Adobe is adding AI tools to Acrobat, including the ability to generate podcast summaries of files, create presentations, and a way for users to edit files using prompts.",
+          "summary_cn": "Adobe is adding AI tools to Acrobat, including the ability to generate podcast summaries of files, create presentations, and a way for users to edit f",
+          "url": "https://techcrunch.com/2026/01/21/adobe-acrobat-now-lets-you-edit-files-using-prompts-generate-podcast-summaries/",
+          "source": "TechCrunch AI",
+          "category": "产业动态",
+          "importance_score": 51.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "🎓 学术突破",
+      "name": "🎓 学术突破",
+      "icon": "📌",
+      "count": 20,
+      "items": [
+        {
+          "id": "🎓 学术突破_e69d08",
+          "title": "Investing in Merge Labs",
+          "title_cn": "Investing in Merge Labs",
+          "summary": "OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human ability, agency, and experience.",
+          "summary_cn": "OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human abilit",
+          "url": "https://openai.com/index/investing-in-merge-labs",
+          "source": "OpenAI Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 60.0,
+          "published_at": "Thu, 15 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_622281",
+          "title": "What exactly does word2vec learn?",
+          "title_cn": "What exactly does word2vec learn?",
+          "summary": "What exactly does word2vec learn, and how? Answering this question amounts to understanding representation learning in a minimal yet interesting language modeling task. Despite the fact that word2vec ",
+          "summary_cn": "What exactly does word2vec learn, and how? Answering this question amounts to understanding representation learning in a minimal yet interesting langu",
+          "url": "http://bair.berkeley.edu/blog/2025/09/01/qwem-word2vec-theory/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.5,
+          "published_at": "Mon, 01 Se",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_69bc87",
+          "title": "RL without TD learning",
+          "title_cn": "RL without TD learning",
+          "summary": "In this post, I’ll introduce a reinforcement learning (RL) algorithm based on an “alternative” paradigm: divide and conquer. Unlike traditional methods, this algorithm is not based on temporal differe",
+          "summary_cn": "In this post, I’ll introduce a reinforcement learning (RL) algorithm based on an “alternative” paradigm: divide and conquer. Unlike traditional method",
+          "url": "http://bair.berkeley.edu/blog/2025/11/01/rl-without-td-learning/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.0,
+          "published_at": "Sat, 01 No",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_d3e365",
+          "title": "How to Evaluate Jailbreak Methods: A Case Study with the StrongREJECT Benchmark",
+          "title_cn": "How to Evaluate Jailbreak Methods: A Case Study with the StrongREJECT Benchmark",
+          "summary": "When we began studying jailbreak evaluations, we found a fascinating paper claiming that you could jailbreak frontier LLMs simply by translating forbidden prompts into obscure languages. Excited by th",
+          "summary_cn": "When we began studying jailbreak evaluations, we found a fascinating paper claiming that you could jailbreak frontier LLMs simply by translating forbi",
+          "url": "http://bair.berkeley.edu/blog/2024/08/28/strong-reject/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.0,
+          "published_at": "Wed, 28 Au",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_2bd695",
+          "title": "Are We Ready for Multi-Image Reasoning? Launching VHs: The Visual Haystacks Benchmark!",
+          "title_cn": "Are We Ready for Multi-Image Reasoning? Launching VHs: The Visual Haystacks Benchmark!",
+          "summary": "Humans excel at processing vast arrays of visual information, a skill that is crucial for achieving artificial general intelligence (AGI). Over the decades, AI researchers have developed Visual Questi",
+          "summary_cn": "Humans excel at processing vast arrays of visual information, a skill that is crucial for achieving artificial general intelligence (AGI). Over the de",
+          "url": "http://bair.berkeley.edu/blog/2024/07/20/visual-haystacks/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.0,
+          "published_at": "Sat, 20 Ju",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_5bf3ba",
+          "title": "GigaTIME: Scaling tumor microenvironment modeling using virtual population generated by multimodal AI",
+          "title_cn": "GigaTIME: Scaling tumor microenvironment modeling using virtual population generated by multimodal AI",
+          "summary": "Using AI-generated virtual populations, Microsoft researchers uncovered hidden cellular patterns that could reshape how we understand and treat cancer. \nThe post GigaTIME: Scaling tumor microenvironme",
+          "summary_cn": "Using AI-generated virtual populations, Microsoft researchers uncovered hidden cellular patterns that could reshape how we understand and treat cancer",
+          "url": "https://www.microsoft.com/en-us/research/blog/gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai/",
+          "source": "Microsoft Research",
+          "category": "🎓 学术突破",
+          "importance_score": 56.5,
+          "published_at": "Tue, 09 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_c95494",
+          "title": "Yann LeCun’s new venture is a contrarian bet against large language models",
+          "title_cn": "Yann LeCun’s new venture is a contrarian bet against large language models",
+          "summary": "Yann LeCun is a Turing Award recipient and a top AI researcher, but he has long been a contrarian figure in the tech world. He believes that the industry’s current obsession with large language models",
+          "summary_cn": "Yann LeCun is a Turing Award recipient and a top AI researcher, but he has long been a contrarian figure in the tech world. He believes that the indus",
+          "url": "https://www.technologyreview.com/2026/01/22/1131661/yann-lecuns-new-venture-ami-labs/",
+          "source": "MIT Technology Review",
+          "category": "🎓 学术突破",
+          "importance_score": 55.5,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_4aff8e",
+          "title": "The Download: Trump at Davos, and AI scientists",
+          "title_cn": "The Download: Trump at Davos, and AI scientists",
+          "summary": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. All anyone wants to talk about at Davos is AI and ",
+          "summary_cn": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. ",
+          "url": "https://www.technologyreview.com/2026/01/21/1131548/the-download-trump-at-davos-and-ai-scientists/",
+          "source": "MIT Technology Review",
+          "category": "🎓 学术突破",
+          "importance_score": 55.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_c2a0ad",
+          "title": "The UK government is backing AI that can run its own lab experiments",
+          "title_cn": "The UK government is backing AI that can run its own lab experiments",
+          "summary": "A number of startups and university teams that are building “AI scientists” to design and run experiments in the lab, including robot biologists and chemists, have just won extra funding from the UK g",
+          "summary_cn": "A number of startups and university teams that are building “AI scientists” to design and run experiments in the lab, including robot biologists and c",
+          "url": "https://www.technologyreview.com/2026/01/20/1131462/the-uk-government-is-backing-ai-scientists-that-can-run-their-own-experiments/",
+          "source": "MIT Technology Review",
+          "category": "🎓 学术突破",
+          "importance_score": 55.5,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_f2e9d3",
+          "title": "Show HN: High speed graphics rendering research with tinygrad/tinyJIT",
+          "title_cn": "Show HN: High speed graphics rendering research with tinygrad/tinyJIT",
+          "summary": "I saw a tweet that tinygrad is so good that you could make a graphics library that wraps tg. So I’ve been hacking on a gtinygrad, and honestly it convinced me it could be used for legit research.<p>Th",
+          "summary_cn": "I saw a tweet that tinygrad is so good that you could make a graphics library that wraps tg. So I’ve been hacking on a gtinygrad, and honestly it conv",
+          "url": "https://github.com/quantbagel/gtinygrad",
+          "source": "Hacker News",
+          "category": "🎓 学术突破",
+          "importance_score": 55.5,
+          "published_at": "2026-01-22 11:26",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_59ef4c",
+          "title": "ScenDi: 3D-to-2D Scene Diffusion Cascades for Urban Generation",
+          "title_cn": "ScenDi: 3D-to-2D Scene Diffusion Cascades for Urban Generation",
+          "summary": "Recent advancements in 3D object generation using diffusion models have achieved remarkable success, but generating realistic 3D urban scenes remains challenging. Existing methods relying solely on 3D",
+          "summary_cn": "Recent advancements in 3D object generation using diffusion models have achieved remarkable success, but generating realistic 3D urban scenes remains ",
+          "url": "http://arxiv.org/abs/2601.15221v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 55.25,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_379a78",
+          "title": "APPLE: Attribute-Preserving Pseudo-Labeling for Diffusion-Based Face Swapping",
+          "title_cn": "APPLE: Attribute-Preserving Pseudo-Labeling for Diffusion-Based Face Swapping",
+          "summary": "Face swapping aims to transfer the identity of a source face onto a target face while preserving target-specific attributes such as pose, expression, lighting, skin tone, and makeup. However, since re",
+          "summary_cn": "Face swapping aims to transfer the identity of a source face onto a target face while preserving target-specific attributes such as pose, expression, ",
+          "url": "http://arxiv.org/abs/2601.15288v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_7cf4fc",
+          "title": "Towards Understanding Best Practices for Quantization of Vision-Language Models",
+          "title_cn": "Towards Understanding Best Practices for Quantization of Vision-Language Models",
+          "summary": "Large language models (LLMs) deliver impressive results for a variety of tasks, but state-of-the-art systems require fast GPUs with large amounts of memory. To reduce both the memory and latency of th",
+          "summary_cn": "Large language models (LLMs) deliver impressive results for a variety of tasks, but state-of-the-art systems require fast GPUs with large amounts of m",
+          "url": "http://arxiv.org/abs/2601.15287v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_cbbeec",
+          "title": "DrivIng: A Large-Scale Multimodal Driving Dataset with Full Digital Twin Integration",
+          "title_cn": "DrivIng: A Large-Scale Multimodal Driving Dataset with Full Digital Twin Integration",
+          "summary": "Perception is a cornerstone of autonomous driving, enabling vehicles to understand their surroundings and make safe, reliable decisions. Developing robust perception algorithms requires large-scale, h",
+          "summary_cn": "Perception is a cornerstone of autonomous driving, enabling vehicles to understand their surroundings and make safe, reliable decisions. Developing ro",
+          "url": "http://arxiv.org/abs/2601.15260v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_14d30f",
+          "title": "FlowSSC: Universal Generative Monocular Semantic Scene Completion via One-Step Latent Diffusion",
+          "title_cn": "FlowSSC: Universal Generative Monocular Semantic Scene Completion via One-Step Latent Diffusion",
+          "summary": "Semantic Scene Completion (SSC) from monocular RGB images is a fundamental yet challenging task due to the inherent ambiguity of inferring occluded 3D geometry from a single view. While feed-forward m",
+          "summary_cn": "Semantic Scene Completion (SSC) from monocular RGB images is a fundamental yet challenging task due to the inherent ambiguity of inferring occluded 3D",
+          "url": "http://arxiv.org/abs/2601.15250v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_da6c90",
+          "title": "PROGRESSLM: Towards Progress Reasoning in Vision-Language Models",
+          "title_cn": "PROGRESSLM: Towards Progress Reasoning in Vision-Language Models",
+          "summary": "Estimating task progress requires reasoning over long-horizon dynamics rather than recognizing static visual content. While modern Vision-Language Models (VLMs) excel at describing what is visible, it",
+          "summary_cn": "Estimating task progress requires reasoning over long-horizon dynamics rather than recognizing static visual content. While modern Vision-Language Mod",
+          "url": "http://arxiv.org/abs/2601.15224v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_11aa95",
+          "title": "BayesianVLA: Bayesian Decomposition of Vision Language Action Models via Latent Action Queries",
+          "title_cn": "BayesianVLA: Bayesian Decomposition of Vision Language Action Models via Latent Action Queries",
+          "summary": "Vision-Language-Action (VLA) models have shown promise in robot manipulation but often struggle to generalize to new instructions or complex multi-task scenarios. We identify a critical pathology in c",
+          "summary_cn": "Vision-Language-Action (VLA) models have shown promise in robot manipulation but often struggle to generalize to new instructions or complex multi-tas",
+          "url": "http://arxiv.org/abs/2601.15197v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_7299b3",
+          "title": "Where Do AI Coding Agents Fail? An Empirical Study of Failed Agentic Pull Requests in GitHub",
+          "title_cn": "Where Do AI Coding Agents Fail? An Empirical Study of Failed Agentic Pull Requests in GitHub",
+          "summary": "AI coding agents are now submitting pull requests (PRs) to software projects, acting not just as assistants but as autonomous contributors. As these agentic contributions are rapidly increasing across",
+          "summary_cn": "AI coding agents are now submitting pull requests (PRs) to software projects, acting not just as assistants but as autonomous contributors. As these a",
+          "url": "http://arxiv.org/abs/2601.15195v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_332761",
+          "title": "The Flexibility Trap: Why Arbitrary Order Limits Reasoning Potential in Diffusion Language Models",
+          "title_cn": "The Flexibility Trap: Why Arbitrary Order Limits Reasoning Potential in Diffusion Language Models",
+          "summary": "Diffusion Large Language Models (dLLMs) break the rigid left-to-right constraint of traditional LLMs, enabling token generation in arbitrary orders. Intuitively, this flexibility implies a solution sp",
+          "summary_cn": "Diffusion Large Language Models (dLLMs) break the rigid left-to-right constraint of traditional LLMs, enabling token generation in arbitrary orders. I",
+          "url": "http://arxiv.org/abs/2601.15165v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_ecad71",
+          "title": "Knowledge Graphs are Implicit Reward Models: Path-Derived Signals Enable Compositional Reasoning",
+          "title_cn": "Knowledge Graphs are Implicit Reward Models: Path-Derived Signals Enable Compositional Reasoning",
+          "summary": "Large language models have achieved near-expert performance in structured reasoning domains like mathematics and programming, yet their ability to perform compositional multi-hop reasoning in speciali",
+          "summary_cn": "Large language models have achieved near-expert performance in structured reasoning domains like mathematics and programming, yet their ability to per",
+          "url": "http://arxiv.org/abs/2601.15160v1",
+          "source": "arXiv",
+          "category": "🎓 学术突破",
+          "importance_score": 54.75,
+          "published_at": "2026-01-21",
+          "tags": [
+            "论文",
+            "学术",
+            "重大突破"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "name": "技术创新",
+      "icon": "🔬",
+      "count": 20,
+      "items": [
+        {
+          "id": "tech_8da608",
+          "title": "How Higgsfield turns simple ideas into cinematic social videos",
+          "title_cn": "How Higgsfield turns simple ideas into cinematic social videos",
+          "summary": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+          "summary_cn": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+          "url": "https://openai.com/index/higgsfield",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_946a92",
+          "title": "How countries can end the capability overhang",
+          "title_cn": "How countries can end the capability overhang",
+          "summary": "Our latest report reveals stark differences in advanced AI adoption across countries and outlines new initiatives to help nations capture productivity gains from AI.",
+          "summary_cn": "Our latest report reveals stark differences in advanced AI adoption across countries and outlines new initiatives to help nations capture productivity",
+          "url": "https://openai.com/index/how-countries-can-end-the-capability-overhang",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_437b36",
+          "title": "Introducing Edu for Countries",
+          "title_cn": "Introducing Edu for Countries",
+          "summary": "Edu for Countries is a new OpenAI initiative helping governments use AI to modernize education systems and build future-ready workforces.",
+          "summary_cn": "Edu for Countries is a new OpenAI initiative helping governments use AI to modernize education systems and build future-ready workforces.",
+          "url": "https://openai.com/index/edu-for-countries",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_b51fe7",
+          "title": "Our approach to age prediction",
+          "title_cn": "Our approach to age prediction",
+          "summary": "ChatGPT is rolling out age prediction to estimate if accounts are under or over 18, applying safeguards for teens and refining accuracy over time.",
+          "summary_cn": "ChatGPT is rolling out age prediction to estimate if accounts are under or over 18, applying safeguards for teens and refining accuracy over time.",
+          "url": "https://openai.com/index/our-approach-to-age-prediction",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_25d6a8",
+          "title": "A business that scales with the value of intelligence",
+          "title_cn": "A business that scales with the value of intelligence",
+          "summary": "OpenAI’s business model scales with intelligence—spanning subscriptions, API, ads, commerce, and compute—driven by deepening ChatGPT adoption.",
+          "summary_cn": "OpenAI’s business model scales with intelligence—spanning subscriptions, API, ads, commerce, and compute—driven by deepening ChatGPT adoption.",
+          "url": "https://openai.com/index/a-business-that-scales-with-the-value-of-intelligence",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Sun, 18 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_58bd9c",
+          "title": "The truth left out from Elon Musk’s recent court filing",
+          "title_cn": "The truth left out from Elon Musk’s recent court filing",
+          "summary": "The truth left out from Elon Musk’s recent court filing.",
+          "summary_cn": "The truth left out from Elon Musk’s recent court filing.",
+          "url": "https://openai.com/index/the-truth-elon-left-out",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Fri, 16 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_36c566",
+          "title": "Our approach to advertising and expanding access to ChatGPT",
+          "title_cn": "Our approach to advertising and expanding access to ChatGPT",
+          "summary": "OpenAI plans to test advertising in the U.S. for ChatGPT’s free and Go tiers to expand affordable access to AI worldwide, while protecting privacy, trust, and answer quality.",
+          "summary_cn": "OpenAI plans to test advertising in the U.S. for ChatGPT’s free and Go tiers to expand affordable access to AI worldwide, while protecting privacy, tr",
+          "url": "https://openai.com/index/our-approach-to-advertising-and-expanding-access",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Fri, 16 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_815c85",
+          "title": "Introducing ChatGPT Go, now available worldwide",
+          "title_cn": "Introducing ChatGPT Go, now available worldwide",
+          "summary": "ChatGPT Go is now available worldwide, offering expanded access to GPT-5.2 Instant, higher usage limits, and longer memory—making advanced AI more affordable globally.",
+          "summary_cn": "ChatGPT Go is now available worldwide, offering expanded access to GPT-5.2 Instant, higher usage limits, and longer memory—making advanced AI more aff",
+          "url": "https://openai.com/index/introducing-chatgpt-go",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.0,
+          "published_at": "Fri, 16 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_20cfd1",
+          "title": "Show HN: Sweep, Open-weights 1.5B model for next-edit autocomplete",
+          "title_cn": "Show HN: Sweep, Open-weights 1.5B model for next-edit autocomplete",
+          "summary": "Hey HN, we trained and open-sourced a 1.5B model that predicts your next edits, similar to Cursor. You can download the weights here (<a href=\"https:&#x2F;&#x2F;huggingface.co&#x2F;sweepai&#x2F;sweep-",
+          "summary_cn": "Hey HN, we trained and open-sourced a 1.5B model that predicts your next edits, similar to Cursor. You can download the weights here (<a href=\"https:&",
+          "url": "https://huggingface.co/sweepai/sweep-next-edit-1.5B",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 59.0,
+          "published_at": "2026-01-22 07:22",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_b3cf7f",
+          "title": "Threat actors expand abuse of Microsoft Visual Studio Code",
+          "title_cn": "Threat actors expand abuse of Microsoft Visual Studio Code",
+          "summary": "Threat actors expand abuse of Microsoft Visual Studio Code",
+          "summary_cn": "Threat actors expand abuse of Microsoft Visual Studio Code",
+          "url": "https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 58.5,
+          "published_at": "2026-01-22 08:12",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_047fac",
+          "title": "Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant",
+          "title_cn": "Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant",
+          "summary": "Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant",
+          "summary_cn": "Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant",
+          "url": "https://www.media.mit.edu/publications/your-brain-on-chatgpt/",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 58.5,
+          "published_at": "2026-01-22 06:41",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_7d16b7",
+          "title": "Waiting for dawn in search: Search index, Google rulings and impact on Kagi",
+          "title_cn": "Waiting for dawn in search: Search index, Google rulings and impact on Kagi",
+          "summary": "Waiting for dawn in search: Search index, Google rulings and impact on Kagi",
+          "summary_cn": "Waiting for dawn in search: Search index, Google rulings and impact on Kagi",
+          "url": "https://blog.kagi.com/waiting-dawn-search",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 58.5,
+          "published_at": "2026-01-22 01:28",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_646f43",
+          "title": "Show HN: RatatuiRuby wraps Rust Ratatui as a RubyGem – TUIs with the joy of Ruby",
+          "title_cn": "Show HN: RatatuiRuby wraps Rust Ratatui as a RubyGem – TUIs with the joy of Ruby",
+          "summary": "Show HN: RatatuiRuby wraps Rust Ratatui as a RubyGem – TUIs with the joy of Ruby",
+          "summary_cn": "Show HN: RatatuiRuby wraps Rust Ratatui as a RubyGem – TUIs with the joy of Ruby",
+          "url": "https://www.ratatui-ruby.dev/",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 58.5,
+          "published_at": "2026-01-17 22:03",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_5f95ea",
+          "title": "Scaling Up Reinforcement Learning for Traffic Smoothing: A 100-AV Highway Deployment",
+          "title_cn": "Scaling Up Reinforcement Learning for Traffic Smoothing: A 100-AV Highway Deployment",
+          "summary": "Training Diffusion Models with Reinforcement Learning\n\n\n    \n\n\n\n    We deployed 100 reinforcement learning (RL)-controlled cars into rush-hour highway traffic to smooth congestion and reduce fuel cons",
+          "summary_cn": "Training Diffusion Models with Reinforcement Learning\n\n\n    \n\n\n\n    We deployed 100 reinforcement learning (RL)-controlled cars into rush-hour highway",
+          "url": "http://bair.berkeley.edu/blog/2025/03/25/rl-av-smoothing/",
+          "source": "BAIR Blog",
+          "category": "技术创新",
+          "importance_score": 57.5,
+          "published_at": "Tue, 25 Ma",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_dc2888",
+          "title": "Fara-7B: An Efficient Agentic Model for Computer Use",
+          "title_cn": "Fara-7B: An Efficient Agentic Model for Computer Use",
+          "summary": "Fara-7B is our first agentic small language model for computer use. This experimental model includes robust safety measures to aid responsible deployment. Despite its size, Fara-7B holds its own again",
+          "summary_cn": "Fara-7B is our first agentic small language model for computer use. This experimental model includes robust safety measures to aid responsible deploym",
+          "url": "https://www.microsoft.com/en-us/research/blog/fara-7b-an-efficient-agentic-model-for-computer-use/",
+          "source": "Microsoft Research",
+          "category": "技术创新",
+          "importance_score": 57.5,
+          "published_at": "Mon, 24 No",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_ef81e5",
+          "title": "Show HN: Rails UI",
+          "title_cn": "Show HN: Rails UI",
+          "summary": "Show HN: Rails UI",
+          "summary_cn": "Show HN: Rails UI",
+          "url": "https://railsui.com/",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 57.5,
+          "published_at": "2026-01-22 02:31",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_3dbc89",
+          "title": "Whole-Body Conditioned Egocentric Video Prediction",
+          "title_cn": "Whole-Body Conditioned Egocentric Video Prediction",
+          "summary": "&times;\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting Ego-centric Video from human Actions (PEVA). Given past video frames and an action specifying a desired change in 3D pose, PEVA predicts the next video frame",
+          "summary_cn": "&times;\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting Ego-centric Video from human Actions (PEVA). Given past video frames and an action specifying a desired cha",
+          "url": "http://bair.berkeley.edu/blog/2025/07/01/peva/",
+          "source": "BAIR Blog",
+          "category": "技术创新",
+          "importance_score": 57.0,
+          "published_at": "Tue, 01 Ju",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_4fb0bd",
+          "title": "Repurposing Protein Folding Models for Generation with Latent Diffusion",
+          "title_cn": "Repurposing Protein Folding Models for Generation with Latent Diffusion",
+          "summary": "PLAID is a multimodal generative model that simultaneously generates protein 1D sequence and 3D structure, by learning the latent space of protein folding models.\n\n\nThe awarding of the 2024 Nobel Priz",
+          "summary_cn": "PLAID is a multimodal generative model that simultaneously generates protein 1D sequence and 3D structure, by learning the latent space of protein fol",
+          "url": "http://bair.berkeley.edu/blog/2025/04/08/plaid/",
+          "source": "BAIR Blog",
+          "category": "技术创新",
+          "importance_score": 57.0,
+          "published_at": "Tue, 08 Ap",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_a17a31",
+          "title": "Virtual Personas for Language Models via an Anthology of Backstories",
+          "title_cn": "Virtual Personas for Language Models via an Anthology of Backstories",
+          "summary": "We introduce Anthology, a method for conditioning LLMs to representative, consistent, and diverse virtual personas by generating and utilizing naturalistic backstories with rich details of individual ",
+          "summary_cn": "We introduce Anthology, a method for conditioning LLMs to representative, consistent, and diverse virtual personas by generating and utilizing natural",
+          "url": "http://bair.berkeley.edu/blog/2024/11/12/virutal-persona-llm/",
+          "source": "BAIR Blog",
+          "category": "技术创新",
+          "importance_score": 57.0,
+          "published_at": "Tue, 12 No",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_7d51f9",
+          "title": "Linguistic Bias in ChatGPT: Language Models Reinforce Dialect Discrimination",
+          "title_cn": "Linguistic Bias in ChatGPT: Language Models Reinforce Dialect Discrimination",
+          "summary": "Sample language model responses to different varieties of English and native speaker reactions.\n\n\nChatGPT does amazingly well at communicating with people in English. But whose English?\n\nOnly 15% of C",
+          "summary_cn": "Sample language model responses to different varieties of English and native speaker reactions.\n\n\nChatGPT does amazingly well at communicating with pe",
+          "url": "http://bair.berkeley.edu/blog/2024/09/20/linguistic-bias/",
+          "source": "BAIR Blog",
+          "category": "技术创新",
+          "importance_score": 57.0,
+          "published_at": "Fri, 20 Se",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "name": "产品工具",
+      "icon": "🛠️",
+      "count": 17,
+      "items": [
+        {
+          "id": "product_0b8448",
+          "title": "Stargate Community",
+          "title_cn": "Stargate Community",
+          "summary": "Stargate Community plans detail a community-first approach to AI infrastructure, using locally tailored plans shaped by community input, energy needs, and workforce priorities.",
+          "summary_cn": "Stargate Community plans detail a community-first approach to AI infrastructure, using locally tailored plans shaped by community input, energy needs,",
+          "url": "https://openai.com/index/stargate-community",
+          "source": "OpenAI Blog",
+          "category": "产品工具",
+          "importance_score": 60.0,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_ce1caf",
+          "title": "ServiceNow powers actionable enterprise AI with OpenAI",
+          "title_cn": "ServiceNow powers actionable enterprise AI with OpenAI",
+          "summary": "ServiceNow expands access to OpenAI frontier models to power AI-driven enterprise workflows, summarization, search, and voice across the ServiceNow Platform.",
+          "summary_cn": "ServiceNow expands access to OpenAI frontier models to power AI-driven enterprise workflows, summarization, search, and voice across the ServiceNow Pl",
+          "url": "https://openai.com/index/servicenow-powers-actionable-enterprise-ai-with-openai",
+          "source": "OpenAI Blog",
+          "category": "产品工具",
+          "importance_score": 60.0,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_17f13b",
+          "title": "eBay explicitly bans AI \"buy for me\" agents in user agreement update",
+          "title_cn": "eBay explicitly bans AI \"buy for me\" agents in user agreement update",
+          "summary": "eBay explicitly bans AI \"buy for me\" agents in user agreement update",
+          "summary_cn": "eBay explicitly bans AI \"buy for me\" agents in user agreement update",
+          "url": "https://www.valueaddedresource.net/ebay-bans-ai-agents-updates-arbitration-user-agreement-feb-2026/",
+          "source": "Hacker News",
+          "category": "产品工具",
+          "importance_score": 58.5,
+          "published_at": "2026-01-22 05:07",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_dd0a37",
+          "title": "Promptions helps make AI prompting more precise with dynamic UI controls",
+          "title_cn": "Promptions helps make AI prompting more precise with dynamic UI controls",
+          "summary": "Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape outputs quickly without writing long instructions.\nTh",
+          "summary_cn": "Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape out",
+          "url": "https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/",
+          "source": "Microsoft Research",
+          "category": "产品工具",
+          "importance_score": 57.0,
+          "published_at": "Wed, 10 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_55b5bc",
+          "title": "Rethinking AI’s future in an augmented workplace",
+          "title_cn": "Rethinking AI’s future in an augmented workplace",
+          "summary": "There are many paths AI evolution could take. On one end of the spectrum, AI is dismissed as a marginal fad, another bubble fueled by notoriety and misallocated capital. On the other end, it’s cast as",
+          "summary_cn": "There are many paths AI evolution could take. On one end of the spectrum, AI is dismissed as a marginal fad, another bubble fueled by notoriety and mi",
+          "url": "https://www.technologyreview.com/2026/01/21/1131366/rethinking-ais-future-in-an-augmented-workplace/",
+          "source": "MIT Technology Review",
+          "category": "产品工具",
+          "importance_score": 55.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_6669ab",
+          "title": "All anyone wants to talk about at Davos is AI and Donald Trump",
+          "title_cn": "All anyone wants to talk about at Davos is AI and Donald Trump",
+          "summary": "This story first appeared in The Debrief, our subscriber-only newsletter about the biggest news in tech&#160;by Mat Honan, Editor in Chief. Subscribe to read the next edition as soon as it lands. Hell",
+          "summary_cn": "This story first appeared in The Debrief, our subscriber-only newsletter about the biggest news in tech&#160;by Mat Honan, Editor in Chief. Subscribe ",
+          "url": "https://www.technologyreview.com/2026/01/21/1131538/all-anyone-wants-to-talk-about-at-davos-is-ai-and-donald-trump/",
+          "source": "MIT Technology Review",
+          "category": "产品工具",
+          "importance_score": 55.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_dde394",
+          "title": "The era of agentic chaos and how data will save us",
+          "title_cn": "The era of agentic chaos and how data will save us",
+          "summary": "AI agents are moving beyond coding assistants and customer service chatbots into the operational core of the enterprise. The ROI is promising, but autonomy without alignment is a recipe for chaos. Bus",
+          "summary_cn": "AI agents are moving beyond coding assistants and customer service chatbots into the operational core of the enterprise. The ROI is promising, but aut",
+          "url": "https://www.technologyreview.com/2026/01/20/1130911/the-era-of-agentic-chaos-and-how-data-will-save-us/",
+          "source": "MIT Technology Review",
+          "category": "产品工具",
+          "importance_score": 55.5,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_0bfef2",
+          "title": "GitLab 18.8 Marks General Availability of the Duo Agent Platform",
+          "title_cn": "GitLab 18.8 Marks General Availability of the Duo Agent Platform",
+          "summary": "GitLab 18.8 brings a number of new features, including GitLab Duo Planner Agent, GitLab Duo Security Analyst Agent, auto-dismiss irrelevant vulnerabilities, and more. With this release, the GitLab Duo",
+          "summary_cn": "GitLab 18.8 brings a number of new features, including GitLab Duo Planner Agent, GitLab Duo Security Analyst Agent, auto-dismiss irrelevant vulnerabil",
+          "url": "https://www.infoq.com/news/2026/01/gitlab-18-8-duo-agent-platform/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "产品工具",
+          "importance_score": 47.0,
+          "published_at": "Mon, 19 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_103ba0",
+          "title": "What are Context Graphs?",
+          "title_cn": "What are Context Graphs?",
+          "summary": "Knowledge Graphs and their limitations With the rapid growth of AI applications, Knowledge Graphs (KGs) have emerged as a foundational structure for representing knowledge in a machine-readable form. ",
+          "summary_cn": "Knowledge Graphs and their limitations With the rapid growth of AI applications, Knowledge Graphs (KGs) have emerged as a foundational structure for r",
+          "url": "https://www.marktechpost.com/2026/01/20/what-are-context-graphs/",
+          "source": "MarkTechPost",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_8f182c",
+          "title": "Navigating AI Entrepreneurship: Insights From The Application Layer",
+          "title_cn": "Navigating AI Entrepreneurship: Insights From The Application Layer",
+          "summary": "Through the lens of a serial entrepreneur, this article explores how the AI revolution is shifting from infrastructure to the application layer, where the greatest opportunities lie in solving special",
+          "summary_cn": "Through the lens of a serial entrepreneur, this article explores how the AI revolution is shifting from infrastructure to the application layer, where",
+          "url": "https://www.kdnuggets.com/navigating-ai-entrepreneurship-insights-from-the-application-layer",
+          "source": "KDnuggets",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_303246",
+          "title": "Financial Market Applications of LLMs",
+          "title_cn": "Financial Market Applications of LLMs",
+          "summary": "The AI revolution drove frenzied investment in both private and public companies and captured the public&#x2019;s imagination in 2023. Transformational consumer products like ChatGPT are powered by La",
+          "summary_cn": "The AI revolution drove frenzied investment in both private and public companies and captured the public&#x2019;s imagination in 2023. Transformationa",
+          "url": "https://thegradient.pub/financial-market-applications-of-llms/",
+          "source": "The Gradient",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Sat, 20 Ap",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_0201f4",
+          "title": "European Initiative for Data Sovereignty Released a Trust Framework",
+          "title_cn": "European Initiative for Data Sovereignty Released a Trust Framework",
+          "summary": "The Danube release of the Gaia-X trust framework provides mechanisms for the automation of compliance and supports interoperability across sectors and geographies to ensure trusted data transactions a",
+          "summary_cn": "The Danube release of the Gaia-X trust framework provides mechanisms for the automation of compliance and supports interoperability across sectors and",
+          "url": "https://www.infoq.com/news/2026/01/data-sovereignty-trust-framework/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_538b24",
+          "title": "Article Series - AI Assisted Development: Real World Patterns, Pitfalls, and Production Readiness",
+          "title_cn": "Article Series - AI Assisted Development: Real World Patterns, Pitfalls, and Production Readiness",
+          "summary": "In this series, we examine what happens after the proof of concept and how AI becomes part of the software delivery pipeline. As AI transitions from proof of concept to production, teams are discoveri",
+          "summary_cn": "In this series, we examine what happens after the proof of concept and how AI becomes part of the software delivery pipeline. As AI transitions from p",
+          "url": "https://www.infoq.com/articles/ai-assisted-development-series/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_001433",
+          "title": "How CyberArk Protects AI Agents with Instruction Detectors and History-Aware Validation",
+          "title_cn": "How CyberArk Protects AI Agents with Instruction Detectors and History-Aware Validation",
+          "summary": "To prevent agents from obeying malicious instructions hidden in external data, all text entering an agent's context must be treated as untrusted, says Niv Rabin, principal software architect at AI-sec",
+          "summary_cn": "To prevent agents from obeying malicious instructions hidden in external data, all text entering an agent's context must be treated as untrusted, says",
+          "url": "https://www.infoq.com/news/2026/01/cyberark-agents-defenses/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_861243",
+          "title": "Google and Retail Leaders Launch Universal Commerce Protocol to Power Next‑Generation AI Shopping",
+          "title_cn": "Google and Retail Leaders Launch Universal Commerce Protocol to Power Next‑Generation AI Shopping",
+          "summary": "Google launched the Universal Commerce Protocol (UCP), an open standard co-developed with Shopify, Target, and others, enabling AI-driven shopping agents to complete tasks end-to-end from product disc",
+          "summary_cn": "Google launched the Universal Commerce Protocol (UCP), an open standard co-developed with Shopify, Target, and others, enabling AI-driven shopping age",
+          "url": "https://www.infoq.com/news/2026/01/google-agentic-commerce-ucp/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Mon, 19 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_dd973f",
+          "title": "Podcast: [Video Podcast] AI-Driven Development with Olivia McVicker",
+          "title_cn": "Podcast: [Video Podcast] AI-Driven Development with Olivia McVicker",
+          "summary": "In this episode, Thomas Betts chats with Olivia McVicker, a Senior Cloud Advocate at Microsoft about AI-driven software development. The conversation covers the current, mainstream AI coding assistant",
+          "summary_cn": "In this episode, Thomas Betts chats with Olivia McVicker, a Senior Cloud Advocate at Microsoft about AI-driven software development. The conversation ",
+          "url": "https://www.infoq.com/podcasts/ai-driven-development/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "产品工具",
+          "importance_score": 46.5,
+          "published_at": "Mon, 19 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_2a1824",
+          "title": "Salesforce Recasts Slackbot as a Personal AI Agent for Work",
+          "title_cn": "Salesforce Recasts Slackbot as a Personal AI Agent for Work",
+          "summary": "The update aims to make AI technology part of a collection of existing tools rather than another burden for employees.",
+          "summary_cn": "The update aims to make AI technology part of a collection of existing tools rather than another burden for employees.",
+          "url": "https://aibusiness.com/agentic-ai/salesforce-updates-slack-for-ai-era",
+          "source": "AI Business",
+          "category": "产品工具",
+          "importance_score": 45.0,
+          "published_at": "Tue, 13 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "application",
+      "name": "行业应用",
+      "icon": "💼",
+      "count": 2,
+      "items": [
+        {
+          "id": "application_1c91d3",
+          "title": "Cisco and OpenAI redefine enterprise engineering with AI agents",
+          "title_cn": "Cisco and OpenAI redefine enterprise engineering with AI agents",
+          "summary": "Cisco and OpenAI redefine enterprise engineering with Codex, an AI software agent embedded in workflows to speed builds, automate defect fixes, and enable AI-native development.",
+          "summary_cn": "Cisco and OpenAI redefine enterprise engineering with Codex, an AI software agent embedded in workflows to speed builds, automate defect fixes, and en",
+          "url": "https://openai.com/index/cisco",
+          "source": "OpenAI Blog",
+          "category": "行业应用",
+          "importance_score": 60.0,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "application_c647d6",
+          "title": "Humanoid Robot Actuator Market Could Approach $10B by 2031",
+          "title_cn": "Humanoid Robot Actuator Market Could Approach $10B by 2031",
+          "summary": "Increased deployment of humanoid robots across sectors is causing a boom in actuator demand.",
+          "summary_cn": "Increased deployment of humanoid robots across sectors is causing a boom in actuator demand.",
+          "url": "https://aibusiness.com/robotics/humanoid-robot-actuator-market-2031",
+          "source": "AI Business",
+          "category": "行业应用",
+          "importance_score": 45.5,
+          "published_at": "Thu, 15 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    }
+  ],
+  "core_insights": [
+    "AI正从通用模型迈向垂直深水区，医疗与教育等领域迎来深度整合与场景化落地。",
+    "各国重视AI基础设施自主权，加强本土制造与国家教育，以应对地缘政治竞争与技术安全。",
+    "生成式视频与自我赋权工具降低创作门槛，个体创作者将利用低成本工具产出高质量媒体内容。",
+    "商业模式正从单纯算力比拼转向以智能价值为核心，企业寻求能随智力增值而规模化的新路径。"
+  ],
+  "trending_topics": [
+    {
+      "name": "新闻",
+      "count": 61,
+      "trend": "rising"
+    },
+    {
+      "name": "AI资讯",
+      "count": 61,
+      "trend": "rising"
+    },
+    {
+      "name": "论文",
+      "count": 10,
+      "trend": "rising"
+    },
+    {
+      "name": "学术",
+      "count": 10,
+      "trend": "rising"
+    },
+    {
+      "name": "重大突破",
+      "count": 10,
+      "trend": "rising"
+    }
+  ],
+  "sources": [
+    {
+      "name": "TechCrunch AI",
+      "count": 15
+    },
+    {
+      "name": "NewsAPI",
+      "count": 20
+    },
+    {
+      "name": "MIT Technology Review",
+      "count": 10
+    },
+    {
+      "name": "OpenAI Blog",
+      "count": 15
+    },
+    {
+      "name": "arXiv",
+      "count": 15
+    },
+    {
+      "name": "BAIR Blog",
+      "count": 10
+    },
+    {
+      "name": "Microsoft Research",
+      "count": 10
+    },
+    {
+      "name": "MarkTechPost",
+      "count": 10
+    },
+    {
+      "name": "KDnuggets",
+      "count": 10
+    },
+    {
+      "name": "AI Business",
+      "count": 12
+    },
+    {
+      "name": "The Gradient",
+      "count": 8
+    },
+    {
+      "name": "InfoQ",
+      "count": 12
+    },
+    {
+      "name": "Hugging Face",
+      "count": 10
+    },
+    {
+      "name": "Hacker News",
+      "count": 11
+    }
+  ],
+  "markdown_content": "# AI每日热点 · 2026年01月22日\n\n> **期号**: #20260122  |  **阅读时间**: ~19分钟  |  **精选**: 79条\n\n---\n\n## 💡 核心洞察\n\n- AI正从通用模型迈向垂直深水区，医疗与教育等领域迎来深度整合与场景化落地。\n- 各国重视AI基础设施自主权，加强本土制造与国家教育，以应对地缘政治竞争与技术安全。\n- 生成式视频与自我赋权工具降低创作门槛，个体创作者将利用低成本工具产出高质量媒体内容。\n- 商业模式正从单纯算力比拼转向以智能价值为核心，企业寻求能随智力增值而规模化的新路径。\n\n---\n\n## ⭐ 编辑精选 (Editor's Picks)\n\n### 1. Horizon 1000: Advancing AI for primary healthcare\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文链接](https://openai.com/index/horizon-1000)\n\n**核心内容**: OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,0\n\n---\n\n### 2. AI for self empowerment\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文链接](https://openai.com/index/ai-for-self-empowerment)\n\n**核心内容**: How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and oppo\n\n---\n\n### 3. Strengthening the U.S. AI supply chain through domestic manufacturing\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文链接](https://openai.com/index/strengthening-the-us-ai-supply-chain)\n\n**核心内容**: OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.\n\n---\n\n### 4. Investing in Merge Labs\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文链接](https://openai.com/index/investing-in-merge-labs)\n\n**核心内容**: OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human abilit\n\n---\n\n### 5. How Higgsfield turns simple ideas into cinematic social videos\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文链接](https://openai.com/index/higgsfield)\n\n**核心内容**: Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.\n\n---\n\n## 📊 热门话题\n\n| 话题 | 相关新闻 | 趋势 |\n|------|---------|------|\n| 新闻 | 61条 | 📈 上升 |\n| AI资讯 | 61条 | 📈 上升 |\n| 论文 | 10条 | 📈 上升 |\n| 学术 | 10条 | 📈 上升 |\n| 重大突破 | 10条 | 📈 上升 |\n\n---\n\n## 🔍 分类热点\n\n### 📈 产业动态 (20条)\n\n#### 1. Horizon 1000: Advancing AI for primary healthcare\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/horizon-1000)\n\n**摘要**: OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,0\n\n---\n\n#### 2. AI for self empowerment\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/ai-for-self-empowerment)\n\n**摘要**: How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and oppo\n\n---\n\n#### 3. Strengthening the U.S. AI supply chain through domestic manufacturing\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/strengthening-the-us-ai-supply-chain)\n\n**摘要**: OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.\n\n---\n\n#### 4. OptiMind: A small language model with optimization expertise\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/optimind-a-small-language-model-with-optimization-expertise/)\n\n**摘要**: OptiMind is a small language model that converts business operation challenges, described naturally, into mathematical formulations that optimization \n\n---\n\n#### 5. Ideas: Community building, machine learning, and the future of AI\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/)\n\n**摘要**: As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hann\n\n---\n\n#### 6. Reimagining ERP for the agentic AI era\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/20/1129965/reimagining-erp-for-the-agentic-ai-era/)\n\n**摘要**: The story of enterprise resource planning (ERP) is really a story of businesses learning to organize themselves around the latest, greatest technology\n\n---\n\n#### 7. Sources: Project SGLang spins out as RadixArk with $400M valuation as inference market explodes\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/sources-project-sglang-spins-out-as-radixark-with-400m-valuation-as-inference-market-explodes/)\n\n**摘要**: SGLang, which originated as an open source research project at Ion Stoica’s UC Berkeley lab, has raised capital from Accel.\n\n---\n\n#### 8. A timeline of the US semiconductor market in 2025\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/a-timeline-of-the-u-s-semiconductor-market-in-2025/)\n\n**摘要**: From leadership changes at legacy semiconductor companies to wishy washy policy around chip exports, a lot happened last year.\n\n---\n\n#### 9. OpenAI aims to ship its first device in 2026, and it could be earbuds\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/openai-aims-to-ship-its-first-device-in-2026-and-it-could-be-earbuds/)\n\n**摘要**: The AI startup is on track to announce its first hardware device in the second half of this year, OpenAI Chief Global Affairs Officer Chris Lehane sai\n\n---\n\n#### 10. TechCrunch Disrupt 2026 tickets now on sale: Lowest rates all year\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/techcrunch-disrupt-2026-tickets-now-on-sale-lowest-rates-all-year/)\n\n**摘要**: TechCrunch Disrupt 2026 tickets are officially on sale. Save up to $680 on your ticket and be among the first 500 registrants to score a plus-one pass\n\n---\n\n#### 11. Zanskar thinks 1 TW of geothermal power is being overlooked\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/zanskar-thinks-1-tw-of-geothermal-power-is-being-overlooked/)\n\n**摘要**: Zanskar has raised $115 million to find about a dozen geothermal resources that could help power the grid throughout the U.S. West.\n\n---\n\n#### 12. Quadric rides the shift from cloud AI to on-device inference — and it’s paying off\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/22/quadric-rides-the-shift-from-cloud-ai-to-on-device-inference-and-its-paying-off/)\n\n**摘要**: Quadric aims to help companies and governments build programmable on-device AI chips that can run fast-changing models locally.\n\n---\n\n#### 13. Former Google trio is building an interactive AI-powered learning app for kids\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/22/former-google-trio-is-building-an-interactive-ai-powered-learning-app-for-kids/)\n\n**摘要**: Big tech companies and upcoming startups want to use generative AI to build software and hardware for kids. A lot of those experiences are limited to \n\n---\n\n#### 14. Not to be outdone by OpenAI, Apple is reportedly developing an AI wearable\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/not-to-be-outdone-by-openai-apple-is-reportedly-developing-an-ai-wearable/)\n\n**摘要**: Should this wearable materialize, it could be released as early as 2027, according to a report on the device.\n\n---\n\n#### 15. Todoist’s app now lets you add tasks to your to-do list by speaking to its AI\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/todoists-app-now-lets-you-add-tasks-to-your-to-do-list-by-speaking-to-its-ai/)\n\n**摘要**: The feature, now public, lets you create to-do's and action items by speaking naturally to the app's AI.\n\n---\n\n#### 16. Apple plans to make Siri an AI chatbot, report says\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/apple-plans-to-make-siri-an-ai-chatbot-report-says/)\n\n**摘要**: Siri could look more like ChatGPT than its current state as an integrated feature across Apple products.\n\n---\n\n#### 17. Anthropic revises Claude’s ‘Constitution,’ and hints at chatbot consciousness\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/anthropic-revises-claudes-constitution-and-hints-at-chatbot-consciousness/)\n\n**摘要**: The newly revised document offers a roadmap for what Anthropic says is a safer and more helpful chatbot experience.\n\n---\n\n#### 18. Irony alert: Hallucinated citations found in papers from NeurIPS, the prestigious AI conference\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/irony-alert-hallucinated-citations-found-in-papers-from-neurips-the-prestigious-ai-conference/)\n\n**摘要**: Research from startup GPTZero points to the impossible problem prestigious conferences face in the age of AI slop.\n\n---\n\n#### 19. YouTube will soon let creators make Shorts with their own AI likeness\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/youtube-will-soon-let-creators-make-shorts-with-their-own-ai-likeness/)\n\n**摘要**: YouTube Shorts viewers might soon see AI versions of their favorite creators when scrolling through their feeds.\n\n---\n\n#### 20. Adobe Acrobat now lets you edit files using prompts, generate podcast summaries\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://techcrunch.com/2026/01/21/adobe-acrobat-now-lets-you-edit-files-using-prompts-generate-podcast-summaries/)\n\n**摘要**: Adobe is adding AI tools to Acrobat, including the ability to generate podcast summaries of files, create presentations, and a way for users to edit f\n\n---\n\n### 🎓 🎓 学术突破 (20条)\n\n#### 1. Investing in Merge Labs\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/investing-in-merge-labs)\n\n**摘要**: OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human abilit\n\n---\n\n#### 2. What exactly does word2vec learn?\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/09/01/qwem-word2vec-theory/)\n\n**摘要**: What exactly does word2vec learn, and how? Answering this question amounts to understanding representation learning in a minimal yet interesting langu\n\n---\n\n#### 3. RL without TD learning\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/11/01/rl-without-td-learning/)\n\n**摘要**: In this post, I’ll introduce a reinforcement learning (RL) algorithm based on an “alternative” paradigm: divide and conquer. Unlike traditional method\n\n---\n\n#### 4. How to Evaluate Jailbreak Methods: A Case Study with the StrongREJECT Benchmark\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/08/28/strong-reject/)\n\n**摘要**: When we began studying jailbreak evaluations, we found a fascinating paper claiming that you could jailbreak frontier LLMs simply by translating forbi\n\n---\n\n#### 5. Are We Ready for Multi-Image Reasoning? Launching VHs: The Visual Haystacks Benchmark!\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/07/20/visual-haystacks/)\n\n**摘要**: Humans excel at processing vast arrays of visual information, a skill that is crucial for achieving artificial general intelligence (AGI). Over the de\n\n---\n\n#### 6. GigaTIME: Scaling tumor microenvironment modeling using virtual population generated by multimodal AI\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 56/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai/)\n\n**摘要**: Using AI-generated virtual populations, Microsoft researchers uncovered hidden cellular patterns that could reshape how we understand and treat cancer\n\n---\n\n#### 7. Yann LeCun’s new venture is a contrarian bet against large language models\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/22/1131661/yann-lecuns-new-venture-ami-labs/)\n\n**摘要**: Yann LeCun is a Turing Award recipient and a top AI researcher, but he has long been a contrarian figure in the tech world. He believes that the indus\n\n---\n\n#### 8. The Download: Trump at Davos, and AI scientists\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/21/1131548/the-download-trump-at-davos-and-ai-scientists/)\n\n**摘要**: This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. \n\n---\n\n#### 9. The UK government is backing AI that can run its own lab experiments\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/20/1131462/the-uk-government-is-backing-ai-scientists-that-can-run-their-own-experiments/)\n\n**摘要**: A number of startups and university teams that are building “AI scientists” to design and run experiments in the lab, including robot biologists and c\n\n---\n\n#### 10. Show HN: High speed graphics rendering research with tinygrad/tinyJIT\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://github.com/quantbagel/gtinygrad)\n\n**摘要**: I saw a tweet that tinygrad is so good that you could make a graphics library that wraps tg. So I’ve been hacking on a gtinygrad, and honestly it conv\n\n---\n\n#### 11. ScenDi: 3D-to-2D Scene Diffusion Cascades for Urban Generation\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](http://arxiv.org/abs/2601.15221v1)\n\n**摘要**: Recent advancements in 3D object generation using diffusion models have achieved remarkable success, but generating realistic 3D urban scenes remains \n\n---\n\n#### 12. APPLE: Attribute-Preserving Pseudo-Labeling for Diffusion-Based Face Swapping\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15288v1)\n\n**摘要**: Face swapping aims to transfer the identity of a source face onto a target face while preserving target-specific attributes such as pose, expression, \n\n---\n\n#### 13. Towards Understanding Best Practices for Quantization of Vision-Language Models\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15287v1)\n\n**摘要**: Large language models (LLMs) deliver impressive results for a variety of tasks, but state-of-the-art systems require fast GPUs with large amounts of m\n\n---\n\n#### 14. DrivIng: A Large-Scale Multimodal Driving Dataset with Full Digital Twin Integration\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15260v1)\n\n**摘要**: Perception is a cornerstone of autonomous driving, enabling vehicles to understand their surroundings and make safe, reliable decisions. Developing ro\n\n---\n\n#### 15. FlowSSC: Universal Generative Monocular Semantic Scene Completion via One-Step Latent Diffusion\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15250v1)\n\n**摘要**: Semantic Scene Completion (SSC) from monocular RGB images is a fundamental yet challenging task due to the inherent ambiguity of inferring occluded 3D\n\n---\n\n#### 16. PROGRESSLM: Towards Progress Reasoning in Vision-Language Models\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15224v1)\n\n**摘要**: Estimating task progress requires reasoning over long-horizon dynamics rather than recognizing static visual content. While modern Vision-Language Mod\n\n---\n\n#### 17. BayesianVLA: Bayesian Decomposition of Vision Language Action Models via Latent Action Queries\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15197v1)\n\n**摘要**: Vision-Language-Action (VLA) models have shown promise in robot manipulation but often struggle to generalize to new instructions or complex multi-tas\n\n---\n\n#### 18. Where Do AI Coding Agents Fail? An Empirical Study of Failed Agentic Pull Requests in GitHub\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15195v1)\n\n**摘要**: AI coding agents are now submitting pull requests (PRs) to software projects, acting not just as assistants but as autonomous contributors. As these a\n\n---\n\n#### 19. The Flexibility Trap: Why Arbitrary Order Limits Reasoning Potential in Diffusion Language Models\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15165v1)\n\n**摘要**: Diffusion Large Language Models (dLLMs) break the rigid left-to-right constraint of traditional LLMs, enabling token generation in arbitrary orders. I\n\n---\n\n#### 20. Knowledge Graphs are Implicit Reward Models: Path-Derived Signals Enable Compositional Reasoning\n\n> 📰 **arXiv**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](http://arxiv.org/abs/2601.15160v1)\n\n**摘要**: Large language models have achieved near-expert performance in structured reasoning domains like mathematics and programming, yet their ability to per\n\n---\n\n### 🔬 技术创新 (20条)\n\n#### 1. How Higgsfield turns simple ideas into cinematic social videos\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/higgsfield)\n\n**摘要**: Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.\n\n---\n\n#### 2. How countries can end the capability overhang\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/how-countries-can-end-the-capability-overhang)\n\n**摘要**: Our latest report reveals stark differences in advanced AI adoption across countries and outlines new initiatives to help nations capture productivity\n\n---\n\n#### 3. Introducing Edu for Countries\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/edu-for-countries)\n\n**摘要**: Edu for Countries is a new OpenAI initiative helping governments use AI to modernize education systems and build future-ready workforces.\n\n---\n\n#### 4. Our approach to age prediction\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/our-approach-to-age-prediction)\n\n**摘要**: ChatGPT is rolling out age prediction to estimate if accounts are under or over 18, applying safeguards for teens and refining accuracy over time.\n\n---\n\n#### 5. A business that scales with the value of intelligence\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/a-business-that-scales-with-the-value-of-intelligence)\n\n**摘要**: OpenAI’s business model scales with intelligence—spanning subscriptions, API, ads, commerce, and compute—driven by deepening ChatGPT adoption.\n\n---\n\n#### 6. The truth left out from Elon Musk’s recent court filing\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/the-truth-elon-left-out)\n\n**摘要**: The truth left out from Elon Musk’s recent court filing.\n\n---\n\n#### 7. Our approach to advertising and expanding access to ChatGPT\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/our-approach-to-advertising-and-expanding-access)\n\n**摘要**: OpenAI plans to test advertising in the U.S. for ChatGPT’s free and Go tiers to expand affordable access to AI worldwide, while protecting privacy, tr\n\n---\n\n#### 8. Introducing ChatGPT Go, now available worldwide\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/introducing-chatgpt-go)\n\n**摘要**: ChatGPT Go is now available worldwide, offering expanded access to GPT-5.2 Instant, higher usage limits, and longer memory—making advanced AI more aff\n\n---\n\n#### 9. Show HN: Sweep, Open-weights 1.5B model for next-edit autocomplete\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 59/100  |  🔗 [原文](https://huggingface.co/sweepai/sweep-next-edit-1.5B)\n\n**摘要**: Hey HN, we trained and open-sourced a 1.5B model that predicts your next edits, similar to Cursor. You can download the weights here (<a href=\"https:&\n\n---\n\n#### 10. Threat actors expand abuse of Microsoft Visual Studio Code\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/)\n\n**摘要**: Threat actors expand abuse of Microsoft Visual Studio Code\n\n---\n\n#### 11. Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://www.media.mit.edu/publications/your-brain-on-chatgpt/)\n\n**摘要**: Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant\n\n---\n\n#### 12. Waiting for dawn in search: Search index, Google rulings and impact on Kagi\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://blog.kagi.com/waiting-dawn-search)\n\n**摘要**: Waiting for dawn in search: Search index, Google rulings and impact on Kagi\n\n---\n\n#### 13. Show HN: RatatuiRuby wraps Rust Ratatui as a RubyGem – TUIs with the joy of Ruby\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://www.ratatui-ruby.dev/)\n\n**摘要**: Show HN: RatatuiRuby wraps Rust Ratatui as a RubyGem – TUIs with the joy of Ruby\n\n---\n\n#### 14. Scaling Up Reinforcement Learning for Traffic Smoothing: A 100-AV Highway Deployment\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/03/25/rl-av-smoothing/)\n\n**摘要**: Training Diffusion Models with Reinforcement Learning\n\n\n    \n\n\n\n    We deployed 100 reinforcement learning (RL)-controlled cars into rush-hour highway\n\n---\n\n#### 15. Fara-7B: An Efficient Agentic Model for Computer Use\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/fara-7b-an-efficient-agentic-model-for-computer-use/)\n\n**摘要**: Fara-7B is our first agentic small language model for computer use. This experimental model includes robust safety measures to aid responsible deploym\n\n---\n\n#### 16. Show HN: Rails UI\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://railsui.com/)\n\n**摘要**: Show HN: Rails UI\n\n---\n\n#### 17. Whole-Body Conditioned Egocentric Video Prediction\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/07/01/peva/)\n\n**摘要**: &times;\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting Ego-centric Video from human Actions (PEVA). Given past video frames and an action specifying a desired cha\n\n---\n\n#### 18. Repurposing Protein Folding Models for Generation with Latent Diffusion\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/04/08/plaid/)\n\n**摘要**: PLAID is a multimodal generative model that simultaneously generates protein 1D sequence and 3D structure, by learning the latent space of protein fol\n\n---\n\n#### 19. Virtual Personas for Language Models via an Anthology of Backstories\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/11/12/virutal-persona-llm/)\n\n**摘要**: We introduce Anthology, a method for conditioning LLMs to representative, consistent, and diverse virtual personas by generating and utilizing natural\n\n---\n\n#### 20. Linguistic Bias in ChatGPT: Language Models Reinforce Dialect Discrimination\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/09/20/linguistic-bias/)\n\n**摘要**: Sample language model responses to different varieties of English and native speaker reactions.\n\n\nChatGPT does amazingly well at communicating with pe\n\n---\n\n### 🛠️ 产品工具 (17条)\n\n#### 1. Stargate Community\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/stargate-community)\n\n**摘要**: Stargate Community plans detail a community-first approach to AI infrastructure, using locally tailored plans shaped by community input, energy needs,\n\n---\n\n#### 2. ServiceNow powers actionable enterprise AI with OpenAI\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/servicenow-powers-actionable-enterprise-ai-with-openai)\n\n**摘要**: ServiceNow expands access to OpenAI frontier models to power AI-driven enterprise workflows, summarization, search, and voice across the ServiceNow Pl\n\n---\n\n#### 3. eBay explicitly bans AI \"buy for me\" agents in user agreement update\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://www.valueaddedresource.net/ebay-bans-ai-agents-updates-arbitration-user-agreement-feb-2026/)\n\n**摘要**: eBay explicitly bans AI \"buy for me\" agents in user agreement update\n\n---\n\n#### 4. Promptions helps make AI prompting more precise with dynamic UI controls\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/)\n\n**摘要**: Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape out\n\n---\n\n#### 5. Rethinking AI’s future in an augmented workplace\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/21/1131366/rethinking-ais-future-in-an-augmented-workplace/)\n\n**摘要**: There are many paths AI evolution could take. On one end of the spectrum, AI is dismissed as a marginal fad, another bubble fueled by notoriety and mi\n\n---\n\n#### 6. All anyone wants to talk about at Davos is AI and Donald Trump\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/21/1131538/all-anyone-wants-to-talk-about-at-davos-is-ai-and-donald-trump/)\n\n**摘要**: This story first appeared in The Debrief, our subscriber-only newsletter about the biggest news in tech&#160;by Mat Honan, Editor in Chief. Subscribe \n\n---\n\n#### 7. The era of agentic chaos and how data will save us\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/20/1130911/the-era-of-agentic-chaos-and-how-data-will-save-us/)\n\n**摘要**: AI agents are moving beyond coding assistants and customer service chatbots into the operational core of the enterprise. The ROI is promising, but aut\n\n---\n\n#### 8. GitLab 18.8 Marks General Availability of the Duo Agent Platform\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 47/100  |  🔗 [原文](https://www.infoq.com/news/2026/01/gitlab-18-8-duo-agent-platform/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: GitLab 18.8 brings a number of new features, including GitLab Duo Planner Agent, GitLab Duo Security Analyst Agent, auto-dismiss irrelevant vulnerabil\n\n---\n\n#### 9. What are Context Graphs?\n\n> 📰 **MarkTechPost**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.marktechpost.com/2026/01/20/what-are-context-graphs/)\n\n**摘要**: Knowledge Graphs and their limitations With the rapid growth of AI applications, Knowledge Graphs (KGs) have emerged as a foundational structure for r\n\n---\n\n#### 10. Navigating AI Entrepreneurship: Insights From The Application Layer\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.kdnuggets.com/navigating-ai-entrepreneurship-insights-from-the-application-layer)\n\n**摘要**: Through the lens of a serial entrepreneur, this article explores how the AI revolution is shifting from infrastructure to the application layer, where\n\n---\n\n#### 11. Financial Market Applications of LLMs\n\n> 📰 **The Gradient**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://thegradient.pub/financial-market-applications-of-llms/)\n\n**摘要**: The AI revolution drove frenzied investment in both private and public companies and captured the public&#x2019;s imagination in 2023. Transformationa\n\n---\n\n#### 12. European Initiative for Data Sovereignty Released a Trust Framework\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.infoq.com/news/2026/01/data-sovereignty-trust-framework/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: The Danube release of the Gaia-X trust framework provides mechanisms for the automation of compliance and supports interoperability across sectors and\n\n---\n\n#### 13. Article Series - AI Assisted Development: Real World Patterns, Pitfalls, and Production Readiness\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.infoq.com/articles/ai-assisted-development-series/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: In this series, we examine what happens after the proof of concept and how AI becomes part of the software delivery pipeline. As AI transitions from p\n\n---\n\n#### 14. How CyberArk Protects AI Agents with Instruction Detectors and History-Aware Validation\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.infoq.com/news/2026/01/cyberark-agents-defenses/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: To prevent agents from obeying malicious instructions hidden in external data, all text entering an agent's context must be treated as untrusted, says\n\n---\n\n#### 15. Google and Retail Leaders Launch Universal Commerce Protocol to Power Next‑Generation AI Shopping\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.infoq.com/news/2026/01/google-agentic-commerce-ucp/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: Google launched the Universal Commerce Protocol (UCP), an open standard co-developed with Shopify, Target, and others, enabling AI-driven shopping age\n\n---\n\n#### 16. Podcast: [Video Podcast] AI-Driven Development with Olivia McVicker\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://www.infoq.com/podcasts/ai-driven-development/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: In this episode, Thomas Betts chats with Olivia McVicker, a Senior Cloud Advocate at Microsoft about AI-driven software development. The conversation \n\n---\n\n#### 17. Salesforce Recasts Slackbot as a Personal AI Agent for Work\n\n> 📰 **AI Business**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://aibusiness.com/agentic-ai/salesforce-updates-slack-for-ai-era)\n\n**摘要**: The update aims to make AI technology part of a collection of existing tools rather than another burden for employees.\n\n---\n\n### 💼 行业应用 (2条)\n\n#### 1. Cisco and OpenAI redefine enterprise engineering with AI agents\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/cisco)\n\n**摘要**: Cisco and OpenAI redefine enterprise engineering with Codex, an AI software agent embedded in workflows to speed builds, automate defect fixes, and en\n\n---\n\n#### 2. Humanoid Robot Actuator Market Could Approach $10B by 2031\n\n> 📰 **AI Business**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://aibusiness.com/robotics/humanoid-robot-actuator-market-2031)\n\n**摘要**: Increased deployment of humanoid robots across sectors is causing a boom in actuator demand.\n\n---\n\n## 📚 数据来源\n\n- **TechCrunch AI**: 15条\n- **NewsAPI**: 20条\n- **MIT Technology Review**: 10条\n- **OpenAI Blog**: 15条\n- **arXiv**: 15条\n- **BAIR Blog**: 10条\n- **Microsoft Research**: 10条\n- **MarkTechPost**: 10条\n- **KDnuggets**: 10条\n- **AI Business**: 12条\n- **The Gradient**: 8条\n- **InfoQ**: 12条\n- **Hugging Face**: 10条\n- **Hacker News**: 11条\n\n---\n\n*🤖 Generated by [ContentForge AI](https://github.com/devfoxaicn/content-forge-ai)*\n"
+}

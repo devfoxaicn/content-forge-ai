@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_010",
+  "series_id": "ml_series_1",
+  "episode": 10,
+  "title": "机器学习数学基础回顾",
+  "description": "线性代数：矩阵运算、特征值分解、SVD。概率统计：分布、期望、方差、最大似然估计。微积分：梯度、偏导数、链式法则。为深度学习打下坚实数学基础。",
+  "keywords": [
+    "线性代数",
+    "概率统计",
+    "微积分",
+    "矩阵分解",
+    "SVD",
+    "最大似然",
+    "梯度计算"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 15000,
+  "status": "pending"
+}

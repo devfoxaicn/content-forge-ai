@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_028",
+  "series_id": "ml_series_3",
+  "episode": 28,
+  "title": "OCR文字检测与识别实战",
+  "description": "场景文字检测：EAST、DBNet、TextSnake。文字识别：CRNN、ASTR。端到端OCR：ABINet、ParseQ。文档版面分析、表格识别，以及OCR在票据处理、文档数字化中的应用。",
+  "keywords": [
+    "OCR",
+    "文字检测",
+    "文字识别",
+    "CRNN",
+    "DBNet",
+    "ASTR",
+    "文档分析"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending"
+}

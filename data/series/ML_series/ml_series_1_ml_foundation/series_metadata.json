@@ -1,0 +1,215 @@
+{
+  "series_info": {
+    "id": "ml_series_1_ml_foundation",
+    "name": "机器学习基础系列",
+    "description": "建立机器学习核心知识体系，从数学基础到算法原理",
+    "topic_count": 10,
+    "difficulty": "入门→进阶",
+    "priority": 1,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_001",
+      "series_id": "ml_series_1",
+      "episode": 1,
+      "title": "机器学习导论：从零开始的AI之旅",
+      "description": "机器学习的本质是什么？从历史发展脉络到核心概念解析，理解学习范式、模型评估、偏差-方差权衡等基础理论，建立完整的机器学习认知框架。",
+      "keywords": [
+        "机器学习",
+        "AI导论",
+        "学习范式",
+        "模型评估",
+        "偏差方差",
+        "过拟合"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_002",
+      "series_id": "ml_series_1",
+      "episode": 2,
+      "title": "线性回归：机器学习的Hello World",
+      "description": "从最小二乘法到梯度下降，深入理解线性回归的数学推导、正则化技巧（L1/L2）、特征选择，以及如何处理多元回归和非线性关系。",
+      "keywords": [
+        "线性回归",
+        "最小二乘法",
+        "梯度下降",
+        "Lasso",
+        "Ridge",
+        "正则化"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_003",
+      "series_id": "ml_series_1",
+      "episode": 3,
+      "title": "逻辑回归与分类问题详解",
+      "description": "分类算法的基石。详解Sigmoid函数、交叉熵损失、多分类Softmax，以及如何处理类别不平衡、评估分类性能（Precision/Recall/F1/ROC-AUC）。",
+      "keywords": [
+        "逻辑回归",
+        "分类",
+        "Sigmoid",
+        "交叉熵",
+        "类别不平衡",
+        "ROC-AUC"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_004",
+      "series_id": "ml_series_1",
+      "episode": 4,
+      "title": "决策树与集成学习实战",
+      "description": "从ID3/C4.5到CART，理解信息增益、基尼系数等分裂准则。深入剖析Bagging、随机森林、AdaBoost、Gradient Boosting、XGBoost等集成算法原理与调优。",
+      "keywords": [
+        "决策树",
+        "ID3",
+        "C4.5",
+        "CART",
+        "随机森林",
+        "AdaBoost",
+        "XGBoost",
+        "LightGBM"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_005",
+      "series_id": "ml_series_1",
+      "episode": 5,
+      "title": "支持向量机SVM核方法解析",
+      "description": "SVM的数学之美：最大间隔分类器、对偶问题、KKT条件。核技巧如何处理非线性可分问题？RBF、多项式核的选择与调优，以及SVM在回归中的应用。",
+      "keywords": [
+        "SVM",
+        "支持向量机",
+        "核方法",
+        "RBF核",
+        "KKT条件",
+        "最大间隔",
+        "SVR"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_006",
+      "series_id": "ml_series_1",
+      "episode": 6,
+      "title": "聚类算法：无监督学习的艺术",
+      "description": "K-Means的局限性与改进：K-Means++初始化、Mini-Batch K-Means。层次聚类、DBSCAN密度聚类、GMM混合高斯模型，以及如何评估聚类质量（轮廓系数、Calinski-Harabasz）。",
+      "keywords": [
+        "聚类",
+        "K-Means",
+        "DBSCAN",
+        "层次聚类",
+        "GMM",
+        "轮廓系数",
+        "无监督学习"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_007",
+      "series_id": "ml_series_1",
+      "episode": 7,
+      "title": "降维技术：PCA与流形学习",
+      "description": "维度灾难问题解析。主成分分析PCA的数学推导、t-SNE、UMAP等非线性降维方法，以及如何可视化高维数据、提取特征、加速模型训练。",
+      "keywords": [
+        "降维",
+        "PCA",
+        "t-SNE",
+        "UMAP",
+        "LDA",
+        "流形学习",
+        "特征提取"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_008",
+      "series_id": "ml_series_1",
+      "episode": 8,
+      "title": "贝叶斯推断与概率图模型",
+      "description": "贝叶斯定理在机器学习中的应用。朴素贝叶斯分类器、贝叶斯网络、马尔可夫随机场MRF、变分推断、MCMC采样，以及如何处理不确定性。",
+      "keywords": [
+        "贝叶斯",
+        "概率图模型",
+        "朴素贝叶斯",
+        "MCMC",
+        "变分推断",
+        "不确定性"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_009",
+      "series_id": "ml_series_1",
+      "episode": 9,
+      "title": "模型评估与交叉验证技巧",
+      "description": "训练集、验证集、测试集的科学划分。K折交叉验证、分层采样、时间序列交叉验证、嵌套交叉验证。超参数调优：网格搜索、随机搜索、贝叶斯优化。",
+      "keywords": [
+        "交叉验证",
+        "模型评估",
+        "超参数调优",
+        "网格搜索",
+        "贝叶斯优化",
+        "Nested CV"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_010",
+      "series_id": "ml_series_1",
+      "episode": 10,
+      "title": "机器学习数学基础回顾",
+      "description": "线性代数：矩阵运算、特征值分解、SVD。概率统计：分布、期望、方差、最大似然估计。微积分：梯度、偏导数、链式法则。为深度学习打下坚实数学基础。",
+      "keywords": [
+        "线性代数",
+        "概率统计",
+        "微积分",
+        "矩阵分解",
+        "SVD",
+        "最大似然",
+        "梯度计算"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 15000,
+      "status": "pending"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 8,
+    "total_estimated_words": 143500,
+    "completion_rate": 80.0,
+    "start_date": "2026-01-25",
+    "end_date": "2026-01-25"
+  }
+}

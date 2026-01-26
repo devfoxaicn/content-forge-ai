@@ -1,0 +1,20 @@
+{
+  "id": "ml_topic_004",
+  "series_id": "ml_series_1",
+  "episode": 4,
+  "title": "决策树与集成学习实战",
+  "description": "从ID3/C4.5到CART，理解信息增益、基尼系数等分裂准则。深入剖析Bagging、随机森林、AdaBoost、Gradient Boosting、XGBoost等集成算法原理与调优。",
+  "keywords": [
+    "决策树",
+    "ID3",
+    "C4.5",
+    "CART",
+    "随机森林",
+    "AdaBoost",
+    "XGBoost",
+    "LightGBM"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 16000,
+  "status": "pending"
+}

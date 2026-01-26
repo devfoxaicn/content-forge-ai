@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_017",
+  "series_id": "ml_series_2",
+  "episode": 17,
+  "title": "深度学习损失函数设计",
+  "description": "从MSE到交叉熵，Focal Loss如何处理类别不平衡。对比损失、三元组损失用于度量学习。感知损失、风格损失、对抗损失，以及如何自定义损失函数。",
+  "keywords": [
+    "损失函数",
+    "交叉熵",
+    "Focal Loss",
+    "对比损失",
+    "度量学习",
+    "感知损失"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending"
+}

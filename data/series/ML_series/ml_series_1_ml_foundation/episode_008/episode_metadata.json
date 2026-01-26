@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_008",
+  "series_id": "ml_series_1",
+  "episode": 8,
+  "title": "贝叶斯推断与概率图模型",
+  "description": "贝叶斯定理在机器学习中的应用。朴素贝叶斯分类器、贝叶斯网络、马尔可夫随机场MRF、变分推断、MCMC采样，以及如何处理不确定性。",
+  "keywords": [
+    "贝叶斯",
+    "概率图模型",
+    "朴素贝叶斯",
+    "MCMC",
+    "变分推断",
+    "不确定性"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

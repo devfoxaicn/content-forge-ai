@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_007",
+  "series_id": "ml_series_1",
+  "episode": 7,
+  "title": "降维技术：PCA与流形学习",
+  "description": "维度灾难问题解析。主成分分析PCA的数学推导、t-SNE、UMAP等非线性降维方法，以及如何可视化高维数据、提取特征、加速模型训练。",
+  "keywords": [
+    "降维",
+    "PCA",
+    "t-SNE",
+    "UMAP",
+    "LDA",
+    "流形学习",
+    "特征提取"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

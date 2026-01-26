@@ -1,0 +1,218 @@
+{
+  "series_info": {
+    "id": "ml_series_2_deep_learning_foundation",
+    "name": "深度学习基础系列",
+    "description": "深度神经网络原理与训练技巧",
+    "topic_count": 10,
+    "difficulty": "进阶",
+    "priority": 2,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_011",
+      "series_id": "ml_series_2",
+      "episode": 11,
+      "title": "神经网络基础：从感知机到多层网络",
+      "description": "感知机的局限性与多层感知机的突破。前向传播、反向传播算法推导、激活函数演变（Sigmoid→Tanh→ReLU→GELU→SwiGLU），权重初始化技巧（Xavier、He初始化）。",
+      "keywords": [
+        "神经网络",
+        "感知机",
+        "反向传播",
+        "激活函数",
+        "权重初始化",
+        "Xavier",
+        "He初始化"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_012",
+      "series_id": "ml_series_2",
+      "episode": 12,
+      "title": "卷积神经网络CNN架构演进",
+      "description": "从LeNet-5到AlexNet，VGG的3x3卷积哲学，GoogLeNet的Inception模块，ResNet的残差连接革命，DenseNet、EfficientNet、ConvNeXt等现代架构解析。",
+      "keywords": [
+        "CNN",
+        "卷积神经网络",
+        "LeNet",
+        "AlexNet",
+        "VGG",
+        "ResNet",
+        "Inception",
+        "EfficientNet"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_013",
+      "series_id": "ml_series_2",
+      "episode": 13,
+      "title": "循环神经网络RNN与序列建模",
+      "description": "序列数据建模的挑战。RNN、LSTM的门控机制、GRU的简化设计。双向RNN、深层RNN训练技巧，以及梯度消失问题的解决方案。",
+      "keywords": [
+        "RNN",
+        "LSTM",
+        "GRU",
+        "序列建模",
+        "门控机制",
+        "梯度消失",
+        "双向RNN"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_014",
+      "series_id": "ml_series_2",
+      "episode": 14,
+      "title": "Attention机制与Transformer架构",
+      "description": "从Seq2Seq到Attention Is All You Need。自注意力机制数学推导、Multi-Head Attention、Position Encoding，以及Transformer如何革命性地改变了深度学习。",
+      "keywords": [
+        "Attention",
+        "Transformer",
+        "Self-Attention",
+        "Multi-Head",
+        "Position Encoding",
+        "Seq2Seq"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_015",
+      "series_id": "ml_series_2",
+      "episode": 15,
+      "title": "深度学习优化算法详解",
+      "description": "SGD的局限性。Momentum、Nesterov加速、Adagrad、Adadelta、RMSprop、Adam、AdamW、AdaBelief等优化算法原理对比，学习率调度策略（Step Decay、Cosine、Warmup）。",
+      "keywords": [
+        "优化算法",
+        "SGD",
+        "Adam",
+        "AdamW",
+        "Momentum",
+        "学习率调度",
+        "优化器"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_016",
+      "series_id": "ml_series_2",
+      "episode": 16,
+      "title": "正则化技术与模型泛化",
+      "description": "防止过拟合的完整工具箱。Dropout、DropPath、Stochastic Depth、Batch Normalization、Layer Normalization、Weight Decay、Early Stopping、Data Augmentation等技术的原理与最佳实践。",
+      "keywords": [
+        "正则化",
+        "Dropout",
+        "BatchNorm",
+        "LayerNorm",
+        "Weight Decay",
+        "泛化",
+        "过拟合"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_017",
+      "series_id": "ml_series_2",
+      "episode": 17,
+      "title": "深度学习损失函数设计",
+      "description": "从MSE到交叉熵，Focal Loss如何处理类别不平衡。对比损失、三元组损失用于度量学习。感知损失、风格损失、对抗损失，以及如何自定义损失函数。",
+      "keywords": [
+        "损失函数",
+        "交叉熵",
+        "Focal Loss",
+        "对比损失",
+        "度量学习",
+        "感知损失"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_018",
+      "series_id": "ml_series_2",
+      "episode": 18,
+      "title": "深度学习训练技巧与调试",
+      "description": "训练不收敛？梯度爆炸/消失？学习率如何设置？从batch size选择、梯度裁剪、学习率warmup、混合精度训练、分布式训练等实用技巧，培养模型调试直觉。",
+      "keywords": [
+        "训练技巧",
+        "调试",
+        "梯度裁剪",
+        "混合精度",
+        "分布式训练",
+        "学习率"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_019",
+      "series_id": "ml_series_2",
+      "episode": 19,
+      "title": "自监督学习与对比学习",
+      "description": "从有标签到无标签的范式转变。SimCLR、MoCo、BYOL、SimSiam等对比学习方法，MAE、BERT等掩码自编码，以及如何在下游任务中有效利用预训练模型。",
+      "keywords": [
+        "自监督学习",
+        "对比学习",
+        "SimCLR",
+        "MoCo",
+        "MAE",
+        "预训练",
+        "SSL"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_020",
+      "series_id": "ml_series_2",
+      "episode": 20,
+      "title": "生成对抗网络GAN实战",
+      "description": "生成模型的革命。GAN的基本原理、纳什均衡、训练稳定性问题。DCGAN、WGAN、StyleGAN、CycleGAN、Pix2Pix等变体，以及GAN在图像生成、风格迁移、数据增强中的应用。",
+      "keywords": [
+        "GAN",
+        "生成对抗网络",
+        "WGAN",
+        "StyleGAN",
+        "CycleGAN",
+        "生成模型",
+        "纳什均衡"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 16000,
+      "status": "pending"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 9,
+    "total_estimated_words": 152000,
+    "completion_rate": 90.0,
+    "start_date": "2026-01-25",
+    "end_date": "2026-01-25"
+  }
+}

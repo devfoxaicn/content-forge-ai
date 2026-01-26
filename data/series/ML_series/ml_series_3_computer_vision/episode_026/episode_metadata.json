@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_026",
+  "series_id": "ml_series_3",
+  "episode": 26,
+  "title": "视频理解与动作识别",
+  "description": "视频数据的时空特性。3D CNN（C3D、I3D）、Two-Stream方法、TSN、TSM。SlowFast网络、Video Transformer。动作识别在视频监控、内容审核中的应用。",
+  "keywords": [
+    "视频理解",
+    "动作识别",
+    "3D CNN",
+    "Two-Stream",
+    "SlowFast",
+    "Video Transformer"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15000,
+  "status": "pending"
+}

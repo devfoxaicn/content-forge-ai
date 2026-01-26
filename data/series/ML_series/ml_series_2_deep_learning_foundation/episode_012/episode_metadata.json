@@ -1,0 +1,20 @@
+{
+  "id": "ml_topic_012",
+  "series_id": "ml_series_2",
+  "episode": 12,
+  "title": "卷积神经网络CNN架构演进",
+  "description": "从LeNet-5到AlexNet，VGG的3x3卷积哲学，GoogLeNet的Inception模块，ResNet的残差连接革命，DenseNet、EfficientNet、ConvNeXt等现代架构解析。",
+  "keywords": [
+    "CNN",
+    "卷积神经网络",
+    "LeNet",
+    "AlexNet",
+    "VGG",
+    "ResNet",
+    "Inception",
+    "EfficientNet"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 16500,
+  "status": "pending"
+}

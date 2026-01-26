@@ -1,0 +1,1934 @@
+{
+  "batch_info": {
+    "name": "ml_100_complete",
+    "description": "机器学习与深度学习完整知识体系 - 从基础到前沿",
+    "version": "1.0",
+    "author": "ContentForge AI",
+    "created_at": "2026-01-24",
+    "total_topics": 100,
+    "series_count": 10
+  },
+  "batch_config": {
+    "target_audience": "技术从业者",
+    "content_type": "技术干货",
+    "stop_on_error": false,
+    "enabled_agents": [
+      "all"
+    ],
+    "disabled_agents": []
+  },
+  "series": [
+    {
+      "id": "ml_series_1",
+      "name": "机器学习基础系列",
+      "description": "建立机器学习核心知识体系，从数学基础到经典算法",
+      "topic_count": 10,
+      "difficulty": "入门→进阶",
+      "priority": 1,
+      "icon": "📚"
+    },
+    {
+      "id": "ml_series_2",
+      "name": "深度学习基础系列",
+      "description": "神经网络、反向传播、Transformer等深度学习核心原理",
+      "topic_count": 10,
+      "difficulty": "进阶",
+      "priority": 2,
+      "icon": "🧠"
+    },
+    {
+      "id": "ml_series_3",
+      "name": "计算机视觉系列",
+      "description": "CNN、目标检测、图像分割、ViT等视觉技术全解析",
+      "topic_count": 10,
+      "difficulty": "进阶",
+      "priority": 3,
+      "icon": "👁️"
+    },
+    {
+      "id": "ml_series_4",
+      "name": "自然语言处理系列",
+      "description": "从词嵌入到BERT、GPT等大模型的NLP完整技术栈",
+      "topic_count": 10,
+      "difficulty": "进阶",
+      "priority": 4,
+      "icon": "📝"
+    },
+    {
+      "id": "ml_series_5",
+      "name": "强化学习系列",
+      "description": "从Q-Learning到PPO、SAC等现代RL算法",
+      "topic_count": 10,
+      "difficulty": "进阶",
+      "priority": 5,
+      "icon": "🎮"
+    },
+    {
+      "id": "ml_series_6",
+      "name": "推荐系统系列",
+      "description": "协同过滤、深度推荐、实时推荐等完整推荐技术",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 6,
+      "icon": "🎯"
+    },
+    {
+      "id": "ml_series_7",
+      "name": "模型优化与部署系列",
+      "description": "模型压缩、量化、TensorRT、ONNX等部署技术",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 7,
+      "icon": "⚡"
+    },
+    {
+      "id": "ml_series_8",
+      "name": "传统机器学习算法系列",
+      "description": "XGBoost、随机森林、聚类、降维等经典算法",
+      "topic_count": 10,
+      "difficulty": "进阶",
+      "priority": 8,
+      "icon": "🌳"
+    },
+    {
+      "id": "ml_series_9",
+      "name": "特征工程系列",
+      "description": "特征选择、特征变换、时间序列特征等工程技巧",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 9,
+      "icon": "🔧"
+    },
+    {
+      "id": "ml_series_10",
+      "name": "前沿技术专题系列",
+      "description": "GAN、扩散模型、图神经网络、多模态等前沿技术",
+      "topic_count": 10,
+      "difficulty": "前沿",
+      "priority": 10,
+      "icon": "🚀"
+    }
+  ],
+  "topics": [
+    {
+      "id": "ml_001",
+      "episode": 1,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "机器学习概述与发展历程",
+      "keywords": [
+        "机器学习定义",
+        "AI发展史",
+        "机器学习分类",
+        "应用场景"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3500,
+      "status": "pending",
+      "completed_at": "2026-01-24"
+    },
+    {
+      "id": "ml_002",
+      "episode": 2,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "线性回归：最简单的机器学习算法",
+      "keywords": [
+        "线性回归",
+        "梯度下降",
+        "损失函数",
+        "正则化"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_003",
+      "episode": 3,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "逻辑回归与分类问题",
+      "keywords": [
+        "逻辑回归",
+        "Sigmoid函数",
+        "交叉熵损失",
+        "多分类"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_004",
+      "episode": 4,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "过拟合与正则化技术",
+      "keywords": [
+        "过拟合",
+        "L1正则化",
+        "L2正则化",
+        "Dropout",
+        "早停"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_005",
+      "episode": 5,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "梯度下降优化算法详解",
+      "keywords": [
+        "SGD",
+        "Adam",
+        "RMSprop",
+        "学习率调度",
+        "优化器选择"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_006",
+      "episode": 6,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "朴素贝叶斯与贝叶斯推断",
+      "keywords": [
+        "贝叶斯定理",
+        "朴素贝叶斯",
+        "先验概率",
+        "后验概率"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_007",
+      "episode": 7,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "支持向量机SVM原理与应用",
+      "keywords": [
+        "SVM",
+        "核函数",
+        "超平面",
+        "软间隔"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_008",
+      "episode": 8,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "KNN与聚类算法入门",
+      "keywords": [
+        "KNN",
+        "K-Means",
+        "DBSCAN",
+        "层次聚类"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_009",
+      "episode": 9,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "决策树与集成学习基础",
+      "keywords": [
+        "决策树",
+        "信息增益",
+        "基尼系数",
+        "Bagging"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_010",
+      "episode": 10,
+      "series_id": "ml_series_1",
+      "series_name": "机器学习基础系列",
+      "title": "机器学习评估指标与交叉验证",
+      "keywords": [
+        "准确率",
+        "精确率",
+        "召回率",
+        "F1分数",
+        "交叉验证"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_011",
+      "episode": 11,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "神经网络基础：感知机到多层网络",
+      "keywords": [
+        "感知机",
+        "多层感知机",
+        "前向传播",
+        "激活函数"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_012",
+      "episode": 12,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "反向传播算法详解",
+      "keywords": [
+        "反向传播",
+        "链式法则",
+        "梯度计算",
+        "自动微分"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_013",
+      "episode": 13,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "激活函数详解：ReLU到Swish",
+      "keywords": [
+        "Sigmoid",
+        "Tanh",
+        "ReLU",
+        "LeakyReLU",
+        "Swish",
+        "GELU"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_014",
+      "episode": 14,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "卷积神经网络CNN架构解析",
+      "keywords": [
+        "卷积层",
+        "池化层",
+        "LeNet",
+        "AlexNet",
+        "VGG"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_015",
+      "episode": 15,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "残差网络与跳跃连接",
+      "keywords": [
+        "ResNet",
+        "残差学习",
+        "跳跃连接",
+        "梯度消失"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_016",
+      "episode": 16,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "循环神经网络RNN与LSTM",
+      "keywords": [
+        "RNN",
+        "LSTM",
+        "GRU",
+        "序列建模",
+        "梯度爆炸"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_017",
+      "episode": 17,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "注意力机制与Transformer基础",
+      "keywords": [
+        "注意力机制",
+        "Self-Attention",
+        "Multi-Head",
+        "Transformer"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_018",
+      "episode": 18,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "Batch Normalization与Layer Normalization",
+      "keywords": [
+        "BatchNorm",
+        "LayerNorm",
+        "归一化",
+        "训练稳定性"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_019",
+      "episode": 19,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "权重初始化技巧",
+      "keywords": [
+        "Xavier初始化",
+        "He初始化",
+        "权重衰减",
+        "预训练"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_020",
+      "episode": 20,
+      "series_id": "ml_series_2",
+      "series_name": "深度学习基础系列",
+      "title": "深度学习训练技巧与调优",
+      "keywords": [
+        "学习率调度",
+        "数据增强",
+        "早停",
+        "模型集成"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_021",
+      "episode": 21,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "计算机视觉概述与图像基础",
+      "keywords": [
+        "像素",
+        "颜色空间",
+        "图像滤波",
+        "边缘检测"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_022",
+      "episode": 22,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "CNN卷积神经网络深度解析",
+      "keywords": [
+        "卷积核",
+        "步长",
+        "填充",
+        "感受野"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_023",
+      "episode": 23,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "经典CNN架构演进史",
+      "keywords": [
+        "AlexNet",
+        "VGG",
+        "GoogLeNet",
+        "ResNet",
+        "EfficientNet"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_024",
+      "episode": 24,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "目标检测：YOLO系列详解",
+      "keywords": [
+        "目标检测",
+        "YOLO",
+        "边界框",
+        "NMS",
+        "Anchor机制"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_025",
+      "episode": 25,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "图像分割：FCN与U-Net",
+      "keywords": [
+        "语义分割",
+        "实例分割",
+        "FCN",
+        "U-Net",
+        "Mask R-CNN"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_026",
+      "episode": 26,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "视频理解与行为识别",
+      "keywords": [
+        "视频分类",
+        "3D CNN",
+        "Two-Stream",
+        "时序建模"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_027",
+      "episode": 27,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "图像生成与风格迁移",
+      "keywords": [
+        "GAN",
+        "风格迁移",
+        "图像生成",
+        "CycleGAN"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_028",
+      "episode": 28,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "视觉Transformer (ViT) 入门",
+      "keywords": [
+        "ViT",
+        "Vision Transformer",
+        "Patch Embedding",
+        "注意力机制"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_029",
+      "episode": 29,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "多模态视觉模型",
+      "keywords": [
+        "CLIP",
+        "BLIP",
+        "图文预训练",
+        "多模态学习"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_030",
+      "episode": 30,
+      "series_id": "ml_series_3",
+      "series_name": "计算机视觉系列",
+      "title": "计算机视觉应用案例解析",
+      "keywords": [
+        "人脸识别",
+        "OCR",
+        "自动驾驶",
+        "医疗影像"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_031",
+      "episode": 31,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "自然语言处理概述",
+      "keywords": [
+        "NLP任务",
+        "文本预处理",
+        "分词",
+        "词性标注"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_032",
+      "episode": 32,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "词嵌入技术",
+      "keywords": [
+        "Word2Vec",
+        "GloVe",
+        "FastText",
+        "词向量"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_033",
+      "episode": 33,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "序列模型：RNN、LSTM、GRU",
+      "keywords": [
+        "序列建模",
+        "RNN",
+        "LSTM",
+        "GRU",
+        "Seq2Seq"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_034",
+      "episode": 34,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "注意力机制详解",
+      "keywords": [
+        "注意力",
+        "Self-Attention",
+        "Cross-Attention",
+        "位置编码"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_035",
+      "episode": 35,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "Transformer架构完全解析",
+      "keywords": [
+        "Transformer",
+        "Encoder-Decoder",
+        "多头注意力",
+        "FFN"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_036",
+      "episode": 36,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "BERT预训练模型",
+      "keywords": [
+        "BERT",
+        "Masked LM",
+        "NSP",
+        "预训练",
+        "Fine-tuning"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_037",
+      "episode": 37,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "GPT系列与生成式NLP",
+      "keywords": [
+        "GPT",
+        "自回归",
+        "语言模型",
+        "文本生成"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_038",
+      "episode": 38,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "T5与BART：Encoder-Decoder模型",
+      "keywords": [
+        "T5",
+        "BART",
+        "Seq2Seq",
+        "文本摘要",
+        "翻译"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_039",
+      "episode": 39,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "NLP实战：文本分类与命名实体识别",
+      "keywords": [
+        "文本分类",
+        "NER",
+        "序列标注",
+        "CRF"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_040",
+      "episode": 40,
+      "series_id": "ml_series_4",
+      "series_name": "自然语言处理系列",
+      "title": "大语言模型LLM应用开发",
+      "keywords": [
+        "LLM",
+        "Prompt工程",
+        "Fine-tuning",
+        "RAG"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_041",
+      "episode": 41,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "强化学习基础概念",
+      "keywords": [
+        "强化学习",
+        "Agent",
+        "Environment",
+        "Reward",
+        "Policy"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_042",
+      "episode": 42,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "马尔可夫决策过程MDP",
+      "keywords": [
+        "MDP",
+        "状态转移",
+        "奖励",
+        "价值函数",
+        "Bellman方程"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_043",
+      "episode": 43,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "Q-Learning与DQN",
+      "keywords": [
+        "Q-Learning",
+        "DQN",
+        "经验回放",
+        "目标网络"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_044",
+      "episode": 44,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "Policy Gradient算法",
+      "keywords": [
+        "Policy Gradient",
+        "REINFORCE",
+        "Actor-Critic",
+        "优势函数"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_045",
+      "episode": 45,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "A3C与A2C算法详解",
+      "keywords": [
+        "A3C",
+        "A2C",
+        "异步训练",
+        "并行Actor"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_046",
+      "episode": 46,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "PPO与TRPO：近端策略优化",
+      "keywords": [
+        "PPO",
+        "TRPO",
+        "重要性采样",
+        "信任区域"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_047",
+      "episode": 47,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "DDPG与连续动作控制",
+      "keywords": [
+        "DDPG",
+        "确定性策略",
+        "Actor-Critic",
+        "连续控制"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_048",
+      "episode": 48,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "SAC与TD3：现代Off-Policy算法",
+      "keywords": [
+        "SAC",
+        "TD3",
+        "最大熵",
+        "经验回放"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_049",
+      "episode": 49,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "强化学习探索与利用",
+      "keywords": [
+        "探索与利用",
+        "Epsilon-Greedy",
+        "UCB",
+        "Thompson采样"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_050",
+      "episode": 50,
+      "series_id": "ml_series_5",
+      "series_name": "强化学习系列",
+      "title": "强化学习应用：游戏与机器人",
+      "keywords": [
+        "AlphaGo",
+        "机器人控制",
+        "Atari游戏",
+        "仿真训练"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_051",
+      "episode": 51,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "推荐系统概述",
+      "keywords": [
+        "推荐系统",
+        "协同过滤",
+        "内容推荐",
+        "混合推荐"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_052",
+      "episode": 52,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "协同过滤算法",
+      "keywords": [
+        "UserCF",
+        "ItemCF",
+        "余弦相似度",
+        "冷启动"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_053",
+      "episode": 53,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "矩阵分解与隐语义模型",
+      "keywords": [
+        "矩阵分解",
+        "SVD",
+        "隐因子",
+        "ALS"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_054",
+      "episode": 54,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "深度学习推荐模型",
+      "keywords": [
+        "NeuralCF",
+        "DeepFM",
+        "Wide&Deep",
+        "DIN"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_055",
+      "episode": 55,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "序列推荐与Session-based推荐",
+      "keywords": [
+        "序列推荐",
+        "Session",
+        "GRU4Rec",
+        "SASRec"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_056",
+      "episode": 56,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "召回与排序架构",
+      "keywords": [
+        "召回",
+        "排序",
+        "粗排",
+        "精排"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_057",
+      "episode": 57,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "多目标学习与推荐",
+      "keywords": [
+        "多目标",
+        "点击率",
+        "转化率",
+        "MMOE",
+        "PLE"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_058",
+      "episode": 58,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "实时推荐系统架构",
+      "keywords": [
+        "实时推荐",
+        "流式计算",
+        "在线学习",
+        "特征服务"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_059",
+      "episode": 59,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "推荐系统评估指标",
+      "keywords": [
+        "AUC",
+        "RMSE",
+        "MAP",
+        "NDCG",
+        "多样性"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_060",
+      "episode": 60,
+      "series_id": "ml_series_6",
+      "series_name": "推荐系统系列",
+      "title": "推荐系统工程实践",
+      "keywords": [
+        "架构设计",
+        "AB测试",
+        "冷启动",
+        "工程落地"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_061",
+      "episode": 61,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "模型压缩技术概述",
+      "keywords": [
+        "模型压缩",
+        "量化",
+        "剪枝",
+        "蒸馏"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_062",
+      "episode": 62,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "模型量化技术",
+      "keywords": [
+        "量化",
+        "INT8",
+        "感知量化",
+        "训练后量化"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_063",
+      "episode": 63,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "网络剪枝方法",
+      "keywords": [
+        "结构化剪枝",
+        "非结构化剪枝",
+        "通道剪枝",
+        "Lottery Ticket"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_064",
+      "episode": 64,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "知识蒸馏详解",
+      "keywords": [
+        "知识蒸馏",
+        "Teacher-Student",
+        "蒸馏损失",
+        "自蒸馏"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_065",
+      "episode": 65,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "TensorRT推理优化",
+      "keywords": [
+        "TensorRT",
+        "推理加速",
+        "层融合",
+        "内核优化"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_066",
+      "episode": 66,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "ONNX跨平台模型部署",
+      "keywords": [
+        "ONNX",
+        "模型转换",
+        "OPENVINO",
+        "跨平台部署"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_067",
+      "episode": 67,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "移动端模型部署",
+      "keywords": [
+        "CoreML",
+        "MLKit",
+        "TFLite",
+        "移动端推理"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_068",
+      "episode": 68,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "模型服务化架构",
+      "keywords": [
+        "模型服务",
+        "TFServing",
+        "TorchServe",
+        "Kserve"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_069",
+      "episode": 69,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "分布式训练与推理",
+      "keywords": [
+        "分布式训练",
+        "数据并行",
+        "模型并行",
+        "推理并行"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_070",
+      "episode": 70,
+      "series_id": "ml_series_7",
+      "series_name": "模型优化与部署系列",
+      "title": "MLOps与模型监控",
+      "keywords": [
+        "MLOps",
+        "模型监控",
+        "A/B测试",
+        "持续训练"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_071",
+      "episode": 71,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "决策树算法详解",
+      "keywords": [
+        "ID3",
+        "C4.5",
+        "CART",
+        "决策树剪枝"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_072",
+      "episode": 72,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "随机森林与Bagging",
+      "keywords": [
+        "随机森林",
+        "Bagging",
+        "OOB",
+        "特征重要性"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_073",
+      "episode": 73,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "梯度提升树GBDT",
+      "keywords": [
+        "GBDT",
+        "梯度提升",
+        "残差学习",
+        "回归树"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_074",
+      "episode": 74,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "XGBoost详解",
+      "keywords": [
+        "XGBoost",
+        "二阶梯度",
+        "正则化",
+        "稀疏感知"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_075",
+      "episode": 75,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "LightGBM与CatBoost",
+      "keywords": [
+        "LightGBM",
+        "CatBoost",
+        "直方图算法",
+        "类别特征"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_076",
+      "episode": 76,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "聚类算法进阶",
+      "keywords": [
+        "DBSCAN",
+        "谱聚类",
+        "高斯混合",
+        "聚类评估"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_077",
+      "episode": 77,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "降维算法：PCA与t-SNE",
+      "keywords": [
+        "PCA",
+        "t-SNE",
+        "UMAP",
+        "特征降维",
+        "可视化"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_078",
+      "episode": 78,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "孤立森林与异常检测",
+      "keywords": [
+        "孤立森林",
+        "异常检测",
+        "LOF",
+        "One-Class SVM"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_079",
+      "episode": 79,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "贝叶斯优化与超参数搜索",
+      "keywords": [
+        "贝叶斯优化",
+        "网格搜索",
+        "随机搜索",
+        "Hyperopt"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_080",
+      "episode": 80,
+      "series_id": "ml_series_8",
+      "series_name": "传统机器学习算法系列",
+      "title": "传统ML集成策略",
+      "keywords": [
+        "Stacking",
+        "Blending",
+        "Voting",
+        "模型融合"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_081",
+      "episode": 81,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "特征工程概述",
+      "keywords": [
+        "特征工程",
+        "特征重要性",
+        "数据预处理",
+        "特征类型"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_082",
+      "episode": 82,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "数值特征处理",
+      "keywords": [
+        "归一化",
+        "标准化",
+        "分箱",
+        "离散化"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_083",
+      "episode": 83,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "类别特征编码",
+      "keywords": [
+        "One-Hot",
+        "Label Encoding",
+        "Target Encoding",
+        "Embedding"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_084",
+      "episode": 84,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "特征选择方法",
+      "keywords": [
+        "过滤法",
+        "包裹法",
+        "嵌入法",
+        "特征重要性"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_085",
+      "episode": 85,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "特征交叉与组合",
+      "keywords": [
+        "特征交叉",
+        "多项式特征",
+        "自动特征工程",
+        "DeepCross"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_086",
+      "episode": 86,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "时间序列特征工程",
+      "keywords": [
+        "时间序列",
+        "滑动窗口",
+        "滞后特征",
+        "周期特征"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_087",
+      "episode": 87,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "文本特征工程",
+      "keywords": [
+        "TF-IDF",
+        "N-gram",
+        "TextCNN",
+        "词级别特征"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_088",
+      "episode": 88,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "图像特征工程",
+      "keywords": [
+        "HOG",
+        "SIFT",
+        "颜色直方图",
+        "传统特征"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_089",
+      "episode": 89,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "自动化特征工程",
+      "keywords": [
+        "AutoFeat",
+        "FeatureTools",
+        "自动特征选择"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_090",
+      "episode": 90,
+      "series_id": "ml_series_9",
+      "series_name": "特征工程系列",
+      "title": "特征工程最佳实践",
+      "keywords": [
+        "特征存储",
+        "特征监控",
+        "数据漂移",
+        "特征平台"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_091",
+      "episode": 91,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "生成对抗网络GAN详解",
+      "keywords": [
+        "GAN",
+        "生成器",
+        "判别器",
+        "纳什均衡"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 4000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_092",
+      "episode": 92,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "扩散模型原理与应用",
+      "keywords": [
+        "扩散模型",
+        "DDPM",
+        "Stable Diffusion",
+        "采样"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_093",
+      "episode": 93,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "图神经网络GNN",
+      "keywords": [
+        "GNN",
+        "GCN",
+        "GAT",
+        "图卷积",
+        "节点分类"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_094",
+      "episode": 94,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "多模态学习技术",
+      "keywords": [
+        "多模态",
+        "图文匹配",
+        "跨模态检索",
+        "CLIP"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_095",
+      "episode": 95,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "自监督学习",
+      "keywords": [
+        "自监督",
+        "对比学习",
+        "SimCLR",
+        "MAE",
+        "掩码建模"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_096",
+      "episode": 96,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "神经架构搜索NAS",
+      "keywords": [
+        "NAS",
+        "架构搜索",
+        "强化学习NAS",
+        "可微分架构搜索"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_097",
+      "episode": 97,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "因果推断与机器学习",
+      "keywords": [
+        "因果推断",
+        "因果图",
+        "反事实",
+        "因果效应"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_098",
+      "episode": 98,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "联邦学习Federated Learning",
+      "keywords": [
+        "联邦学习",
+        "隐私保护",
+        "分布式训练",
+        "聚合算法"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_099",
+      "episode": 99,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "小样本与元学习",
+      "keywords": [
+        "小样本学习",
+        "元学习",
+        "MAML",
+        "度量学习"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "进阶",
+      "estimated_words": 3000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_100",
+      "episode": 100,
+      "series_id": "ml_series_10",
+      "series_name": "前沿技术专题系列",
+      "title": "机器学习技术趋势展望",
+      "keywords": [
+        "技术趋势",
+        "AGI",
+        "AI Agent",
+        "未来展望"
+      ],
+      "target_audience": "技术从业者",
+      "content_type": "技术干货",
+      "difficulty": "入门",
+      "estimated_words": 3000,
+      "status": "pending"
+    }
+  ]
+}

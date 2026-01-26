@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_029",
+  "series_id": "ml_series_3",
+  "episode": 29,
+  "title": "人脸识别完整技术栈",
+  "description": "人脸检测（MTCNN、RetinaFace）、关键点定位、人脸对齐。人脸识别：ArcFace、CosFace、SphereFace。活体检测、人脸属性分析，以及隐私保护与合规要求。",
+  "keywords": [
+    "人脸识别",
+    "MTCNN",
+    "ArcFace",
+    "活体检测",
+    "人脸属性",
+    "RetinaFace"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

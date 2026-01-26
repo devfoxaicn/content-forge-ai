@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_014",
+  "series_id": "ml_series_2",
+  "episode": 14,
+  "title": "Attention机制与Transformer架构",
+  "description": "从Seq2Seq到Attention Is All You Need。自注意力机制数学推导、Multi-Head Attention、Position Encoding，以及Transformer如何革命性地改变了深度学习。",
+  "keywords": [
+    "Attention",
+    "Transformer",
+    "Self-Attention",
+    "Multi-Head",
+    "Position Encoding",
+    "Seq2Seq"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 16000,
+  "status": "pending"
+}

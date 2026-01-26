@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_013",
+  "series_id": "ml_series_2",
+  "episode": 13,
+  "title": "循环神经网络RNN与序列建模",
+  "description": "序列数据建模的挑战。RNN、LSTM的门控机制、GRU的简化设计。双向RNN、深层RNN训练技巧，以及梯度消失问题的解决方案。",
+  "keywords": [
+    "RNN",
+    "LSTM",
+    "GRU",
+    "序列建模",
+    "门控机制",
+    "梯度消失",
+    "双向RNN"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

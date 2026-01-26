@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_030",
+  "series_id": "ml_series_3",
+  "episode": 30,
+  "title": "3D视觉与点云处理",
+  "description": "3D数据表示：点云、体素、网格。PointNet++、DGCNN点云神经网络。3D目标检测、3D语义分割。在自动驾驶LiDAR处理、机器人视觉中的应用。",
+  "keywords": [
+    "3D视觉",
+    "点云",
+    "PointNet",
+    "DGCNN",
+    "LiDAR",
+    "3D检测"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

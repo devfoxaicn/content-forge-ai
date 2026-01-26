@@ -228,12 +228,16 @@ data/
 │           └── digest_20260122.json
 │
 ├── series/                   # Series模式输出
-│   ├── series_1_llm_foundation/
-│   │   ├── episode_001/
-│   │   │   └── longform/     # 长文本文章
-│   │   ├── episode_002/
-│   │   └── series_metadata.json
-│   └── ...
+│   ├── LLM_series/           # LLM系列分类
+│   │   ├── series_1_llm_foundation/
+│   │   │   ├── episode_001/
+│   │   │   │   ├── episode_metadata.json
+│   │   │   │   └── ep001_标题_article.md
+│   │   │   ├── episode_002/
+│   │   │   └── series_metadata.json
+│   │   └── ...
+│   └── ML_series/            # ML系列分类
+│       └── ...
 │
 ├── custom/                   # Custom模式输出
 │   └── YYYYMMDD_HHMMSS_topic/

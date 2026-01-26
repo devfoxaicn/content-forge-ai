@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_015",
+  "series_id": "ml_series_2",
+  "episode": 15,
+  "title": "深度学习优化算法详解",
+  "description": "SGD的局限性。Momentum、Nesterov加速、Adagrad、Adadelta、RMSprop、Adam、AdamW、AdaBelief等优化算法原理对比，学习率调度策略（Step Decay、Cosine、Warmup）。",
+  "keywords": [
+    "优化算法",
+    "SGD",
+    "Adam",
+    "AdamW",
+    "Momentum",
+    "学习率调度",
+    "优化器"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

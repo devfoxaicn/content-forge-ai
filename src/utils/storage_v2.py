@@ -18,14 +18,18 @@ data/
 │       └── twitter/
 │
 ├── series/            # 100期技术博客系列
-│   └── {series_id}/   # 如 series_1_llm_foundation
-│       ├── episode_{episode_number}/
-│       │   ├── raw/
-│       │   ├── digest/
-│       │   ├── longform/
-│       │   ├── xiaohongshu/
-│       │   └── twitter/
-│       └── metadata.json
+│   ├── LLM_series/    # LLM系列分类
+│   │   └── {series_id}/   # 如 series_1_llm_foundation
+│   │       ├── episode_{episode_number}/
+│   │       │   ├── episode_metadata.json
+│   │       │   └── epXXX_标题_article.md
+│   │       └── series_metadata.json
+│   └── ML_series/      # ML系列分类
+│       └── {series_id}/   # 如 ml_series_1_ml_foundation
+│           ├── episode_{episode_number}/
+│           │   ├── episode_metadata.json
+│           │   └── epXXX_标题_article.md
+│           └── series_metadata.json
 │
 ├── custom/            # 用户自定义内容
 │   └── {timestamp}_{topic}/
@@ -155,7 +159,19 @@ class DailyStorage(BaseStorage):
 class SeriesStorage(BaseStorage):
     """系列内容存储（100期技术博客）
 
-    路径：data/series/{series_id}/episode_{episode_number}/
+    目标路径结构：
+    data/series/LLM_series/series_1_llm_foundation/episode_001/
+
+    文件命名: epXXX_标题_article.md (如 ep001_transformer架构深度解析_article.md)
+    文件直接保存在episode目录下，不创建子目录
+
+    完整示例：
+    data/series/LLM_series/series_1_llm_foundation/episode_001/
+    ├── ep001_transformer架构深度解析_article.md
+    └── episode_metadata.json
+
+    data/series/LLM_series/series_1_llm_foundation/
+    └── series_metadata.json
     """
 
     def __init__(
@@ -168,7 +184,7 @@ class SeriesStorage(BaseStorage):
         初始化系列存储
 
         Args:
-            series_id: 系列ID (如 "series_1_llm_foundation")
+            series_id: 系列ID (如 "series_1", "ml_series_1")
             episode_number: 集数编号
             base_dir: 基础存储目录
         """
@@ -178,12 +194,25 @@ class SeriesStorage(BaseStorage):
         self.episode_number = episode_number
         self.episode_str = f"episode_{episode_number:03d}"
 
-        # 创建 series/{series_id}/episode_{xxx} 目录
+        # 导入SeriesPathManager获取分类
+        import sys
+        from pathlib import Path
+        project_root = Path(__file__).parent.parent.parent
+        sys.path.insert(0, str(project_root))
+        from src.utils.series_manager import SeriesPathManager
+
+        # 获取系列分类
+        category = SeriesPathManager.get_series_category(series_id)
+
+        # 获取系列目录名
+        series_dir_name = SeriesPathManager.get_series_directory_name(series_id)
+
+        # 创建分类目录/系列目录/episode目录
         self.episode_dir = (
-            self.base_dir / "series" / self.series_id / self.episode_str
+            self.base_dir / "series" / category / series_dir_name / self.episode_str
         )
         self.episode_dir.mkdir(parents=True, exist_ok=True)
-        self._create_subdirs(self.episode_dir)
+        # 不创建任何子目录
 
     def get_root_dir(self) -> Path:
         return self.episode_dir
@@ -197,13 +226,61 @@ class SeriesStorage(BaseStorage):
     def get_episode_dir(self) -> Path:
         return self.episode_dir
 
+    def _create_subdirs(self, parent_dir: Path) -> None:
+        """不创建子目录（覆盖父类方法）"""
+        pass
+
+    def save_article(
+        self,
+        content: str,
+        title: str = "",
+        filename: str = ""
+    ) -> Path:
+        """
+        保存文章到episode目录
+
+        Args:
+            content: 文章内容
+            title: 文章标题（用于生成文件名）
+            filename: 自定义文件名（优先级高于title）
+
+        Returns:
+            文件路径
+        """
+        # 确定文件名
+        if filename:
+            filepath = self.episode_dir / filename
+        elif title:
+            # 使用TopicFormatter生成文件名
+            from src.utils.series_manager import TopicFormatter
+            # 构造临时topic对象用于文件名生成
+            topic_temp = {"episode": self.episode_number, "title": title}
+            filename = TopicFormatter.generate_markdown_filename(topic_temp, "article")
+            filepath = self.episode_dir / filename
+        else:
+            # 默认文件名
+            filepath = self.episode_dir / f"ep{self.episode_number:03d}_article.md"
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return filepath
+
     def save_episode_metadata(self, metadata: dict) -> Path:
         """保存单集元数据"""
         return self.save_json("", "episode_metadata.json", metadata)
 
     def save_series_metadata(self, metadata: dict) -> Path:
         """保存系列元数据（存放在系列根目录）"""
-        series_root = self.base_dir / "series" / self.series_id
+        import sys
+        from pathlib import Path
+        project_root = Path(__file__).parent.parent.parent
+        sys.path.insert(0, str(project_root))
+        from src.utils.series_manager import SeriesPathManager
+
+        category = SeriesPathManager.get_series_category(self.series_id)
+        series_dir_name = SeriesPathManager.get_series_directory_name(self.series_id)
+
+        series_root = self.base_dir / "series" / category / series_dir_name
         series_root.mkdir(parents=True, exist_ok=True)
         filepath = series_root / "series_metadata.json"
         with open(filepath, 'w', encoding='utf-8') as f:

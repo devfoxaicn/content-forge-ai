@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_022",
+  "series_id": "ml_series_3",
+  "episode": 22,
+  "title": "图像分类实战：从数据集到SOTA模型",
+  "description": "ImageNet数据集解析。数据增强策略（RandAugment、AutoAugment、MixUp、CutMix）。训练ResNet、EfficientNet、Vision Transformer，达到SOTA性能的完整pipeline。",
+  "keywords": [
+    "图像分类",
+    "ImageNet",
+    "数据增强",
+    "ResNet",
+    "ViT",
+    "SOTA"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending"
+}

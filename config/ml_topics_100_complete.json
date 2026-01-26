@@ -1,0 +1,1982 @@
+{
+  "batch_info": {
+    "name": "ml_100_complete",
+    "description": "机器学习与深度学习100期完整规划 - 从基础原理到前沿应用全栈指南",
+    "version": "1.0",
+    "author": "ContentForge AI",
+    "created_at": "2026-01-24",
+    "total_topics": 100,
+    "series_count": 10
+  },
+  "batch_config": {
+    "target_audience": "混合受众（从入门到专家）",
+    "content_type": "技术干货",
+    "stop_on_error": false,
+    "enabled_agents": [
+      "all"
+    ],
+    "disabled_agents": []
+  },
+  "series": [
+    {
+      "id": "ml_series_1",
+      "name": "机器学习基础系列",
+      "description": "建立机器学习核心知识体系，从数学基础到算法原理",
+      "topic_count": 10,
+      "difficulty": "入门→进阶",
+      "priority": 1
+    },
+    {
+      "id": "ml_series_2",
+      "name": "深度学习基础系列",
+      "description": "深度神经网络原理与训练技巧",
+      "topic_count": 10,
+      "difficulty": "进阶",
+      "priority": 2
+    },
+    {
+      "id": "ml_series_3",
+      "name": "计算机视觉系列",
+      "description": "图像处理与计算机视觉完整技术栈",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 3
+    },
+    {
+      "id": "ml_series_4",
+      "name": "自然语言处理系列",
+      "description": "NLP核心技术与应用实战",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 4
+    },
+    {
+      "id": "ml_series_5",
+      "name": "强化学习系列",
+      "description": "强化学习原理与智能决策系统",
+      "topic_count": 10,
+      "difficulty": "进阶→前沿",
+      "priority": 5
+    },
+    {
+      "id": "ml_series_6",
+      "name": "推荐系统系列",
+      "description": "推荐算法架构与工业实践",
+      "topic_count": 10,
+      "difficulty": "综合应用",
+      "priority": 6
+    },
+    {
+      "id": "ml_series_7",
+      "name": "模型优化系列",
+      "description": "模型压缩、加速与部署优化",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 7
+    },
+    {
+      "id": "ml_series_8",
+      "name": "传统机器学习系列",
+      "description": "经典机器学习算法深入解析",
+      "topic_count": 10,
+      "difficulty": "入门→进阶",
+      "priority": 8
+    },
+    {
+      "id": "ml_series_9",
+      "name": "特征工程系列",
+      "description": "数据预处理与特征工程最佳实践",
+      "topic_count": 10,
+      "difficulty": "实践为主",
+      "priority": 9
+    },
+    {
+      "id": "ml_series_10",
+      "name": "高级机器学习专题系列",
+      "description": "前沿技术与跨领域应用",
+      "topic_count": 10,
+      "difficulty": "前沿→综合",
+      "priority": 10
+    }
+  ],
+  "topics": [
+    {
+      "id": "ml_topic_001",
+      "series_id": "ml_series_1",
+      "episode": 1,
+      "title": "机器学习导论：从零开始的AI之旅",
+      "description": "机器学习的本质是什么？从历史发展脉络到核心概念解析，理解学习范式、模型评估、偏差-方差权衡等基础理论，建立完整的机器学习认知框架。",
+      "keywords": [
+        "机器学习",
+        "AI导论",
+        "学习范式",
+        "模型评估",
+        "偏差方差",
+        "过拟合"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 12000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_002",
+      "series_id": "ml_series_1",
+      "episode": 2,
+      "title": "线性回归：机器学习的Hello World",
+      "description": "从最小二乘法到梯度下降，深入理解线性回归的数学推导、正则化技巧（L1/L2）、特征选择，以及如何处理多元回归和非线性关系。",
+      "keywords": [
+        "线性回归",
+        "最小二乘法",
+        "梯度下降",
+        "Lasso",
+        "Ridge",
+        "正则化"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_003",
+      "series_id": "ml_series_1",
+      "episode": 3,
+      "title": "逻辑回归与分类问题详解",
+      "description": "分类算法的基石。详解Sigmoid函数、交叉熵损失、多分类Softmax，以及如何处理类别不平衡、评估分类性能（Precision/Recall/F1/ROC-AUC）。",
+      "keywords": [
+        "逻辑回归",
+        "分类",
+        "Sigmoid",
+        "交叉熵",
+        "类别不平衡",
+        "ROC-AUC"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_004",
+      "series_id": "ml_series_1",
+      "episode": 4,
+      "title": "决策树与集成学习实战",
+      "description": "从ID3/C4.5到CART，理解信息增益、基尼系数等分裂准则。深入剖析Bagging、随机森林、AdaBoost、Gradient Boosting、XGBoost等集成算法原理与调优。",
+      "keywords": [
+        "决策树",
+        "ID3",
+        "C4.5",
+        "CART",
+        "随机森林",
+        "AdaBoost",
+        "XGBoost",
+        "LightGBM"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_005",
+      "series_id": "ml_series_1",
+      "episode": 5,
+      "title": "支持向量机SVM核方法解析",
+      "description": "SVM的数学之美：最大间隔分类器、对偶问题、KKT条件。核技巧如何处理非线性可分问题？RBF、多项式核的选择与调优，以及SVM在回归中的应用。",
+      "keywords": [
+        "SVM",
+        "支持向量机",
+        "核方法",
+        "RBF核",
+        "KKT条件",
+        "最大间隔",
+        "SVR"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_006",
+      "series_id": "ml_series_1",
+      "episode": 6,
+      "title": "聚类算法：无监督学习的艺术",
+      "description": "K-Means的局限性与改进：K-Means++初始化、Mini-Batch K-Means。层次聚类、DBSCAN密度聚类、GMM混合高斯模型，以及如何评估聚类质量（轮廓系数、Calinski-Harabasz）。",
+      "keywords": [
+        "聚类",
+        "K-Means",
+        "DBSCAN",
+        "层次聚类",
+        "GMM",
+        "轮廓系数",
+        "无监督学习"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_007",
+      "series_id": "ml_series_1",
+      "episode": 7,
+      "title": "降维技术：PCA与流形学习",
+      "description": "维度灾难问题解析。主成分分析PCA的数学推导、t-SNE、UMAP等非线性降维方法，以及如何可视化高维数据、提取特征、加速模型训练。",
+      "keywords": [
+        "降维",
+        "PCA",
+        "t-SNE",
+        "UMAP",
+        "LDA",
+        "流形学习",
+        "特征提取"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_008",
+      "series_id": "ml_series_1",
+      "episode": 8,
+      "title": "贝叶斯推断与概率图模型",
+      "description": "贝叶斯定理在机器学习中的应用。朴素贝叶斯分类器、贝叶斯网络、马尔可夫随机场MRF、变分推断、MCMC采样，以及如何处理不确定性。",
+      "keywords": [
+        "贝叶斯",
+        "概率图模型",
+        "朴素贝叶斯",
+        "MCMC",
+        "变分推断",
+        "不确定性"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_009",
+      "series_id": "ml_series_1",
+      "episode": 9,
+      "title": "模型评估与交叉验证技巧",
+      "description": "训练集、验证集、测试集的科学划分。K折交叉验证、分层采样、时间序列交叉验证、嵌套交叉验证。超参数调优：网格搜索、随机搜索、贝叶斯优化。",
+      "keywords": [
+        "交叉验证",
+        "模型评估",
+        "超参数调优",
+        "网格搜索",
+        "贝叶斯优化",
+        "Nested CV"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_010",
+      "series_id": "ml_series_1",
+      "episode": 10,
+      "title": "机器学习数学基础回顾",
+      "description": "线性代数：矩阵运算、特征值分解、SVD。概率统计：分布、期望、方差、最大似然估计。微积分：梯度、偏导数、链式法则。为深度学习打下坚实数学基础。",
+      "keywords": [
+        "线性代数",
+        "概率统计",
+        "微积分",
+        "矩阵分解",
+        "SVD",
+        "最大似然",
+        "梯度计算"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_011",
+      "series_id": "ml_series_2",
+      "episode": 11,
+      "title": "神经网络基础：从感知机到多层网络",
+      "description": "感知机的局限性与多层感知机的突破。前向传播、反向传播算法推导、激活函数演变（Sigmoid→Tanh→ReLU→GELU→SwiGLU），权重初始化技巧（Xavier、He初始化）。",
+      "keywords": [
+        "神经网络",
+        "感知机",
+        "反向传播",
+        "激活函数",
+        "权重初始化",
+        "Xavier",
+        "He初始化"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_012",
+      "series_id": "ml_series_2",
+      "episode": 12,
+      "title": "卷积神经网络CNN架构演进",
+      "description": "从LeNet-5到AlexNet，VGG的3x3卷积哲学，GoogLeNet的Inception模块，ResNet的残差连接革命，DenseNet、EfficientNet、ConvNeXt等现代架构解析。",
+      "keywords": [
+        "CNN",
+        "卷积神经网络",
+        "LeNet",
+        "AlexNet",
+        "VGG",
+        "ResNet",
+        "Inception",
+        "EfficientNet"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_013",
+      "series_id": "ml_series_2",
+      "episode": 13,
+      "title": "循环神经网络RNN与序列建模",
+      "description": "序列数据建模的挑战。RNN、LSTM的门控机制、GRU的简化设计。双向RNN、深层RNN训练技巧，以及梯度消失问题的解决方案。",
+      "keywords": [
+        "RNN",
+        "LSTM",
+        "GRU",
+        "序列建模",
+        "门控机制",
+        "梯度消失",
+        "双向RNN"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_014",
+      "series_id": "ml_series_2",
+      "episode": 14,
+      "title": "Attention机制与Transformer架构",
+      "description": "从Seq2Seq到Attention Is All You Need。自注意力机制数学推导、Multi-Head Attention、Position Encoding，以及Transformer如何革命性地改变了深度学习。",
+      "keywords": [
+        "Attention",
+        "Transformer",
+        "Self-Attention",
+        "Multi-Head",
+        "Position Encoding",
+        "Seq2Seq"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_015",
+      "series_id": "ml_series_2",
+      "episode": 15,
+      "title": "深度学习优化算法详解",
+      "description": "SGD的局限性。Momentum、Nesterov加速、Adagrad、Adadelta、RMSprop、Adam、AdamW、AdaBelief等优化算法原理对比，学习率调度策略（Step Decay、Cosine、Warmup）。",
+      "keywords": [
+        "优化算法",
+        "SGD",
+        "Adam",
+        "AdamW",
+        "Momentum",
+        "学习率调度",
+        "优化器"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_016",
+      "series_id": "ml_series_2",
+      "episode": 16,
+      "title": "正则化技术与模型泛化",
+      "description": "防止过拟合的完整工具箱。Dropout、DropPath、Stochastic Depth、Batch Normalization、Layer Normalization、Weight Decay、Early Stopping、Data Augmentation等技术的原理与最佳实践。",
+      "keywords": [
+        "正则化",
+        "Dropout",
+        "BatchNorm",
+        "LayerNorm",
+        "Weight Decay",
+        "泛化",
+        "过拟合"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_017",
+      "series_id": "ml_series_2",
+      "episode": 17,
+      "title": "深度学习损失函数设计",
+      "description": "从MSE到交叉熵，Focal Loss如何处理类别不平衡。对比损失、三元组损失用于度量学习。感知损失、风格损失、对抗损失，以及如何自定义损失函数。",
+      "keywords": [
+        "损失函数",
+        "交叉熵",
+        "Focal Loss",
+        "对比损失",
+        "度量学习",
+        "感知损失"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_018",
+      "series_id": "ml_series_2",
+      "episode": 18,
+      "title": "深度学习训练技巧与调试",
+      "description": "训练不收敛？梯度爆炸/消失？学习率如何设置？从batch size选择、梯度裁剪、学习率warmup、混合精度训练、分布式训练等实用技巧，培养模型调试直觉。",
+      "keywords": [
+        "训练技巧",
+        "调试",
+        "梯度裁剪",
+        "混合精度",
+        "分布式训练",
+        "学习率"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_019",
+      "series_id": "ml_series_2",
+      "episode": 19,
+      "title": "自监督学习与对比学习",
+      "description": "从有标签到无标签的范式转变。SimCLR、MoCo、BYOL、SimSiam等对比学习方法，MAE、BERT等掩码自编码，以及如何在下游任务中有效利用预训练模型。",
+      "keywords": [
+        "自监督学习",
+        "对比学习",
+        "SimCLR",
+        "MoCo",
+        "MAE",
+        "预训练",
+        "SSL"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_020",
+      "series_id": "ml_series_2",
+      "episode": 20,
+      "title": "生成对抗网络GAN实战",
+      "description": "生成模型的革命。GAN的基本原理、纳什均衡、训练稳定性问题。DCGAN、WGAN、StyleGAN、CycleGAN、Pix2Pix等变体，以及GAN在图像生成、风格迁移、数据增强中的应用。",
+      "keywords": [
+        "GAN",
+        "生成对抗网络",
+        "WGAN",
+        "StyleGAN",
+        "CycleGAN",
+        "生成模型",
+        "纳什均衡"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_021",
+      "series_id": "ml_series_3",
+      "episode": 21,
+      "title": "计算机视觉导论：图像基础与OpenCV实战",
+      "description": "数字图像表示：像素、颜色空间、通道。OpenCV基础操作：滤波、边缘检测、形态学处理。图像变换、几何变换、特征点检测，构建CV应用的基础工具箱。",
+      "keywords": [
+        "计算机视觉",
+        "OpenCV",
+        "图像处理",
+        "滤波",
+        "边缘检测",
+        "颜色空间"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_022",
+      "series_id": "ml_series_3",
+      "episode": 22,
+      "title": "图像分类实战：从数据集到SOTA模型",
+      "description": "ImageNet数据集解析。数据增强策略（RandAugment、AutoAugment、MixUp、CutMix）。训练ResNet、EfficientNet、Vision Transformer，达到SOTA性能的完整pipeline。",
+      "keywords": [
+        "图像分类",
+        "ImageNet",
+        "数据增强",
+        "ResNet",
+        "ViT",
+        "SOTA"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_023",
+      "series_id": "ml_series_3",
+      "episode": 23,
+      "title": "目标检测：从两阶段到单阶段算法",
+      "description": "目标检测的核心挑战。R-CNN系列：R-CNN、Fast R-CNN、Faster R-CNN。单阶段检测器：YOLO系列、SSD、RetinaNet。Anchor-Free方法：CenterNet、FCOS。NMS后处理技巧。",
+      "keywords": [
+        "目标检测",
+        "R-CNN",
+        "YOLO",
+        "Faster R-CNN",
+        "SSD",
+        "NMS",
+        "Anchor-Free"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_024",
+      "series_id": "ml_series_3",
+      "episode": 24,
+      "title": "图像分割：语义分割与实例分割",
+      "description": "FCN、U-Net、DeepLab系列语义分割算法。Mask R-CNN实例分割。Panoptic FPN全景分割。分割评估指标（mIoU、Dice系数），以及分割在医学影像、自动驾驶中的应用。",
+      "keywords": [
+        "图像分割",
+        "语义分割",
+        "U-Net",
+        "DeepLab",
+        "Mask R-CNN",
+        "mIoU"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_025",
+      "series_id": "ml_series_3",
+      "episode": 25,
+      "title": "关键点检测与姿态估计",
+      "description": "人体姿态估计原理。OpenPose、HRNet、ViTPose等算法解析。人脸关键点检测、手部关键点、全身姿态估计。自顶向下vs自底向上方法对比，以及在体育分析、交互中的应用。",
+      "keywords": [
+        "关键点检测",
+        "姿态估计",
+        "OpenPose",
+        "HRNet",
+        "ViTPose",
+        "人体姿态"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_026",
+      "series_id": "ml_series_3",
+      "episode": 26,
+      "title": "视频理解与动作识别",
+      "description": "视频数据的时空特性。3D CNN（C3D、I3D）、Two-Stream方法、TSN、TSM。SlowFast网络、Video Transformer。动作识别在视频监控、内容审核中的应用。",
+      "keywords": [
+        "视频理解",
+        "动作识别",
+        "3D CNN",
+        "Two-Stream",
+        "SlowFast",
+        "Video Transformer"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_027",
+      "series_id": "ml_series_3",
+      "episode": 27,
+      "title": "图像生成与风格迁移",
+      "description": "从GAN到Diffusion Models。StyleGAN生成高保真人脸。神经风格迁移原理与实现。CycleGAN图像翻译。Stable Diffusion、DALL-E等文生图模型解析。",
+      "keywords": [
+        "图像生成",
+        "风格迁移",
+        "StyleGAN",
+        "CycleGAN",
+        "扩散模型",
+        "Stable Diffusion"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15500,
+      "status": "completed",
+      "completed_at": "2026-01-25"
+    },
+    {
+      "id": "ml_topic_028",
+      "series_id": "ml_series_3",
+      "episode": 28,
+      "title": "OCR文字检测与识别实战",
+      "description": "场景文字检测：EAST、DBNet、TextSnake。文字识别：CRNN、ASTR。端到端OCR：ABINet、ParseQ。文档版面分析、表格识别，以及OCR在票据处理、文档数字化中的应用。",
+      "keywords": [
+        "OCR",
+        "文字检测",
+        "文字识别",
+        "CRNN",
+        "DBNet",
+        "ASTR",
+        "文档分析"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-26"
+    },
+    {
+      "id": "ml_topic_029",
+      "series_id": "ml_series_3",
+      "episode": 29,
+      "title": "人脸识别完整技术栈",
+      "description": "人脸检测（MTCNN、RetinaFace）、关键点定位、人脸对齐。人脸识别：ArcFace、CosFace、SphereFace。活体检测、人脸属性分析，以及隐私保护与合规要求。",
+      "keywords": [
+        "人脸识别",
+        "MTCNN",
+        "ArcFace",
+        "活体检测",
+        "人脸属性",
+        "RetinaFace"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-26"
+    },
+    {
+      "id": "ml_topic_030",
+      "series_id": "ml_series_3",
+      "episode": 30,
+      "title": "3D视觉与点云处理",
+      "description": "3D数据表示：点云、体素、网格。PointNet++、DGCNN点云神经网络。3D目标检测、3D语义分割。在自动驾驶LiDAR处理、机器人视觉中的应用。",
+      "keywords": [
+        "3D视觉",
+        "点云",
+        "PointNet",
+        "DGCNN",
+        "LiDAR",
+        "3D检测"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-26"
+    },
+    {
+      "id": "ml_topic_031",
+      "series_id": "ml_series_4",
+      "episode": 31,
+      "title": "自然语言处理NLP导论",
+      "description": "NLP的核心任务：文本分类、命名实体识别、关系抽取、情感分析。jieba分词、停用词处理、词性标注。传统NLP方法（TF-IDF、Bag of Words）与现代深度学习方法的对比。",
+      "keywords": [
+        "NLP",
+        "自然语言处理",
+        "文本分类",
+        "分词",
+        "NER",
+        "情感分析",
+        "jieba"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-26"
+    },
+    {
+      "id": "ml_topic_032",
+      "series_id": "ml_series_4",
+      "episode": 32,
+      "title": "词嵌入与Word2Vec解析",
+      "description": "词的向量表示。Word2Vec（CBOW、Skip-gram）、GloVe、FastText。词向量可视化、词类比任务。上下文嵌入（ELMo、CoVe）与静态词嵌入的对比。",
+      "keywords": [
+        "词嵌入",
+        "Word2Vec",
+        "GloVe",
+        "FastText",
+        "ELMo",
+        "词向量"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-26"
+    },
+    {
+      "id": "ml_topic_033",
+      "series_id": "ml_series_4",
+      "episode": 33,
+      "title": "语言模型与预训练革命",
+      "description": "从NNLM到BERT。ELMo的双向LSTM、GPT系列的自回归生成、BERT的掩码语言模型。RoBERTa、ALBERT优化版。预训练-微调范式如何改变NLP。",
+      "keywords": [
+        "语言模型",
+        "BERT",
+        "GPT",
+        "ELMo",
+        "RoBERTa",
+        "预训练",
+        "掩码语言模型"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_034",
+      "series_id": "ml_series_4",
+      "episode": 34,
+      "title": "序列标注：NER与词性标注实战",
+      "description": "序列标注任务的特点。BiLSTM+CRF、BERT+CRF经典架构。Span-based方法、指针网络。标注评估（Precision/Recall/F1），以及医疗、金融等专业领域NER应用。",
+      "keywords": [
+        "序列标注",
+        "NER",
+        "词性标注",
+        "CRF",
+        "BiLSTM+CRF",
+        "指针网络"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_035",
+      "series_id": "ml_series_4",
+      "episode": 35,
+      "title": "文本分类与情感分析",
+      "description": "从传统方法到深度学习。FastText、TextCNN、Hierarchical Attention Network、BERT。多标签分类、细粒度情感分析、方面级情感分析ABSA，以及电商评论、舆情分析应用。",
+      "keywords": [
+        "文本分类",
+        "情感分析",
+        "TextCNN",
+        "HAN",
+        "ABSA",
+        "多标签分类"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_036",
+      "series_id": "ml_series_4",
+      "episode": 36,
+      "title": "文本生成与Seq2Seq模型",
+      "description": "Seq2Seq架构、Attention机制。Transformer生成模型：GPT系列、T5、BART。解码策略：Greedy、Beam Search、Top-K、Top-P采样。文本评估指标（BLEU、ROUGE、METEOR）。",
+      "keywords": [
+        "文本生成",
+        "Seq2Seq",
+        "GPT",
+        "T5",
+        "BART",
+        "Beam Search",
+        "BLEU",
+        "ROUGE"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_037",
+      "series_id": "ml_series_4",
+      "episode": 37,
+      "title": "问答系统与检索式RAG",
+      "description": "问答系统类型：FAQ问答、知识库问答、社区问答。检索式方法（TF-IDF、BM25）、稠密检索（DPR、ColBERT）。RAG架构设计、检索优化、生成质量提升。",
+      "keywords": [
+        "问答系统",
+        "RAG",
+        "检索",
+        "DPR",
+        "ColBERT",
+        "BM25",
+        "知识库问答"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_038",
+      "series_id": "ml_series_4",
+      "episode": 38,
+      "title": "信息抽取与知识图谱构建",
+      "description": "信息抽取三大任务：NER、关系抽取、事件抽取。开放域信息抽取、文档信息抽取。知识图谱表示（RDF、OWL）、知识存储（Neo4j）、知识推理，以及构建领域知识图谱实践。",
+      "keywords": [
+        "信息抽取",
+        "知识图谱",
+        "关系抽取",
+        "事件抽取",
+        "Neo4j",
+        "RDF"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_039",
+      "series_id": "ml_series_4",
+      "episode": 39,
+      "title": "机器翻译与多语言NLP",
+      "description": "机器翻译发展史：规则统计→神经网络→大模型。Transformer架构在MT中的应用、多语言模型（mBERT、XLM-R）。低资源语言翻译、领域自适应翻译，以及翻译质量评估。",
+      "keywords": [
+        "机器翻译",
+        "多语言",
+        "mBERT",
+        "XLM-R",
+        "Transformer",
+        "低资源",
+        "BLEU"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_040",
+      "series_id": "ml_series_4",
+      "episode": 40,
+      "title": "对话系统与聊天机器人",
+      "description": "对话系统架构：检索式vs生成式、任务型vs闲聊型。意图识别、槽位填充、对话状态追踪（DST）。端到端对话模型、多轮对话管理，以及智能客服、语音助手应用。",
+      "keywords": [
+        "对话系统",
+        "聊天机器人",
+        "意图识别",
+        "槽位填充",
+        "DST",
+        "多轮对话"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_041",
+      "series_id": "ml_series_5",
+      "episode": 41,
+      "title": "强化学习RL基础原理",
+      "description": "RL的核心要素：Agent、Environment、State、Action、Reward。马尔可夫决策过程MDP、贝尔曼方程、值迭代、策略迭代。探索与利用困境：ε-greedy、UCB、Thompson Sampling。",
+      "keywords": [
+        "强化学习",
+        "RL",
+        "MDP",
+        "贝尔曼方程",
+        "探索利用",
+        "ε-greedy",
+        "UCB"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_042",
+      "series_id": "ml_series_5",
+      "episode": 42,
+      "title": "深度Q学习DQN与改进算法",
+      "description": "Q-Learning、DQN原理及经验回放、目标网络。Double DQN、Dueling DQN、Rainbow DQN。连续动作空间：DDPG、TD3、A3C、A2C、IMPALA。Atari游戏实战。",
+      "keywords": [
+        "DQN",
+        "Q-Learning",
+        "DDPG",
+        "TD3",
+        "A3C",
+        "A2C",
+        "Rainbow",
+        "Atari"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_043",
+      "series_id": "ml_series_5",
+      "episode": 43,
+      "title": "策略梯度与Actor-Critic算法",
+      "description": "策略梯度定理、REINFORCE算法。Actor-Critic架构、优势函数、GAE。PPO、TRPO近端策略优化。SAC、Soft Actor-Critic最大熵RL。连续控制任务实战。",
+      "keywords": [
+        "策略梯度",
+        "Actor-Critic",
+        "PPO",
+        "TRPO",
+        "SAC",
+        "REINFORCE",
+        "GAE"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_044",
+      "series_id": "ml_series_5",
+      "episode": 44,
+      "title": "模仿学习与逆强化学习",
+      "description": "从专家演示中学习。行为克隆、逆向RL、DAgger、GAIL。奖励函数设计、奖励塑形、人工对齐。以及在机器人控制、自动驾驶中的应用。",
+      "keywords": [
+        "模仿学习",
+        "逆强化学习",
+        "行为克隆",
+        "GAIL",
+        "奖励塑形",
+        "IRL"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_045",
+      "series_id": "ml_series_5",
+      "episode": 45,
+      "title": "多智能体强化学习MARL",
+      "description": "多智能体系统挑战。独立学习、 centralized training with decentralized execution (CTDE)。QMIX、MADDPG、MAPPO。协作、竞争、混合动机场景，以及在即时战略游戏、资源调度中的应用。",
+      "keywords": [
+        "多智能体",
+        "MARL",
+        "MADDPG",
+        "QMIX",
+        "MAPPO",
+        "CTDE",
+        "协作"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_046",
+      "series_id": "ml_series_5",
+      "episode": 46,
+      "title": "离线强化学习Offline RL",
+      "description": "从在线到离线RL的范式转变。Offline RL挑战：分布偏移。Conservative Q-Learning（CQL）、Behavior Regularized Offline RL（BORL）、Implicit Q-Learning（IQL）。在推荐系统、 Healthcare中的应用。",
+      "keywords": [
+        "离线强化学习",
+        "Offline RL",
+        "CQL",
+        "IQL",
+        "分布偏移",
+        "BORL"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_047",
+      "series_id": "ml_series_5",
+      "episode": 47,
+      "title": "基于模型的强化学习Model-Based RL",
+      "description": "Model-Free vs Model-Based对比。世界模型学习、Model Predictive Control (MPC)。Dreamer、World Models、MuZero。规划与学习结合，以及在机器人控制、游戏中的应用。",
+      "keywords": [
+        "Model-Based RL",
+        "世界模型",
+        "MPC",
+        "Dreamer",
+        "MuZero",
+        "规划"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_048",
+      "series_id": "ml_series_5",
+      "episode": 48,
+      "title": "层次强化学习与选项框架",
+      "description": "时间信度分配问题。Options框架、Feudal Networks、HIerarchical Reinforcement Learning (HIRL)。FuN、FeUdal Networks、hRL。在复杂任务、长期规划中的应用。",
+      "keywords": [
+        "层次强化学习",
+        "Options",
+        "HIRL",
+        "Feudal Networks",
+        "时间信度",
+        "抽象"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_049",
+      "series_id": "ml_series_5",
+      "episode": 49,
+      "title": "奖励函数设计与评估",
+      "description": "奖励塑造的艺术。稀疏vs密集奖励、辅助奖励、内在动机。好奇心驱动、RND、ICM。奖励黑客问题、指标评估（Return、Success Rate、样本效率）。",
+      "keywords": [
+        "奖励塑造",
+        "奖励设计",
+        "好奇心",
+        "RND",
+        "ICM",
+        "奖励黑客",
+        "内在动机"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_050",
+      "series_id": "ml_series_5",
+      "episode": 50,
+      "title": "RL在游戏AI中的应用",
+      "description": "AlphaGo系列解析：MCTS、策略价值网络、AlphaZero。OpenAI Five（Dota 2）、OpenAI Five（Hide&Seek）。星际争霸、德州扑克。从游戏AI到通用AI的启示。",
+      "keywords": [
+        "AlphaGo",
+        "AlphaZero",
+        "MCTS",
+        "游戏AI",
+        "Dota",
+        "星际争霸",
+        "德州扑克"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_051",
+      "series_id": "ml_series_6",
+      "episode": 51,
+      "title": "推荐系统导论：架构与评估",
+      "description": "推荐系统的核心价值。召回、排序、重排三层架构。离线评估（AUC、NDCG、MAP）与在线评估（CTR、CVR、GMV）。A/B测试、用户调研。",
+      "keywords": [
+        "推荐系统",
+        "召回",
+        "排序",
+        "重排",
+        "AUC",
+        "NDCG",
+        "A/B测试"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_052",
+      "series_id": "ml_series_6",
+      "episode": 52,
+      "title": "协同过滤算法深入解析",
+      "description": "用户-物品矩阵的稀疏性挑战。User-based、Item-based CF。矩阵分解：SVD、SVD++、ALS。隐语义模型，以及在Netflix Prize、电商推荐中的应用。",
+      "keywords": [
+        "协同过滤",
+        "矩阵分解",
+        "SVD",
+        "ALS",
+        "隐语义",
+        "Netflix Prize"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_053",
+      "series_id": "ml_series_6",
+      "episode": 53,
+      "title": "深度学习推荐模型：从Wide&Deep到DLRM",
+      "description": "Wide&Deep、DeepFM、xDeepFM、DCN。序列推荐：GRU4Rec、BERT4Rec、SASRec。多任务学习：ESMM、MMOE、PLE。YouTube、阿里巴巴推荐架构解析。",
+      "keywords": [
+        "Wide&Deep",
+        "DeepFM",
+        "DCN",
+        "序列推荐",
+        "GRU4Rec",
+        "SASRec",
+        "多任务学习"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_054",
+      "series_id": "ml_series_6",
+      "episode": 54,
+      "title": "召回算法与索引技术",
+      "description": "大规模召回的挑战。双塔模型、DSSM、YouTube召回。Faiss、HNSW近似最近邻搜索。向量检索、倒排索引、多路召回，以及在亿级商品召回中的实践。",
+      "keywords": [
+        "召回",
+        "双塔模型",
+        "DSSM",
+        "Faiss",
+        "HNSW",
+        "向量检索",
+        "倒排索引"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_055",
+      "series_id": "ml_series_6",
+      "episode": 55,
+      "title": "排序学习Learning to Rank",
+      "description": "LTR的三个范式：Pointwise、Pairwise、Listwise。LambdaMART、LambdaRank。深度LTR模型、多目标排序。在搜索排名、信息流排序中的应用。",
+      "keywords": [
+        "排序学习",
+        "LTR",
+        "LambdaMART",
+        "LambdaRank",
+        "Pointwise",
+        "Pairwise",
+        "Listwise"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_056",
+      "series_id": "ml_series_6",
+      "episode": 56,
+      "title": "重排策略与多样性优化",
+      "description": "MMR、MMR多样性算法。业务规则重排、多臂老虎机探索。惊喜感推荐、 serendipity。长尾物品曝光、公平性考量，以及在信息流、短视频推荐中的应用。",
+      "keywords": [
+        "重排",
+        "多样性",
+        "MMR",
+        "多臂老虎机",
+        "惊喜感",
+        "长尾",
+        "公平性"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_057",
+      "series_id": "ml_series_6",
+      "episode": 57,
+      "title": "冷启动与用户画像",
+      "description": "新用户、新物品冷启动。基于内容、基于人口统计、基于社交的冷启动策略。用户标签体系、兴趣建模、用户生命周期。在注册转化、新人引导中的应用。",
+      "keywords": [
+        "冷启动",
+        "用户画像",
+        "兴趣建模",
+        "用户标签",
+        "生命周期",
+        "新人引导"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_058",
+      "series_id": "ml_series_6",
+      "episode": 58,
+      "title": "实时推荐与在线学习",
+      "description": "实时流计算架构。Flink、Spark Streaming实时特征工程。在线学习、增量更新。实时反馈闭环、曝光去偏，以及在直播推荐、即时互动中的应用。",
+      "keywords": [
+        "实时推荐",
+        "在线学习",
+        "Flink",
+        "流计算",
+        "增量更新",
+        "反馈闭环"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_059",
+      "series_id": "ml_series_6",
+      "episode": 59,
+      "title": "推荐系统评估与AB测试",
+      "description": "离线评估陷阱：Simpson悖论、选择偏差、数据泄漏。在线AB测试设计：分流、实验时长、统计显著性。CUPED、DeltaDelta、增量评估，以及在业务迭代中的最佳实践。",
+      "keywords": [
+        "AB测试",
+        "评估指标",
+        "Simpson悖论",
+        "CUPED",
+        "统计显著性",
+        "增量评估"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_060",
+      "series_id": "ml_series_6",
+      "episode": 60,
+      "title": "大模型与推荐系统的融合",
+      "description": "LLM4Rec：大模型做推荐。生成式推荐、多模态推荐、对话式推荐。Prompt Engineering在推荐中的应用。RLHF与推荐对齐，以及在下一代推荐系统中的实践。",
+      "keywords": [
+        "LLM4Rec",
+        "大模型推荐",
+        "生成式推荐",
+        "对话推荐",
+        "多模态",
+        "RLHF"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_061",
+      "series_id": "ml_series_7",
+      "episode": 61,
+      "title": "模型量化技术详解",
+      "description": "量化原理：INT8/INT4量化、量化感知训练。GEMM低比特优化、量化误差累积。Post-Training Quantization (PTQ)、Quantization-Aware Training (QAT)。在边缘设备、移动端部署中的应用。",
+      "keywords": [
+        "量化",
+        "INT8",
+        "QAT",
+        "PTQ",
+        "模型压缩",
+        "边缘部署",
+        "量化感知训练"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_062",
+      "series_id": "ml_series_7",
+      "episode": 62,
+      "title": "模型剪枝与网络瘦身",
+      "description": "结构化剪枝vs非结构化剪枝。L1/L2正则化剪枝、Gradual Pruning。Lottery Ticket Hypothesis、Network Pruning。动态剪枝、稀疏训练，以及在模型加速中的应用。",
+      "keywords": [
+        "剪枝",
+        "网络瘦身",
+        "Lottery Ticket",
+        "稀疏化",
+        "结构化剪枝",
+        "动态剪枝"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_063",
+      "series_id": "ml_series_7",
+      "episode": 63,
+      "title": "知识蒸馏Knowledge Distillation",
+      "description": "师生模型架构。Logits蒸馏、Feature蒸馏、关系蒸馏。自蒸馏、互蒸馏、在线蒸馏。DistilBERT、TinyBERT实践，以及在模型压缩中的应用。",
+      "keywords": [
+        "知识蒸馏",
+        "Distillation",
+        "师生模型",
+        "自蒸馏",
+        "DistilBERT",
+        "TinyBERT"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_064",
+      "series_id": "ml_series_7",
+      "episode": 64,
+      "title": "神经架构搜索NAS",
+      "description": "AutoML在架构设计中的应用。强化学习NAS（ENAS、DPP-Net）、可微分NAS（DARTS、PDARTS）、One-Shot NAS。硬件感知NAS，以及在移动端模型设计中的应用。",
+      "keywords": [
+        "NAS",
+        "神经架构搜索",
+        "ENAS",
+        "DARTS",
+        "AutoML",
+        "硬件感知"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_065",
+      "series_id": "ml_series_7",
+      "episode": 65,
+      "title": "模型部署与推理加速",
+      "description": "ONNX、TensorRT、TFLite推理引擎。图优化、算子融合、内存优化。TensorRT、ONNX Runtime实践。批处理、动态批处理，以及在低延迟服务中的应用。",
+      "keywords": [
+        "模型部署",
+        "TensorRT",
+        "ONNX",
+        "推理加速",
+        "TFLite",
+        "图优化",
+        "算子融合"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_066",
+      "series_id": "ml_series_7",
+      "episode": 66,
+      "title": "模型服务架构设计",
+      "description": "高并发推理服务设计。Kubernetes、Docker容器化。gRPC、RESTful API。负载均衡、自动扩缩容。TF Serving、TorchServe、Triton Inference Server实践。",
+      "keywords": [
+        "模型服务",
+        "Kubernetes",
+        "gRPC",
+        "TFServing",
+        "TorchServe",
+        "负载均衡"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_067",
+      "series_id": "ml_series_7",
+      "episode": 67,
+      "title": "分布式训练与并行策略",
+      "description": "数据并行、模型并行、流水线并行。PyTorch DDP、DeepSpeed、FairScale。ZeRO优化器、混合精度、梯度累积。在千卡、万卡规模训练中的实践。",
+      "keywords": [
+        "分布式训练",
+        "DDP",
+        "DeepSpeed",
+        "ZeRO",
+        "数据并行",
+        "模型并行"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_068",
+      "series_id": "ml_series_7",
+      "episode": 68,
+      "title": "边缘AI与端侧部署",
+      "description": "边缘设备计算能力分析。模型压缩、优化流程。Core ML、ML Kit、TensorFlow Lite。端侧推理、增量更新，以及在手机、IoT设备中的实践。",
+      "keywords": [
+        "边缘AI",
+        "端侧部署",
+        "Core ML",
+        "ML Kit",
+        "TFLite",
+        "IoT",
+        "增量更新"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_069",
+      "series_id": "ml_series_7",
+      "episode": 69,
+      "title": "模型监控与可观测性",
+      "description": "生产环境模型监控。数据漂移、概念漂移检测。性能监控、预测监控。模型Explainability、可解释性工具，以及在AIOps中的实践。",
+      "keywords": [
+        "模型监控",
+        "可观测性",
+        "数据漂移",
+        "概念漂移",
+        "Explainability",
+        "AIOps"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_070",
+      "series_id": "ml_series_7",
+      "episode": 70,
+      "title": "AutoML自动化机器学习",
+      "description": "AutoML全流程：数据预处理、特征工程、模型选择、超参数优化。AutoSklearn、AutoGluon、H2O.ai。神经架构搜索NAS，以及在低门槛AI建模中的应用。",
+      "keywords": [
+        "AutoML",
+        "自动化机器学习",
+        "AutoSklearn",
+        "AutoGluon",
+        "H2O",
+        "超参数优化"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_071",
+      "series_id": "ml_series_8",
+      "episode": 71,
+      "title": "K近邻KNN算法详解",
+      "description": "懒惰学习代表。KD树、球树加速近邻搜索。距离度量：欧氏、曼哈顿、余弦、马氏。加权KNN、近似近邻ANN，以及在推荐、检索中的应用。",
+      "keywords": [
+        "KNN",
+        "K近邻",
+        "KD树",
+        "距离度量",
+        "余弦相似度",
+        "ANN",
+        "近似近邻"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_072",
+      "series_id": "ml_series_8",
+      "episode": 72,
+      "title": "朴素贝叶斯分类器深入",
+      "description": "贝叶斯定理的应用。高斯NB、多项式NB、伯努利NB。特征独立性假设、拉普拉斯平滑。文本分类、垃圾邮件过滤实践，以及在速度要求高场景中的应用。",
+      "keywords": [
+        "朴素贝叶斯",
+        "高斯NB",
+        "多项式NB",
+        "伯努利NB",
+        "贝叶斯定理",
+        "文本分类"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 12500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_073",
+      "series_id": "ml_series_8",
+      "episode": 73,
+      "title": "线性判别分析LDA",
+      "description": "有监督降维技术。Fisher线性判别、LDA vs PCA对比。多类别LDA、正则化LDA。人脸识别（Eigenfaces、Fisherfaces）应用，以及在特征提取中的实践。",
+      "keywords": [
+        "LDA",
+        "线性判别分析",
+        "Fisher",
+        "PCA",
+        "降维",
+        "特征提取",
+        "人脸识别"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_074",
+      "series_id": "ml_series_8",
+      "episode": 74,
+      "title": "梯度提升GBDT完全指南",
+      "description": "GBDT原理：加法模型、梯度提升。XGBoost、LightGBM、CatBoost三大框架对比。特征重要性、Partial Dependence Plot、SHAP值解释，以及在表格数据竞赛中的实践。",
+      "keywords": [
+        "GBDT",
+        "XGBoost",
+        "LightGBM",
+        "CatBoost",
+        "梯度提升",
+        "特征重要性",
+        "SHAP"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_075",
+      "series_id": "ml_series_8",
+      "episode": 75,
+      "title": "高斯混合模型GMM与EM算法",
+      "description": "概率聚类模型。单高斯vs混合高斯、EM算法推导。模型选择（BIC、AIC）。分量数量选择、协方差类型，以及在异常检测、密度估计中的应用。",
+      "keywords": [
+        "GMM",
+        "高斯混合模型",
+        "EM算法",
+        "BIC",
+        "AIC",
+        "密度估计",
+        "异常检测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_076",
+      "series_id": "ml_series_8",
+      "episode": 76,
+      "title": "孤立森林与异常检测",
+      "description": "异常检测方法总览。孤立森林iForest原理、路径长度、异常评分。One-Class SVM、LOF、HBOS。工业异常检测、欺诈检测实践，以及在时间序列异常中的应用。",
+      "keywords": [
+        "孤立森林",
+        "异常检测",
+        "iForest",
+        "One-Class SVM",
+        "LOF",
+        "欺诈检测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_077",
+      "series_id": "ml_series_8",
+      "episode": 77,
+      "title": "时间序列分析经典方法",
+      "description": "时间序列特性：趋势、季节性、周期性。AR、MA、ARIMA、SARIMA模型。指数平滑、状态空间模型、Kalman滤波。在经济预测、销量预测中的应用。",
+      "keywords": [
+        "时间序列",
+        "ARIMA",
+        "SARIMA",
+        "指数平滑",
+        "Kalman滤波",
+        "预测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_078",
+      "series_id": "ml_series_8",
+      "episode": 78,
+      "title": "生存分析与可靠性工程",
+      "description": "时间到事件数据建模。Kaplan-Meier生存曲线、Cox比例风险模型。生存树、生存森林。医疗数据分析、设备寿命预测、客户流失预测应用。",
+      "keywords": [
+        "生存分析",
+        "Kaplan-Meier",
+        "Cox模型",
+        "可靠性工程",
+        "流失预测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_079",
+      "series_id": "ml_series_8",
+      "episode": 79,
+      "title": "因果推断与倾向得分",
+      "description": "相关性≠因果性。潜在结果框架、 Rubin因果模型。倾向得分匹配PSM、工具变量IV、双重差分DID。 uplift建模，以及在营销归因、策略评估中的应用。",
+      "keywords": [
+        "因果推断",
+        "倾向得分",
+        "PSM",
+        "工具变量",
+        "DID",
+        "uplift",
+        "归因"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_080",
+      "series_id": "ml_series_8",
+      "episode": 80,
+      "title": "传统ML vs深度学习选择指南",
+      "description": "表格数据、图像、文本、时序数据的不同选择。数据规模、特征工程、可解释性考量。集成学习优势、深度学习优势。工业实践中的模型选型决策框架。",
+      "keywords": [
+        "模型选择",
+        "表格数据",
+        "集成学习",
+        "深度学习",
+        "选型",
+        "可解释性"
+      ],
+      "difficulty": "综合",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_081",
+      "series_id": "ml_series_9",
+      "episode": 81,
+      "title": "特征工程基础与数据预处理",
+      "description": "垃圾进，垃圾出。数据清洗、缺失值处理、异常值处理。特征缩放：标准化、归一化、鲁棒缩放。编码：One-Hot、Label、Target、Frequency编码，以及在管道Pipeline中的应用。",
+      "keywords": [
+        "特征工程",
+        "数据预处理",
+        "缺失值",
+        "特征缩放",
+        "编码",
+        "Pipeline"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_082",
+      "series_id": "ml_series_9",
+      "episode": 82,
+      "title": "高级特征工程技术",
+      "description": "特征构造的艺术。多项式特征、交互特征。时间序列特征：滚动窗口、滞后特征。地理空间特征、文本特征、图像特征，以及在特征竞赛中的实践。",
+      "keywords": [
+        "特征构造",
+        "多项式特征",
+        "交互特征",
+        "时间序列特征",
+        "地理特征",
+        "特征竞赛"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_083",
+      "series_id": "ml_series_9",
+      "episode": 83,
+      "title": "特征选择与降维实战",
+      "description": "过滤法、包装法、嵌入法。方差阈值、相关性分析、互信息。RFE递归特征消除、LASSO。基于模型的特征选择、SHAP值，以及在模型性能提升中的应用。",
+      "keywords": [
+        "特征选择",
+        "RFE",
+        "LASSO",
+        "方差阈值",
+        "互信息",
+        "SHAP",
+        "降维"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_084",
+      "series_id": "ml_series_9",
+      "episode": 84,
+      "title": "Embedding技术深入",
+      "description": "从离散到连续的表示。Word2Vec、GloVe、FastText。Item2Vec、Doc2Vec、Graph2Vec。负采样、层次Softmax，以及在推荐、搜索、NLP中的应用。",
+      "keywords": [
+        "Embedding",
+        "Word2Vec",
+        "Item2Vec",
+        "Doc2Vec",
+        "Graph2Vec",
+        "负采样"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_085",
+      "series_id": "ml_series_9",
+      "episode": 85,
+      "title": "时序特征工程完整指南",
+      "description": "时间序列特征的特殊性。日历特征、周期特征、统计特征。滑动窗口、lag特征、差分特征。傅里叶变换、小波变换，以及在销量预测、负荷预测中的应用。",
+      "keywords": [
+        "时序特征",
+        "日历特征",
+        "滑动窗口",
+        "lag特征",
+        "傅里叶变换",
+        "负荷预测"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_086",
+      "series_id": "ml_series_9",
+      "episode": 86,
+      "title": "文本特征工程实战",
+      "description": "文本的向量表示。TF-IDF、N-gram、Char-CNN。预训练Embedding、BERT特征。情感特征、主题特征（LDA）、关键词特征，以及在文本分类、情感分析中的应用。",
+      "keywords": [
+        "文本特征",
+        "TF-IDF",
+        "N-gram",
+        "BERT",
+        "LDA",
+        "情感特征",
+        "文本分类"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_087",
+      "series_id": "ml_series_9",
+      "episode": 87,
+      "title": "图像特征工程技术",
+      "description": "手工设计特征vs深度学习。颜色直方图、纹理特征（GLCM、LBP）。SIFT、SURF、HOG关键点。深度特征、预训练CNN特征，以及在图像检索、分类中的应用。",
+      "keywords": [
+        "图像特征",
+        "SIFT",
+        "HOG",
+        "LBP",
+        "GLCM",
+        "纹理特征",
+        "深度特征"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_088",
+      "series_id": "ml_series_9",
+      "episode": 88,
+      "title": "AutoML自动化特征工程",
+      "description": "Featuretools、AutoFeat自动化特征构造。AutoSklearn自动特征选择。神经架构特征学习、端到端学习。在数据竞赛、快速原型中的应用。",
+      "keywords": [
+        "AutoML特征",
+        "Featuretools",
+        "AutoFeat",
+        "自动化",
+        "端到端学习"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_089",
+      "series_id": "ml_series_9",
+      "episode": 89,
+      "title": "特征存储与管理",
+      "description": "特征工程工业化。特征存储架构、在线/离线特征。特征血缘、特征版本管理。特征监控、特征质量评估，以及在大型互联网公司中的实践。",
+      "keywords": [
+        "特征存储",
+        "Feature Store",
+        "特征管理",
+        "特征血缘",
+        "在线特征",
+        "离线特征"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_090",
+      "series_id": "ml_series_9",
+      "episode": 90,
+      "title": "特征交叉与高阶特征",
+      "description": "特征交叉的艺术。显式交叉、隐式交叉。FM、DeepFM、xDeepFM高阶交叉。自动特征交叉AutoCross、AutoFIS，以及在CTR预测、推荐排序中的应用。",
+      "keywords": [
+        "特征交叉",
+        "FM",
+        "DeepFM",
+        "xDeepFM",
+        "高阶特征",
+        "AutoCross",
+        "CTR"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_091",
+      "series_id": "ml_series_10",
+      "episode": 91,
+      "title": "图神经网络GNN基础",
+      "description": "图的数学表示。GCN、GAT、GraphSAGE原理。消息传递、邻居采样、图级表示。同构vs异构图，以及在社交网络、推荐系统中的应用。",
+      "keywords": [
+        "GNN",
+        "图神经网络",
+        "GCN",
+        "GAT",
+        "GraphSAGE",
+        "消息传递",
+        "图学习"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_092",
+      "series_id": "ml_series_10",
+      "episode": 92,
+      "title": "因果机器学习前沿",
+      "description": "因果发现、因果推断。因果森林、因果树。Causal ML、DoWhy库。反事实推理、因果效应估计，以及在医疗决策、营销策略中的应用。",
+      "keywords": [
+        "因果机器学习",
+        "因果发现",
+        "因果森林",
+        "DoWhy",
+        "反事实",
+        "因果推断"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_093",
+      "series_id": "ml_series_10",
+      "episode": 93,
+      "title": "联邦学习与隐私保护",
+      "description": "数据隐私的法律合规要求。联邦学习框架：FedAvg、FedProx。差分隐私、安全聚合、同态加密。在金融风控、医疗协作中的应用。",
+      "keywords": [
+        "联邦学习",
+        "隐私保护",
+        "FedAvg",
+        "差分隐私",
+        "同态加密",
+        "安全聚合"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_094",
+      "series_id": "ml_series_10",
+      "episode": 94,
+      "title": "小样本学习与元学习",
+      "description": "从大数据到小样本。Few-Shot、One-Shot学习。MAML元学习、Prototypical Networks。元学习在NLP、CV中的应用，以及在快速适应新场景中的实践。",
+      "keywords": [
+        "小样本学习",
+        "元学习",
+        "MAML",
+        "Few-Shot",
+        "One-Shot",
+        "Prototypical Networks"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_095",
+      "series_id": "ml_series_10",
+      "episode": 95,
+      "title": "自监督学习新进展",
+      "description": "从有监督到自监督。对比学习、掩码建模、生成式方法。SIMCLR、MoCo、BYOL、MAE、DINO。自监督在预训练-微调范式中的应用，以及在大规模预训练中的实践。",
+      "keywords": [
+        "自监督学习",
+        "对比学习",
+        "SimCLR",
+        "MoCo",
+        "BYOL",
+        "MAE",
+        "DINO",
+        "预训练"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_096",
+      "series_id": "ml_series_10",
+      "episode": 96,
+      "title": "扩散模型Diffusion Models深入",
+      "description": "从DDPM到Stable Diffusion。前向扩散、反向去噪、分数匹配。条件生成、Classifier-Free Guidance。文生图、图生图、图像编辑应用，以及在视频生成、3D生成中的扩展。",
+      "keywords": [
+        "扩散模型",
+        "DDPM",
+        "Stable Diffusion",
+        "去噪",
+        "分数匹配",
+        "文生图"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_097",
+      "series_id": "ml_series_10",
+      "episode": 97,
+      "title": "神经符号AI与可解释性",
+      "description": "深度学习与符号推理结合。神经符号模型、可微分逻辑。可解释性技术：LIME、SHAP、Attention可视化。因果推断、反事实解释，以及在医疗、金融高风险场景中的应用。",
+      "keywords": [
+        "神经符号AI",
+        "可解释性",
+        "LIME",
+        "SHAP",
+        "符号推理",
+        "因果解释"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_098",
+      "series_id": "ml_series_10",
+      "episode": 98,
+      "title": "持续学习与 lifelong learning",
+      "description": "克服灾难性遗忘。EWC、SI、MAS正则化方法。回放机制：经验回放、生成式回放。终身学习、增量学习，以及在在线学习、个性化推荐中的应用。",
+      "keywords": [
+        "持续学习",
+        "终身学习",
+        "灾难性遗忘",
+        "EWC",
+        "增量学习",
+        "经验回放"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_099",
+      "series_id": "ml_series_10",
+      "episode": 99,
+      "title": "AI for Science科学计算前沿",
+      "description": "AI在科学研究中的应用。分子性质预测、蛋白质结构预测（AlphaFold）、药物发现。物理模拟、天气预报、材料发现，以及在科学发现中的范式转变。",
+      "keywords": [
+        "AI for Science",
+        "AlphaFold",
+        "分子预测",
+        "药物发现",
+        "物理模拟",
+        "天气预报"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_100",
+      "series_id": "ml_series_10",
+      "episode": 100,
+      "title": "机器学习100期总结与未来展望",
+      "description": "100期知识体系回顾。机器学习发展历程、核心技术栈梳理。行业应用全景、未来趋势预测。给学习者的建议、持续学习路径，以及在AI时代保持竞争力的方法。",
+      "keywords": [
+        "总结",
+        "未来展望",
+        "机器学习趋势",
+        "学习路径",
+        "AI时代",
+        "职业发展"
+      ],
+      "difficulty": "综合",
+      "estimated_words": 15000,
+      "status": "pending"
+    }
+  ]
+}

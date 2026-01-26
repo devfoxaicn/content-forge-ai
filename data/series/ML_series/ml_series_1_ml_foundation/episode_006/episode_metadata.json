@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_006",
+  "series_id": "ml_series_1",
+  "episode": 6,
+  "title": "聚类算法：无监督学习的艺术",
+  "description": "K-Means的局限性与改进：K-Means++初始化、Mini-Batch K-Means。层次聚类、DBSCAN密度聚类、GMM混合高斯模型，以及如何评估聚类质量（轮廓系数、Calinski-Harabasz）。",
+  "keywords": [
+    "聚类",
+    "K-Means",
+    "DBSCAN",
+    "层次聚类",
+    "GMM",
+    "轮廓系数",
+    "无监督学习"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending"
+}

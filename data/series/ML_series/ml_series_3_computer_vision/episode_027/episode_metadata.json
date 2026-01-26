@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_027",
+  "series_id": "ml_series_3",
+  "episode": 27,
+  "title": "图像生成与风格迁移",
+  "description": "从GAN到Diffusion Models。StyleGAN生成高保真人脸。神经风格迁移原理与实现。CycleGAN图像翻译。Stable Diffusion、DALL-E等文生图模型解析。",
+  "keywords": [
+    "图像生成",
+    "风格迁移",
+    "StyleGAN",
+    "CycleGAN",
+    "扩散模型",
+    "Stable Diffusion"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15500,
+  "status": "pending"
+}

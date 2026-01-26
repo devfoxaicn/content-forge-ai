@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_021",
+  "series_id": "ml_series_3",
+  "episode": 21,
+  "title": "计算机视觉导论：图像基础与OpenCV实战",
+  "description": "数字图像表示：像素、颜色空间、通道。OpenCV基础操作：滤波、边缘检测、形态学处理。图像变换、几何变换、特征点检测，构建CV应用的基础工具箱。",
+  "keywords": [
+    "计算机视觉",
+    "OpenCV",
+    "图像处理",
+    "滤波",
+    "边缘检测",
+    "颜色空间"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 13000,
+  "status": "pending"
+}

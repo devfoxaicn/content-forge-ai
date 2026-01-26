@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_018",
+  "series_id": "ml_series_2",
+  "episode": 18,
+  "title": "深度学习训练技巧与调试",
+  "description": "训练不收敛？梯度爆炸/消失？学习率如何设置？从batch size选择、梯度裁剪、学习率warmup、混合精度训练、分布式训练等实用技巧，培养模型调试直觉。",
+  "keywords": [
+    "训练技巧",
+    "调试",
+    "梯度裁剪",
+    "混合精度",
+    "分布式训练",
+    "学习率"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13500,
+  "status": "pending"
+}

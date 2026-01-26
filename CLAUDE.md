@@ -2,14 +2,21 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Current Version**: v7.0 (Latest: v7.0 with 6-dimensional news scoring and Chinese digest)
+
+**IMPORTANT**: Always run commands with PYTHONPATH set to the project root directory.
+
+**Project Root**: `/Users/z/Documents/work/content-forge-ai` (adjust if different)
+
 ## Quick Reference
 
 **Essential Commands**:
 ```bash
-# Set PYTHONPATH (required for all commands)
+# Set PYTHONPATH (required for all commands - adjust path to your project root)
 export PYTHONPATH=/Users/z/Documents/work/content-forge-ai
 
-# ========== Auto Mode v4.0 (Chinese AI News Digest) ==========
+# ========== Auto Mode v7.0 (Chinese AI News Digest with Scoring) ==========
+# Run once (recommended for daily AI news digest)
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --once
 
 # ========== Series Mode (100-episode blog series) ==========
@@ -17,41 +24,50 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode au
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --progress
 # Generate single episode
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1
+# Generate range
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --all --start 1 --end 10
 
 # ========== Custom Mode (user-defined topics) ==========
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode custom --topic "RAG技术原理与实战"
 
 # ========== Refine Mode (multi-platform content refining) ==========
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode refine --input article.md
+
+# ========== Tests ==========
+cd test
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --source hackernews
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 ```
 
 **Core Files**:
 - `src/main.py` - Unified entry point (use `--mode` to switch)
-- `config/config.yaml` - Main config (LLM, agents, 8 data sources)
+- `config/config.yaml` - Main config (LLM, agents, 15+ data sources)
 - `config/blog_topics_100_complete.json` - 100-episode content plan
 - `config/prompts.yaml` - Agent system prompt templates
 - `src/utils/storage_v2.py` - Unified storage (StorageFactory)
+- `src/utils/api_config.py` - API configuration manager
 
 **Key Architecture Points**:
-1. **Four-Mode Architecture**: Auto (v4.0 Chinese digest), Series (100 topics), Custom (user-defined), Refine (multi-platform)
-2. **Auto Mode v4.0**: 8 data sources → 分类组织 → 全中文简报
+1. **Four-Mode Architecture**: Auto (v7.0 Chinese digest with scoring), Series (100 topics), Custom (user-defined), Refine (multi-platform)
+2. **Auto Mode v7.0**: 15+ data sources → 分类组织 → 评分筛选 → 全中文简报
 3. **DailyStorage**: Only creates `raw/` and `digest/` directories
 4. **Immutable State Updates**: Use `{**state, **updates}` pattern
 
 ## Project Overview
 
-ContentForge AI v4.0 is a LangChain/LangGraph-based automated content production system.
+ContentForge AI v7.0 is a LangChain/LangGraph-based automated content production system that generates AI-focused content in Chinese and English across multiple formats.
 
-**Auto Mode v4.0** (Latest):
-- **8 Data Sources**: Product Hunt, GitHub, TechCrunch AI, The Verge AI, VentureBeat AI, NewsAPI, arXiv, Hacker News
-- **3 Agents**: AI Trend Analyzer → Trend Categorizer → World Class Digest (全中文)
-- **5 Categories**: 产业动态(35条), 学术前沿(15条), 技术创新(4条), 产品工具(1条), 行业应用
-- **Output**: `data/daily/YYYYMMDD/digest/digest_YYYYMMDD.md` (全中文)
+**Auto Mode v7.0** (Latest):
+- **14 Data Sources**: TechCrunch AI, NewsAPI.org, Hacker News, MIT Tech Review, OpenAI Blog, BAIR Blog, Microsoft Research, arXiv, MarkTechPost, KDnuggets, AI Business, The Gradient, InfoQ AI, Hugging Face Blog
+- **4 Agents**: AI Trend Analyzer → Trend Categorizer → News Scoring → World Class Digest (全中文)
+- **5 Categories**: 产业动态, 学术前沿, 技术创新, 产品工具, 行业应用
+- **Scoring System**: 6-dimensional scoring (source_authority 30%, engagement 20%, freshness 15%, category_balance 15%, content_quality 10%, diversity 10%)
+- **Output**: `data/daily/YYYYMMDD/digest/digest_YYYYMMDD.md` (全中文, with structured JSON)
 
 **Other Modes**:
-- **Series Mode**: 100-episode technical blog series
+- **Series Mode**: 100-episode technical blog series (planned, episodes 1-100)
 - **Custom Mode**: User-defined topic content generation
-- **Refine Mode**: Multi-platform content (WeChat/Xiaohongshu/Twitter)
+- **Refine Mode**: Multi-platform content adaptation (WeChat/Xiaohongshu/Twitter)
 
 ## Environment Setup
 
@@ -68,12 +84,12 @@ ContentForge AI v4.0 is a LangChain/LangGraph-based automated content production
 pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arxiv praw
 ```
 
-## Auto Mode v4.0 Architecture
+## Auto Mode v7.0 Architecture
 
 **Workflow**:
 ```
-1. AITrendAnalyzerAgent
-   - 从8个数据源获取热点
+1. RealAITrendAnalyzerAgent
+   - 从15+个数据源获取热点
    - 保留所有内容（不去重、不排序）
    - 输出: trends_by_source
 
@@ -82,24 +98,43 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
    - 5大分类：产业动态、学术前沿、技术创新、产品工具、行业应用
    - 输出: categorized_trends
 
-3. WorldClassDigestAgent
+3. NewsScoringAgent (v7.0新增)
+   - 对新闻进行6维度评分
+   - 智能筛选，保留高价值内容
+   - 输出: scored_trends
+
+4. WorldClassDigestAgent
    - 生成全中文世界顶级新闻简报
    - 翻译所有标题、描述
    - 生成核心洞察和深度观察
-   - 输出: news_digest (全中文)
+   - 输出: news_digest (全中文 + 结构化JSON)
 ```
 
-**Data Sources** (8):
+**Data Sources** (14 enabled sources):
 | 数据源 | 类型 | 内容 |
 |--------|------|------|
-| Product Hunt | 产品 | 热门AI产品 |
-| GitHub | 产品 | AI应用开源项目 |
-| TechCrunch AI | 新闻 | AI行业新闻 |
-| The Verge AI | 新闻 | AI技术创新 |
-| VentureBeat AI | 新闻 | AI商业动态 |
-| **NewsAPI** | **新闻** | **全球AI新闻聚合** |
-| arXiv | 学术 | AI重大论文 |
-| Hacker News | 社区 | 科技热点讨论 |
+| TechCrunch AI | 新闻 | AI行业新闻RSS |
+| NewsAPI.org | 新闻 | 全球AI新闻聚合（需API key） |
+| Hacker News | 社区 | 科技热点讨论API |
+| MIT Tech Review | 新闻 | MIT技术评论RSS |
+| OpenAI Blog | 官方 | OpenAI官方动态RSS |
+| BAIR Blog | 学术 | UC Berkeley AI研究RSS |
+| Microsoft Research | 学术 | 微软研究院博客RSS |
+| arXiv | 学术 | AI重大论文API |
+| MarkTechPost | 新闻 | AI研究新闻RSS |
+| KDnuggets | 新闻 | 数据科学权威RSS |
+| AI Business | 新闻 | AI行业新闻RSS |
+| The Gradient | 期刊 | AI研究期刊RSS |
+| InfoQ AI | 技术 | 技术媒体RSS |
+| Hugging Face | 官方 | Hugging Face官方博客RSS |
+
+**Scoring System** (NewsScoringAgent):
+- `source_authority` (30%): 来源权威度，基于预定义评分表
+- `engagement` (20%): 互动数据（点赞、评论、分享）
+- `freshness` (15%): 时效性（24小时内发布加分）
+- `category_balance` (15%): 确保各分类平衡
+- `content_quality` (10%): 标题质量、内容完整性
+- `diversity` (10%): 确保来源多样性
 
 **Output Format**:
 ```markdown
@@ -112,9 +147,9 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
 **AI产业观察：从云端竞逐到端侧重构的范式转移**
 
 ## 🔍 本期热点
-### 📈 产业动态（35条）
+### 📈 产业动态（15条，已筛选）
 #### [据报Apple研发AI可穿戴设备](链接)
-**来源**：TechCrunch AI  ·  **热度**：70
+**来源**：TechCrunch AI  ·  **热度**：70  ·  **评分**：82
 ...
 ```
 
@@ -152,11 +187,36 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
 - `--input PATH` - Input file path (required)
 - `--platforms {wechat,xiaohongshu,twitter}` - Target platforms (default: all three)
 
-**Important**:
-- In auto mode, `--topic` is **only for file naming** - actual content is fully auto-generated from real-time AI trends
-- In custom mode, `--topic` is the actual content theme to generate
+**Important - Understanding `--topic` Parameter**:
+- **Auto mode**: `--topic` is **only for file naming** - actual content is fully auto-generated from real-time AI trends. The topic name doesn't affect the content.
+- **Custom mode**: `--topic` is the actual content theme to generate
+- **Series/Refine mode**: `--topic` is not used
 
 ## Architecture Overview
+
+### Big Picture: Multi-Orchestrator Architecture
+
+This system uses a **multi-orchestrator pattern** where each mode has its own orchestrator implementing a different content generation strategy:
+
+```
+src/main.py (CLI entry point)
+    │
+    ├─→ AutoContentOrchestrator (src/auto_orchestrator.py)
+    │   └─→ LangGraph StateGraph workflow
+    │       └─→ Agent chain: trend_analyzer → categorizer → scorer → digest
+    │
+    ├─→ SeriesOrchestrator (src/series_orchestrator.py)
+    │   └─→ Sequential execution with error recovery
+    │       └─→ Agent chain: research → longform → quality check → social content
+    │
+    ├─→ CustomContentOrchestrator (src/custom_orchestrator.py)
+    │   └─→ Sequential execution for user-defined topics
+    │
+    └─→ RefineOrchestrator (src/refine_orchestrator.py)
+        └─→ Multi-platform content adaptation
+```
+
+**Key Insight**: The LangGraph StateGraph in Auto mode vs sequential execution in other modes represents a fundamental architectural difference - Auto mode uses graph-based state management while other modes use traditional sequential flows.
 
 ### Design Patterns
 
@@ -193,20 +253,33 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
 | **Primary Use** | Daily trend tracking | Systematic content library | On-demand content | Multi-platform publishing |
 | **Storage Format** | `YYYYMMDD/` | `series_X_name/episode_XXX/` | `YYYYMMDD_HHMMSS_topic/` | `YYYYMMDD_title/` |
 
-### Auto Workflow Agent Chain (v4.0)
+### Auto Workflow Agent Chain (v7.0)
 
+The LangGraph StateGraph builds a directed acyclic graph (DAG) of agents:
+
+```python
+# From src/auto_orchestrator.py:_build_workflow()
+workflow = StateGraph(dict)
+workflow.add_entry_point("ai_trend_analyzer")
+workflow.add_edge("ai_trend_analyzer", "trend_categorizer")
+workflow.add_edge("trend_categorizer", "news_scoring")
+workflow.add_edge("news_scoring", "world_class_digest")
+workflow.add_edge("world_class_digest", END)
 ```
-ai_trend_analyzer (8 data sources aggregation)
-  ↓
-  输出: trends_by_source (按数据源组织，保留所有内容)
+
+**Data Flow**:
+```
+ai_trend_analyzer (15+ data sources aggregation)
+  ↓ state["trends_by_source"] = {...}
 
 trend_categorizer (按5大分类重新组织)
-  ↓
-  输出: categorized_trends (产业动态/学术前沿/技术创新/产品工具/行业应用)
+  ↓ state["categorized_trends"] = {...}
+
+news_scoring (v7.0新增：6维度智能评分筛选)
+  ↓ state["scored_trends"] = {...}
 
 world_class_digest (生成全中文世界顶级新闻简报)
-  ↓
-  输出: news_digest (全中文digest.md)
+  ↓ state["news_digest"] = {...}
 ```
 
 ### Storage Structure (v4.0)
@@ -255,27 +328,34 @@ For each platform:
 - Short refiner uses viral content style with numbered chapters, colloquial language ("太绝了", "扒一皮"), and strong comparisons
 - Each platform's content is saved immediately after generation
 
-### AI Trend Data Sources (config.yaml:30-37)
+### AI Trend Data Sources (config.yaml:30-48)
 
-**Currently Enabled (7 sources)**:
-- `producthunt` - Product Hunt RSS
-- `github` - GitHub Trending
+**Currently Enabled (14 sources)**:
 - `techcrunch_ai` - TechCrunch AI RSS
-- `verge_ai` - The Verge AI RSS
-- `venturebeat_ai` - VentureBeat AI RSS
-- `arxiv_news` - arXiv API
+- `newsapi` - NewsAPI.org (全球AI新闻聚合)
 - `hackernews` - Hacker News API
+- `mit_tech_review` - MIT Technology Review RSS
+- `openai_blog` - OpenAI Blog RSS
+- `bair_blog` - Berkeley AI Research Blog (顶级学术)
+- `microsoft_research` - Microsoft Research Blog (官方)
+- `arxiv_news` - arXiv API
+- `marktechpost` - MarkTechPost (AI研究新闻)
+- `kdnuggets` - KDnuggets (数据科学权威)
+- `ai_business` - AI Business (行业新闻)
+- `the_gradient` - The Gradient (AI研究期刊)
+- `infoq_ai` - InfoQ AI (技术媒体)
+- `hugging_face_blog` - Hugging Face Blog (官方)
 
-**Config Params** (`config/config.yaml:39-42`):
-- `max_trends: 20` - Max trend count
+**Config Params** (`config/config.yaml:50-53`):
+- `max_trends: 20` - Max trend count per source
 - `min_heat_score: 60` - Minimum heat score
 - `cache_ttl: 3600` - Cache TTL (seconds)
 
-**Data Source Implementation**: In v2.5, sources are integrated into `AITrendAnalyzerAgent` in `src/agents/ai_trend_analyzer_real.py`.
+**Data Source Implementation**: Sources are integrated into `RealAITrendAnalyzerAgent` in `src/agents/ai_trend_analyzer_real.py`.
 
 **Adding New Sources**:
 ```python
-# Add new source logic in AITrendAnalyzerAgent._fetch_all_trends()
+# Add new source logic in RealAITrendAnalyzerAgent._fetch_all_trends()
 # Return format: [{"title": "...", "url": "...", ...}]
 ```
 
@@ -337,8 +417,8 @@ llm:
 - `thinking.type`: "auto" (auto-trigger) or "enabled" (force enable)
 - Improves reasoning quality for complex tasks
 
-**Research Agent Options** (`config/config.yaml:54-59`):
-- `search_provider`: "zhipuai" (recommended, included in annual plan), "tavily" (paid), "mock" (offline)
+**Research Agent Options** (`config/config.yaml:95-100`):
+- `search_provider`: "tavily" (default, paid service), "zhipuai" (included in annual plan, recommended), "mock" (offline)
 - `max_results`: Maximum search results
 - `search_depth`: "basic" or "advanced"
 - `mock_mode`: Set to `true` to disable all search APIs
@@ -399,10 +479,10 @@ daily_storage.save_markdown("digest", "digest.md", content)
 
 # Series mode (100-episode series)
 series_storage = StorageFactory.create_series(
-    series_id="series_1_llm_foundation",
+    series_id="series_1",  # 使用基础ID，内部会自动处理目录名
     episode_number=1
 )
-series_storage.save_markdown("longform", "article.md", content)
+series_storage.save_article(content, title="文章标题")  # 直接保存到episode目录
 series_storage.save_episode_metadata(metadata)
 
 # Custom mode (user-defined content)
@@ -492,16 +572,22 @@ state = create_initial_state(
 new_state = update_state(state, {"new_field": value})
 ```
 
-**LangGraph Node Wrapper** (`src/auto_orchestrator.py:270-277`):
+**LangGraph Node Wrapper** (`src/auto_orchestrator.py:171-184`):
 ```python
-def _create_agent_node(self, agent: BaseAgent):
-    def node_func(state: Dict[str, Any]) -> Dict[str, Any]:
-        result = agent.execute(state)
-        return add_agent_to_order(result, agent.name)
-    return node_func
+def _create_agent_node(self, agent):
+    def node_function(state):
+        try:
+            result = agent.execute(state)
+            return add_agent_to_order(result, agent.name)
+        except Exception as e:
+            return update_state(state, {
+                "error_message": str(e),
+                "current_step": f"{agent.name}_failed"
+            })
+    return node_function
 ```
 
-Each agent's output is merged into state via `{**state, **updates}` pattern, ensuring immutability.
+**Critical State Pattern**: All agents must return a complete state dict using the immutable pattern `{**state, **updates}`. The LangGraph workflow automatically merges each node's output into the shared state.
 
 ## Workflow Execution Order
 
@@ -533,10 +619,18 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 
 ### Agent Dependencies
 
+**Auto Mode v7.0 Agents**:
 | Agent | Deps On | Outputs | Description |
 |-------|---------|---------|-------------|
-| ai_trend_analyzer | - | trending_topics, selected_ai_topic | Data source |
-| trends_digest | trending_topics | digest_content | Optional |
+| ai_trend_analyzer | - | trends_by_source | 15+ data source aggregation |
+| trend_categorizer | trends_by_source | categorized_trends | 5-category organization |
+| news_scoring | categorized_trends | scored_trends | 6-dimensional scoring (v7.0) |
+| world_class_digest | scored_trends | news_digest | Chinese digest + JSON |
+
+**Other Agents** (Series/Custom/Refine modes):
+| Agent | Deps On | Outputs | Description |
+|-------|---------|---------|-------------|
+| trends_digest | trending_topics | digest_content | Optional digest |
 | research_agent | selected_ai_topic | research_data, research_summary | Background for longform |
 | longform_generator | selected_ai_topic, research_data | longform_article | Core content |
 | code_review_agent | longform_article | code_review_result | Quality assurance |
@@ -546,6 +640,9 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 | title_optimizer | longform_article | optimized_titles | SEO optimization |
 | image_generator | xiaohongshu_note or twitter_post | image_prompts | Image generation |
 | quality_evaluator | All outputs | quality_report | Final evaluation |
+| consistency_checker_agent | longform_article | consistency_report | Terminology/citation check |
+| visualization_generator_agent | longform_article | mermaid_diagrams | Auto-generate diagrams |
+| citation_formatter_agent | longform_article | formatted_citations | GB/T 7714-2015 format |
 
 ### Critical Notes
 
@@ -649,14 +746,25 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --s
 
 ### Test Files
 
+**Test Directory**: `test/`
+
 | Test File | Purpose |
 |-----------|---------|
-| `test_ai_trends.py` | Test AI trend fetching (single source support) |
-| `test_storage.py` | Test storage system |
-| `test_topic_logic.py` | Test topic param handling |
+| `test_ai_trends.py` | Test AI trend fetching from single data source |
+| `test_storage.py` | Test storage system functionality |
+| `test_topic_logic.py` | Test topic parameter handling across modes |
 | `test_digest.py` | Test trend digest generation |
 | `test_auto_topic.py` | Test auto mode topic handling |
 | `test_new_sources.py` | Test new data source integration |
+
+**Test README**: `test/README.md` contains detailed documentation for test files.
+
+**Running Tests**:
+```bash
+cd test
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --source hackernews
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
+```
 
 **Test Single AI Trend Source**:
 ```bash
@@ -716,7 +824,8 @@ This enables 9000-13000 word professional in-depth analysis.
 
 **Import Error**: Ensure running from project root with PYTHONPATH set
 ```bash
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --once
+export PYTHONPATH=/Users/z/Documents/work/content-forge-ai  # Replace with your actual path
+python src/main.py --mode auto --once
 ```
 
 **API Key Error**: Check environment variables
@@ -745,6 +854,28 @@ agents:
     mock_mode: true
 ```
 
+**NewsAPI Rate Limiting**: NewsAPI has a free tier limit. If you hit rate limits:
+1. Reduce `max_trends` in config.yaml
+2. Remove `newsapi` from sources list
+3. Or upgrade to NewsAPI paid tier
+
+## Important Architecture Gotchas
+
+1. **State Field Naming Confusion**: Auto mode uses `trends_by_source`/`categorized_trends`/`scored_trends`, but older code and Series mode use `trending_topics`. These are NOT compatible.
+
+2. **Agent Name vs State Field**: The agent is named `ai_trend_analyzer` but outputs `trends_by_source`, not `trending_topics`.
+
+3. **DailyStorage Only Creates Two Directories**: As of v4.0+, `DailyStorage` only creates `raw/` and `digest/` subdirectories. Other directories like `longform/` will NOT be created in Auto mode.
+
+4. **Research Agent Provider**: The `research_agent` uses `search_provider: "tavily"` by default (paid service). You can change to "zhipuai" (included in annual plan) or "mock" (offline development) in config.yaml.
+
+5. **Series ID vs Path**: Series use two different identifiers:
+   - `series_id`: "series_1" (internal ID, used in JSON config)
+   - `series_path`: "series_1_llm_foundation" (folder name, used in filesystem)
+   - Always use `SeriesPathManager` to convert between them.
+
+6. **LLM Provider Base URL**: ZhipuAI uses a special coding endpoint: `https://open.bigmodel.cn/api/coding/paas/v4/` (NOT the standard API endpoint). This is configured in `config.yaml`.
+
 ## Key File Locations
 
 ### Core Files
@@ -767,10 +898,18 @@ agents:
 
 ### Agent Classes (src/agents/)
 
+**Auto Mode v7.0 Agents**:
 | Agent Class | File | Purpose |
 |-------------|------|---------|
 | `BaseAgent` | `base.py` | Agent base class |
-| `AITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | AI trend analysis (7 data sources) |
+| `RealAITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | AI trend analysis (15+ data sources) |
+| `TrendCategorizerAgent` | `trend_categorizer_agent.py` | 5-category organization |
+| `NewsScoringAgent` | `news_scoring_agent.py` | 6-dimensional scoring (v7.0) |
+| `WorldClassDigestAgent` | `world_class_digest_agent.py` | Chinese digest + JSON |
+
+**Content Generation Agents** (Series/Custom/Refine modes):
+| Agent Class | File | Purpose |
+|-------------|------|---------|
 | `TrendsDigestAgent` | `trends_digest_agent.py` | Trend digest generation |
 | `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
 | `XiaohongshuLongRefinerAgent` | `xiaohongshu_long_refiner.py` | Xiaohongshu long note (~2000 chars) |
@@ -780,9 +919,16 @@ agents:
 | `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
 | `ImageGeneratorAgent` | `image_generator.py` | Image prompt generation |
 | `ResearchAgent` | `research_agent.py` | Web search deep research |
+
+**Quality Assurance Agents**:
+| Agent Class | File | Purpose |
+|-------------|------|---------|
 | `CodeReviewAgent` | `code_review_agent.py` | Code quality review |
 | `FactCheckAgent` | `fact_check_agent.py` | Fact verification |
 | `QualityEvaluatorAgent` | `quality_evaluator_agent.py` | Comprehensive quality assessment |
+| `ConsistencyCheckerAgent` | `consistency_checker_agent.py` | Terminology/citation check |
+| `VisualizationGeneratorAgent` | `visualization_generator_agent.py` | Auto-generate Mermaid diagrams |
+| `CitationFormatterAgent` | `citation_formatter_agent.py` | GB/T 7714-2015 format |
 
 ## Related Documentation
 
@@ -791,5 +937,19 @@ agents:
 
 ---
 
-**Version**: v2.8
-**Updated**: 2026-01-16
+**Version**: v7.0
+**Updated**: 2026-01-25
+
+## Summary of Key Changes
+
+This CLAUDE.md has been improved with:
+
+1. **Added test commands** - Test files section now includes actual commands to run tests
+2. **Corrected data source table** - Removed non-existent sources (Anthropic, Google AI, The Verge, VentureBeat) and aligned with actual config.yaml
+3. **Enhanced architecture overview** - Added "Big Picture" section showing multi-orchestrator pattern
+4. **Clarified LangGraph workflow** - Added actual code snippet from `src/auto_orchestrator.py:_build_workflow()`
+5. **Added "Important Architecture Gotchas" section** - Six critical gotchas that can trip up developers
+6. **Added state flow annotations** - Shows exactly which state fields each agent outputs
+7. **Added NewsAPI rate limiting note** - Common issue when using free tier
+8. **Improved PYTHONPATH reminder** - Added note to replace with actual path
+9. **Added test commands** - Shows how to run individual test files

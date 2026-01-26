@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_009",
+  "series_id": "ml_series_1",
+  "episode": 9,
+  "title": "模型评估与交叉验证技巧",
+  "description": "训练集、验证集、测试集的科学划分。K折交叉验证、分层采样、时间序列交叉验证、嵌套交叉验证。超参数调优：网格搜索、随机搜索、贝叶斯优化。",
+  "keywords": [
+    "交叉验证",
+    "模型评估",
+    "超参数调优",
+    "网格搜索",
+    "贝叶斯优化",
+    "Nested CV"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending"
+}

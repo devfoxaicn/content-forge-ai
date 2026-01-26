@@ -57,114 +57,50 @@ class SeriesOrchestrator:
         logger.info(f"SeriesOrchestrator initialized with {config_path}")
 
     def _init_agents(self) -> Dict[str, BaseAgent]:
-        """初始化Agent（Series模式：研究 + 生成 + 质量保证 + 可视化）"""
+        """初始化Agent（优化版Series模式：只保留 Research + LongForm）"""
         from src.agents.longform_generator import LongFormGeneratorAgent
         from src.agents.research_agent import ResearchAgent
-        from src.agents.code_review_agent import CodeReviewAgent
-        from src.agents.fact_check_agent import FactCheckAgent
-        from src.agents.quality_evaluator_agent import QualityEvaluatorAgent
-        from src.agents.consistency_checker_agent import ConsistencyCheckerAgent
-        from src.agents.visualization_generator_agent import VisualizationGeneratorAgent
-        from src.agents.citation_formatter_agent import CitationFormatterAgent
 
         agents = {}
 
         # 获取agent配置
         agents_config = self.config.get("agents", {})
 
+        # 确保配置中包含 mode: "series"
+        full_config = {**self.config, "mode": "series"}
+
         # 初始化研究Agent（优先于长文本生成）
         if agents_config.get("research_agent", {}).get("enabled", True):
             try:
                 agents["research_agent"] = ResearchAgent(
-                    config=agents_config.get("research_agent", {}),
+                    config={**agents_config.get("research_agent", {}), "mode": "series"},
                     prompts=self.prompts
                 )
                 logger.info("Initialized agent: research_agent")
             except Exception as e:
                 logger.warning(f"Failed to initialize research_agent: {e}")
 
-        # 初始化长文本生成Agent
+        # 初始化长文本生成Agent（必需）
         if agents_config.get("longform_generator", {}).get("enabled", True):
             try:
+                # 传递完整配置（包含mode: "series"）
+                longform_config = {**agents_config.get("longform_generator", {}), "mode": "series"}
                 agents["longform_generator"] = LongFormGeneratorAgent(
-                    config=agents_config.get("longform_generator", {}),
+                    config=full_config,  # 传递完整配置，包含 mode: "series"
                     prompts=self.prompts
                 )
                 logger.info("Initialized agent: longform_generator")
             except Exception as e:
                 logger.error(f"Failed to initialize longform_generator: {e}")
-
-        # 初始化代码审查Agent（Phase 1新增）
-        if agents_config.get("code_review_agent", {}).get("enabled", True):
-            try:
-                agents["code_review_agent"] = CodeReviewAgent(
-                    config=agents_config.get("code_review_agent", {}),
-                    prompts=self.prompts
-                )
-                logger.info("Initialized agent: code_review_agent")
-            except Exception as e:
-                logger.warning(f"Failed to initialize code_review_agent: {e}")
-
-        # 初始化事实核查Agent（Phase 1新增）
-        if agents_config.get("fact_check_agent", {}).get("enabled", True):
-            try:
-                agents["fact_check_agent"] = FactCheckAgent(
-                    config=agents_config.get("fact_check_agent", {}),
-                    prompts=self.prompts
-                )
-                logger.info("Initialized agent: fact_check_agent")
-            except Exception as e:
-                logger.warning(f"Failed to initialize fact_check_agent: {e}")
-
-        # 初始化质量评估Agent（Phase 1新增）
-        if agents_config.get("quality_evaluator_agent", {}).get("enabled", True):
-            try:
-                agents["quality_evaluator_agent"] = QualityEvaluatorAgent(
-                    config=agents_config.get("quality_evaluator_agent", {}),
-                    prompts=self.prompts
-                )
-                logger.info("Initialized agent: quality_evaluator_agent")
-            except Exception as e:
-                logger.warning(f"Failed to initialize quality_evaluator_agent: {e}")
-
-        # 初始化一致性检查Agent（Phase 2新增）
-        if agents_config.get("consistency_checker_agent", {}).get("enabled", True):
-            try:
-                agents["consistency_checker_agent"] = ConsistencyCheckerAgent(
-                    config=agents_config.get("consistency_checker_agent", {}),
-                    prompts=self.prompts
-                )
-                logger.info("Initialized agent: consistency_checker_agent")
-            except Exception as e:
-                logger.warning(f"Failed to initialize consistency_checker_agent: {e}")
-
-        # 初始化可视化生成Agent（Phase 2新增）
-        if agents_config.get("visualization_generator_agent", {}).get("enabled", True):
-            try:
-                agents["visualization_generator_agent"] = VisualizationGeneratorAgent(
-                    config=agents_config.get("visualization_generator_agent", {}),
-                    prompts=self.prompts
-                )
-                logger.info("Initialized agent: visualization_generator_agent")
-            except Exception as e:
-                logger.warning(f"Failed to initialize visualization_generator_agent: {e}")
-
-        # 初始化引用格式化Agent（Phase 3新增）
-        if agents_config.get("citation_formatter_agent", {}).get("enabled", True):
-            try:
-                agents["citation_formatter_agent"] = CitationFormatterAgent(
-                    config=agents_config.get("citation_formatter_agent", {}),
-                    prompts=self.prompts
-                )
-                logger.info("Initialized agent: citation_formatter_agent")
-            except Exception as e:
-                logger.warning(f"Failed to initialize citation_formatter_agent: {e}")
+                raise
 
         return agents
 
     def _generate_series_metadata(self, series_id: str) -> dict:
         """
         生成系列专用的元数据（只包含该系列的信息）
+
+        目标格式与 data/series/LLM_series/{series_directory}/series_metadata.json 一致
 
         Args:
             series_id: 系列 ID（如 series_1）
@@ -174,18 +110,24 @@ class SeriesOrchestrator:
         """
         from datetime import datetime
 
+        # 获取系列完整目录名（如 series_1_llm_foundation）
+        series_dir_name = SeriesPathManager.get_series_directory_name(series_id)
+
         # 获取系列信息
         series_info = self.series_metadata.get_series_by_id(series_id)
         if not series_info:
             logger.warning(f"Series {series_id} not found, using default info")
             series_info = {
-                "id": series_id,
+                "id": series_dir_name,  # 使用完整目录名
                 "name": series_id,
                 "description": "",
                 "topic_count": 0,
                 "difficulty": "未知",
                 "priority": 0
             }
+        else:
+            # 覆盖 id 为完整目录名（与目标格式一致）
+            series_info = {**series_info, "id": series_dir_name}
 
         # 获取该系列的所有话题
         topics = self.series_metadata.get_topics_by_series(series_id)
@@ -194,7 +136,12 @@ class SeriesOrchestrator:
         completed_episodes = sum(1 for t in topics if t.get("status") == "completed")
         total_estimated_words = sum(t.get("estimated_words", 0) for t in topics)
 
-        # 构建系列元数据
+        # 获取日期范围
+        completed_dates = [t.get("completed_at") for t in topics if t.get("completed_at")]
+        start_date = min(completed_dates) if completed_dates else None
+        end_date = max(completed_dates) if completed_dates else None
+
+        # 构建系列元数据（与目标格式一致）
         metadata = {
             "series_info": {
                 **series_info,
@@ -205,9 +152,9 @@ class SeriesOrchestrator:
                 "total_episodes": len(topics),
                 "completed_episodes": completed_episodes,
                 "total_estimated_words": total_estimated_words,
-                "completion_rate": f"{completed_episodes / len(topics) * 100:.1f}" if len(topics) > 0 else "0%",
-                "start_date": min((t.get("completed_at") for t in topics if t.get("completed_at")), default=None),
-                "end_date": max((t.get("completed_at") for t in topics if t.get("completed_at")), default=None)
+                "completion_rate": round(completed_episodes / len(topics) * 100, 1) if len(topics) > 0 else 0,
+                "start_date": start_date,
+                "end_date": end_date
             }
         }
 
@@ -235,13 +182,10 @@ class SeriesOrchestrator:
 
         series_id = topic["series_id"]
 
-        # 使用 SeriesPathManager 转换 series_id 为目录名
-        series_dir_name = SeriesPathManager.get_series_directory_name(series_id)
-
-        # 创建存储实例
+        # 创建存储实例（直接使用series_id，SeriesStorage内部会处理目录名转换）
         if storage is None:
             storage = StorageFactory.create_series(
-                series_id=series_dir_name,  # 使用转换后的目录名
+                series_id=series_id,
                 episode_number=episode_number
             )
 
@@ -306,7 +250,7 @@ class SeriesOrchestrator:
         state: Dict[str, Any],
         storage: SeriesStorage
     ) -> Dict[str, Any]:
-        """执行内容生成工作流（研究 + 生成 + 质量保证）"""
+        """执行内容生成工作流（优化版：只有 Research + LongForm）"""
         import time
 
         def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]:
@@ -325,60 +269,14 @@ class SeriesOrchestrator:
         # 第一步：网络搜索研究（如果启用了research_agent）
         if "research_agent" in self.agents:
             state = _call_agent_safely("research_agent", state)
-            logger.info(f"✅ 研究完成，获取到 {len(state.get('research_data', {}).get('sources', []))} 个资料来源")
+            sources_count = len(state.get('research_data', {}).get('sources', []))
+            logger.info(f"✅ 研究完成，获取到 {sources_count} 个资料来源")
 
-        # 第二步：长文本生成
+        # 第二步：长文本生成（必需）
         if "longform_generator" in self.agents:
             state = _call_agent_safely("longform_generator", state)
 
-        # 第三步：代码审查（Phase 1新增）
-        if "code_review_agent" in self.agents:
-            state = _call_agent_safely("code_review_agent", state)
-            if state.get("code_review_result"):
-                review_result = state["code_review_result"]
-                logger.info(f"✅ 代码审查完成，质量分数: {review_result.get('score', 0):.1f}/10")
-
-        # 第四步：事实核查（Phase 1新增）
-        if "fact_check_agent" in self.agents:
-            state = _call_agent_safely("fact_check_agent", state)
-            if state.get("fact_check_result"):
-                fact_result = state["fact_check_result"]
-                logger.info(f"✅ 事实核查完成，准确率: {fact_result.get('accuracy_rate', 0):.1%}")
-
-        # 第五步：质量评估（Phase 1新增）
-        if "quality_evaluator_agent" in self.agents:
-            state = _call_agent_safely("quality_evaluator_agent", state)
-            if state.get("quality_report"):
-                quality_report = state["quality_report"]
-                overall_score = quality_report.get("overall_score", 0)
-                logger.info(f"✅ 质量评估完成，总分: {overall_score:.1f}/10")
-
-                # 如果质量低于阈值，记录警告
-                if not quality_report.get("meets_threshold", True):
-                    logger.warning(f"⚠️ 文章质量 {overall_score:.1f} 低于阈值 {self.agents['quality_evaluator_agent'].min_score}")
-
-        # 第六步：一致性检查（Phase 2新增）
-        if "consistency_checker_agent" in self.agents:
-            state = _call_agent_safely("consistency_checker_agent", state)
-            if state.get("consistency_check_result"):
-                consistency_result = state["consistency_check_result"]
-                logger.info(f"✅ 一致性检查完成，分数: {consistency_result.get('score', 0):.1f}/10")
-
-        # 第七步：可视化生成（Phase 2新增）
-        if "visualization_generator_agent" in self.agents:
-            state = _call_agent_safely("visualization_generator_agent", state)
-            if state.get("visualization_result"):
-                viz_result = state["visualization_result"]
-                logger.info(f"✅ 可视化生成完成，生成 {viz_result.get('total_diagrams', 0)} 个图表")
-
-        # 第八步：引用格式化（Phase 3新增）
-        if "citation_formatter_agent" in self.agents:
-            state = _call_agent_safely("citation_formatter_agent", state)
-            if state.get("citation_formatter_result"):
-                citation_result = state["citation_formatter_result"]
-                logger.info(f"✅ 引用格式化完成，识别 {citation_result.get('inline_citation_count', 0)} 个文内引用，{citation_result.get('reference_count', 0)} 条参考文献")
-
-        # 保存长文本和质量报告
+        # 保存文章到episode目录（文件名格式：epXXX_标题_article.md）
         if "longform_article" in state:
             topic = state["current_topic"]
             article = state["longform_article"]
@@ -395,16 +293,10 @@ class SeriesOrchestrator:
 - 标签: {', '.join(article.get('tags', []))}
 - 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 """
-            filename = TopicFormatter.generate_markdown_filename(topic, "article")
-            storage.save_markdown("longform", filename, md_content)
-            logger.info(f"Saved longform article: {filename}")
 
-        # 保存质量报告
-        if state.get("quality_report"):
-            quality_report = state["quality_report"]
-            quality_md = self._format_quality_report(quality_report)
-            storage.save_markdown("quality", "quality_report.md", quality_md)
-            logger.info("Saved quality report")
+            # 使用标题生成文件名（格式：epXXX_标题_article.md）
+            saved_path = storage.save_article(md_content, title=article['title'])
+            logger.info(f"✅ 文章已保存: {saved_path.name}")
 
         return state
 

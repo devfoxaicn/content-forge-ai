@@ -6,6 +6,7 @@
 from typing import Dict, Any
 import re
 import json
+import time
 from datetime import datetime
 from src.agents.base import BaseAgent
 
@@ -22,10 +23,14 @@ class LongFormGeneratorAgent(BaseAgent):
         self.llm.max_tokens = self.max_tokens
         self.llm.temperature = 0.7  # 平衡创意和准确性
         self.mock_mode = config.get("agents", {}).get("ai_trend_analyzer", {}).get("mock_mode", False)
+        # Series模式必须生成真实内容，不允许使用mock数据
+        self.series_mode = config.get("mode", "") == "series"
+        self.max_retries = generator_config.get("max_retries", 3)  # 最大重试次数
+        self.retry_delay = generator_config.get("retry_delay", 5)  # 重试延迟（秒）
 
     def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
-        生成长文本技术文章（分阶段生成）
+        生成长文本技术文章（分阶段生成，带重试机制）
 
         Args:
             state: 当前工作流状态
@@ -35,34 +40,62 @@ class LongFormGeneratorAgent(BaseAgent):
         """
         self.log("开始生成长文本技术文章（分阶段生成）")
 
-        try:
-            # 获取选中的热点话题
-            selected_topic = state.get("selected_ai_topic")
-            if not selected_topic:
-                raise ValueError("没有找到选中的AI热点话题")
+        # 获取选中的热点话题
+        selected_topic = state.get("selected_ai_topic")
+        if not selected_topic:
+            raise ValueError("没有找到选中的AI热点话题")
 
-            self.log(f"基于热点生成文章: {selected_topic['title']}")
+        self.log(f"基于热点生成文章: {selected_topic['title']}")
 
-            # Mock模式或API调用失败时返回模拟数据
-            if self.mock_mode:
-                self.log("使用Mock模式生成模拟文章")
-                article = self._generate_mock_article(selected_topic)
-            else:
-                # 分阶段生成
-                article = self._generate_article_stages(state, selected_topic)
-
-            self.log(f"成功生成技术文章，字数: {article['word_count']}")
-
+        # Mock模式直接返回模拟数据
+        if self.mock_mode:
+            self.log("使用Mock模式生成模拟文章")
+            article = self._generate_mock_article(selected_topic)
             return {
                 **state,
                 "longform_article": article,
                 "current_step": "longform_generator_completed"
             }
-        except Exception as e:
-            self.log(f"长文本生成失败: {str(e)}", "ERROR")
-            # 失败时也返回模拟数据以便测试后续流程
-            self.log("使用模拟数据继续测试", "WARNING")
-            selected_topic = state.get("selected_ai_topic", {"title": "AI技术", "description": "技术热点"})
+
+        # Series模式：必须生成真实内容，带重试机制
+        last_error = None
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                self.log(f"尝试生成文章 (第 {attempt}/{self.max_retries} 次)...")
+                article = self._generate_article_stages(state, selected_topic)
+
+                # 检查字数是否达标（Series模式要求）
+                if self.series_mode:
+                    min_words = 8000  # 最低8000字
+                    actual_words = article.get('word_count', 0)
+                    if actual_words < min_words:
+                        raise ValueError(f"字数不足: {actual_words} < {min_words}，需要重新生成")
+
+                self.log(f"✅ 成功生成技术文章，字数: {article['word_count']}")
+                return {
+                    **state,
+                    "longform_article": article,
+                    "current_step": "longform_generator_completed"
+                }
+
+            except Exception as e:
+                last_error = e
+                self.log(f"第 {attempt} 次尝试失败: {str(e)}", "WARNING")
+
+                if attempt < self.max_retries:
+                    retry_time = self.retry_delay * attempt  # 递增延迟
+                    self.log(f"等待 {retry_time} 秒后重试...", "INFO")
+                    time.sleep(retry_time)
+                else:
+                    self.log(f"❌ 所有重试均失败，最后错误: {str(e)}", "ERROR")
+
+        # 所有重试都失败后的处理
+        if self.series_mode:
+            # Series模式：抛出异常，不允许使用mock数据
+            raise Exception(f"Series模式文章生成失败（已重试{self.max_retries}次）: {str(last_error)}")
+        else:
+            # Auto模式：返回模拟数据以便测试后续流程
+            self.log("Auto模式：使用模拟数据继续测试", "WARNING")
             article = self._generate_mock_article(selected_topic)
             return {
                 **state,

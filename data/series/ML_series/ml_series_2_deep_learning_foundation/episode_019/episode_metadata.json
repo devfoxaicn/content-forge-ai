@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_019",
+  "series_id": "ml_series_2",
+  "episode": 19,
+  "title": "自监督学习与对比学习",
+  "description": "从有标签到无标签的范式转变。SimCLR、MoCo、BYOL、SimSiam等对比学习方法，MAE、BERT等掩码自编码，以及如何在下游任务中有效利用预训练模型。",
+  "keywords": [
+    "自监督学习",
+    "对比学习",
+    "SimCLR",
+    "MoCo",
+    "MAE",
+    "预训练",
+    "SSL"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15500,
+  "status": "pending"
+}

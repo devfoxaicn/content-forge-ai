@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_032",
+  "series_id": "ml_series_4",
+  "episode": 32,
+  "title": "词嵌入与Word2Vec解析",
+  "description": "词的向量表示。Word2Vec（CBOW、Skip-gram）、GloVe、FastText。词向量可视化、词类比任务。上下文嵌入（ELMo、CoVe）与静态词嵌入的对比。",
+  "keywords": [
+    "词嵌入",
+    "Word2Vec",
+    "GloVe",
+    "FastText",
+    "ELMo",
+    "词向量"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending"
+}

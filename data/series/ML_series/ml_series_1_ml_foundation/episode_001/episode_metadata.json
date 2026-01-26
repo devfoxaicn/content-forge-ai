@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_001",
+  "series_id": "ml_series_1",
+  "episode": 1,
+  "title": "机器学习导论：从零开始的AI之旅",
+  "description": "机器学习的本质是什么？从历史发展脉络到核心概念解析，理解学习范式、模型评估、偏差-方差权衡等基础理论，建立完整的机器学习认知框架。",
+  "keywords": [
+    "机器学习",
+    "AI导论",
+    "学习范式",
+    "模型评估",
+    "偏差方差",
+    "过拟合"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 12000,
+  "status": "completed",
+  "completed_at": "2026-01-24"
+}

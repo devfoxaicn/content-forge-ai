@@ -212,11 +212,13 @@ config/
 data/
 ├── daily/                                 # Auto模式输出
 ├── series/                               # Series模式输出
-│   └── series_X_*/
-│       └── episode_XXX/
-│           ├── longform/
-│           ├── quality/                   # 质量报告 ✨ NEW
-│           └── episode_metadata.json
+│   ├── LLM_series/                       # LLM系列分类
+│   │   └── series_X_*/
+│   │       └── episode_XXX/
+│   │           ├── episode_metadata.json
+│   │           └── epXXX_标题_article.md
+│   └── ML_series/                         # ML系列分类
+│       └── ...
 └── custom/                               # Custom模式输出
 ```
 
@@ -238,12 +240,9 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai ./venv/bin/python src/main.p
 
 **输出位置**：
 ```
-data/series/series_1_llm_foundation/episode_001/
-├── longform/
-│   └── ep001_llm_transformer_attention_mechanism_article.md
-├── quality/
-│   └── quality_report.md                   # 质量评估报告
-└── episode_metadata.json
+data/series/LLM_series/series_1_llm_foundation/episode_001/
+├── episode_metadata.json
+└── ep001_标题_article.md
 ```
 
 ### 7.2 Custom模式生成（仅生成长文本）

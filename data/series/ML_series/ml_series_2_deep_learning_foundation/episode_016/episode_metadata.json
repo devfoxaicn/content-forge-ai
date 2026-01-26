@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_016",
+  "series_id": "ml_series_2",
+  "episode": 16,
+  "title": "正则化技术与模型泛化",
+  "description": "防止过拟合的完整工具箱。Dropout、DropPath、Stochastic Depth、Batch Normalization、Layer Normalization、Weight Decay、Early Stopping、Data Augmentation等技术的原理与最佳实践。",
+  "keywords": [
+    "正则化",
+    "Dropout",
+    "BatchNorm",
+    "LayerNorm",
+    "Weight Decay",
+    "泛化",
+    "过拟合"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

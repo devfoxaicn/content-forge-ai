@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_024",
+  "series_id": "ml_series_3",
+  "episode": 24,
+  "title": "图像分割：语义分割与实例分割",
+  "description": "FCN、U-Net、DeepLab系列语义分割算法。Mask R-CNN实例分割。Panoptic FPN全景分割。分割评估指标（mIoU、Dice系数），以及分割在医学影像、自动驾驶中的应用。",
+  "keywords": [
+    "图像分割",
+    "语义分割",
+    "U-Net",
+    "DeepLab",
+    "Mask R-CNN",
+    "mIoU"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15500,
+  "status": "pending"
+}

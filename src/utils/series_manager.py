@@ -154,6 +154,7 @@ class SeriesPathManager:
 
     # 系列ID到友好名称的映射（与实际文件夹名称一致）
     SERIES_NAME_MAP = {
+        # LLM系列
         "series_1": "llm_foundation",
         "series_2": "rag_technique",
         "series_3": "agent_development",
@@ -164,7 +165,25 @@ class SeriesPathManager:
         "series_8": "ai_data_engineering",
         "series_9": "ai_applications",
         "series_10": "ai_infrastructure",
+        # ML系列（机器学习与深度学习）
+        "ml_series_1": "ml_foundation",
+        "ml_series_2": "deep_learning_foundation",
+        "ml_series_3": "computer_vision",
+        "ml_series_4": "natural_language_processing",
+        "ml_series_5": "reinforcement_learning",
+        "ml_series_6": "recommendation_systems",
+        "ml_series_7": "model_optimization",
+        "ml_series_8": "traditional_ml",
+        "ml_series_9": "feature_engineering",
+        "ml_series_10": "advanced_ml_topics",
     }
+
+    @classmethod
+    def get_series_category(cls, series_id: str) -> str:
+        """获取系列分类：LLM 或 ML"""
+        if series_id.startswith("ml_series_"):
+            return "ML_series"
+        return "LLM_series"
 
     @classmethod
     def get_series_directory_name(cls, series_id: str) -> str:
@@ -179,10 +198,16 @@ class SeriesPathManager:
 
     @classmethod
     def get_full_series_path(cls, base_dir: str = "data", series_id: str = None) -> Path:
-        """获取系列完整路径"""
+        """
+        获取系列完整路径
+
+        路径格式：data/series/{category}/{series_directory}/
+        例如：data/series/LLM_series/series_1_llm_foundation/
+        """
         if series_id:
+            category = cls.get_series_category(series_id)
             series_dir = cls.get_series_directory_name(series_id)
-            return Path(base_dir) / "series" / series_dir
+            return Path(base_dir) / "series" / category / series_dir
         return Path(base_dir) / "series"
 
     @classmethod
@@ -192,7 +217,12 @@ class SeriesPathManager:
         series_id: str,
         episode_number: int
     ) -> Path:
-        """获取单集完整路径"""
+        """
+        获取单集完整路径
+
+        路径格式：data/series/{category}/{series_directory}/episode_{XXX}/
+        例如：data/series/LLM_series/series_1_llm_foundation/episode_001/
+        """
         series_path = cls.get_full_series_path(base_dir, series_id)
         episode_dir = cls.get_episode_directory_name(episode_number)
         return series_path / episode_dir

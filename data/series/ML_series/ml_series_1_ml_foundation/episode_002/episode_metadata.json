@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_002",
+  "series_id": "ml_series_1",
+  "episode": 2,
+  "title": "线性回归：机器学习的Hello World",
+  "description": "从最小二乘法到梯度下降，深入理解线性回归的数学推导、正则化技巧（L1/L2）、特征选择，以及如何处理多元回归和非线性关系。",
+  "keywords": [
+    "线性回归",
+    "最小二乘法",
+    "梯度下降",
+    "Lasso",
+    "Ridge",
+    "正则化"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 14000,
+  "status": "pending"
+}

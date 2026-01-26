@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_031",
+  "series_id": "ml_series_4",
+  "episode": 31,
+  "title": "自然语言处理NLP导论",
+  "description": "NLP的核心任务：文本分类、命名实体识别、关系抽取、情感分析。jieba分词、停用词处理、词性标注。传统NLP方法（TF-IDF、Bag of Words）与现代深度学习方法的对比。",
+  "keywords": [
+    "NLP",
+    "自然语言处理",
+    "文本分类",
+    "分词",
+    "NER",
+    "情感分析",
+    "jieba"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 13000,
+  "status": "pending"
+}

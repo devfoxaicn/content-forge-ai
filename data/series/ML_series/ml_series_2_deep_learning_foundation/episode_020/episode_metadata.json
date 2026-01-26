@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_020",
+  "series_id": "ml_series_2",
+  "episode": 20,
+  "title": "生成对抗网络GAN实战",
+  "description": "生成模型的革命。GAN的基本原理、纳什均衡、训练稳定性问题。DCGAN、WGAN、StyleGAN、CycleGAN、Pix2Pix等变体，以及GAN在图像生成、风格迁移、数据增强中的应用。",
+  "keywords": [
+    "GAN",
+    "生成对抗网络",
+    "WGAN",
+    "StyleGAN",
+    "CycleGAN",
+    "生成模型",
+    "纳什均衡"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 16000,
+  "status": "pending"
+}

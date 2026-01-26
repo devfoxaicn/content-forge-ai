@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_023",
+  "series_id": "ml_series_3",
+  "episode": 23,
+  "title": "目标检测：从两阶段到单阶段算法",
+  "description": "目标检测的核心挑战。R-CNN系列：R-CNN、Fast R-CNN、Faster R-CNN。单阶段检测器：YOLO系列、SSD、RetinaNet。Anchor-Free方法：CenterNet、FCOS。NMS后处理技巧。",
+  "keywords": [
+    "目标检测",
+    "R-CNN",
+    "YOLO",
+    "Faster R-CNN",
+    "SSD",
+    "NMS",
+    "Anchor-Free"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 16500,
+  "status": "pending"
+}

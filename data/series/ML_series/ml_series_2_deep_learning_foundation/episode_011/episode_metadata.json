@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_011",
+  "series_id": "ml_series_2",
+  "episode": 11,
+  "title": "神经网络基础：从感知机到多层网络",
+  "description": "感知机的局限性与多层感知机的突破。前向传播、反向传播算法推导、激活函数演变（Sigmoid→Tanh→ReLU→GELU→SwiGLU），权重初始化技巧（Xavier、He初始化）。",
+  "keywords": [
+    "神经网络",
+    "感知机",
+    "反向传播",
+    "激活函数",
+    "权重初始化",
+    "Xavier",
+    "He初始化"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 16000,
+  "status": "pending"
+}
