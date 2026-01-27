@@ -17,8 +17,8 @@ jobs:
   generate-digest:
     runs-on: ubuntu-latest
 
-    # 设置超时时间为 30 分钟
-    timeout-minutes: 30
+    # 设置超时时间为 90 分钟
+    timeout-minutes: 90
 
     steps:
       # 1. 检出代码
