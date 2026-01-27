@@ -1,12 +1,12 @@
 {
   "series_info": {
-    "id": "series_3",
+    "id": "series_3_agent_development",
     "name": "Agent智能体开发系列",
     "description": "从零构建AI Agent，掌握Agent开发全流程",
     "topic_count": 8,
     "difficulty": "实践为主",
     "priority": 3,
-    "status": "in_progress"
+    "status": "completed"
   },
   "topics": [
     {
@@ -166,16 +166,16 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 12000,
-      "status": "pending",
-      "completed_at": "2026-01-09"
+      "status": "completed",
+      "completed_at": "2026-01-10"
     }
   ],
   "statistics": {
     "total_episodes": 8,
-    "completed_episodes": 7,
+    "completed_episodes": 8,
     "total_estimated_words": 99000,
-    "completion_rate": "87.5",
-    "start_date": "2026-01-09",
+    "completion_rate": 100.0,
+    "start_date": "2026-01-10",
     "end_date": "2026-01-10"
   }
 }

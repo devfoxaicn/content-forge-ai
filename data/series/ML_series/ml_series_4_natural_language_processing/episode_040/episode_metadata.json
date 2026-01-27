@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_040",
+  "series_id": "ml_series_4",
+  "episode": 40,
+  "title": "对话系统与聊天机器人",
+  "description": "对话系统架构：检索式vs生成式、任务型vs闲聊型。意图识别、槽位填充、对话状态追踪（DST）。端到端对话模型、多轮对话管理，以及智能客服、语音助手应用。",
+  "keywords": [
+    "对话系统",
+    "聊天机器人",
+    "意图识别",
+    "槽位填充",
+    "DST",
+    "多轮对话"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

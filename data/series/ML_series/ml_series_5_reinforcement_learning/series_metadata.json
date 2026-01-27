@@ -1,0 +1,211 @@
+{
+  "series_info": {
+    "id": "ml_series_5_reinforcement_learning",
+    "name": "强化学习系列",
+    "description": "强化学习原理与智能决策系统",
+    "topic_count": 10,
+    "difficulty": "进阶→前沿",
+    "priority": 5,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_041",
+      "series_id": "ml_series_5",
+      "episode": 41,
+      "title": "强化学习RL基础原理",
+      "description": "RL的核心要素：Agent、Environment、State、Action、Reward。马尔可夫决策过程MDP、贝尔曼方程、值迭代、策略迭代。探索与利用困境：ε-greedy、UCB、Thompson Sampling。",
+      "keywords": [
+        "强化学习",
+        "RL",
+        "MDP",
+        "贝尔曼方程",
+        "探索利用",
+        "ε-greedy",
+        "UCB"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-27"
+    },
+    {
+      "id": "ml_topic_042",
+      "series_id": "ml_series_5",
+      "episode": 42,
+      "title": "深度Q学习DQN与改进算法",
+      "description": "Q-Learning、DQN原理及经验回放、目标网络。Double DQN、Dueling DQN、Rainbow DQN。连续动作空间：DDPG、TD3、A3C、A2C、IMPALA。Atari游戏实战。",
+      "keywords": [
+        "DQN",
+        "Q-Learning",
+        "DDPG",
+        "TD3",
+        "A3C",
+        "A2C",
+        "Rainbow",
+        "Atari"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "completed",
+      "completed_at": "2026-01-27"
+    },
+    {
+      "id": "ml_topic_043",
+      "series_id": "ml_series_5",
+      "episode": 43,
+      "title": "策略梯度与Actor-Critic算法",
+      "description": "策略梯度定理、REINFORCE算法。Actor-Critic架构、优势函数、GAE。PPO、TRPO近端策略优化。SAC、Soft Actor-Critic最大熵RL。连续控制任务实战。",
+      "keywords": [
+        "策略梯度",
+        "Actor-Critic",
+        "PPO",
+        "TRPO",
+        "SAC",
+        "REINFORCE",
+        "GAE"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-27"
+    },
+    {
+      "id": "ml_topic_044",
+      "series_id": "ml_series_5",
+      "episode": 44,
+      "title": "模仿学习与逆强化学习",
+      "description": "从专家演示中学习。行为克隆、逆向RL、DAgger、GAIL。奖励函数设计、奖励塑形、人工对齐。以及在机器人控制、自动驾驶中的应用。",
+      "keywords": [
+        "模仿学习",
+        "逆强化学习",
+        "行为克隆",
+        "GAIL",
+        "奖励塑形",
+        "IRL"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_045",
+      "series_id": "ml_series_5",
+      "episode": 45,
+      "title": "多智能体强化学习MARL",
+      "description": "多智能体系统挑战。独立学习、 centralized training with decentralized execution (CTDE)。QMIX、MADDPG、MAPPO。协作、竞争、混合动机场景，以及在即时战略游戏、资源调度中的应用。",
+      "keywords": [
+        "多智能体",
+        "MARL",
+        "MADDPG",
+        "QMIX",
+        "MAPPO",
+        "CTDE",
+        "协作"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_046",
+      "series_id": "ml_series_5",
+      "episode": 46,
+      "title": "离线强化学习Offline RL",
+      "description": "从在线到离线RL的范式转变。Offline RL挑战：分布偏移。Conservative Q-Learning（CQL）、Behavior Regularized Offline RL（BORL）、Implicit Q-Learning（IQL）。在推荐系统、 Healthcare中的应用。",
+      "keywords": [
+        "离线强化学习",
+        "Offline RL",
+        "CQL",
+        "IQL",
+        "分布偏移",
+        "BORL"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_047",
+      "series_id": "ml_series_5",
+      "episode": 47,
+      "title": "基于模型的强化学习Model-Based RL",
+      "description": "Model-Free vs Model-Based对比。世界模型学习、Model Predictive Control (MPC)。Dreamer、World Models、MuZero。规划与学习结合，以及在机器人控制、游戏中的应用。",
+      "keywords": [
+        "Model-Based RL",
+        "世界模型",
+        "MPC",
+        "Dreamer",
+        "MuZero",
+        "规划"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_048",
+      "series_id": "ml_series_5",
+      "episode": 48,
+      "title": "层次强化学习与选项框架",
+      "description": "时间信度分配问题。Options框架、Feudal Networks、HIerarchical Reinforcement Learning (HIRL)。FuN、FeUdal Networks、hRL。在复杂任务、长期规划中的应用。",
+      "keywords": [
+        "层次强化学习",
+        "Options",
+        "HIRL",
+        "Feudal Networks",
+        "时间信度",
+        "抽象"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_049",
+      "series_id": "ml_series_5",
+      "episode": 49,
+      "title": "奖励函数设计与评估",
+      "description": "奖励塑造的艺术。稀疏vs密集奖励、辅助奖励、内在动机。好奇心驱动、RND、ICM。奖励黑客问题、指标评估（Return、Success Rate、样本效率）。",
+      "keywords": [
+        "奖励塑造",
+        "奖励设计",
+        "好奇心",
+        "RND",
+        "ICM",
+        "奖励黑客",
+        "内在动机"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_050",
+      "series_id": "ml_series_5",
+      "episode": 50,
+      "title": "RL在游戏AI中的应用",
+      "description": "AlphaGo系列解析：MCTS、策略价值网络、AlphaZero。OpenAI Five（Dota 2）、OpenAI Five（Hide&Seek）。星际争霸、德州扑克。从游戏AI到通用AI的启示。",
+      "keywords": [
+        "AlphaGo",
+        "AlphaZero",
+        "MCTS",
+        "游戏AI",
+        "Dota",
+        "星际争霸",
+        "德州扑克"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15500,
+      "status": "pending"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 3,
+    "total_estimated_words": 147500,
+    "completion_rate": 30.0,
+    "start_date": "2026-01-27",
+    "end_date": "2026-01-27"
+  }
+}

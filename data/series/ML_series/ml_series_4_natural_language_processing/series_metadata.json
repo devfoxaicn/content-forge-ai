@@ -45,7 +45,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 14000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-26"
     },
     {
       "id": "ml_topic_033",
@@ -64,7 +65,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 15500,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_034",
@@ -82,7 +84,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 14000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_035",
@@ -100,7 +103,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 14500,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_036",
@@ -120,7 +124,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 15000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_037",
@@ -139,7 +144,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 15000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_038",
@@ -157,7 +163,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 15500,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_039",
@@ -176,7 +183,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 14500,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-27"
     },
     {
       "id": "ml_topic_040",
@@ -199,10 +207,10 @@
   ],
   "statistics": {
     "total_episodes": 10,
-    "completed_episodes": 1,
+    "completed_episodes": 9,
     "total_estimated_words": 146000,
-    "completion_rate": 10.0,
+    "completion_rate": 90.0,
     "start_date": "2026-01-26",
-    "end_date": "2026-01-26"
+    "end_date": "2026-01-27"
   }
 }

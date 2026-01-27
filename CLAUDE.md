@@ -2,8 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Current Version**: v7.0 (Latest: v7.0 with 6-dimensional news scoring and Chinese digest)
-
 **IMPORTANT**: Always run commands with PYTHONPATH set to the project root directory.
 
 **Project Root**: `/Users/z/Documents/work/content-forge-ai` (adjust if different)
@@ -15,7 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Set PYTHONPATH (required for all commands - adjust path to your project root)
 export PYTHONPATH=/Users/z/Documents/work/content-forge-ai
 
-# ========== Auto Mode v7.0 (Chinese AI News Digest with Scoring) ==========
+# ========== Auto Mode (Chinese AI News Digest with Scoring) ==========
 # Run once (recommended for daily AI news digest)
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --once
 
@@ -27,12 +25,6 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode se
 # Generate range
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --all --start 1 --end 10
 
-# ========== Custom Mode (user-defined topics) ==========
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode custom --topic "RAG技术原理与实战"
-
-# ========== Refine Mode (multi-platform content refining) ==========
-PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode refine --input article.md
-
 # ========== Tests ==========
 cd test
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --source hackernews
@@ -41,33 +33,50 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 
 **Core Files**:
 - `src/main.py` - Unified entry point (use `--mode` to switch)
-- `config/config.yaml` - Main config (LLM, agents, 15+ data sources)
+- `config/config.yaml` - Main config (LLM, agents, data sources)
 - `config/blog_topics_100_complete.json` - 100-episode content plan
 - `config/prompts.yaml` - Agent system prompt templates
 - `src/utils/storage_v2.py` - Unified storage (StorageFactory)
 - `src/utils/api_config.py` - API configuration manager
 
 **Key Architecture Points**:
-1. **Four-Mode Architecture**: Auto (v7.0 Chinese digest with scoring), Series (100 topics), Custom (user-defined), Refine (multi-platform)
-2. **Auto Mode v7.0**: 15+ data sources → 分类组织 → 评分筛选 → 全中文简报
+1. **Two-Mode Architecture**: Auto (Chinese digest with scoring), Series (100 topics)
+2. **Auto Mode**: Multiple data sources → 分类组织 → 评分筛选 → 全中文简报
 3. **DailyStorage**: Only creates `raw/` and `digest/` directories
 4. **Immutable State Updates**: Use `{**state, **updates}` pattern
+5. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
+
+## Deployment Automation
+
+**run_and_commit.sh** - Automated deployment script:
+```bash
+# Location: /path/to/content-forge-ai/run_and_commit.sh
+# Purpose: Auto-generate content and commit to GitHub
+
+# Script workflow:
+# 1. Sets PYTHONPATH
+# 2. Runs auto mode once: python src/main.py --mode auto --once
+# 3. Stages data/ directory changes
+# 4. Creates structured commit message with date
+# 5. Pushes to remote repository
+
+# Recommended crontab entry (daily at 3 AM):
+0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
+```
 
 ## Project Overview
 
-ContentForge AI v7.0 is a LangChain/LangGraph-based automated content production system that generates AI-focused content in Chinese and English across multiple formats.
+ContentForge AI is a LangChain/LangGraph-based automated content production system that generates AI-focused content.
 
-**Auto Mode v7.0** (Latest):
-- **14 Data Sources**: TechCrunch AI, NewsAPI.org, Hacker News, MIT Tech Review, OpenAI Blog, BAIR Blog, Microsoft Research, arXiv, MarkTechPost, KDnuggets, AI Business, The Gradient, InfoQ AI, Hugging Face Blog
+**Auto Mode**:
+- **Multiple Data Sources**: TechCrunch AI, NewsAPI.org, Hacker News, MIT Tech Review, OpenAI Blog, BAIR Blog, Microsoft Research, arXiv, MarkTechPost, KDnuggets, AI Business, The Gradient, InfoQ AI, Hugging Face Blog
 - **4 Agents**: AI Trend Analyzer → Trend Categorizer → News Scoring → World Class Digest (全中文)
 - **5 Categories**: 产业动态, 学术前沿, 技术创新, 产品工具, 行业应用
 - **Scoring System**: 6-dimensional scoring (source_authority 30%, engagement 20%, freshness 15%, category_balance 15%, content_quality 10%, diversity 10%)
 - **Output**: `data/daily/YYYYMMDD/digest/digest_YYYYMMDD.md` (全中文, with structured JSON)
 
-**Other Modes**:
-- **Series Mode**: 100-episode technical blog series (planned, episodes 1-100)
-- **Custom Mode**: User-defined topic content generation
-- **Refine Mode**: Multi-platform content adaptation (WeChat/Xiaohongshu/Twitter)
+**Series Mode**:
+- 100-episode technical blog series (episodes 1-100)
 
 ## Environment Setup
 
@@ -84,12 +93,12 @@ ContentForge AI v7.0 is a LangChain/LangGraph-based automated content production
 pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arxiv praw
 ```
 
-## Auto Mode v7.0 Architecture
+## Auto Mode Architecture
 
 **Workflow**:
 ```
 1. RealAITrendAnalyzerAgent
-   - 从15+个数据源获取热点
+   - 从多个数据源获取热点
    - 保留所有内容（不去重、不排序）
    - 输出: trends_by_source
 
@@ -98,7 +107,7 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
    - 5大分类：产业动态、学术前沿、技术创新、产品工具、行业应用
    - 输出: categorized_trends
 
-3. NewsScoringAgent (v7.0新增)
+3. NewsScoringAgent
    - 对新闻进行6维度评分
    - 智能筛选，保留高价值内容
    - 输出: scored_trends
@@ -110,7 +119,7 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
    - 输出: news_digest (全中文 + 结构化JSON)
 ```
 
-**Data Sources** (14 enabled sources):
+**Data Sources** (enabled sources):
 | 数据源 | 类型 | 内容 |
 |--------|------|------|
 | TechCrunch AI | 新闻 | AI行业新闻RSS |
@@ -163,34 +172,8 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
 - `--mode series --progress` - 查看进度
 - `--mode series --episode INT` - 生成指定集
 - `--mode series --all` - 生成全部
-
-**Custom Mode**:
-- `--mode custom --topic STR` - 指定主题
-- `--prompt STR` - 详细要求
-
-**Refine Mode**:
-- `--mode refine --input PATH` - 输入文件
-- `--platforms LIST` - 目标平台
 - `--start INT` - Start episode (default: 1)
 - `--end INT` - End episode (default: 100)
-- `--all` - Generate all in range
-- `--progress` - Show progress only
-
-**Custom Mode Parameters**:
-- `--topic STR` - Content topic/keywords (required)
-- `--prompt STR` - Detailed content requirements (optional)
-- `--audience STR` - Target audience (default: "技术从业者")
-- `--words INT` - Target word count (optional)
-- `--style {technical,practical,tutorial}` - Article style (optional)
-
-**Refine Mode Parameters**:
-- `--input PATH` - Input file path (required)
-- `--platforms {wechat,xiaohongshu,twitter}` - Target platforms (default: all three)
-
-**Important - Understanding `--topic` Parameter**:
-- **Auto mode**: `--topic` is **only for file naming** - actual content is fully auto-generated from real-time AI trends. The topic name doesn't affect the content.
-- **Custom mode**: `--topic` is the actual content theme to generate
-- **Series/Refine mode**: `--topic` is not used
 
 ## Architecture Overview
 
@@ -205,18 +188,12 @@ src/main.py (CLI entry point)
     │   └─→ LangGraph StateGraph workflow
     │       └─→ Agent chain: trend_analyzer → categorizer → scorer → digest
     │
-    ├─→ SeriesOrchestrator (src/series_orchestrator.py)
-    │   └─→ Sequential execution with error recovery
-    │       └─→ Agent chain: research → longform → quality check → social content
-    │
-    ├─→ CustomContentOrchestrator (src/custom_orchestrator.py)
-    │   └─→ Sequential execution for user-defined topics
-    │
-    └─→ RefineOrchestrator (src/refine_orchestrator.py)
-        └─→ Multi-platform content adaptation
+    └─→ SeriesOrchestrator (src/series_orchestrator.py)
+        └─→ Sequential execution with error recovery
+            └─→ Agent chain: research → longform → quality check → social content
 ```
 
-**Key Insight**: The LangGraph StateGraph in Auto mode vs sequential execution in other modes represents a fundamental architectural difference - Auto mode uses graph-based state management while other modes use traditional sequential flows.
+**Key Insight**: The LangGraph StateGraph in Auto mode vs sequential execution in Series mode represents a fundamental architectural difference - Auto mode uses graph-based state management while Series mode uses traditional sequential flows.
 
 ### Design Patterns
 
@@ -239,21 +216,21 @@ src/main.py (CLI entry point)
 - Implement standard `execute(state: Dict) -> Dict` interface
 - Unified logging, error handling, LLM calls
 
-### Four-Orchestrator Comparison
+### Two-Orchestrator Comparison
 
-| Feature | AutoContentOrchestrator | SeriesOrchestrator | CustomContentOrchestrator | RefineOrchestrator |
-|---------|-------------------------|-------------------|--------------------------|-------------------|
-| **File** | `src/auto_orchestrator.py` | `src/series_orchestrator.py` | `src/custom_orchestrator.py` | `src/refine_orchestrator.py` |
-| **Data Source** | 7 real-time APIs | 100 preset topics | User-defined keywords | Input file |
-| **Trigger** | Scheduled or manual | Manual execution | Manual execution | Manual execution |
-| **Storage** | `data/daily/YYYYMMDD/` | `data/series/{id}/episode_{xxx}/` | `data/custom/{timestamp}_topic/` | `data/refine/{source_name}/` |
-| **Output** | Raw data + Digest | Longform articles | Longform + Social content | Multi-platform content |
-| **Workflow** | LangGraph graph execution | Sequential with error recovery | Sequential execution | Sequential execution |
-| **State Fields** | Uses `trending_topics` | Uses `current_topic` + `selected_ai_topic` | Uses `selected_ai_topic` | Uses `longform_article` |
-| **Primary Use** | Daily trend tracking | Systematic content library | On-demand content | Multi-platform publishing |
-| **Storage Format** | `YYYYMMDD/` | `series_X_name/episode_XXX/` | `YYYYMMDD_HHMMSS_topic/` | `YYYYMMDD_title/` |
+| Feature | AutoContentOrchestrator | SeriesOrchestrator |
+|---------|-------------------------|-------------------|
+| **File** | `src/auto_orchestrator.py` | `src/series_orchestrator.py` |
+| **Data Source** | Multiple real-time APIs | 100 preset topics |
+| **Trigger** | Scheduled or manual | Manual execution |
+| **Storage** | `data/daily/YYYYMMDD/` | `data/series/{id}/episode_{xxx}/` |
+| **Output** | Raw data + Digest | Longform articles |
+| **Workflow** | LangGraph graph execution | Sequential with error recovery |
+| **State Fields** | Uses `trends_by_source` | Uses `current_topic` + `selected_ai_topic` |
+| **Primary Use** | Daily trend tracking | Systematic content library |
+| **Storage Format** | `YYYYMMDD/` | `series_X_name/episode_XXX/` |
 
-### Auto Workflow Agent Chain (v7.0)
+### Auto Workflow Agent Chain
 
 The LangGraph StateGraph builds a directed acyclic graph (DAG) of agents:
 
@@ -269,7 +246,7 @@ workflow.add_edge("world_class_digest", END)
 
 **Data Flow**:
 ```
-ai_trend_analyzer (15+ data sources aggregation)
+ai_trend_analyzer (multiple data sources aggregation)
   ↓ state["trends_by_source"] = {...}
 
 trend_categorizer (按5大分类重新组织)
@@ -282,7 +259,7 @@ world_class_digest (生成全中文世界顶级新闻简报)
   ↓ state["news_digest"] = {...}
 ```
 
-### Storage Structure (v4.0)
+### Storage Structure
 
 ```
 data/
@@ -293,40 +270,10 @@ data/
 │           ├── digest_YYYYMMDD.md
 │           └── digest_YYYYMMDD.json
 │
-├── series/                    # Series模式
-│   └── {series_id}/
-│       └── episode_{xxx}/
-│
-├── custom/                    # Custom模式
-│   └── {timestamp}_topic/
-│
-└── refine/                    # Refine模式
-    └── {source_name}/
+└── series/                    # Series模式
+    └── {series_id}/
+        └── episode_{xxx}/
 ```
-
-### Refine Mode Workflow
-
-```
-Load input file (article.md)
-  ↓
-Extract title and content
-  ↓
-Generate storage name: YYYYMMDD_title
-  ↓
-For each platform:
-  ┌─ WeChat: wechat_generator → article.html
-  ├─ Xiaohongshu: xiaohongshu_long_refiner → note_long.md (2000 chars)
-  │              xiaohongshu_short_refiner → note_short.md (800-1000 chars, viral baokuan style)
-  └─ Twitter: twitter_generator → thread.md
-```
-
-**Refine Mode Key Points**:
-- Storage format: `data/refine/YYYYMMDD_title/` (e.g., `20260115_Claude_Cowork入门指南`)
-- Xiaohongshu generates **two versions**:
-  - **Long note** (~2000 chars, 6 chapters, deep content) - `xiaohongshu/note_long.md`
-  - **Short note** (800-1000 chars, viral baokuan style with ## 1️⃣ 2️⃣ 3️⃣ numbered chapters) - `xiaohongshu/note_short.md`
-- Short refiner uses viral content style with numbered chapters, colloquial language ("太绝了", "扒一皮"), and strong comparisons
-- Each platform's content is saved immediately after generation
 
 ### AI Trend Data Sources (config.yaml:30-48)
 
@@ -555,6 +502,36 @@ series_id = SeriesPathManager.get_series_id_from_path("series_1_llm_foundation")
 **Important**: Adding new series requires updating both:
 1. `config/blog_topics_100_complete.json` - Add series info and topics
 2. `SeriesPathManager.SERIES_NAME_MAP` - Add path mapping
+
+### Claude Code Skills Directory
+
+**`.claude/skills/`** - Custom Claude Code skills for enhanced functionality:
+
+Skills are reusable capabilities that extend Claude Code's functionality. Each skill directory contains:
+- `skill.md` - Skill definition and usage instructions
+- Implementation code or configuration
+
+**Available Skills** (from git status):
+- `content-research-writer` - Research and citation assistance
+- `copy-editing` - Marketing copy review and improvement
+- `copywriting` - Marketing copy generation
+- `email-sequence` - Email campaign automation
+- `marketing-psychology` - Psychological principles for marketing
+- `notebooklm` - Google NotebookLM integration
+- `platform-adaptation` - Content adaptation for Chinese platforms
+- `scriptwriting` - Screenplay and script writing
+- `social-content` - Social media content management
+- `writing-clearly-and-concisely` - Strunk's writing rules
+- `x-article-publisher` - X (Twitter) Articles publishing
+
+**Using Skills**:
+```bash
+# List available skills
+ls .claude/skills/
+
+# Skills are automatically loaded by Claude Code
+# Invoke with /<skill-name> command in Claude Code
+```
 
 ### LangGraph State Management
 
@@ -876,6 +853,10 @@ agents:
 
 6. **LLM Provider Base URL**: ZhipuAI uses a special coding endpoint: `https://open.bigmodel.cn/api/coding/paas/v4/` (NOT the standard API endpoint). This is configured in `config.yaml`.
 
+7. **Version Context**: `config/config.yaml` header shows v2.5 but documentation references v7.0 features (NewsScoringAgent, 6-dimensional scoring). Features were added incrementally - verify actual implementation in source code.
+
+8. **Claude Code Skills**: The `.claude/skills/` directory contains custom skills that extend Claude Code functionality. These are loaded automatically when using Claude Code CLI.
+
 ## Key File Locations
 
 ### Core Files
@@ -895,6 +876,7 @@ agents:
 | `.env` | Environment variables (API keys) |
 | `.env.example` | Environment variable examples |
 | `run_and_commit.sh` | Automated deployment script |
+| `.claude/skills/` | Custom Claude Code skills directory |
 
 ### Agent Classes (src/agents/)
 
@@ -937,19 +919,32 @@ agents:
 
 ---
 
-**Version**: v7.0
-**Updated**: 2026-01-25
+**Version**: v2.5 (config.yaml) / v7.0 (feature documentation)
+**Updated**: 2026-01-27
 
-## Summary of Key Changes
+## Version Notes
+
+**Important Version Context**:
+- `config/config.yaml` shows v2.5 (file header comment)
+- Feature documentation references v7.0 (NewsScoringAgent, 6-dimensional scoring)
+- This reflects incremental development where features were added between config updates
+- **Always verify actual implementation in source code** - documented features may differ from deployed version
+
+## Recent Changes
 
 This CLAUDE.md has been improved with:
 
-1. **Added test commands** - Test files section now includes actual commands to run tests
-2. **Corrected data source table** - Removed non-existent sources (Anthropic, Google AI, The Verge, VentureBeat) and aligned with actual config.yaml
-3. **Enhanced architecture overview** - Added "Big Picture" section showing multi-orchestrator pattern
-4. **Clarified LangGraph workflow** - Added actual code snippet from `src/auto_orchestrator.py:_build_workflow()`
-5. **Added "Important Architecture Gotchas" section** - Six critical gotchas that can trip up developers
-6. **Added state flow annotations** - Shows exactly which state fields each agent outputs
-7. **Added NewsAPI rate limiting note** - Common issue when using free tier
-8. **Improved PYTHONPATH reminder** - Added note to replace with actual path
-9. **Added test commands** - Shows how to run individual test files
+1. **Added version mismatch clarification** - Explains v2.5 config vs v7.0 features
+2. **Added skills directory reference** - Documents `.claude/skills/` for custom Claude Code skills
+3. **Added run_and_commit.sh documentation** - Automated deployment script details
+4. **Added test commands** - Test files section includes actual commands to run tests
+5. **Corrected data source table** - Aligned with actual config.yaml (14 sources)
+6. **Enhanced architecture overview** - Added "Big Picture" section showing multi-orchestrator pattern
+7. **Added state flow annotations** - Shows exactly which state fields each agent outputs
+8. **Added NewsAPI rate limiting note** - Common issue when using free tier
+9. **Improved PYTHONPATH reminder** - Added note to replace with actual path
+
+**Recommended Actions**:
+1. Verify which features are actually enabled in config.yaml before use
+2. Check source code implementation when behavior differs from documentation
+3. Test in mock mode first before running with live APIs

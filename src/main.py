@@ -1,10 +1,8 @@
 """
 ContentForge AI - 统一主入口
-支持四种模式：
-1. auto模式 - 基于AI热点的自动内容生成
+支持两种模式：
+1. auto模式 - 基于AI热点的自动内容生成（全中文AI新闻简报）
 2. series模式 - 100期技术博客系列生成
-3. custom模式 - 根据用户给定的关键词/要求产出高质量长文本
-4. refine模式 - 根据已有高质量文本精炼出可直接复制粘贴的多平台内容
 """
 
 import os
@@ -101,68 +99,6 @@ def run_series_mode(args):
     print_progress_summary(args.series_config)
 
 
-def run_custom_mode(args):
-    """运行自定义内容生成模式"""
-    import yaml
-
-    logger.info("🚀 启动自定义内容生成模式...")
-
-    # 加载配置
-    with open(args.config, 'r', encoding='utf-8') as f:
-        config = yaml.safe_load(f)
-
-    # 创建协调器
-    from src.custom_orchestrator import CustomContentOrchestrator
-    orchestrator = CustomContentOrchestrator(config=config)
-
-    # 执行
-    result = orchestrator.run(
-        topic=args.topic,
-        prompt=args.prompt,
-        target_audience=args.audience,
-        words=args.words,
-        style=args.style
-    )
-
-    logger.success("="*50)
-    logger.success("✅ 自定义内容生成完成")
-    logger.success(f"耗时: {result.get('execution_time', 0):.2f}秒")
-    logger.success("="*50)
-
-    return result
-
-
-def run_refine_mode(args):
-    """运行内容精炼模式"""
-    import yaml
-
-    logger.info("🚀 启动内容精炼模式...")
-
-    # 加载配置
-    with open(args.config, 'r', encoding='utf-8') as f:
-        config = yaml.safe_load(f)
-
-    # 创建协调器
-    from src.refine_orchestrator import RefineOrchestrator
-    orchestrator = RefineOrchestrator(config=config)
-
-    # 确定平台列表
-    platforms = args.platforms or ["wechat", "xiaohongshu", "twitter"]
-
-    # 执行
-    result = orchestrator.run(
-        input_source=args.input,
-        platforms=platforms
-    )
-
-    logger.success("="*50)
-    logger.success("✅ 内容精炼完成")
-    logger.success(f"输出平台: {', '.join(platforms)}")
-    logger.success("="*50)
-
-    return result
-
-
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(
@@ -179,14 +115,6 @@ def main():
     python src/main.py --mode series --episode 1
     python src/main.py --mode series --series series_1
     python src/main.py --mode series --all --start 1 --end 10
-
-  自定义模式（根据关键词生成长文本）:
-    python src/main.py --mode custom --topic "RAG技术原理与实战"
-    python src/main.py --mode custom --topic "RAG技术" --prompt "详细介绍架构和实战"
-
-  精炼模式（已有文本精炼为多平台内容）:
-    python src/main.py --mode refine --input article.md
-    python src/main.py --mode refine --input article.md --platforms wechat xiaohongshu
         """
     )
 
@@ -194,7 +122,7 @@ def main():
     parser.add_argument(
         "--mode",
         type=str,
-        choices=["auto", "series", "custom", "refine"],
+        choices=["auto", "series"],
         default="auto",
         help="运行模式"
     )
@@ -216,17 +144,6 @@ def main():
     parser.add_argument("--all", action="store_true", help="生成全部指定范围")
     parser.add_argument("--progress", action="store_true", help="仅显示进度")
 
-    # ===== 自定义模式参数 =====
-    parser.add_argument("--prompt", help="详细内容要求描述")
-    parser.add_argument("--words", type=int, help="目标字数")
-    parser.add_argument("--style", choices=["technical", "practical", "tutorial"],
-                       help="文章风格")
-
-    # ===== 精炼模式参数 =====
-    parser.add_argument("--input", help="输入文件路径（Refine模式必需）")
-    parser.add_argument("--platforms", nargs="+", choices=["wechat", "xiaohongshu", "twitter"],
-                       help="目标平台")
-
     args = parser.parse_args()
 
     try:
@@ -234,10 +151,6 @@ def main():
             return run_auto_mode(args)
         elif args.mode == "series":
             return run_series_mode(args)
-        elif args.mode == "custom":
-            return run_custom_mode(args)
-        elif args.mode == "refine":
-            return run_refine_mode(args)
     except KeyboardInterrupt:
         logger.warning("用户中断")
         sys.exit(1)

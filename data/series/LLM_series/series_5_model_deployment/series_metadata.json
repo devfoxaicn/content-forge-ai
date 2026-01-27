@@ -1,6 +1,6 @@
 {
   "series_info": {
-    "id": "series_5",
+    "id": "series_5_model_deployment",
     "name": "模型部署与优化系列",
     "description": "掌握LLM生产环境部署与性能优化",
     "topic_count": 8,
@@ -69,7 +69,7 @@
       "difficulty": "实践",
       "estimated_words": 15000,
       "status": "completed",
-      "completed_at": "2026-01-11"
+      "completed_at": "2026-01-12"
     },
     {
       "id": "topic_036",
@@ -178,8 +178,8 @@
     "total_episodes": 8,
     "completed_episodes": 8,
     "total_estimated_words": 104000,
-    "completion_rate": "100.0",
+    "completion_rate": 100.0,
     "start_date": "2026-01-11",
-    "end_date": "2026-01-11"
+    "end_date": "2026-01-12"
   }
 }

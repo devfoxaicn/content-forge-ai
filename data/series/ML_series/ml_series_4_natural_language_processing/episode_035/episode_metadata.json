@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_035",
+  "series_id": "ml_series_4",
+  "episode": 35,
+  "title": "文本分类与情感分析",
+  "description": "从传统方法到深度学习。FastText、TextCNN、Hierarchical Attention Network、BERT。多标签分类、细粒度情感分析、方面级情感分析ABSA，以及电商评论、舆情分析应用。",
+  "keywords": [
+    "文本分类",
+    "情感分析",
+    "TextCNN",
+    "HAN",
+    "ABSA",
+    "多标签分类"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14500,
+  "status": "completed",
+  "completed_at": "2026-01-27"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_039",
+  "series_id": "ml_series_4",
+  "episode": 39,
+  "title": "机器翻译与多语言NLP",
+  "description": "机器翻译发展史：规则统计→神经网络→大模型。Transformer架构在MT中的应用、多语言模型（mBERT、XLM-R）。低资源语言翻译、领域自适应翻译，以及翻译质量评估。",
+  "keywords": [
+    "机器翻译",
+    "多语言",
+    "mBERT",
+    "XLM-R",
+    "Transformer",
+    "低资源",
+    "BLEU"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

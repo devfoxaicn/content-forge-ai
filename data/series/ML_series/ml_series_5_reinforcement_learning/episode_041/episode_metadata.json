@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_041",
+  "series_id": "ml_series_5",
+  "episode": 41,
+  "title": "强化学习RL基础原理",
+  "description": "RL的核心要素：Agent、Environment、State、Action、Reward。马尔可夫决策过程MDP、贝尔曼方程、值迭代、策略迭代。探索与利用困境：ε-greedy、UCB、Thompson Sampling。",
+  "keywords": [
+    "强化学习",
+    "RL",
+    "MDP",
+    "贝尔曼方程",
+    "探索利用",
+    "ε-greedy",
+    "UCB"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

@@ -1,6 +1,6 @@
 {
   "series_info": {
-    "id": "series_4",
+    "id": "series_4_prompt_engineering",
     "name": "提示工程系列",
     "description": "掌握提示词设计的艺术与科学",
     "topic_count": 6,
@@ -134,7 +134,7 @@
     "total_episodes": 6,
     "completed_episodes": 6,
     "total_estimated_words": 71000,
-    "completion_rate": "100.0",
+    "completion_rate": 100.0,
     "start_date": "2026-01-10",
     "end_date": "2026-01-12"
   }

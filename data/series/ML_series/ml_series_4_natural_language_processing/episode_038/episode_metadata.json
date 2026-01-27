@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_038",
+  "series_id": "ml_series_4",
+  "episode": 38,
+  "title": "信息抽取与知识图谱构建",
+  "description": "信息抽取三大任务：NER、关系抽取、事件抽取。开放域信息抽取、文档信息抽取。知识图谱表示（RDF、OWL）、知识存储（Neo4j）、知识推理，以及构建领域知识图谱实践。",
+  "keywords": [
+    "信息抽取",
+    "知识图谱",
+    "关系抽取",
+    "事件抽取",
+    "Neo4j",
+    "RDF"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15500,
+  "status": "pending"
+}

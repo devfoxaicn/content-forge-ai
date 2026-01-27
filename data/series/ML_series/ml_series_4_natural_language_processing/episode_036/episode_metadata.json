@@ -1,0 +1,20 @@
+{
+  "id": "ml_topic_036",
+  "series_id": "ml_series_4",
+  "episode": 36,
+  "title": "文本生成与Seq2Seq模型",
+  "description": "Seq2Seq架构、Attention机制。Transformer生成模型：GPT系列、T5、BART。解码策略：Greedy、Beam Search、Top-K、Top-P采样。文本评估指标（BLEU、ROUGE、METEOR）。",
+  "keywords": [
+    "文本生成",
+    "Seq2Seq",
+    "GPT",
+    "T5",
+    "BART",
+    "Beam Search",
+    "BLEU",
+    "ROUGE"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

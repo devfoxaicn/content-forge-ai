@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_043",
+  "series_id": "ml_series_5",
+  "episode": 43,
+  "title": "策略梯度与Actor-Critic算法",
+  "description": "策略梯度定理、REINFORCE算法。Actor-Critic架构、优势函数、GAE。PPO、TRPO近端策略优化。SAC、Soft Actor-Critic最大熵RL。连续控制任务实战。",
+  "keywords": [
+    "策略梯度",
+    "Actor-Critic",
+    "PPO",
+    "TRPO",
+    "SAC",
+    "REINFORCE",
+    "GAE"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

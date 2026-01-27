@@ -1,5 +1,5 @@
 """
-新闻重要性评分Agent - 对分类后的新闻进行重要性评分和筛选
+新闻重要性评分Agent v8.0 - 对分类后的新闻进行重要性评分和筛选
 
 评分维度:
 - source_authority: 来源权威度 (30%)
@@ -8,15 +8,48 @@
 - category_balance: 分类平衡 (15%)
 - content_quality: 内容质量 (10%)
 - diversity: 多样性 (10%)
+
+v8.0 新增:
+- AI关键词识别加权
+- 技术趋势敏感度评分
+- 专业术语识别
 """
 
 from typing import Dict, Any, List
 from datetime import datetime, timedelta
 from collections import defaultdict
 from src.agents.base import BaseAgent
+import re
 
 
-# 数据源权威度评分 (0-100)
+# v8.0: AI关键词列表 - 用于识别高价值内容
+AI_KEYWORDS_HIGH_VALUE = [
+    # 核心技术
+    "GPT", "LLM", "Transformer", "Agent", "RAG", "Fine-tuning", "LoRA",
+    "Multi-agent", "Chain of Thought", "Reasoning", "Embedding",
+    # 前沿技术
+    "Diffusion", "Stable Diffusion", "Midjourney", "DALL-E", "Sora",
+    "Whisper", "CLIP", "GLM", "Qwen", "Llama", "Mistral",
+    # 应用领域
+    "Code generation", "Copilot", "GitHub Copilot", "ChatGPT",
+    "OpenAI", "Anthropic", "Claude", "Gemini", "Hugging Face",
+    # 技术概念
+    "Prompt engineering", "In-context learning", "Zero-shot", "Few-shot",
+    "Temperature", "Token", "Context window", "Inference",
+]
+
+# 新兴技术趋势 - 2024-2025
+EMERGING_TECH_TRENDS = [
+    "AI Agent", "Autonomous agent", "Multi-agent system",
+    "Video generation", "Text-to-video", "Sora",
+    "Real-time voice", "GPT-4o", "GPT-4o mini",
+    "Local LLM", "On-device AI", "Edge AI",
+    "Open source model", "Llama 3", "Gemma", "Mixtral",
+    "AI safety", "Alignment", "Interpretability",
+    "Multimodal", "Vision-language", "VLM",
+]
+
+# 数据源权威度评分 (0-100) - v8.0 更新
 SOURCE_AUTHORITY_SCORES = {
     "OpenAI Blog": 95,
     "Anthropic": 95,
@@ -236,11 +269,13 @@ class NewsScoringAgent(BaseAgent):
             return 60.0
 
     def _score_content_quality(self, item: Dict) -> float:
-        """根据内容质量评分"""
+        """根据内容质量评分（v8.0 - 增强版，包含AI关键词识别）"""
         title = item.get("title", "")
         description = item.get("description", "")
 
         score = 50.0  # 基础分
+
+        # ========== 基础质量评分 ==========
 
         # 标题质量
         if len(title) >= 10 and len(title) <= 100:
@@ -266,6 +301,35 @@ class NewsScoringAgent(BaseAgent):
         # 标题是否全大写（可能质量较低）
         if title.isupper():
             score -= 10
+
+        # ========== v8.0: AI关键词和技术趋势识别 ==========
+
+        # 合并标题和描述进行关键词检测
+        content = f"{title} {description}".lower()
+
+        # 检测高价值AI关键词（每个+3分，最多+15分）
+        ai_keyword_count = 0
+        for keyword in AI_KEYWORDS_HIGH_VALUE:
+            if keyword.lower() in content:
+                ai_keyword_count += 1
+                if ai_keyword_count >= 5:  # 最多计算5个
+                    break
+        score += min(15, ai_keyword_count * 3)
+
+        # 检测新兴技术趋势（每个+5分，最多+10分）
+        trend_count = 0
+        for trend in EMERGING_TECH_TRENDS:
+            if trend.lower() in content:
+                trend_count += 1
+                if trend_count >= 2:  # 最多计算2个
+                    break
+        score += min(10, trend_count * 5)
+
+        # 检测专业术语（提升质量感）
+        technical_terms = ["API", "SDK", "benchmark", "performance", "architecture",
+                          "paper", "research", "model", "training", "inference"]
+        tech_term_count = sum(1 for term in technical_terms if term.lower() in content)
+        score += min(5, tech_term_count * 1)
 
         return min(100.0, max(0.0, score))
 

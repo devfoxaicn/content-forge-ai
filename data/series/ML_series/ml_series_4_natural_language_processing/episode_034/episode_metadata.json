@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_034",
+  "series_id": "ml_series_4",
+  "episode": 34,
+  "title": "序列标注：NER与词性标注实战",
+  "description": "序列标注任务的特点。BiLSTM+CRF、BERT+CRF经典架构。Span-based方法、指针网络。标注评估（Precision/Recall/F1），以及医疗、金融等专业领域NER应用。",
+  "keywords": [
+    "序列标注",
+    "NER",
+    "词性标注",
+    "CRF",
+    "BiLSTM+CRF",
+    "指针网络"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending"
+}

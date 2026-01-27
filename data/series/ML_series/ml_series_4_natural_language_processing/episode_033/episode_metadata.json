@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_033",
+  "series_id": "ml_series_4",
+  "episode": 33,
+  "title": "语言模型与预训练革命",
+  "description": "从NNLM到BERT。ELMo的双向LSTM、GPT系列的自回归生成、BERT的掩码语言模型。RoBERTa、ALBERT优化版。预训练-微调范式如何改变NLP。",
+  "keywords": [
+    "语言模型",
+    "BERT",
+    "GPT",
+    "ELMo",
+    "RoBERTa",
+    "预训练",
+    "掩码语言模型"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15500,
+  "status": "pending"
+}

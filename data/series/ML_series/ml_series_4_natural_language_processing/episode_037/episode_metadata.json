@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_037",
+  "series_id": "ml_series_4",
+  "episode": 37,
+  "title": "问答系统与检索式RAG",
+  "description": "问答系统类型：FAQ问答、知识库问答、社区问答。检索式方法（TF-IDF、BM25）、稠密检索（DPR、ColBERT）。RAG架构设计、检索优化、生成质量提升。",
+  "keywords": [
+    "问答系统",
+    "RAG",
+    "检索",
+    "DPR",
+    "ColBERT",
+    "BM25",
+    "知识库问答"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending"
+}
