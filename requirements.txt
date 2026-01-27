@@ -3,13 +3,13 @@
 # ============================================================
 
 # ------------------ LangChain & LangGraph ------------------
-# 使用固定版本确保兼容性
-langchain==0.3.14
-langchain-openai==0.2.14
-langchain-core==0.3.29
-langchain-community==0.3.17
-langgraph==0.2.55
-langgraph-sdk==0.2.9
+# 使用版本范围以避免依赖冲突
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+langgraph>=0.2.0
+langgraph-sdk>=0.2.0
 
 # ------------------ LLM API ------------------
 openai>=1.0.0
@@ -41,11 +41,12 @@ feedparser>=6.0.10
 praw>=7.7.0
 
 # ------------------ 搜索服务 ------------------
-tavily-python==0.7.18
+# tavily-python==0.7.18  # Daily 模式不需要，移除以避免依赖冲突
 
 # ------------------ 可选依赖 ------------------
+# 以下依赖暂时注释，以避免安装冲突
 # Stability AI (图片生成)
-stability-sdk>=0.8.0
+# stability-sdk>=0.8.0
 
 # 定时任务
-apscheduler>=3.10.0
+# apscheduler>=3.10.0
