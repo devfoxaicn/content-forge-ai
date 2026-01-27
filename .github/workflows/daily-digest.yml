@@ -9,6 +9,10 @@ on:
     - cron: '50 13 * * *'
   workflow_dispatch:  # 支持在 GitHub 页面手动触发
 
+# 设置权限
+permissions:
+  contents: write
+
 jobs:
   generate-digest:
     runs-on: ubuntu-latest
