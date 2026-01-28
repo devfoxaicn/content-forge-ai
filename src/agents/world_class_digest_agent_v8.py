@@ -480,12 +480,15 @@ class WorldClassDigestAgentV8:
             for item in top_items
         ])
 
+        # 准备核心洞察列表（避免嵌套f-string）
+        insights_list = "\n".join([f"- {insight}" for insight in core_insights])
+
         prompt = f"""你是TechCrunch、Wired等顶级科技媒体的专栏作家。
 
 基于今日AI新闻和核心洞察，写一篇350-450字的深度观察文章。
 
 【参考的核心洞察】
-{chr(10).join(f"- {insight}" for insight in core_insights)}
+{insights_list}
 
 【今日重要新闻】
 {news_list}
