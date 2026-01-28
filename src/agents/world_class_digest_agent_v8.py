@@ -212,7 +212,10 @@ class WorldClassDigestAgentV8:
             desc = desc.replace('<p>', '').replace('</p>', '').replace('<br>', ' ')[:200]
             news_items.append(f"{i+1}. 标题: {title}\n   摘要: {desc}")
 
-        prompt = """你是TechCrunch、The Verge、Wired等顶级科技媒体的中文主编。
+        # 构建新闻内容（使用字符串拼接避免brace冲突）
+        news_content = "\n".join(news_items)
+
+        prompt_template = """你是TechCrunch、The Verge、Wired等顶级科技媒体的中文主编。
 
 【核心翻译原则 - Copywriting Standards】
 
@@ -245,7 +248,7 @@ class WorldClassDigestAgentV8:
 【优秀翻译示例】
 
 输入: "OpenAI Announces GPT-5 With 1M Context Window, 300% Better Reasoning"
-输出: {{"title": "OpenAI发布GPT-5：支持100万tokens，推理提升300%", "summary": "OpenAI推出GPT-5，上下文窗口扩展至100万tokens（可处理整本书），推理能力提升300%"}
+输出: {{"title": "OpenAI发布GPT-5：支持100万tokens，推理提升300%", "summary": "OpenAI推出GPT-5，上下文窗口扩展至100万tokens（可处理整本书），推理能力提升300%"}}
 
 输入: "Meta Releases New Open Source LLM to Compete with GPT-4"
 输出: {{"title": "Meta开源新大模型，性能媲美GPT-4可免费商用", "summary": "Meta发布全新开源LLM，性能达到GPT-4水平，企业可免费用于商业产品"}}
@@ -261,9 +264,12 @@ class WorldClassDigestAgentV8:
 }}
 
 【待翻译新闻】
-{news_items_placeholder}
+PLACEHOLDER_NEWS_CONTENT
 
-请严格按照以上原则，直接输出JSON格式：""".format(news_items_placeholder=chr(10).join(news_items))
+请严格按照以上原则，直接输出JSON格式："""
+
+        prompt = prompt_template.replace("PLACEHOLDER_NEWS_CONTENT", news_content)
+
 
         try:
             system_msg = """你是TechCrunch、The Verge、Wired等顶级科技媒体的中文主编。
