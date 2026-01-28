@@ -50,12 +50,17 @@ jobs:
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
           PYTHONPATH: ${{ github.workspace }}
           TZ: Asia/Shanghai
+          PYTHONDONTWRITEBYTECODE: 1
         run: |
           echo "========================================"
           echo "开始执行 AI 每日热点生成..."
           echo "执行时间: $(date '+%Y-%m-%d %H:%M:%S')"
           echo "时区: $TZ"
           echo "========================================"
+
+          # 清理Python缓存
+          find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+          find . -name "*.pyc" -delete 2>/dev/null || true
 
           python src/main.py --mode auto --once
 
