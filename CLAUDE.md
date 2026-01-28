@@ -40,15 +40,21 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 - `src/utils/api_config.py` - API configuration manager
 
 **Key Architecture Points**:
-1. **Two-Mode Architecture**: Auto (Chinese digest with scoring), Series (100 topics)
+1. **Two-Mode Architecture** (only 2 implemented): Auto (Chinese digest), Series (100 episodes)
 2. **Auto Mode**: Multiple data sources → 分类组织 → 评分筛选 → 全中文简报
-3. **DailyStorage**: Only creates `raw/` and `digest/` directories
-4. **Immutable State Updates**: Use `{**state, **updates}` pattern
-5. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
+3. **Series Mode**: 7-layer quality pipeline with staged longform generation
+4. **DailyStorage**: Only creates `raw/` and `digest/` directories
+5. **Immutable State Updates**: Use `{**state, **updates}` pattern
+6. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
 
 ## Deployment Automation
 
-**run_and_commit.sh** - Automated deployment script:
+**GitHub Actions** - Automated deployment (3x daily):
+- **Schedule**: 6:00, 12:00, 18:00 Beijing Time (via `.github/workflows/daily-content.yml`)
+- **Workflow**: Runs auto mode → commits changes → pushes to GitHub
+- **Timeout**: 90 minutes (configured in workflow YAML)
+
+**run_and_commit.sh** - Manual deployment script:
 ```bash
 # Location: /path/to/content-forge-ai/run_and_commit.sh
 # Purpose: Auto-generate content and commit to GitHub
@@ -59,9 +65,6 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 # 3. Stages data/ directory changes
 # 4. Creates structured commit message with date
 # 5. Pushes to remote repository
-
-# Recommended crontab entry (daily at 3 AM):
-0 3 * * * /path/to/content-forge-ai/run_and_commit.sh
 ```
 
 ## Project Overview
@@ -77,6 +80,8 @@ ContentForge AI is a LangChain/LangGraph-based automated content production syst
 
 **Series Mode**:
 - 100-episode technical blog series (episodes 1-100)
+- 7-layer quality assurance pipeline
+- Staged longform generation (outline → sections → summary)
 
 ## Environment Setup
 
@@ -273,7 +278,10 @@ data/
 └── series/                    # Series模式
     └── {series_id}/
         └── episode_{xxx}/
+            └── longform/     # 长文本文章
 ```
+
+**Note**: Only Auto and Series modes are implemented. Custom/Refine modes documented in config.yaml are NOT available in the current codebase.
 
 ### AI Trend Data Sources (config.yaml:30-48)
 
@@ -396,24 +404,11 @@ data/
 │       ├── raw/
 │       └── digest/
 │
-├── series/                   # Series mode (100-episode blog series)
-│   └── {series_id}/
-│       ├── episode_{xxx}/
-│       │   └── longform/
-│       └── series_metadata.json
-│
-├── custom/                   # Custom mode (user-defined content)
-│   └── {timestamp}_{topic}/
-│       ├── longform/
-│       ├── xiaohongshu/
-│       └── twitter/
-│
-└── refine/                   # Refine mode (multi-platform content)
-    └── {source_name}/
-        ├── raw/
-        ├── wechat/
-        ├── xiaohongshu/
-        └── twitter/
+└── series/                   # Series mode (100-episode blog series)
+    └── {series_id}/
+        ├── episode_{xxx}/
+        │   └── longform/
+        └── series_metadata.json
 ```
 
 **Usage**:
@@ -431,15 +426,9 @@ series_storage = StorageFactory.create_series(
 )
 series_storage.save_article(content, title="文章标题")  # 直接保存到episode目录
 series_storage.save_episode_metadata(metadata)
-
-# Custom mode (user-defined content)
-custom_storage = StorageFactory.create_custom("20260114_120000_RAG技术")
-custom_storage.save_markdown("longform", "article.md", content)
-
-# Refine mode (multi-platform)
-refine_storage = StorageFactory.create_refine("my_article")
-refine_storage.save_text("wechat", "article.html", html_content)
 ```
+
+**Note**: Custom and Refine modes are defined in storage_v2.py but are NOT used by the current codebase. Only Auto and Series modes are implemented.
 
 **Series Metadata Management**:
 ```python
@@ -586,44 +575,46 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 ```
 
 **Execution Order**:
-1. AI trend analysis → Trend digest → Content research
-2. Longform generation → Code review
-3. Xiaohongshu refinement → Twitter generation
-4. Title optimization → Image generation
-5. Quality evaluation
+- **Auto Mode**: AI trend analysis → Trend categorization → News scoring → World class digest
+- **Series Mode**: Research → Longform generation → Code review → Fact check → Quality evaluation → Consistency check → Visualization → Citation formatting
 
 **Prompt Template System**: Each agent's system prompts stored in `config/prompts.yaml`, organized by lowercase agent class name
 
 ### Agent Dependencies
 
-**Auto Mode v7.0 Agents**:
+**Auto Mode Agents (v8.0)**:
 | Agent | Deps On | Outputs | Description |
 |-------|---------|---------|-------------|
-| ai_trend_analyzer | - | trends_by_source | 15+ data source aggregation |
+| ai_trend_analyzer | - | trends_by_source | 14 data source aggregation |
 | trend_categorizer | trends_by_source | categorized_trends | 5-category organization |
-| news_scoring | categorized_trends | scored_trends | 6-dimensional scoring (v7.0) |
-| world_class_digest | scored_trends | news_digest | Chinese digest + JSON |
+| news_scoring | categorized_trends | scored_trends | 6-dimensional scoring |
+| world_class_digest_v8 | scored_trends | news_digest | Chinese digest + JSON |
 
-**Other Agents** (Series/Custom/Refine modes):
+**Series Mode Agents**:
 | Agent | Deps On | Outputs | Description |
 |-------|---------|---------|-------------|
-| trends_digest | trending_topics | digest_content | Optional digest |
-| research_agent | selected_ai_topic | research_data, research_summary | Background for longform |
-| longform_generator | selected_ai_topic, research_data | longform_article | Core content |
+| research_agent | selected_ai_topic | research_data, research_summary | Web search background |
+| longform_generator | selected_ai_topic, research_data | longform_article | Core content (staged) |
 | code_review_agent | longform_article | code_review_result | Quality assurance |
-| fact_check_agent | longform_article | fact_check_result | Quality assurance |
-| xiaohongshu_refiner | longform_article | xiaohongshu_note | Content adaptation |
-| twitter_generator | longform_article | twitter_post | Content adaptation |
-| title_optimizer | longform_article | optimized_titles | SEO optimization |
-| image_generator | xiaohongshu_note or twitter_post | image_prompts | Image generation |
-| quality_evaluator | All outputs | quality_report | Final evaluation |
+| fact_check_agent | longform_article | fact_check_result | Fact verification |
+| quality_evaluator_agent | longform_article | quality_report | Comprehensive evaluation |
 | consistency_checker_agent | longform_article | consistency_report | Terminology/citation check |
 | visualization_generator_agent | longform_article | mermaid_diagrams | Auto-generate diagrams |
 | citation_formatter_agent | longform_article | formatted_citations | GB/T 7714-2015 format |
 
+**Available Exported Agents** (from `src/agents/__init__.py`):
+- BaseAgent
+- RealAITrendAnalyzerAgent
+- TrendsDigestAgent
+- LongFormGeneratorAgent
+- TitleOptimizerAgent
+- ImageGeneratorAgent
+
+**Note**: Many agent files exist in `src/agents/` (16 total) but are NOT exported in `__init__.py`. Agents like `XiaohongshuRefinerAgent` and `TwitterGeneratorAgent` were removed during Refine/Custom mode cleanup. To use additional agents, manually import them from their modules.
+
 ### Critical Notes
 
-1. **Xiaohongshu/Twitter Agents Must Execute Sequentially**: Both read `longform_article` but should not run in parallel to avoid state update conflicts (`src/auto_orchestrator.py:213`)
+1. **Agent Import Requirement**: Only 6 agents are exported by default. To use quality assurance agents (code_review, fact_check, etc.), import directly: `from src.agents.code_review_agent import CodeReviewAgent`
 
 2. **Longform Generator Needs Research Data**: `longform_generator` prioritizes `research_data`; if unavailable, generates based only on `selected_ai_topic`
 
@@ -653,20 +644,20 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 
 | State Field | Written By | Read By | Description |
 |-------------|------------|----------|-------------|
-| `trending_topics` | ai_trend_analyzer | trends_digest | AI trend list (Auto mode) |
-| `digest_content` | trends_digest | - | Trend digest content |
+| `trends_by_source` | ai_trend_analyzer | trend_categorizer | Raw trends by source (Auto mode) |
+| `categorized_trends` | trend_categorizer | news_scoring | 5-category organized trends |
+| `scored_trends` | news_scoring | world_class_digest_v8 | Scored and filtered trends |
+| `news_digest` | world_class_digest_v8 | - | Final Chinese digest |
 | `research_data` | research_agent | longform_generator | Web search research data |
-| `selected_ai_topic` | ai_trend_analyzer / series_orchestrator | longform_generator | Selected AI topic |
+| `selected_ai_topic` | series_orchestrator | longform_generator | Selected AI topic |
 | `current_topic` | series_orchestrator | - | Current topic (Series mode) |
-| `longform_article` | longform_generator | code_review_agent, xiaohongshu_refiner, twitter_generator | Longform article |
-| `xiaohongshu_note` | xiaohongshu_refiner | - | Xiaohongshu note |
-| `twitter_post` | twitter_generator | - | Twitter post |
+| `longform_article` | longform_generator | quality agents | Longform article |
 | `error_message` | Any agent | - | Error info |
 | `current_step` | Any agent | - | Current step |
 | `execution_time` | orchestrator | - | Execution time stats |
 | `agent_execution_order` | orchestrator | - | Agent execution order |
 
-**Note**: `WorkflowState` TypedDict defines possible fields, but actual usage is plain Dict. Auto mode uses `trending_topics`, Series mode uses `current_topic` and `selected_ai_topic`. State updates use immutable pattern: `{**state, **updates}`.
+**Note**: `WorkflowState` TypedDict defines possible fields, but actual usage is plain Dict. Auto mode uses `trends_by_source`→`categorized_trends`→`scored_trends` flow; Series mode uses `current_topic` and `selected_ai_topic`. State updates use immutable pattern: `{**state, **updates}`.
 
 ### Error Handling Pattern
 
@@ -838,24 +829,26 @@ agents:
 
 ## Important Architecture Gotchas
 
-1. **State Field Naming Confusion**: Auto mode uses `trends_by_source`/`categorized_trends`/`scored_trends`, but older code and Series mode use `trending_topics`. These are NOT compatible.
+1. **Only 2 Modes Implemented**: Auto and Series modes work. Custom and Refine modes are documented in config.yaml but NOT coded.
 
-2. **Agent Name vs State Field**: The agent is named `ai_trend_analyzer` but outputs `trends_by_source`, not `trending_topics`.
+2. **State Field Naming Confusion**: Auto mode uses `trends_by_source`/`categorized_trends`/`scored_trends`, but older code and Series mode use `trending_topics`. These are NOT compatible.
 
-3. **DailyStorage Only Creates Two Directories**: As of v4.0+, `DailyStorage` only creates `raw/` and `digest/` subdirectories. Other directories like `longform/` will NOT be created in Auto mode.
+3. **Agent Name vs State Field**: The agent is named `ai_trend_analyzer` but outputs `trends_by_source`, not `trending_topics`.
 
-4. **Research Agent Provider**: The `research_agent` uses `search_provider: "tavily"` by default (paid service). You can change to "zhipuai" (included in annual plan) or "mock" (offline development) in config.yaml.
+4. **DailyStorage Only Creates Two Directories**: As of v4.0+, `DailyStorage` only creates `raw/` and `digest/` subdirectories. Other directories like `longform/` will NOT be created in Auto mode.
 
-5. **Series ID vs Path**: Series use two different identifiers:
+5. **Research Agent Provider**: The `research_agent` uses `search_provider: "tavily"` by default (paid service). You can change to "zhipuai" (included in annual plan) or "mock" (offline development) in config.yaml.
+
+6. **Series ID vs Path**: Series use two different identifiers:
    - `series_id`: "series_1" (internal ID, used in JSON config)
    - `series_path`: "series_1_llm_foundation" (folder name, used in filesystem)
    - Always use `SeriesPathManager` to convert between them.
 
-6. **LLM Provider Base URL**: ZhipuAI uses a special coding endpoint: `https://open.bigmodel.cn/api/coding/paas/v4/` (NOT the standard API endpoint). This is configured in `config.yaml`.
+7. **LLM Provider Base URL**: ZhipuAI uses a special coding endpoint: `https://open.bigmodel.cn/api/coding/paas/v4/` (NOT the standard API endpoint). This is configured in `config.yaml`.
 
-7. **Version Context**: `config/config.yaml` header shows v2.5 but documentation references v7.0 features (NewsScoringAgent, 6-dimensional scoring). Features were added incrementally - verify actual implementation in source code.
+8. **Agent Import Limitation**: Only 6 agents are exported in `__init__.py`. Quality agents (code_review, fact_check, etc.) must be imported directly from their modules.
 
-8. **Claude Code Skills**: The `.claude/skills/` directory contains custom skills that extend Claude Code functionality. These are loaded automatically when using Claude Code CLI.
+9. **Version Context**: `config/config.yaml` header shows v2.5 but actual implementation is v8.0. Features were added incrementally - verify actual implementation in source code.
 
 ## Key File Locations
 
@@ -880,37 +873,35 @@ agents:
 
 ### Agent Classes (src/agents/)
 
-**Auto Mode v7.0 Agents**:
+**Exported Agents** (available via `from src.agents import ...`):
 | Agent Class | File | Purpose |
 |-------------|------|---------|
 | `BaseAgent` | `base.py` | Agent base class |
-| `RealAITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | AI trend analysis (15+ data sources) |
-| `TrendCategorizerAgent` | `trend_categorizer_agent.py` | 5-category organization |
-| `NewsScoringAgent` | `news_scoring_agent.py` | 6-dimensional scoring (v7.0) |
-| `WorldClassDigestAgent` | `world_class_digest_agent.py` | Chinese digest + JSON |
-
-**Content Generation Agents** (Series/Custom/Refine modes):
-| Agent Class | File | Purpose |
-|-------------|------|---------|
+| `RealAITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | AI trend analysis (14 data sources) |
 | `TrendsDigestAgent` | `trends_digest_agent.py` | Trend digest generation |
 | `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
-| `XiaohongshuLongRefinerAgent` | `xiaohongshu_long_refiner.py` | Xiaohongshu long note (~2000 chars) |
-| `XiaohongshuShortRefinerAgent` | `xiaohongshu_short_refiner.py` | Xiaohongshu short note (800-1000 chars, viral baokuan style) |
-| `TwitterGeneratorAgent` | `twitter_generator.py` | Twitter post generation |
-| `WechatGeneratorAgent` | `wechat_generator.py` | WeChat HTML generation |
 | `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
 | `ImageGeneratorAgent` | `image_generator.py` | Image prompt generation |
-| `ResearchAgent` | `research_agent.py` | Web search deep research |
 
-**Quality Assurance Agents**:
+**Auto Mode Agents** (import directly):
 | Agent Class | File | Purpose |
 |-------------|------|---------|
+| `TrendCategorizerAgent` | `trend_categorizer_agent.py` | 5-category organization |
+| `NewsScoringAgent` | `news_scoring_agent.py` | 6-dimensional scoring |
+| `WorldClassDigestAgentV8` | `world_class_digest_agent_v8.py` | Chinese digest + JSON |
+
+**Series Mode Quality Agents** (import directly):
+| Agent Class | File | Purpose |
+|-------------|------|---------|
+| `ResearchAgent` | `research_agent.py` | Web search deep research |
 | `CodeReviewAgent` | `code_review_agent.py` | Code quality review |
 | `FactCheckAgent` | `fact_check_agent.py` | Fact verification |
 | `QualityEvaluatorAgent` | `quality_evaluator_agent.py` | Comprehensive quality assessment |
 | `ConsistencyCheckerAgent` | `consistency_checker_agent.py` | Terminology/citation check |
 | `VisualizationGeneratorAgent` | `visualization_generator_agent.py` | Auto-generate Mermaid diagrams |
 | `CitationFormatterAgent` | `citation_formatter_agent.py` | GB/T 7714-2015 format |
+
+**Note**: Files for Xiaohongshu/Twitter/WeChat agents exist but were removed during Refine/Custom mode cleanup and are NOT exported.
 
 ## Related Documentation
 
@@ -919,32 +910,33 @@ agents:
 
 ---
 
-**Version**: v2.5 (config.yaml) / v7.0 (feature documentation)
-**Updated**: 2026-01-27
+**Version**: v8.0 (current implementation)
+**Updated**: 2026-01-28
 
 ## Version Notes
 
 **Important Version Context**:
-- `config/config.yaml` shows v2.5 (file header comment)
-- Feature documentation references v7.0 (NewsScoringAgent, 6-dimensional scoring)
-- This reflects incremental development where features were added between config updates
+- **v8.0** (current): Auto and Series modes optimized with skills integration, 3x daily GitHub Actions
+- `config/config.yaml` header shows v2.5 (outdated, not updated)
+- Features include v7.0 innovations (NewsScoringAgent, 6-dimensional scoring) plus v8.0 improvements
+- **Only 2 modes implemented**: Auto and Series. Custom/Refine modes documented in config but NOT coded
 - **Always verify actual implementation in source code** - documented features may differ from deployed version
 
 ## Recent Changes
 
 This CLAUDE.md has been improved with:
 
-1. **Added version mismatch clarification** - Explains v2.5 config vs v7.0 features
-2. **Added skills directory reference** - Documents `.claude/skills/` for custom Claude Code skills
-3. **Added run_and_commit.sh documentation** - Automated deployment script details
-4. **Added test commands** - Test files section includes actual commands to run tests
-5. **Corrected data source table** - Aligned with actual config.yaml (14 sources)
-6. **Enhanced architecture overview** - Added "Big Picture" section showing multi-orchestrator pattern
-7. **Added state flow annotations** - Shows exactly which state fields each agent outputs
-8. **Added NewsAPI rate limiting note** - Common issue when using free tier
-9. **Improved PYTHONPATH reminder** - Added note to replace with actual path
+1. **Removed Custom/Refine mode documentation** - These modes are NOT implemented
+2. **Corrected agent availability** - Only 6 agents exported by default (not 16)
+3. **Updated storage structure** - Removed custom/refine directories
+4. **Added GitHub Actions deployment** - 3x daily automated execution (6:00, 12:00, 18:00)
+5. **Updated agent dependencies** - Separated Auto (v8.0) and Series mode agents
+6. **Fixed state flow documentation** - Removed references to non-existent social content agents
+7. **Added agent import warning** - Quality agents require manual import
+8. **Corrected version information** - Reflects v8.0 reality
 
 **Recommended Actions**:
-1. Verify which features are actually enabled in config.yaml before use
-2. Check source code implementation when behavior differs from documentation
+1. Only use Auto and Series modes - Custom/Refine are not available
+2. Import quality agents directly when needed: `from src.agents.code_review_agent import CodeReviewAgent`
 3. Test in mock mode first before running with live APIs
+4. Verify agent availability in `src/agents/__init__.py` before use

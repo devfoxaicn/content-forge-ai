@@ -31,10 +31,46 @@ data/
 
 import os
 import json
-from datetime import datetime
+import time
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional, Literal
 from abc import ABC, abstractmethod
+
+
+def _get_now_beijing_time():
+    """获取北京时间（兼容 TZ 环境变量）
+
+    优先级：
+    1. 使用 TZ 环境变量（如果设置）
+    2. 否则使用 UTC+8（北京时间）
+
+    Returns:
+        datetime: 当前时间
+    """
+    tz_str = os.environ.get('TZ')
+
+    if tz_str:
+        # 设置时区（仅限 Unix/Linux）
+        try:
+            # 尝试使用 zoneinfo（Python 3.9+）
+            try:
+                from zoneinfo import ZoneInfo
+                return datetime.now(ZoneInfo(tz_str))
+            except ImportError:
+                # Python 3.8 或更早版本，使用时区偏移
+                if tz_str == 'Asia/Shanghai':
+                    # 北京时间 UTC+8
+                    return datetime.now(timezone.utc) + timedelta(hours=8)
+                else:
+                    # 其他时区，返回 UTC（简化处理）
+                    return datetime.now(timezone.utc)
+        except Exception:
+            # 出错时返回 UTC+8
+            return datetime.now(timezone.utc) + timedelta(hours=8)
+    else:
+        # 没有设置 TZ 环境变量，默认使用 UTC+8
+        return datetime.now(timezone.utc) + timedelta(hours=8)
 
 
 class BaseStorage(ABC):
@@ -114,7 +150,7 @@ class DailyStorage(BaseStorage):
         if date:
             self.date_str = date
         else:
-            self.date_str = datetime.now().strftime("%Y%m%d")
+            self.date_str = _get_now_beijing_time().strftime("%Y%m%d")
 
         # 创建 daily/{日期} 目录
         self.daily_dir = self.base_dir / "daily" / self.date_str
