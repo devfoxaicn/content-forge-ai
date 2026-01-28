@@ -49,10 +49,12 @@ jobs:
           ZHIPUAI_API_KEY: ${{ secrets.ZHIPUAI_API_KEY }}
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
           PYTHONPATH: ${{ github.workspace }}
+          TZ: Asia/Shanghai
         run: |
           echo "========================================"
           echo "开始执行 AI 每日热点生成..."
           echo "执行时间: $(date '+%Y-%m-%d %H:%M:%S')"
+          echo "时区: $TZ"
           echo "========================================"
 
           python src/main.py --mode auto --once
@@ -120,11 +122,13 @@ jobs:
       # 7. 生成摘要报告
       - name: Summary report
         if: always()
+        env:
+          TZ: Asia/Shanghai
         run: |
           echo "========================================"
           echo "📊 AI Daily Digest 生成报告"
           echo "========================================"
-          echo "执行时间: $(date '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "执行时间: $(date '+%Y-%m-%d %H:%M:%S') (北京时间)"
           echo "执行状态: ${{ job.status }}"
 
           if [ "${{ steps.check-data.outputs.has_digest }}" = "true" ]; then
