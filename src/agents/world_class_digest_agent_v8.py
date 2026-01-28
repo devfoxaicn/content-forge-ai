@@ -212,7 +212,7 @@ class WorldClassDigestAgentV8:
             desc = desc.replace('<p>', '').replace('</p>', '').replace('<br>', ' ')[:200]
             news_items.append(f"{i+1}. 标题: {title}\n   摘要: {desc}")
 
-        prompt = f"""你是TechCrunch、The Verge、Wired等顶级科技媒体的中文主编。
+        prompt = """你是TechCrunch、The Verge、Wired等顶级科技媒体的中文主编。
 
 【核心翻译原则 - Copywriting Standards】
 
@@ -261,9 +261,9 @@ class WorldClassDigestAgentV8:
 }}
 
 【待翻译新闻】
-{chr(10).join(news_items)}
+{news_items_placeholder}
 
-请严格按照以上原则，直接输出JSON格式："""
+请严格按照以上原则，直接输出JSON格式：""".format(news_items_placeholder=chr(10).join(news_items))
 
         try:
             system_msg = """你是TechCrunch、The Verge、Wired等顶级科技媒体的中文主编。
