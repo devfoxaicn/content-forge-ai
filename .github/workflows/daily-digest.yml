@@ -44,6 +44,11 @@ jobs:
           pip install -r requirements.txt
 
       # 4. 运行每日简报生成
+      - name: Verify code version
+        run: |
+          echo "检查代码版本..."
+          grep -A 2 "insights_list" src/agents/world_class_digest_agent_v8.py || echo "⚠️ 代码可能未更新"
+
       - name: Run daily digest generation
         env:
           ZHIPUAI_API_KEY: ${{ secrets.ZHIPUAI_API_KEY }}
