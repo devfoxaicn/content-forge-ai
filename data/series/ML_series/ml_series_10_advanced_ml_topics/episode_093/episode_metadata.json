@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_093",
+  "series_id": "ml_series_10",
+  "episode": 93,
+  "title": "联邦学习与隐私保护",
+  "description": "数据隐私的法律合规要求。联邦学习框架：FedAvg、FedProx。差分隐私、安全聚合、同态加密。在金融风控、医疗协作中的应用。",
+  "keywords": [
+    "联邦学习",
+    "隐私保护",
+    "FedAvg",
+    "差分隐私",
+    "同态加密",
+    "安全聚合"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

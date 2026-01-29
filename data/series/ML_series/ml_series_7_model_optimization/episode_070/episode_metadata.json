@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_070",
+  "series_id": "ml_series_7",
+  "episode": 70,
+  "title": "AutoML自动化机器学习",
+  "description": "AutoML全流程：数据预处理、特征工程、模型选择、超参数优化。AutoSklearn、AutoGluon、H2O.ai。神经架构搜索NAS，以及在低门槛AI建模中的应用。",
+  "keywords": [
+    "AutoML",
+    "自动化机器学习",
+    "AutoSklearn",
+    "AutoGluon",
+    "H2O",
+    "超参数优化"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

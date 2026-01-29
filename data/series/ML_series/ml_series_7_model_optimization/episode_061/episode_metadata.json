@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_061",
+  "series_id": "ml_series_7",
+  "episode": 61,
+  "title": "模型量化技术详解",
+  "description": "量化原理：INT8/INT4量化、量化感知训练。GEMM低比特优化、量化误差累积。Post-Training Quantization (PTQ)、Quantization-Aware Training (QAT)。在边缘设备、移动端部署中的应用。",
+  "keywords": [
+    "量化",
+    "INT8",
+    "QAT",
+    "PTQ",
+    "模型压缩",
+    "边缘部署",
+    "量化感知训练"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15000,
+  "status": "pending"
+}

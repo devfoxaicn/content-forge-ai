@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_086",
+  "series_id": "ml_series_9",
+  "episode": 86,
+  "title": "文本特征工程实战",
+  "description": "文本的向量表示。TF-IDF、N-gram、Char-CNN。预训练Embedding、BERT特征。情感特征、主题特征（LDA）、关键词特征，以及在文本分类、情感分析中的应用。",
+  "keywords": [
+    "文本特征",
+    "TF-IDF",
+    "N-gram",
+    "BERT",
+    "LDA",
+    "情感特征",
+    "文本分类"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending"
+}

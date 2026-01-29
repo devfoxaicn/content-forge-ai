@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_062",
+  "series_id": "ml_series_7",
+  "episode": 62,
+  "title": "模型剪枝与网络瘦身",
+  "description": "结构化剪枝vs非结构化剪枝。L1/L2正则化剪枝、Gradual Pruning。Lottery Ticket Hypothesis、Network Pruning。动态剪枝、稀疏训练，以及在模型加速中的应用。",
+  "keywords": [
+    "剪枝",
+    "网络瘦身",
+    "Lottery Ticket",
+    "稀疏化",
+    "结构化剪枝",
+    "动态剪枝"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending"
+}

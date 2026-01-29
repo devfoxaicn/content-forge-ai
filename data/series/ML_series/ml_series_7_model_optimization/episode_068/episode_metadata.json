@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_068",
+  "series_id": "ml_series_7",
+  "episode": 68,
+  "title": "边缘AI与端侧部署",
+  "description": "边缘设备计算能力分析。模型压缩、优化流程。Core ML、ML Kit、TensorFlow Lite。端侧推理、增量更新，以及在手机、IoT设备中的实践。",
+  "keywords": [
+    "边缘AI",
+    "端侧部署",
+    "Core ML",
+    "ML Kit",
+    "TFLite",
+    "IoT",
+    "增量更新"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14000,
+  "status": "pending"
+}

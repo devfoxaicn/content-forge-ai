@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_048",
+  "series_id": "ml_series_5",
+  "episode": 48,
+  "title": "层次强化学习与选项框架",
+  "description": "时间信度分配问题。Options框架、Feudal Networks、HIerarchical Reinforcement Learning (HIRL)。FuN、FeUdal Networks、hRL。在复杂任务、长期规划中的应用。",
+  "keywords": [
+    "层次强化学习",
+    "Options",
+    "HIRL",
+    "Feudal Networks",
+    "时间信度",
+    "抽象"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14000,
+  "status": "pending"
+}

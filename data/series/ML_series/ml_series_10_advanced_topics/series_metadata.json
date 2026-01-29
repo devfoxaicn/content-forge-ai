@@ -1,0 +1,75 @@
+{
+  "series_info": {
+    "id": "ml_series_10",
+    "name": "高级专题系列",
+    "topic_count": 10,
+    "status": "completed"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_091",
+      "series_id": "ml_series_10",
+      "episode": 91,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_092",
+      "series_id": "ml_series_10",
+      "episode": 92,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_093",
+      "series_id": "ml_series_10",
+      "episode": 93,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_094",
+      "series_id": "ml_series_10",
+      "episode": 94,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_095",
+      "series_id": "ml_series_10",
+      "episode": 95,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_096",
+      "series_id": "ml_series_10",
+      "episode": 96,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_097",
+      "series_id": "ml_series_10",
+      "episode": 97,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_098",
+      "series_id": "ml_series_10",
+      "episode": 98,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_099",
+      "series_id": "ml_series_10",
+      "episode": 99,
+      "status": "completed"
+    },
+    {
+      "id": "ml_topic_100",
+      "series_id": "ml_series_10",
+      "episode": 100,
+      "status": "completed"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 10,
+    "completion_rate": 100.0
+  }
+}

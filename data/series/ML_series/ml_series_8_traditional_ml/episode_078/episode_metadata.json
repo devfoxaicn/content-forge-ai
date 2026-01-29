@@ -1,0 +1,17 @@
+{
+  "id": "ml_topic_078",
+  "series_id": "ml_series_8",
+  "episode": 78,
+  "title": "生存分析与可靠性工程",
+  "description": "时间到事件数据建模。Kaplan-Meier生存曲线、Cox比例风险模型。生存树、生存森林。医疗数据分析、设备寿命预测、客户流失预测应用。",
+  "keywords": [
+    "生存分析",
+    "Kaplan-Meier",
+    "Cox模型",
+    "可靠性工程",
+    "流失预测"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending"
+}

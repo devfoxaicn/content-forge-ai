@@ -1,0 +1,17 @@
+{
+  "id": "ml_topic_088",
+  "series_id": "ml_series_9",
+  "episode": 88,
+  "title": "AutoML自动化特征工程",
+  "description": "Featuretools、AutoFeat自动化特征构造。AutoSklearn自动特征选择。神经架构特征学习、端到端学习。在数据竞赛、快速原型中的应用。",
+  "keywords": [
+    "AutoML特征",
+    "Featuretools",
+    "AutoFeat",
+    "自动化",
+    "端到端学习"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 13500,
+  "status": "pending"
+}

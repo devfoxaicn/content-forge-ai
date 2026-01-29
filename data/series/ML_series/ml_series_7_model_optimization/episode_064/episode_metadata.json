@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_064",
+  "series_id": "ml_series_7",
+  "episode": 64,
+  "title": "神经架构搜索NAS",
+  "description": "AutoML在架构设计中的应用。强化学习NAS（ENAS、DPP-Net）、可微分NAS（DARTS、PDARTS）、One-Shot NAS。硬件感知NAS，以及在移动端模型设计中的应用。",
+  "keywords": [
+    "NAS",
+    "神经架构搜索",
+    "ENAS",
+    "DARTS",
+    "AutoML",
+    "硬件感知"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

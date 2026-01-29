@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_079",
+  "series_id": "ml_series_8",
+  "episode": 79,
+  "title": "因果推断与倾向得分",
+  "description": "相关性≠因果性。潜在结果框架、 Rubin因果模型。倾向得分匹配PSM、工具变量IV、双重差分DID。 uplift建模，以及在营销归因、策略评估中的应用。",
+  "keywords": [
+    "因果推断",
+    "倾向得分",
+    "PSM",
+    "工具变量",
+    "DID",
+    "uplift",
+    "归因"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

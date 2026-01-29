@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_074",
+  "series_id": "ml_series_8",
+  "episode": 74,
+  "title": "梯度提升GBDT完全指南",
+  "description": "GBDT原理：加法模型、梯度提升。XGBoost、LightGBM、CatBoost三大框架对比。特征重要性、Partial Dependence Plot、SHAP值解释，以及在表格数据竞赛中的实践。",
+  "keywords": [
+    "GBDT",
+    "XGBoost",
+    "LightGBM",
+    "CatBoost",
+    "梯度提升",
+    "特征重要性",
+    "SHAP"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 15500,
+  "status": "pending"
+}

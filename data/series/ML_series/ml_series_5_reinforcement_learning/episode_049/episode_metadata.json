@@ -1,0 +1,20 @@
+{
+  "id": "ml_topic_049",
+  "series_id": "ml_series_5",
+  "episode": 49,
+  "title": "奖励函数设计与评估",
+  "description": "奖励塑造的艺术。稀疏vs密集奖励、辅助奖励、内在动机。好奇心驱动、RND、ICM。奖励黑客问题、指标评估（Return、Success Rate、样本效率）。",
+  "keywords": [
+    "奖励塑造",
+    "奖励设计",
+    "好奇心",
+    "RND",
+    "ICM",
+    "奖励黑客",
+    "内在动机"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13500,
+  "status": "completed",
+  "completed_at": "2026-01-28"
+}

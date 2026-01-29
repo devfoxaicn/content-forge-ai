@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_072",
+  "series_id": "ml_series_8",
+  "episode": 72,
+  "title": "朴素贝叶斯分类器深入",
+  "description": "贝叶斯定理的应用。高斯NB、多项式NB、伯努利NB。特征独立性假设、拉普拉斯平滑。文本分类、垃圾邮件过滤实践，以及在速度要求高场景中的应用。",
+  "keywords": [
+    "朴素贝叶斯",
+    "高斯NB",
+    "多项式NB",
+    "伯努利NB",
+    "贝叶斯定理",
+    "文本分类"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 12500,
+  "status": "pending"
+}

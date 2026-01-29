@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_089",
+  "series_id": "ml_series_9",
+  "episode": 89,
+  "title": "特征存储与管理",
+  "description": "特征工程工业化。特征存储架构、在线/离线特征。特征血缘、特征版本管理。特征监控、特征质量评估，以及在大型互联网公司中的实践。",
+  "keywords": [
+    "特征存储",
+    "Feature Store",
+    "特征管理",
+    "特征血缘",
+    "在线特征",
+    "离线特征"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13500,
+  "status": "pending"
+}

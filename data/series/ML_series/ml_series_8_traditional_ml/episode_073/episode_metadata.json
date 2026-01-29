@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_073",
+  "series_id": "ml_series_8",
+  "episode": 73,
+  "title": "线性判别分析LDA",
+  "description": "有监督降维技术。Fisher线性判别、LDA vs PCA对比。多类别LDA、正则化LDA。人脸识别（Eigenfaces、Fisherfaces）应用，以及在特征提取中的实践。",
+  "keywords": [
+    "LDA",
+    "线性判别分析",
+    "Fisher",
+    "PCA",
+    "降维",
+    "特征提取",
+    "人脸识别"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13000,
+  "status": "pending"
+}

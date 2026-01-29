@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_067",
+  "series_id": "ml_series_7",
+  "episode": 67,
+  "title": "分布式训练与并行策略",
+  "description": "数据并行、模型并行、流水线并行。PyTorch DDP、DeepSpeed、FairScale。ZeRO优化器、混合精度、梯度累积。在千卡、万卡规模训练中的实践。",
+  "keywords": [
+    "分布式训练",
+    "DDP",
+    "DeepSpeed",
+    "ZeRO",
+    "数据并行",
+    "模型并行"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15000,
+  "status": "pending"
+}

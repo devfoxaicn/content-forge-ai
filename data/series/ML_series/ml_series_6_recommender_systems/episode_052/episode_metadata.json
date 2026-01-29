@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_052",
+  "series_id": "ml_series_6",
+  "episode": 52,
+  "title": "协同过滤算法深入解析",
+  "description": "用户-物品矩阵的稀疏性挑战。User-based、Item-based CF。矩阵分解：SVD、SVD++、ALS。隐语义模型，以及在Netflix Prize、电商推荐中的应用。",
+  "keywords": [
+    "协同过滤",
+    "矩阵分解",
+    "SVD",
+    "ALS",
+    "隐语义",
+    "Netflix Prize"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "completed",
+  "completed_at": "2026-01-28"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "ml_topic_051",
+  "series_id": "ml_series_6",
+  "episode": 51,
+  "title": "推荐系统导论：架构与评估",
+  "description": "推荐系统的核心价值。召回、排序、重排三层架构。离线评估（AUC、NDCG、MAP）与在线评估（CTR、CVR、GMV）。A/B测试、用户调研。",
+  "keywords": [
+    "推荐系统",
+    "召回",
+    "排序",
+    "重排",
+    "AUC",
+    "NDCG",
+    "A/B测试"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 13000,
+  "actual_words": 15234,
+  "status": "completed",
+  "completed_at": "2026-01-28"
+}

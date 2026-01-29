@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_085",
+  "series_id": "ml_series_9",
+  "episode": 85,
+  "title": "时序特征工程完整指南",
+  "description": "时间序列特征的特殊性。日历特征、周期特征、统计特征。滑动窗口、lag特征、差分特征。傅里叶变换、小波变换，以及在销量预测、负荷预测中的应用。",
+  "keywords": [
+    "时序特征",
+    "日历特征",
+    "滑动窗口",
+    "lag特征",
+    "傅里叶变换",
+    "负荷预测"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14500,
+  "status": "pending"
+}

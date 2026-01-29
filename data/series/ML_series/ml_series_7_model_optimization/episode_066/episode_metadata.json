@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_066",
+  "series_id": "ml_series_7",
+  "episode": 66,
+  "title": "模型服务架构设计",
+  "description": "高并发推理服务设计。Kubernetes、Docker容器化。gRPC、RESTful API。负载均衡、自动扩缩容。TF Serving、TorchServe、Triton Inference Server实践。",
+  "keywords": [
+    "模型服务",
+    "Kubernetes",
+    "gRPC",
+    "TFServing",
+    "TorchServe",
+    "负载均衡"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 14500,
+  "status": "pending"
+}

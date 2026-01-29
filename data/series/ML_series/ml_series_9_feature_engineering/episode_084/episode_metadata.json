@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_084",
+  "series_id": "ml_series_9",
+  "episode": 84,
+  "title": "Embedding技术深入",
+  "description": "从离散到连续的表示。Word2Vec、GloVe、FastText。Item2Vec、Doc2Vec、Graph2Vec。负采样、层次Softmax，以及在推荐、搜索、NLP中的应用。",
+  "keywords": [
+    "Embedding",
+    "Word2Vec",
+    "Item2Vec",
+    "Doc2Vec",
+    "Graph2Vec",
+    "负采样"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

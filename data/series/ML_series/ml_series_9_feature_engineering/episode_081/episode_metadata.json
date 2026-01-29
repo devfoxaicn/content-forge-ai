@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_081",
+  "series_id": "ml_series_9",
+  "episode": 81,
+  "title": "特征工程基础与数据预处理",
+  "description": "垃圾进，垃圾出。数据清洗、缺失值处理、异常值处理。特征缩放：标准化、归一化、鲁棒缩放。编码：One-Hot、Label、Target、Frequency编码，以及在管道Pipeline中的应用。",
+  "keywords": [
+    "特征工程",
+    "数据预处理",
+    "缺失值",
+    "特征缩放",
+    "编码",
+    "Pipeline"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 14000,
+  "status": "pending"
+}

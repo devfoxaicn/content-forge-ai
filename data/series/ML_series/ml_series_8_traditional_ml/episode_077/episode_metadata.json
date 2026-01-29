@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_077",
+  "series_id": "ml_series_8",
+  "episode": 77,
+  "title": "时间序列分析经典方法",
+  "description": "时间序列特性：趋势、季节性、周期性。AR、MA、ARIMA、SARIMA模型。指数平滑、状态空间模型、Kalman滤波。在经济预测、销量预测中的应用。",
+  "keywords": [
+    "时间序列",
+    "ARIMA",
+    "SARIMA",
+    "指数平滑",
+    "Kalman滤波",
+    "预测"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

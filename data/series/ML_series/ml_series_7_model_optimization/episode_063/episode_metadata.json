@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_063",
+  "series_id": "ml_series_7",
+  "episode": 63,
+  "title": "知识蒸馏Knowledge Distillation",
+  "description": "师生模型架构。Logits蒸馏、Feature蒸馏、关系蒸馏。自蒸馏、互蒸馏、在线蒸馏。DistilBERT、TinyBERT实践，以及在模型压缩中的应用。",
+  "keywords": [
+    "知识蒸馏",
+    "Distillation",
+    "师生模型",
+    "自蒸馏",
+    "DistilBERT",
+    "TinyBERT"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

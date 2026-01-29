@@ -1,0 +1,20 @@
+{
+  "id": "ml_topic_090",
+  "series_id": "ml_series_9",
+  "episode": 90,
+  "title": "特征交叉与高阶特征",
+  "description": "特征交叉的艺术。显式交叉、隐式交叉。FM、DeepFM、xDeepFM高阶交叉。自动特征交叉AutoCross、AutoFIS，以及在CTR预测、推荐排序中的应用。",
+  "keywords": [
+    "特征交叉",
+    "FM",
+    "DeepFM",
+    "xDeepFM",
+    "高阶特征",
+    "AutoCross",
+    "CTR"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "completed",
+  "completed_at": "2026-01-29"
+}

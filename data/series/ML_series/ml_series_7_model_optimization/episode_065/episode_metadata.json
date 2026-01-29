@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_065",
+  "series_id": "ml_series_7",
+  "episode": 65,
+  "title": "模型部署与推理加速",
+  "description": "ONNX、TensorRT、TFLite推理引擎。图优化、算子融合、内存优化。TensorRT、ONNX Runtime实践。批处理、动态批处理，以及在低延迟服务中的应用。",
+  "keywords": [
+    "模型部署",
+    "TensorRT",
+    "ONNX",
+    "推理加速",
+    "TFLite",
+    "图优化",
+    "算子融合"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 15000,
+  "status": "pending"
+}

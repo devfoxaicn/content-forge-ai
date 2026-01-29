@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_080",
+  "series_id": "ml_series_8",
+  "episode": 80,
+  "title": "传统ML vs深度学习选择指南",
+  "description": "表格数据、图像、文本、时序数据的不同选择。数据规模、特征工程、可解释性考量。集成学习优势、深度学习优势。工业实践中的模型选型决策框架。",
+  "keywords": [
+    "模型选择",
+    "表格数据",
+    "集成学习",
+    "深度学习",
+    "选型",
+    "可解释性"
+  ],
+  "difficulty": "综合",
+  "estimated_words": 13000,
+  "status": "pending"
+}

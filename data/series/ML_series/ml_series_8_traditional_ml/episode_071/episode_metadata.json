@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_071",
+  "series_id": "ml_series_8",
+  "episode": 71,
+  "title": "K近邻KNN算法详解",
+  "description": "懒惰学习代表。KD树、球树加速近邻搜索。距离度量：欧氏、曼哈顿、余弦、马氏。加权KNN、近似近邻ANN，以及在推荐、检索中的应用。",
+  "keywords": [
+    "KNN",
+    "K近邻",
+    "KD树",
+    "距离度量",
+    "余弦相似度",
+    "ANN",
+    "近似近邻"
+  ],
+  "difficulty": "入门",
+  "estimated_words": 13000,
+  "status": "pending"
+}

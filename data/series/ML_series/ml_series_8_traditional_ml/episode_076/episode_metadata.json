@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_076",
+  "series_id": "ml_series_8",
+  "episode": 76,
+  "title": "孤立森林与异常检测",
+  "description": "异常检测方法总览。孤立森林iForest原理、路径长度、异常评分。One-Class SVM、LOF、HBOS。工业异常检测、欺诈检测实践，以及在时间序列异常中的应用。",
+  "keywords": [
+    "孤立森林",
+    "异常检测",
+    "iForest",
+    "One-Class SVM",
+    "LOF",
+    "欺诈检测"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 13500,
+  "status": "pending"
+}

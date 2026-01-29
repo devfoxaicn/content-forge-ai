@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_075",
+  "series_id": "ml_series_8",
+  "episode": 75,
+  "title": "高斯混合模型GMM与EM算法",
+  "description": "概率聚类模型。单高斯vs混合高斯、EM算法推导。模型选择（BIC、AIC）。分量数量选择、协方差类型，以及在异常检测、密度估计中的应用。",
+  "keywords": [
+    "GMM",
+    "高斯混合模型",
+    "EM算法",
+    "BIC",
+    "AIC",
+    "密度估计",
+    "异常检测"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14000,
+  "status": "pending"
+}

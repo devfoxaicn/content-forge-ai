@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_083",
+  "series_id": "ml_series_9",
+  "episode": 83,
+  "title": "特征选择与降维实战",
+  "description": "过滤法、包装法、嵌入法。方差阈值、相关性分析、互信息。RFE递归特征消除、LASSO。基于模型的特征选择、SHAP值，以及在模型性能提升中的应用。",
+  "keywords": [
+    "特征选择",
+    "RFE",
+    "LASSO",
+    "方差阈值",
+    "互信息",
+    "SHAP",
+    "降维"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 14500,
+  "status": "pending"
+}

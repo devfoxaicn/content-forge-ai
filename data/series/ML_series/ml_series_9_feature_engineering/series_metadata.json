@@ -1,0 +1,208 @@
+{
+  "series_info": {
+    "id": "ml_series_9_feature_engineering",
+    "name": "特征工程系列",
+    "description": "数据预处理与特征工程最佳实践",
+    "topic_count": 10,
+    "difficulty": "实践为主",
+    "priority": 9,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_081",
+      "series_id": "ml_series_9",
+      "episode": 81,
+      "title": "特征工程基础与数据预处理",
+      "description": "垃圾进，垃圾出。数据清洗、缺失值处理、异常值处理。特征缩放：标准化、归一化、鲁棒缩放。编码：One-Hot、Label、Target、Frequency编码，以及在管道Pipeline中的应用。",
+      "keywords": [
+        "特征工程",
+        "数据预处理",
+        "缺失值",
+        "特征缩放",
+        "编码",
+        "Pipeline"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-28"
+    },
+    {
+      "id": "ml_topic_082",
+      "series_id": "ml_series_9",
+      "episode": 82,
+      "title": "高级特征工程技术",
+      "description": "特征构造的艺术。多项式特征、交互特征。时间序列特征：滚动窗口、滞后特征。地理空间特征、文本特征、图像特征，以及在特征竞赛中的实践。",
+      "keywords": [
+        "特征构造",
+        "多项式特征",
+        "交互特征",
+        "时间序列特征",
+        "地理特征",
+        "特征竞赛"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15000,
+      "status": "completed",
+      "completed_at": "2026-01-28"
+    },
+    {
+      "id": "ml_topic_083",
+      "series_id": "ml_series_9",
+      "episode": 83,
+      "title": "特征选择与降维实战",
+      "description": "过滤法、包装法、嵌入法。方差阈值、相关性分析、互信息。RFE递归特征消除、LASSO。基于模型的特征选择、SHAP值，以及在模型性能提升中的应用。",
+      "keywords": [
+        "特征选择",
+        "RFE",
+        "LASSO",
+        "方差阈值",
+        "互信息",
+        "SHAP",
+        "降维"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-28"
+    },
+    {
+      "id": "ml_topic_084",
+      "series_id": "ml_series_9",
+      "episode": 84,
+      "title": "Embedding技术深入",
+      "description": "从离散到连续的表示。Word2Vec、GloVe、FastText。Item2Vec、Doc2Vec、Graph2Vec。负采样、层次Softmax，以及在推荐、搜索、NLP中的应用。",
+      "keywords": [
+        "Embedding",
+        "Word2Vec",
+        "Item2Vec",
+        "Doc2Vec",
+        "Graph2Vec",
+        "负采样"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_085",
+      "series_id": "ml_series_9",
+      "episode": 85,
+      "title": "时序特征工程完整指南",
+      "description": "时间序列特征的特殊性。日历特征、周期特征、统计特征。滑动窗口、lag特征、差分特征。傅里叶变换、小波变换，以及在销量预测、负荷预测中的应用。",
+      "keywords": [
+        "时序特征",
+        "日历特征",
+        "滑动窗口",
+        "lag特征",
+        "傅里叶变换",
+        "负荷预测"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_086",
+      "series_id": "ml_series_9",
+      "episode": 86,
+      "title": "文本特征工程实战",
+      "description": "文本的向量表示。TF-IDF、N-gram、Char-CNN。预训练Embedding、BERT特征。情感特征、主题特征（LDA）、关键词特征，以及在文本分类、情感分析中的应用。",
+      "keywords": [
+        "文本特征",
+        "TF-IDF",
+        "N-gram",
+        "BERT",
+        "LDA",
+        "情感特征",
+        "文本分类"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_087",
+      "series_id": "ml_series_9",
+      "episode": 87,
+      "title": "图像特征工程技术",
+      "description": "手工设计特征vs深度学习。颜色直方图、纹理特征（GLCM、LBP）。SIFT、SURF、HOG关键点。深度特征、预训练CNN特征，以及在图像检索、分类中的应用。",
+      "keywords": [
+        "图像特征",
+        "SIFT",
+        "HOG",
+        "LBP",
+        "GLCM",
+        "纹理特征",
+        "深度特征"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_088",
+      "series_id": "ml_series_9",
+      "episode": 88,
+      "title": "AutoML自动化特征工程",
+      "description": "Featuretools、AutoFeat自动化特征构造。AutoSklearn自动特征选择。神经架构特征学习、端到端学习。在数据竞赛、快速原型中的应用。",
+      "keywords": [
+        "AutoML特征",
+        "Featuretools",
+        "AutoFeat",
+        "自动化",
+        "端到端学习"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_089",
+      "series_id": "ml_series_9",
+      "episode": 89,
+      "title": "特征存储与管理",
+      "description": "特征工程工业化。特征存储架构、在线/离线特征。特征血缘、特征版本管理。特征监控、特征质量评估，以及在大型互联网公司中的实践。",
+      "keywords": [
+        "特征存储",
+        "Feature Store",
+        "特征管理",
+        "特征血缘",
+        "在线特征",
+        "离线特征"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_090",
+      "series_id": "ml_series_9",
+      "episode": 90,
+      "title": "特征交叉与高阶特征",
+      "description": "特征交叉的艺术。显式交叉、隐式交叉。FM、DeepFM、xDeepFM高阶交叉。自动特征交叉AutoCross、AutoFIS，以及在CTR预测、推荐排序中的应用。",
+      "keywords": [
+        "特征交叉",
+        "FM",
+        "DeepFM",
+        "xDeepFM",
+        "高阶特征",
+        "AutoCross",
+        "CTR"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "completed",
+      "completed_at": "2026-01-29"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 4,
+    "total_estimated_words": 141000,
+    "completion_rate": 40.0,
+    "start_date": "2026-01-28",
+    "end_date": "2026-01-29"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_069",
+  "series_id": "ml_series_7",
+  "episode": 69,
+  "title": "模型监控与可观测性",
+  "description": "生产环境模型监控。数据漂移、概念漂移检测。性能监控、预测监控。模型Explainability、可解释性工具，以及在AIOps中的实践。",
+  "keywords": [
+    "模型监控",
+    "可观测性",
+    "数据漂移",
+    "概念漂移",
+    "Explainability",
+    "AIOps"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13500,
+  "status": "pending"
+}

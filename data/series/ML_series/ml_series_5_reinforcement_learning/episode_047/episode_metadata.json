@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_047",
+  "series_id": "ml_series_5",
+  "episode": 47,
+  "title": "基于模型的强化学习Model-Based RL",
+  "description": "Model-Free vs Model-Based对比。世界模型学习、Model Predictive Control (MPC)。Dreamer、World Models、MuZero。规划与学习结合，以及在机器人控制、游戏中的应用。",
+  "keywords": [
+    "Model-Based RL",
+    "世界模型",
+    "MPC",
+    "Dreamer",
+    "MuZero",
+    "规划"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15000,
+  "status": "pending"
+}

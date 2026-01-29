@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_046",
+  "series_id": "ml_series_5",
+  "episode": 46,
+  "title": "离线强化学习Offline RL",
+  "description": "从在线到离线RL的范式转变。Offline RL挑战：分布偏移。Conservative Q-Learning（CQL）、Behavior Regularized Offline RL（BORL）、Implicit Q-Learning（IQL）。在推荐系统、 Healthcare中的应用。",
+  "keywords": [
+    "离线强化学习",
+    "Offline RL",
+    "CQL",
+    "IQL",
+    "分布偏移",
+    "BORL"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

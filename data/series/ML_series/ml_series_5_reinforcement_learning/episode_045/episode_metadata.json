@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_045",
+  "series_id": "ml_series_5",
+  "episode": 45,
+  "title": "多智能体强化学习MARL",
+  "description": "多智能体系统挑战。独立学习、 centralized training with decentralized execution (CTDE)。QMIX、MADDPG、MAPPO。协作、竞争、混合动机场景，以及在即时战略游戏、资源调度中的应用。",
+  "keywords": [
+    "多智能体",
+    "MARL",
+    "MADDPG",
+    "QMIX",
+    "MAPPO",
+    "CTDE",
+    "协作"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15000,
+  "status": "pending"
+}

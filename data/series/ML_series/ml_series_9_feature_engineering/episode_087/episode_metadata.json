@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_087",
+  "series_id": "ml_series_9",
+  "episode": 87,
+  "title": "图像特征工程技术",
+  "description": "手工设计特征vs深度学习。颜色直方图、纹理特征（GLCM、LBP）。SIFT、SURF、HOG关键点。深度特征、预训练CNN特征，以及在图像检索、分类中的应用。",
+  "keywords": [
+    "图像特征",
+    "SIFT",
+    "HOG",
+    "LBP",
+    "GLCM",
+    "纹理特征",
+    "深度特征"
+  ],
+  "difficulty": "实践",
+  "estimated_words": 13500,
+  "status": "pending"
+}

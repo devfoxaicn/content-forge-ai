@@ -1,0 +1,207 @@
+{
+  "series_info": {
+    "id": "ml_series_8_traditional_ml",
+    "name": "传统机器学习系列",
+    "description": "经典机器学习算法深入解析",
+    "topic_count": 10,
+    "difficulty": "入门→进阶",
+    "priority": 8,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_071",
+      "series_id": "ml_series_8",
+      "episode": 71,
+      "title": "K近邻KNN算法详解",
+      "description": "懒惰学习代表。KD树、球树加速近邻搜索。距离度量：欧氏、曼哈顿、余弦、马氏。加权KNN、近似近邻ANN，以及在推荐、检索中的应用。",
+      "keywords": [
+        "KNN",
+        "K近邻",
+        "KD树",
+        "距离度量",
+        "余弦相似度",
+        "ANN",
+        "近似近邻"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-29"
+    },
+    {
+      "id": "ml_topic_072",
+      "series_id": "ml_series_8",
+      "episode": 72,
+      "title": "朴素贝叶斯分类器深入",
+      "description": "贝叶斯定理的应用。高斯NB、多项式NB、伯努利NB。特征独立性假设、拉普拉斯平滑。文本分类、垃圾邮件过滤实践，以及在速度要求高场景中的应用。",
+      "keywords": [
+        "朴素贝叶斯",
+        "高斯NB",
+        "多项式NB",
+        "伯努利NB",
+        "贝叶斯定理",
+        "文本分类"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 12500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_073",
+      "series_id": "ml_series_8",
+      "episode": 73,
+      "title": "线性判别分析LDA",
+      "description": "有监督降维技术。Fisher线性判别、LDA vs PCA对比。多类别LDA、正则化LDA。人脸识别（Eigenfaces、Fisherfaces）应用，以及在特征提取中的实践。",
+      "keywords": [
+        "LDA",
+        "线性判别分析",
+        "Fisher",
+        "PCA",
+        "降维",
+        "特征提取",
+        "人脸识别"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_074",
+      "series_id": "ml_series_8",
+      "episode": 74,
+      "title": "梯度提升GBDT完全指南",
+      "description": "GBDT原理：加法模型、梯度提升。XGBoost、LightGBM、CatBoost三大框架对比。特征重要性、Partial Dependence Plot、SHAP值解释，以及在表格数据竞赛中的实践。",
+      "keywords": [
+        "GBDT",
+        "XGBoost",
+        "LightGBM",
+        "CatBoost",
+        "梯度提升",
+        "特征重要性",
+        "SHAP"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 15500,
+      "status": "completed",
+      "completed_at": "2026-01-29"
+    },
+    {
+      "id": "ml_topic_075",
+      "series_id": "ml_series_8",
+      "episode": 75,
+      "title": "高斯混合模型GMM与EM算法",
+      "description": "概率聚类模型。单高斯vs混合高斯、EM算法推导。模型选择（BIC、AIC）。分量数量选择、协方差类型，以及在异常检测、密度估计中的应用。",
+      "keywords": [
+        "GMM",
+        "高斯混合模型",
+        "EM算法",
+        "BIC",
+        "AIC",
+        "密度估计",
+        "异常检测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_076",
+      "series_id": "ml_series_8",
+      "episode": 76,
+      "title": "孤立森林与异常检测",
+      "description": "异常检测方法总览。孤立森林iForest原理、路径长度、异常评分。One-Class SVM、LOF、HBOS。工业异常检测、欺诈检测实践，以及在时间序列异常中的应用。",
+      "keywords": [
+        "孤立森林",
+        "异常检测",
+        "iForest",
+        "One-Class SVM",
+        "LOF",
+        "欺诈检测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_077",
+      "series_id": "ml_series_8",
+      "episode": 77,
+      "title": "时间序列分析经典方法",
+      "description": "时间序列特性：趋势、季节性、周期性。AR、MA、ARIMA、SARIMA模型。指数平滑、状态空间模型、Kalman滤波。在经济预测、销量预测中的应用。",
+      "keywords": [
+        "时间序列",
+        "ARIMA",
+        "SARIMA",
+        "指数平滑",
+        "Kalman滤波",
+        "预测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_078",
+      "series_id": "ml_series_8",
+      "episode": 78,
+      "title": "生存分析与可靠性工程",
+      "description": "时间到事件数据建模。Kaplan-Meier生存曲线、Cox比例风险模型。生存树、生存森林。医疗数据分析、设备寿命预测、客户流失预测应用。",
+      "keywords": [
+        "生存分析",
+        "Kaplan-Meier",
+        "Cox模型",
+        "可靠性工程",
+        "流失预测"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 13000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_079",
+      "series_id": "ml_series_8",
+      "episode": 79,
+      "title": "因果推断与倾向得分",
+      "description": "相关性≠因果性。潜在结果框架、 Rubin因果模型。倾向得分匹配PSM、工具变量IV、双重差分DID。 uplift建模，以及在营销归因、策略评估中的应用。",
+      "keywords": [
+        "因果推断",
+        "倾向得分",
+        "PSM",
+        "工具变量",
+        "DID",
+        "uplift",
+        "归因"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_080",
+      "series_id": "ml_series_8",
+      "episode": 80,
+      "title": "传统ML vs深度学习选择指南",
+      "description": "表格数据、图像、文本、时序数据的不同选择。数据规模、特征工程、可解释性考量。集成学习优势、深度学习优势。工业实践中的模型选型决策框架。",
+      "keywords": [
+        "模型选择",
+        "表格数据",
+        "集成学习",
+        "深度学习",
+        "选型",
+        "可解释性"
+      ],
+      "difficulty": "综合",
+      "estimated_words": 13000,
+      "status": "pending"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 2,
+    "total_estimated_words": 136500,
+    "completion_rate": 20.0,
+    "start_date": "2026-01-29",
+    "end_date": "2026-01-29"
+  }
+}
