@@ -1,0 +1,774 @@
+{
+  "metadata": {
+    "title": "AI每日热点 · 2026年02月01日",
+    "issue_number": "20260201",
+    "publish_date": "2026-02-01",
+    "generated_at": "2026-02-01T06:29:20.807760",
+    "word_count": 10098,
+    "reading_time": "6分钟",
+    "total_items": 30,
+    "version": "v8.0"
+  },
+  "editors_pick": [
+    {
+      "id": "ep_001",
+      "title": "Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT",
+      "title_cn": "OpenAI宣布停用GPT-4o等旧模型，ChatGPT服务全面更新",
+      "summary": "On February 13, 2026, alongside the previously announced retirement⁠ of GPT‑5 (Instant, Thinking, and Pro), we will retire GPT‑4o, GPT‑4.1, GPT‑4.1 mini, and OpenAI o4-mini from ChatGPT. In the API, t",
+      "summary_cn": "2026年2月13日起，OpenAI将从ChatGPT中移除GPT-4o、GPT-4.1及o4-mini等旧模型，配合GPT-5系列的调整，推动用户迁移至最新架构。",
+      "url": "https://openai.com/index/retiring-gpt-4o-and-older-models",
+      "source": "OpenAI Blog",
+      "category": "技术创新",
+      "importance_score": 61.5,
+      "published_at": "Thu, 29 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 1
+    },
+    {
+      "id": "ep_002",
+      "title": "Powering tax donations with AI powered personalized recommendations",
+      "title_cn": "TRUSTBANK利用OpenAI模型构建Choice AI，简化税收捐赠流程",
+      "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system hel",
+      "summary_cn": "TRUSTBANK携手Recursive，基于OpenAI模型和multi-agent系统打造Choice AI，提供个性化对话推荐，大幅简化捐赠发现流程。",
+      "url": "https://openai.com/index/trustbank",
+      "source": "OpenAI Blog",
+      "category": "技术创新",
+      "importance_score": 61.5,
+      "published_at": "Tue, 27 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 2
+    },
+    {
+      "id": "ep_003",
+      "title": "Scaling PostgreSQL to power 800 million ChatGPT users",
+      "title_cn": "OpenAI技术揭秘：扩展PostgreSQL支撑8亿ChatGPT用户",
+      "summary": "An inside look at how OpenAI scaled PostgreSQL to millions of queries per second using replicas, caching, rate limiting, and workload isolation.",
+      "summary_cn": "深入解析OpenAI如何利用副本、缓存和速率限制技术，将PostgreSQL扩展至每秒处理数百万次查询，支撑8亿用户访问。",
+      "url": "https://openai.com/index/scaling-postgresql",
+      "source": "OpenAI Blog",
+      "category": "技术创新",
+      "importance_score": 61.4,
+      "published_at": "Thu, 22 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 3
+    },
+    {
+      "id": "ep_004",
+      "title": "How Higgsfield turns simple ideas into cinematic social videos",
+      "title_cn": "Higgsfield整合GPT-5和Sora 2，将简单创意转化为电影级视频",
+      "summary": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+      "summary_cn": "Higgsfield利用OpenAI的GPT-4.1、GPT-5及Sora 2模型，让创作者仅凭简单输入即可生成高质量的电影级社交媒体视频。",
+      "url": "https://openai.com/index/higgsfield",
+      "source": "OpenAI Blog",
+      "category": "技术创新",
+      "importance_score": 61.4,
+      "published_at": "Wed, 21 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 4
+    },
+    {
+      "id": "ep_005",
+      "title": "Inside GPT-5 for Work: How Businesses Use GPT-5",
+      "title_cn": "GPT-5职场深度报告：揭示企业应用趋势与核心任务",
+      "summary": "A data-driven report on how workers across industries use ChatGPT—covering adoption trends, top tasks, departmental patterns, and the future of AI at work.",
+      "summary_cn": "基于数据的深度报告，全面解析各行业员工如何使用ChatGPT，涵盖采用趋势、高频任务模式及职场AI的未来发展。",
+      "url": "https://openai.com/business/guides-and-resources/chatgpt-usage-and-adoption-patterns-at-work",
+      "source": "OpenAI Blog",
+      "category": "产业动态",
+      "importance_score": 61.1,
+      "published_at": "Thu, 22 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 5
+    }
+  ],
+  "categories": [
+    {
+      "id": "industry",
+      "name": "产业动态",
+      "icon": "📈",
+      "count": 7,
+      "items": [
+        {
+          "id": "industry_563833",
+          "title": "Inside GPT-5 for Work: How Businesses Use GPT-5",
+          "title_cn": "GPT-5职场应用报告：揭示各行业AI使用趋势",
+          "summary": "A data-driven report on how workers across industries use ChatGPT—covering adoption trends, top tasks, departmental patterns, and the future of AI at work.",
+          "summary_cn": "本报告通过数据揭示各行业员工如何使用ChatGPT，涵盖采用趋势、高频任务及部门模式，展望职场AI的未来发展。",
+          "url": "https://openai.com/business/guides-and-resources/chatgpt-usage-and-adoption-patterns-at-work",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 61.1,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_4af8f4",
+          "title": "PVH reimagines the future of fashion with OpenAI",
+          "title_cn": "PVH集团引入ChatGPT Enterprise：重塑时尚设计与供应链",
+          "summary": "PVH Corp., parent company of Calvin Klein and Tommy Hilfiger, is adopting ChatGPT Enterprise to bring AI into fashion design, supply chain, and consumer engagement.",
+          "summary_cn": "PVH集团（Calvin Klein母公司）引入ChatGPT Enterprise，将AI技术融入时尚设计、供应链管理及消费者互动，重塑时尚产业未来。",
+          "url": "https://openai.com/index/pvh-future-of-fashion",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.9,
+          "published_at": "Tue, 27 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_575a36",
+          "title": "Taisei Corporation shapes the next generation of talent with ChatGPT",
+          "title_cn": "大成建设部署ChatGPT Enterprise：助力人才培养及全球建筑业务AI化",
+          "summary": "Taisei Corporation uses ChatGPT Enterprise to support HR-led talent development and scale generative AI across its global construction business.",
+          "summary_cn": "大成建设利用ChatGPT Enterprise支持HR主导的人才发展，并在其全球建筑业务中扩展生成式AI应用，加速数字化转型。",
+          "url": "https://openai.com/index/taisei",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.6,
+          "published_at": "Thu, 29 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_f24635",
+          "title": "The next chapter for AI in the EU",
+          "title_cn": "OpenAI发布欧盟经济蓝图2.0：加速欧洲AI普及与技能增长",
+          "summary": "OpenAI launches the EU Economic Blueprint 2.0 with new data, partnerships, and initiatives to accelerate AI adoption, skills, and growth across Europe.",
+          "summary_cn": "OpenAI推出欧盟经济蓝图2.0，通过新数据、合作伙伴关系及举措，加速全欧洲的AI采用、技能提升与经济增长。",
+          "url": "https://openai.com/index/the-next-chapter-for-ai-in-the-eu",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.3,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_5dd67b",
+          "title": "How Indeed uses AI to help evolve the job search",
+          "title_cn": "Indeed CRO专访：AI如何变革求职体验与人才招聘流程",
+          "summary": "Indeed’s CRO Maggie Hulce shares how AI is transforming job search, recruiting, and talent acquisition for employers and job seekers.",
+          "summary_cn": "Indeed首席营收官Maggie Hulce分享见解，阐述AI如何正在变革求职、招聘及人才获取流程，为雇主和求职者创造新价值。",
+          "url": "https://openai.com/index/indeed-maggie-hulce",
+          "source": "OpenAI Blog",
+          "category": "产业动态",
+          "importance_score": 60.0,
+          "published_at": "Mon, 26 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_44b6a2",
+          "title": "OptiMind: A small language model with optimization expertise",
+          "title_cn": "OptiMind小语言模型：自然语言转数学公式，提升业务优化效率",
+          "summary": "OptiMind is a small language model that converts business operation challenges, described naturally, into mathematical formulations that optimization software can solve. It reduces formulation time &#",
+          "summary_cn": "OptiMind是一个小语言模型，能将自然语言描述的业务运营挑战转化为数学公式，供优化软件求解，显著缩短公式化时间。",
+          "url": "https://www.microsoft.com/en-us/research/blog/optimind-a-small-language-model-with-optimization-expertise/",
+          "source": "Microsoft Research",
+          "category": "产业动态",
+          "importance_score": 57.1,
+          "published_at": "Thu, 15 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_2febc6",
+          "title": "Ideas: Community building, machine learning, and the future of AI",
+          "title_cn": "WiML 20周年：联合创始人回顾社区建设与AI未来",
+          "summary": "As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hanna Wallach reflect on WiML’s evolution, navigating ",
+          "summary_cn": "机器学习女性论坛迎来第20届年会，联合创始人回顾社区演变历程，探讨女性在机器学习领域的贡献及AI未来发展。",
+          "url": "https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/",
+          "source": "Microsoft Research",
+          "category": "产业动态",
+          "importance_score": 57.0,
+          "published_at": "Mon, 01 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "🎓 学术突破",
+      "name": "🎓 学术突破",
+      "icon": "📌",
+      "count": 8,
+      "items": [
+        {
+          "id": "🎓 学术突破_9cacae",
+          "title": "Inside OpenAI’s in-house data agent",
+          "title_cn": "OpenAI揭秘内部数据Agent：整合GPT-5与Codex，分钟级处理海量数据",
+          "summary": "How OpenAI built an in-house AI data agent that uses GPT-5, Codex, and memory to reason over massive datasets and deliver reliable insights in minutes.",
+          "summary_cn": "OpenAI构建内部AI数据Agent，结合GPT-5、Codex及记忆功能，能在几分钟内分析海量数据集并产出可靠洞察。",
+          "url": "https://openai.com/index/inside-our-in-house-data-agent",
+          "source": "OpenAI Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 60.9,
+          "published_at": "Thu, 29 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_e2c129",
+          "title": "Introducing Prism",
+          "title_cn": "Prism发布：集成GPT-5.2的免费LaTeX工作空间，助科研写作推理一体化",
+          "summary": "Prism is a free LaTeX-native workspace with GPT-5.2 built in, helping researchers write, collaborate, and reason in one place.",
+          "summary_cn": "Prism发布免费LaTeX原生工作空间，内置GPT-5.2，让研究人员在同一平台实现论文写作、协作与逻辑推理。",
+          "url": "https://openai.com/index/introducing-prism",
+          "source": "OpenAI Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 60.4,
+          "published_at": "Tue, 27 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_871cdb",
+          "title": "EMEA Youth & Wellbeing Grant",
+          "title_cn": "开放申请：50万欧元EMEA青年基金，助力AI时代青少年安全研究",
+          "summary": "Apply for the EMEA Youth & Wellbeing Grant, a €500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
+          "summary_cn": "EMEA青年与福祉基金开放申请，提供50万欧元资助NGO及研究人员，致力于推动AI时代的青少年安全与福祉发展。",
+          "url": "https://openai.com/index/emea-youth-and-wellbeing-grant",
+          "source": "OpenAI Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 60.1,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_2b5375",
+          "title": "What exactly does word2vec learn?",
+          "title_cn": "深度解析：word2vec究竟学到了什么？揭开表示学习的面纱",
+          "summary": "What exactly does word2vec learn, and how? Answering this question amounts to understanding representation learning in a minimal yet interesting language modeling task. Despite the fact that word2vec ",
+          "summary_cn": "本文深入探讨word2vec的学习原理，通过解析语言建模任务，揭示其在表示学习中的具体机制与运作方式。",
+          "url": "http://bair.berkeley.edu/blog/2025/09/01/qwem-word2vec-theory/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.7,
+          "published_at": "Mon, 01 Se",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_0cb880",
+          "title": "How to Evaluate Jailbreak Methods: A Case Study with the StrongREJECT Benchmark",
+          "title_cn": "越狱评估新视角：StrongREJECT基准测试与翻译攻击案例分析",
+          "summary": "When we began studying jailbreak evaluations, we found a fascinating paper claiming that you could jailbreak frontier LLMs simply by translating forbidden prompts into obscure languages. Excited by th",
+          "summary_cn": "本文利用StrongREJECT基准测试，深入探讨越狱攻击评估方法，揭示了通过翻译提示词至小众语言即可绕过LLM防御的机制。",
+          "url": "http://bair.berkeley.edu/blog/2024/08/28/strong-reject/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.5,
+          "published_at": "Wed, 28 Au",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_d532e6",
+          "title": "Are We Ready for Multi-Image Reasoning? Launching VHs: The Visual Haystacks Benchmark!",
+          "title_cn": "发布Visual Haystacks基准测试：评估AI是否已具备多图像推理能力",
+          "summary": "Humans excel at processing vast arrays of visual information, a skill that is crucial for achieving artificial general intelligence (AGI). Over the decades, AI researchers have developed Visual Questi",
+          "summary_cn": "研究人员发布Visual Haystacks基准测试，旨在评估AI处理海量视觉信息的能力，这是迈向通用人工智能(AGI)的关键一步。",
+          "url": "http://bair.berkeley.edu/blog/2024/07/20/visual-haystacks/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.5,
+          "published_at": "Sat, 20 Ju",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_c87374",
+          "title": "GigaTIME: Scaling tumor microenvironment modeling using virtual population generated by multimodal AI",
+          "title_cn": "微软推出GigaTIME：利用多模态AI虚拟群体重塑癌症治疗研究",
+          "summary": "Using AI-generated virtual populations, Microsoft researchers uncovered hidden cellular patterns that could reshape how we understand and treat cancer. \nThe post GigaTIME: Scaling tumor microenvironme",
+          "summary_cn": "微软研究人员利用多模态AI生成虚拟群体，开发出GigaTIME模型，发现隐藏的细胞模式，有望改变癌症的理解与治疗方式。",
+          "url": "https://www.microsoft.com/en-us/research/blog/gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai/",
+          "source": "Microsoft Research",
+          "category": "🎓 学术突破",
+          "importance_score": 57.2,
+          "published_at": "Tue, 09 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "🎓 学术突破_4a9892",
+          "title": "RL without TD learning",
+          "title_cn": "抛弃TD学习：介绍一种基于分治策略的强化学习新算法",
+          "summary": "In this post, I’ll introduce a reinforcement learning (RL) algorithm based on an “alternative” paradigm: divide and conquer. Unlike traditional methods, this algorithm is not based on temporal differe",
+          "summary_cn": "本文介绍一种基于分治策略的新型强化学习(RL)算法，摒弃了传统的TD学习，为解决复杂问题提供了全新的替代范式。",
+          "url": "http://bair.berkeley.edu/blog/2025/11/01/rl-without-td-learning/",
+          "source": "BAIR Blog",
+          "category": "🎓 学术突破",
+          "importance_score": 57.0,
+          "published_at": "Sat, 01 No",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "name": "技术创新",
+      "icon": "🔬",
+      "count": 8,
+      "items": [
+        {
+          "id": "tech_6d074c",
+          "title": "Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT",
+          "title_cn": "OpenAI将于2月13日停用GPT-4o及GPT-4.1系列模型",
+          "summary": "On February 13, 2026, alongside the previously announced retirement⁠ of GPT‑5 (Instant, Thinking, and Pro), we will retire GPT‑4o, GPT‑4.1, GPT‑4.1 mini, and OpenAI o4-mini from ChatGPT. In the API, t",
+          "summary_cn": "OpenAI将于2026年2月13日停止GPT-4o、GPT-4.1等模型服务，用户需提前迁移至新版本以避免业务中断。",
+          "url": "https://openai.com/index/retiring-gpt-4o-and-older-models",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 61.5,
+          "published_at": "Thu, 29 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_0e135f",
+          "title": "Powering tax donations with AI powered personalized recommendations",
+          "title_cn": "TRUSTBANK推出AI捐赠助手，利用OpenAI模型简化家乡税决策",
+          "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system hel",
+          "summary_cn": "TRUSTBANK联合Recursive基于OpenAI模型构建Choice AI，通过对话式个性化推荐，大幅简化家乡税捐赠发现流程。",
+          "url": "https://openai.com/index/trustbank",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 61.5,
+          "published_at": "Tue, 27 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_9752ec",
+          "title": "Scaling PostgreSQL to power 800 million ChatGPT users",
+          "title_cn": "OpenAI扩容PostgreSQL支持8亿用户，实现每秒百万级查询",
+          "summary": "An inside look at how OpenAI scaled PostgreSQL to millions of queries per second using replicas, caching, rate limiting, and workload isolation.",
+          "summary_cn": "OpenAI通过副本、缓存及工作负载隔离等技术，将PostgreSQL扩容至每秒处理百万次查询，支撑8亿ChatGPT用户。",
+          "url": "https://openai.com/index/scaling-postgresql",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 61.4,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_8eb895",
+          "title": "How Higgsfield turns simple ideas into cinematic social videos",
+          "title_cn": "Higgsfield整合OpenAI多模态模型，将创意转化为电影级视频",
+          "summary": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+          "summary_cn": "Higgsfield利用OpenAI的GPT-4.1、GPT-5和Sora 2模型，帮助创作者将简单创意转化为高质量、电影级的社交媒体视频。",
+          "url": "https://openai.com/index/higgsfield",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 61.4,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_f4c9eb",
+          "title": "Keeping your data safe when an AI agent clicks a link",
+          "title_cn": "OpenAI内置安全机制，防止AI Agent点击链接时泄露数据",
+          "summary": "Learn how OpenAI protects user data when AI agents open links, preventing URL-based data exfiltration and prompt injection with built-in safeguards.",
+          "summary_cn": "OpenAI通过内置安全防护措施，防止AI Agent在打开链接时发生基于URL的数据泄露和提示注入攻击，保障用户数据安全。",
+          "url": "https://openai.com/index/ai-agent-link-safety",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 61.1,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_2a14ca",
+          "title": "Inside Praktika's conversational approach to language learning",
+          "title_cn": "Praktika利用GPT-5.2打造AI导师，提供个性化语言学习体验",
+          "summary": "How Praktika uses GPT-4.1 and GPT-5.2 to build adaptive AI tutors that personalize lessons, track progress, and help learners achieve real-world language fluency",
+          "summary_cn": "Praktika利用GPT-4.1和GPT-5.2构建自适应AI导师，通过个性化课程与进度追踪，帮助用户快速掌握现实世界语言流利度。",
+          "url": "https://openai.com/index/praktika",
+          "source": "OpenAI Blog",
+          "category": "技术创新",
+          "importance_score": 60.3,
+          "published_at": "Thu, 22 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_d3bdc5",
+          "title": "Show HN: I trained a 9M speech model to fix my Mandarin tones",
+          "title_cn": "开发者训练9M参数模型修正中文声调，仅300小时数据",
+          "summary": "Built this because tones are killing my spoken Mandarin and I can&#x27;t reliably hear my own mistakes.<p>It&#x27;s a 9M Conformer-CTC model trained on ~300h (AISHELL + Primewords), quantized to INT8 ",
+          "summary_cn": "开发者基于300小时数据训练了一个9M参数的Conformer-CTC模型，经INT8量化，旨在帮助用户自测并修正中文发音中的声调错误。",
+          "url": "https://simedw.com/2026/01/31/ear-pronunication-via-ctc/",
+          "source": "Hacker News",
+          "category": "技术创新",
+          "importance_score": 59.1,
+          "published_at": "2026-01-31 08:51",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "tech_60e3d4",
+          "title": "Multimodal reinforcement learning with agentic verifier for AI agents",
+          "title_cn": "Argos引入Agent验证器，减少多模态AI视觉幻觉",
+          "summary": "Argos improves multimodal RL by evaluating whether an agent’s reasoning aligns with what it observes over time. The approach reduces visual hallucinations and produces more reliable, data-efficient ag",
+          "summary_cn": "Argos通过引入Agent验证器评估推理与观察的一致性，改进多模态强化学习，有效减少视觉幻觉，打造更可靠的Agent。",
+          "url": "https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/",
+          "source": "Microsoft Research",
+          "category": "技术创新",
+          "importance_score": 58.5,
+          "published_at": "Tue, 20 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "name": "产品工具",
+      "icon": "🛠️",
+      "count": 6,
+      "items": [
+        {
+          "id": "product_656484",
+          "title": "Unrolling the Codex agent loop",
+          "title_cn": "Codex Agent技术拆解：如何通过CLI与Responses API高效编排模型",
+          "summary": "A technical deep dive into the Codex agent loop, explaining how Codex CLI orchestrates models, tools, prompts, and performance using the Responses API.",
+          "summary_cn": "本文深度解析Codex Agent循环机制，详细拆解Codex CLI如何利用Responses API协调模型、工具及提示词，实现性能优化。",
+          "url": "https://openai.com/index/unrolling-the-codex-agent-loop",
+          "source": "OpenAI Blog",
+          "category": "产品工具",
+          "importance_score": 60.6,
+          "published_at": "Fri, 23 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_f095d0",
+          "title": "US has investigated claims WhatsApp chats aren't private",
+          "title_cn": "美国调查WhatsApp隐私指控：端到端加密安全性受质疑",
+          "summary": "<a href=\"https:&#x2F;&#x2F;archive.ph&#x2F;lZlAs\" rel=\"nofollow\">https:&#x2F;&#x2F;archive.ph&#x2F;lZlAs</a><p><a href=\"https:&#x2F;&#x2F;www.theguardian.com&#x2F;technology&#x2F;2026&#x2F;jan&#x2F;31",
+          "summary_cn": "针对WhatsApp聊天内容缺乏隐私保护的指控，美国当局已启动调查，引发公众对该端到端加密应用安全性的担忧。",
+          "url": "https://www.bloomberg.com/news/articles/2026-01-29/us-has-investigated-claims-that-whatsapp-chats-aren-t-private",
+          "source": "Hacker News",
+          "category": "产品工具",
+          "importance_score": 58.5,
+          "published_at": "2026-02-01 01:25",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_99a0d8",
+          "title": "Apple Platform Security (Jan 2026) [pdf]",
+          "title_cn": "Apple发布2026平台安全指南，全面更新硬件与软件防护架构",
+          "summary": "Apple Platform Security (Jan 2026) [pdf]",
+          "summary_cn": "Apple发布最新版平台安全指南文档，全面概述其硬件和软件系统的安全架构，为开发者提供权威安全参考。",
+          "url": "https://help.apple.com/pdf/security/en_US/apple-platform-security-guide.pdf",
+          "source": "Hacker News",
+          "category": "产品工具",
+          "importance_score": 58.5,
+          "published_at": "2026-02-01 00:04",
+          "tags": [
+            "科技新闻",
+            "产品"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_a0e809",
+          "title": "Promptions helps make AI prompting more precise with dynamic UI controls",
+          "title_cn": "Promptions推出动态UI控件：无需长指令即可精准引导生成式AI",
+          "summary": "Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape outputs quickly without writing long instructions.\nTh",
+          "summary_cn": "Promptions允许开发者在聊天界面添加动态控件，帮助用户无需编写冗长指令即可快速引导生成式AI输出，提升交互精准度。",
+          "url": "https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/",
+          "source": "Microsoft Research",
+          "category": "产品工具",
+          "importance_score": 57.0,
+          "published_at": "Wed, 10 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_455048",
+          "title": "What AI “remembers” about you is privacy’s next frontier",
+          "title_cn": "AI记忆功能引发隐私新挑战：从Google Personal Intelligence看数据边界",
+          "summary": "The ability to remember you and your preferences is rapidly becoming a big selling point for AI chatbots and agents.&#160; Earlier this month, Google announced Personal Intelligence, a new way for peo",
+          "summary_cn": "AI的记忆能力正成为Chatbot和Agent的核心卖点，如Google的Personal Intelligence，但这同时也引发了关于数据隐私的新一轮担忧。",
+          "url": "https://www.technologyreview.com/2026/01/28/1131835/what-ai-remembers-about-you-is-privacys-next-frontier/",
+          "source": "MIT Technology Review",
+          "category": "产品工具",
+          "importance_score": 56.2,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "product_4b15e5",
+          "title": "Inside the marketplace powering bespoke AI deepfakes of real women",
+          "title_cn": "调查揭秘Civitai：a16z投资的平台如何助长定制化女性AI深度伪造",
+          "summary": "Civitai—an online marketplace for buying and selling AI-generated content, backed by the venture capital firm Andreessen Horowitz—is letting users buy custom instruction files for generating celebrity",
+          "summary_cn": "获Andreessen Horowitz支持的AI平台Civitai允许购买定制指令生成明星深度伪造，引发严重伦理与法律争议。",
+          "url": "https://www.technologyreview.com/2026/01/30/1131945/inside-the-marketplace-powering-bespoke-ai-deepfakes-of-real-women/",
+          "source": "MIT Technology Review",
+          "category": "产品工具",
+          "importance_score": 55.6,
+          "published_at": "Fri, 30 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "application",
+      "name": "行业应用",
+      "icon": "💼",
+      "count": 1,
+      "items": [
+        {
+          "id": "application_ea6943",
+          "title": "Robotics in 2026: Building the Business Case for Humanoids",
+          "title_cn": "2026年机器人行业展望：人形机器人迎来商业落地",
+          "summary": "From household deployments to general-purpose machines, experts weigh in on what the next year holds for the robotics industry.",
+          "summary_cn": "专家预测2026年行业趋势，人形机器人将从家庭场景扩展至通用机器领域，商业化进程将迎来关键突破。",
+          "url": "https://aibusiness.com/robotics/building-business-case-for-humanoid-robotics",
+          "source": "AI Business",
+          "category": "行业应用",
+          "importance_score": 45.5,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    }
+  ],
+  "core_insights": [
+    "企业应用从通用对话转向垂直深耕，时尚与建筑等行业利用AI重塑供应链与设计，意味着AI落地进入业务深水区。",
+    "融合Codex与GPT-5的Agent架构通过CLI实现分钟级数据处理，配合高并发扩容，意味着AI基建正向高吞吐自动化演进。",
+    "Agent从生成向执行演进，内置安全机制保障交互隐私，意味着企业部署自动化工作流时需建立全新的操作与信任边界。"
+  ],
+  "deep_observation": "OpenAI宣布2月13日停用GPT-4o及GPT-4.1系列模型，这绝非简单的版本迭代，而是宣告了通用对话时代的终结。真正的信号隐藏在基础设施层：OpenAI将PostgreSQL扩容至支持8亿用户并实现每秒百万级查询，这种吞吐量并非为了陪你闲聊，而是为了给工业级自动化铺设管道。\n\n这种算力底座的升级，正在推动AI应用从“泛泛而谈”转向“垂直深耕”。TRUSTBANK利用OpenAI模型简化家乡税决策，Higgsfield将创意转化为电影级视频，表明金融与创意行业正在将AI嵌入核心业务流。无论是时尚行业的供应链重塑，还是建筑设计的高效生成，AI已越过浅滩，开始在业务深水区承担具体职能。\n\n结合GPT-5职场报告来看，Agent架构正通过融合Codex实现CLI分钟级数据处理，向高并发自动化演进。这意味着AI的角色正从内容生成者转变为任务执行者。但这种执行力的跃升带来了新的挑战：如TRUSTBANK的案例所示，内置安全机制与隐私保护已成为刚需。企业在部署自动化工作流时，必须在效率与信任边界之间找到新的平衡点。停用旧模型是为了给更高效的Agent让路，AI不再是屏幕上的对话框，而是正在成为每秒处理百万级查询的企业骨干。",
+  "trending_topics": [
+    {
+      "name": "新闻",
+      "count": 27,
+      "trend": "rising"
+    },
+    {
+      "name": "AI资讯",
+      "count": 27,
+      "trend": "rising"
+    },
+    {
+      "name": "科技新闻",
+      "count": 3,
+      "trend": "stable"
+    },
+    {
+      "name": "产品",
+      "count": 3,
+      "trend": "stable"
+    }
+  ],
+  "sources": [
+    {
+      "name": "TechCrunch AI",
+      "count": 15
+    },
+    {
+      "name": "MIT Technology Review",
+      "count": 10
+    },
+    {
+      "name": "OpenAI Blog",
+      "count": 15
+    },
+    {
+      "name": "arXiv",
+      "count": 16
+    },
+    {
+      "name": "BAIR Blog",
+      "count": 10
+    },
+    {
+      "name": "Microsoft Research",
+      "count": 10
+    },
+    {
+      "name": "MarkTechPost",
+      "count": 10
+    },
+    {
+      "name": "KDnuggets",
+      "count": 10
+    },
+    {
+      "name": "AI Business",
+      "count": 12
+    },
+    {
+      "name": "The Gradient",
+      "count": 8
+    },
+    {
+      "name": "InfoQ",
+      "count": 12
+    },
+    {
+      "name": "Hugging Face",
+      "count": 10
+    },
+    {
+      "name": "Hacker News",
+      "count": 12
+    }
+  ],
+  "markdown_content": "# AI每日热点 · 2026年02月01日\n\n> **期号**: #20260201  |  **阅读时间**: ~6分钟  |  **精选**: 30条\n\n---\n\n## 💡 核心洞察\n\n- 企业应用从通用对话转向垂直深耕，时尚与建筑等行业利用AI重塑供应链与设计，意味着AI落地进入业务深水区。\n- 融合Codex与GPT-5的Agent架构通过CLI实现分钟级数据处理，配合高并发扩容，意味着AI基建正向高吞吐自动化演进。\n- Agent从生成向执行演进，内置安全机制保障交互隐私，意味着企业部署自动化工作流时需建立全新的操作与信任边界。\n\n---\n\n## 📰 深度观察\n\nOpenAI宣布2月13日停用GPT-4o及GPT-4.1系列模型，这绝非简单的版本迭代，而是宣告了通用对话时代的终结。真正的信号隐藏在基础设施层：OpenAI将PostgreSQL扩容至支持8亿用户并实现每秒百万级查询，这种吞吐量并非为了陪你闲聊，而是为了给工业级自动化铺设管道。\n\n这种算力底座的升级，正在推动AI应用从“泛泛而谈”转向“垂直深耕”。TRUSTBANK利用OpenAI模型简化家乡税决策，Higgsfield将创意转化为电影级视频，表明金融与创意行业正在将AI嵌入核心业务流。无论是时尚行业的供应链重塑，还是建筑设计的高效生成，AI已越过浅滩，开始在业务深水区承担具体职能。\n\n结合GPT-5职场报告来看，Agent架构正通过融合Codex实现CLI分钟级数据处理，向高并发自动化演进。这意味着AI的角色正从内容生成者转变为任务执行者。但这种执行力的跃升带来了新的挑战：如TRUSTBANK的案例所示，内置安全机制与隐私保护已成为刚需。企业在部署自动化工作流时，必须在效率与信任边界之间找到新的平衡点。停用旧模型是为了给更高效的Agent让路，AI不再是屏幕上的对话框，而是正在成为每秒处理百万级查询的企业骨干。\n\n---\n\n## ⭐ 编辑精选 (Editor's Picks)\n\n### 1. OpenAI宣布停用GPT-4o等旧模型，ChatGPT服务全面更新\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文链接](https://openai.com/index/retiring-gpt-4o-and-older-models)\n\n**核心内容**: 2026年2月13日起，OpenAI将从ChatGPT中移除GPT-4o、GPT-4.1及o4-mini等旧模型，配合GPT-5系列的调整，推动用户迁移至最新架构。\n\n---\n\n### 2. TRUSTBANK利用OpenAI模型构建Choice AI，简化税收捐赠流程\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文链接](https://openai.com/index/trustbank)\n\n**核心内容**: TRUSTBANK携手Recursive，基于OpenAI模型和multi-agent系统打造Choice AI，提供个性化对话推荐，大幅简化捐赠发现流程。\n\n---\n\n### 3. OpenAI技术揭秘：扩展PostgreSQL支撑8亿ChatGPT用户\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文链接](https://openai.com/index/scaling-postgresql)\n\n**核心内容**: 深入解析OpenAI如何利用副本、缓存和速率限制技术，将PostgreSQL扩展至每秒处理数百万次查询，支撑8亿用户访问。\n\n---\n\n### 4. Higgsfield整合GPT-5和Sora 2，将简单创意转化为电影级视频\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文链接](https://openai.com/index/higgsfield)\n\n**核心内容**: Higgsfield利用OpenAI的GPT-4.1、GPT-5及Sora 2模型，让创作者仅凭简单输入即可生成高质量的电影级社交媒体视频。\n\n---\n\n### 5. GPT-5职场深度报告：揭示企业应用趋势与核心任务\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文链接](https://openai.com/business/guides-and-resources/chatgpt-usage-and-adoption-patterns-at-work)\n\n**核心内容**: 基于数据的深度报告，全面解析各行业员工如何使用ChatGPT，涵盖采用趋势、高频任务模式及职场AI的未来发展。\n\n---\n\n## 📊 热门话题\n\n| 话题 | 相关新闻 | 趋势 |\n|------|---------|------|\n| 新闻 | 27条 | 📈 上升 |\n| AI资讯 | 27条 | 📈 上升 |\n| 科技新闻 | 3条 | ➡️ 稳定 |\n| 产品 | 3条 | ➡️ 稳定 |\n\n---\n\n## 🔍 分类热点\n\n### 📈 产业动态 (7条)\n\n#### 1. GPT-5职场应用报告：揭示各行业AI使用趋势\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文](https://openai.com/business/guides-and-resources/chatgpt-usage-and-adoption-patterns-at-work)\n\n**摘要**: 本报告通过数据揭示各行业员工如何使用ChatGPT，涵盖采用趋势、高频任务及部门模式，展望职场AI的未来发展。\n\n---\n\n#### 2. PVH集团引入ChatGPT Enterprise：重塑时尚设计与供应链\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/pvh-future-of-fashion)\n\n**摘要**: PVH集团（Calvin Klein母公司）引入ChatGPT Enterprise，将AI技术融入时尚设计、供应链管理及消费者互动，重塑时尚产业未来。\n\n---\n\n#### 3. 大成建设部署ChatGPT Enterprise：助力人才培养及全球建筑业务AI化\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/taisei)\n\n**摘要**: 大成建设利用ChatGPT Enterprise支持HR主导的人才发展，并在其全球建筑业务中扩展生成式AI应用，加速数字化转型。\n\n---\n\n#### 4. OpenAI发布欧盟经济蓝图2.0：加速欧洲AI普及与技能增长\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/the-next-chapter-for-ai-in-the-eu)\n\n**摘要**: OpenAI推出欧盟经济蓝图2.0，通过新数据、合作伙伴关系及举措，加速全欧洲的AI采用、技能提升与经济增长。\n\n---\n\n#### 5. Indeed CRO专访：AI如何变革求职体验与人才招聘流程\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/indeed-maggie-hulce)\n\n**摘要**: Indeed首席营收官Maggie Hulce分享见解，阐述AI如何正在变革求职、招聘及人才获取流程，为雇主和求职者创造新价值。\n\n---\n\n#### 6. OptiMind小语言模型：自然语言转数学公式，提升业务优化效率\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/optimind-a-small-language-model-with-optimization-expertise/)\n\n**摘要**: OptiMind是一个小语言模型，能将自然语言描述的业务运营挑战转化为数学公式，供优化软件求解，显著缩短公式化时间。\n\n---\n\n#### 7. WiML 20周年：联合创始人回顾社区建设与AI未来\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/)\n\n**摘要**: 机器学习女性论坛迎来第20届年会，联合创始人回顾社区演变历程，探讨女性在机器学习领域的贡献及AI未来发展。\n\n---\n\n### 🎓 🎓 学术突破 (8条)\n\n#### 1. OpenAI揭秘内部数据Agent：整合GPT-5与Codex，分钟级处理海量数据\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/inside-our-in-house-data-agent)\n\n**摘要**: OpenAI构建内部AI数据Agent，结合GPT-5、Codex及记忆功能，能在几分钟内分析海量数据集并产出可靠洞察。\n\n---\n\n#### 2. Prism发布：集成GPT-5.2的免费LaTeX工作空间，助科研写作推理一体化\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/introducing-prism)\n\n**摘要**: Prism发布免费LaTeX原生工作空间，内置GPT-5.2，让研究人员在同一平台实现论文写作、协作与逻辑推理。\n\n---\n\n#### 3. 开放申请：50万欧元EMEA青年基金，助力AI时代青少年安全研究\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/emea-youth-and-wellbeing-grant)\n\n**摘要**: EMEA青年与福祉基金开放申请，提供50万欧元资助NGO及研究人员，致力于推动AI时代的青少年安全与福祉发展。\n\n---\n\n#### 4. 深度解析：word2vec究竟学到了什么？揭开表示学习的面纱\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/09/01/qwem-word2vec-theory/)\n\n**摘要**: 本文深入探讨word2vec的学习原理，通过解析语言建模任务，揭示其在表示学习中的具体机制与运作方式。\n\n---\n\n#### 5. 越狱评估新视角：StrongREJECT基准测试与翻译攻击案例分析\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/08/28/strong-reject/)\n\n**摘要**: 本文利用StrongREJECT基准测试，深入探讨越狱攻击评估方法，揭示了通过翻译提示词至小众语言即可绕过LLM防御的机制。\n\n---\n\n#### 6. 发布Visual Haystacks基准测试：评估AI是否已具备多图像推理能力\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/07/20/visual-haystacks/)\n\n**摘要**: 研究人员发布Visual Haystacks基准测试，旨在评估AI处理海量视觉信息的能力，这是迈向通用人工智能(AGI)的关键一步。\n\n---\n\n#### 7. 微软推出GigaTIME：利用多模态AI虚拟群体重塑癌症治疗研究\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai/)\n\n**摘要**: 微软研究人员利用多模态AI生成虚拟群体，开发出GigaTIME模型，发现隐藏的细胞模式，有望改变癌症的理解与治疗方式。\n\n---\n\n#### 8. 抛弃TD学习：介绍一种基于分治策略的强化学习新算法\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/11/01/rl-without-td-learning/)\n\n**摘要**: 本文介绍一种基于分治策略的新型强化学习(RL)算法，摒弃了传统的TD学习，为解决复杂问题提供了全新的替代范式。\n\n---\n\n### 🔬 技术创新 (8条)\n\n#### 1. OpenAI将于2月13日停用GPT-4o及GPT-4.1系列模型\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文](https://openai.com/index/retiring-gpt-4o-and-older-models)\n\n**摘要**: OpenAI将于2026年2月13日停止GPT-4o、GPT-4.1等模型服务，用户需提前迁移至新版本以避免业务中断。\n\n---\n\n#### 2. TRUSTBANK推出AI捐赠助手，利用OpenAI模型简化家乡税决策\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文](https://openai.com/index/trustbank)\n\n**摘要**: TRUSTBANK联合Recursive基于OpenAI模型构建Choice AI，通过对话式个性化推荐，大幅简化家乡税捐赠发现流程。\n\n---\n\n#### 3. OpenAI扩容PostgreSQL支持8亿用户，实现每秒百万级查询\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文](https://openai.com/index/scaling-postgresql)\n\n**摘要**: OpenAI通过副本、缓存及工作负载隔离等技术，将PostgreSQL扩容至每秒处理百万次查询，支撑8亿ChatGPT用户。\n\n---\n\n#### 4. Higgsfield整合OpenAI多模态模型，将创意转化为电影级视频\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文](https://openai.com/index/higgsfield)\n\n**摘要**: Higgsfield利用OpenAI的GPT-4.1、GPT-5和Sora 2模型，帮助创作者将简单创意转化为高质量、电影级的社交媒体视频。\n\n---\n\n#### 5. OpenAI内置安全机制，防止AI Agent点击链接时泄露数据\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 61/100  |  🔗 [原文](https://openai.com/index/ai-agent-link-safety)\n\n**摘要**: OpenAI通过内置安全防护措施，防止AI Agent在打开链接时发生基于URL的数据泄露和提示注入攻击，保障用户数据安全。\n\n---\n\n#### 6. Praktika利用GPT-5.2打造AI导师，提供个性化语言学习体验\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/praktika)\n\n**摘要**: Praktika利用GPT-4.1和GPT-5.2构建自适应AI导师，通过个性化课程与进度追踪，帮助用户快速掌握现实世界语言流利度。\n\n---\n\n#### 7. 开发者训练9M参数模型修正中文声调，仅300小时数据\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 59/100  |  🔗 [原文](https://simedw.com/2026/01/31/ear-pronunication-via-ctc/)\n\n**摘要**: 开发者基于300小时数据训练了一个9M参数的Conformer-CTC模型，经INT8量化，旨在帮助用户自测并修正中文发音中的声调错误。\n\n---\n\n#### 8. Argos引入Agent验证器，减少多模态AI视觉幻觉\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/)\n\n**摘要**: Argos通过引入Agent验证器评估推理与观察的一致性，改进多模态强化学习，有效减少视觉幻觉，打造更可靠的Agent。\n\n---\n\n### 🛠️ 产品工具 (6条)\n\n#### 1. Codex Agent技术拆解：如何通过CLI与Responses API高效编排模型\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 60/100  |  🔗 [原文](https://openai.com/index/unrolling-the-codex-agent-loop)\n\n**摘要**: 本文深度解析Codex Agent循环机制，详细拆解Codex CLI如何利用Responses API协调模型、工具及提示词，实现性能优化。\n\n---\n\n#### 2. 美国调查WhatsApp隐私指控：端到端加密安全性受质疑\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://www.bloomberg.com/news/articles/2026-01-29/us-has-investigated-claims-that-whatsapp-chats-aren-t-private)\n\n**摘要**: 针对WhatsApp聊天内容缺乏隐私保护的指控，美国当局已启动调查，引发公众对该端到端加密应用安全性的担忧。\n\n---\n\n#### 3. Apple发布2026平台安全指南，全面更新硬件与软件防护架构\n\n> 📰 **Hacker News**  |  ⭐ **重要性**: 58/100  |  🔗 [原文](https://help.apple.com/pdf/security/en_US/apple-platform-security-guide.pdf)\n\n**摘要**: Apple发布最新版平台安全指南文档，全面概述其硬件和软件系统的安全架构，为开发者提供权威安全参考。\n\n---\n\n#### 4. Promptions推出动态UI控件：无需长指令即可精准引导生成式AI\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/)\n\n**摘要**: Promptions允许开发者在聊天界面添加动态控件，帮助用户无需编写冗长指令即可快速引导生成式AI输出，提升交互精准度。\n\n---\n\n#### 5. AI记忆功能引发隐私新挑战：从Google Personal Intelligence看数据边界\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 56/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/28/1131835/what-ai-remembers-about-you-is-privacys-next-frontier/)\n\n**摘要**: AI的记忆能力正成为Chatbot和Agent的核心卖点，如Google的Personal Intelligence，但这同时也引发了关于数据隐私的新一轮担忧。\n\n---\n\n#### 6. 调查揭秘Civitai：a16z投资的平台如何助长定制化女性AI深度伪造\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://www.technologyreview.com/2026/01/30/1131945/inside-the-marketplace-powering-bespoke-ai-deepfakes-of-real-women/)\n\n**摘要**: 获Andreessen Horowitz支持的AI平台Civitai允许购买定制指令生成明星深度伪造，引发严重伦理与法律争议。\n\n---\n\n### 💼 行业应用 (1条)\n\n#### 1. 2026年机器人行业展望：人形机器人迎来商业落地\n\n> 📰 **AI Business**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://aibusiness.com/robotics/building-business-case-for-humanoid-robotics)\n\n**摘要**: 专家预测2026年行业趋势，人形机器人将从家庭场景扩展至通用机器领域，商业化进程将迎来关键突破。\n\n---\n\n## 📚 数据来源\n\n- **TechCrunch AI**: 15条\n- **MIT Technology Review**: 10条\n- **OpenAI Blog**: 15条\n- **arXiv**: 16条\n- **BAIR Blog**: 10条\n- **Microsoft Research**: 10条\n- **MarkTechPost**: 10条\n- **KDnuggets**: 10条\n- **AI Business**: 12条\n- **The Gradient**: 8条\n- **InfoQ**: 12条\n- **Hugging Face**: 10条\n- **Hacker News**: 12条\n\n---\n\n*🤖 Generated by [ContentForge AI](https://github.com/devfoxaicn/content-forge-ai)*\n"
+}
