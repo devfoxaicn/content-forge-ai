@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_092",
+  "series_id": "ml_series_10",
+  "episode": 92,
+  "title": "因果机器学习前沿",
+  "description": "因果发现、因果推断。因果森林、因果树。Causal ML、DoWhy库。反事实推理、因果效应估计，以及在医疗决策、营销策略中的应用。",
+  "keywords": [
+    "因果机器学习",
+    "因果发现",
+    "因果森林",
+    "DoWhy",
+    "反事实",
+    "因果推断"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14500,
+  "status": "pending"
+}

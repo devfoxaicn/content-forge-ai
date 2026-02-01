@@ -19,7 +19,7 @@ from src.state import create_initial_state, update_state, add_agent_to_order, ca
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
 from src.agents.trend_categorizer_agent import TrendCategorizerAgent
 from src.agents.news_scoring_agent import NewsScoringAgent
-from src.agents.world_class_digest_agent_v8 import WorldClassDigestAgentV8
+from src.agents.world_class_digest_agent_v8 import WorldClassDigestAgentV9  # v9.0: 6分类系统
 from src.utils.storage_v2 import StorageFactory
 from src.utils.github_publisher import GitHubPublisher
 
@@ -126,18 +126,18 @@ class AutoContentOrchestrator:
         if agents_config.get("news_scoring", {}).get("enabled", True):
             agents["news_scoring"] = NewsScoringAgent(self.config, self.prompts)
 
-        # 4. 世界顶级中文简报Agent v8.0（整合 copywriting + copy-editing 原则）
+        # 4. 世界顶级中文简报Agent v9.0（6分类系统 + 30数据源 + Top5截取）
         if agents_config.get("world_class_digest", {}).get("enabled", True):
-            agents["world_class_digest"] = WorldClassDigestAgentV8(self.config, self.prompts)
+            agents["world_class_digest"] = WorldClassDigestAgentV9(self.config, self.prompts)
 
         # 注意：Auto模式下不初始化长文本、小红书、Twitter等Agent
         # 如需生成完整内容，请使用 Series 模式
 
-        logger.info(f"Auto模式 v8.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
+        logger.info(f"Auto模式 v9.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
         return agents
 
     def _build_workflow(self) -> StateGraph:
-        """构建自动化工作流（Auto模式 v8.0：世界顶级中文新闻简报）"""
+        """构建自动化工作流（Auto模式 v9.0：6分类系统 + 世界顶级中文新闻简报）"""
         workflow = StateGraph(dict)
 
         # 添加Agent节点

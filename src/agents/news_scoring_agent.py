@@ -1,18 +1,19 @@
 """
-新闻重要性评分Agent v8.0 - 对分类后的新闻进行重要性评分和筛选
+新闻重要性评分Agent v9.0 - 对分类后的新闻进行重要性评分和筛选
 
 评分维度:
-- source_authority: 来源权威度 (30%)
+- source_authority: 来源权威度 (30%) - v9.0更新: 30个数据源评分
 - engagement: 互动数据 (20%)
-- freshness: 时效性 (15%)
-- category_balance: 分类平衡 (15%)
+- freshness: 时效性 (15%) - v9.0更新: 严格24小时过滤
+- category_balance: 分类平衡 (15%) - v9.0更新: 6分类平衡
 - content_quality: 内容质量 (10%)
 - diversity: 多样性 (10%)
 
-v8.0 新增:
-- AI关键词识别加权
-- 技术趋势敏感度评分
-- 专业术语识别
+v9.0 更新:
+- 6分类系统权威度评分
+- 30个数据源完整覆盖
+- 严格24小时时效性过滤
+- 宁缺毋滥策略
 """
 
 from typing import Dict, Any, List
@@ -49,28 +50,71 @@ EMERGING_TECH_TRENDS = [
     "Multimodal", "Vision-language", "VLM",
 ]
 
-# 数据源权威度评分 (0-100) - v8.0 更新
+# 数据源权威度评分 (0-100) - v9.0 更新: 30个数据源权威度评分
+# 评分标准:
+# - 95-100: 顶级官方/学术机构 (OpenAI, Google AI, MIT等)
+# - 85-94: 权威学术/研究机构 (Microsoft Research, BAIR, Stanford HAI等)
+# - 75-84: 知名学术预印本/数据库 (arXiv, Semantic Scholar, OpenAlex等)
+# - 65-74: 顶级科技媒体/社区 (Hacker News, MIT Tech Review等)
+# - 55-64: 行业媒体/资讯 (TechCrunch, VentureBeat, NewsAPI等)
+# - 45-54: 专业媒体/博客 (MarkTechPost, KDnuggets, The Gradient等)
+# - 35-44: 产品平台/社区 (Product Hunt, GitHub, Reddit等)
+# - 25-34: 用户生成内容/榜单
+
 SOURCE_AUTHORITY_SCORES = {
-    "OpenAI Blog": 95,
-    "Anthropic": 95,
-    "Google AI": 90,
-    "Microsoft Research": 85,
-    "BAIR Blog": 85,
-    "MIT": 80,
-    "arXiv": 75,
-    "Hacker News": 70,
-    "TechCrunch AI": 65,
-    "The Verge AI": 65,
-    "VentureBeat AI": 60,
-    "NewsAPI": 55,
-    "MarkTechPost": 50,
-    "KDnuggets": 50,
-    "AI Business": 45,
-    "The Gradient": 50,
-    "InfoQ": 50,
-    "Hugging Face": 55,
-    "Product Hunt": 40,
-    "GitHub": 35,
+    # ========== 📚 学术前沿 (6个) ==========
+    "arXiv": 80,                        # 学术预印本 - 最高权威
+    "Semantic Scholar": 78,             # 论文元数据库 - 高权威
+    "OpenAlex": 75,                     # 开放学术数据库 - 高权威
+    "Papers with Code": 72,             # 论文+代码 - 高权威
+    "OpenReview": 70,                   # 论文评审平台 - 中高权威
+    "DBLP": 68,                         # 计算机科学文献库 - 中高权威
+
+    # ========== 🛠️ 开发工具 (5个) ==========
+    "Hugging Face": 60,                 # ML模型平台 - 中高权威
+    "PyPI": 55,                         # Python包索引 - 中等权威
+    "npm": 50,                          # JavaScript包 - 中等权威
+    "GitHub Releases": 58,              # GitHub版本发布 - 中高权威
+    "PyTorch": 75,                      # PyTorch官方 - 高权威
+    "TensorFlow": 75,                   # TensorFlow官方 - 高权威
+
+    # ========== 🦾 AI Agent (5个) ==========
+    "GitHub Trending": 45,              # GitHub热门项目 - 中等权威
+    "Product Hunt": 40,                 # 产品发布平台 - 中低权威
+    "Reddit": 50,                       # Reddit社区 - 中等权威
+    "Hacker News": 70,                  # Hacker News - 高权威
+    "Awesome AI Agents": 55,            # 精选列表 - 中等权威
+
+    # ========== 💼 企业应用 (4个) ==========
+    "TechCrunch AI": 62,                # TechCrunch AI - 中高权威
+    "VentureBeat AI": 58,               # VentureBeat AI - 中等权威
+    "AI Business": 52,                  # AI Business - 中等权威
+    "InfoQ AI": 55,                     # InfoQ AI - 中等权威
+
+    # ========== 🌐 消费产品 (4个) ==========
+    "Product Hunt": 40,                 # Product Hunt - 中低权威
+    "a16z": 70,                         # a16z报告 - 高权威
+    "Hacker News": 70,                  # Hacker News (Show HN) - 高权威
+    "App Store": 45,                    # App Store - 中等权威
+    "Google Play": 45,                  # Google Play - 中等权威
+
+    # ========== 📰 行业资讯 (6个) ==========
+    "NewsAPI": 55,                      # NewsAPI聚合 - 中等权威
+    "MIT Tech Review": 72,              # MIT技术评论 - 高权威
+    "The Gradient": 58,                 # The Gradient期刊 - 中高权威
+    "MarkTechPost": 52,                 # MarkTechPost - 中等权威
+    "Stanford HAI": 80,                 # Stanford HAI报告 - 高权威
+    "Accenture": 65,                    # Accenture技术趋势 - 中高权威
+
+    # ========== 其他已有数据源 ==========
+    "OpenAI Blog": 95,                  # OpenAI官方 - 顶级权威
+    "Anthropic": 95,                    # Anthropic官方 - 顶级权威
+    "Google AI": 90,                    # Google AI官方 - 顶级权威
+    "Microsoft Research": 85,           # 微软研究院 - 高权威
+    "BAIR Blog": 85,                    # Berkeley AI Research - 高权威
+    "MIT": 80,                          # MIT - 高权威
+    "The Verge AI": 65,                 # The Verge AI - 中高权威
+    "KDnuggets": 50,                    # KDnuggets - 中等权威
 }
 
 
@@ -227,10 +271,16 @@ class NewsScoringAgent(BaseAgent):
             return 30.0
 
     def _score_freshness(self, item: Dict, current_time: datetime) -> float:
-        """根据时效性评分"""
+        """
+        根据时效性评分 (v9.0: 严格24小时过滤)
+
+        宁缺毋滥策略:
+        - 24小时内: 70-100分
+        - 超过24小时: 0-20分（基本被淘汰）
+        """
         timestamp = item.get("timestamp", "")
         if not timestamp:
-            return 60.0  # 没有时间戳给中等分
+            return 30.0  # v9.0: 没有时间戳给低分（宁缺毋滥）
 
         try:
             # 尝试解析时间戳
@@ -243,30 +293,29 @@ class NewsScoringAgent(BaseAgent):
                     except ValueError:
                         continue
                 else:
-                    return 60.0
+                    return 30.0  # v9.0: 解析失败给低分
             else:
-                return 60.0
+                return 30.0
 
             # 计算时间差
             time_diff = (current_time - pub_time).total_seconds() / 3600  # 小时
 
+            # v9.0: 严格24小时过滤
             if time_diff <= 6:
                 return 100.0
             elif time_diff <= 12:
                 return 90.0
             elif time_diff <= 24:
-                return 80.0
+                return 70.0
+            elif time_diff <= 36:  # 超过24小时，大幅降分
+                return 20.0
             elif time_diff <= 48:
-                return 65.0
-            elif time_diff <= 72:  # 3天
-                return 50.0
-            elif time_diff <= 168:  # 7天
-                return 30.0
+                return 10.0
             else:
-                return 15.0
+                return 5.0  # 超过48小时，基本淘汰
 
         except Exception:
-            return 60.0
+            return 30.0
 
     def _score_content_quality(self, item: Dict) -> float:
         """根据内容质量评分（v8.0 - 增强版，包含AI关键词识别）"""

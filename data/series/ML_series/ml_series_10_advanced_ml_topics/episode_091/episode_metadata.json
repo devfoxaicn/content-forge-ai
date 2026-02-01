@@ -1,0 +1,19 @@
+{
+  "id": "ml_topic_091",
+  "series_id": "ml_series_10",
+  "episode": 91,
+  "title": "图神经网络GNN基础",
+  "description": "图的数学表示。GCN、GAT、GraphSAGE原理。消息传递、邻居采样、图级表示。同构vs异构图，以及在社交网络、推荐系统中的应用。",
+  "keywords": [
+    "GNN",
+    "图神经网络",
+    "GCN",
+    "GAT",
+    "GraphSAGE",
+    "消息传递",
+    "图学习"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 15000,
+  "status": "pending"
+}

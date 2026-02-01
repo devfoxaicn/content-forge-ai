@@ -1,8 +1,15 @@
 """
-World Class AI News Digest Generator v8.0
-顶级AI新闻简报生成器 v8.0 - 增强版
+World Class AI News Digest Generator v9.0
+顶级AI新闻简报生成器 v9.0 - 6分类系统
 
-v8.0 新特性:
+v9.0 更新:
+- 6分类系统支持 (原5分类)
+- 30个数据源整合
+- Top5截取输出
+- 严格24小时过滤
+- 宁缺毋滥策略
+
+v8.0 特性:
 - 整合 copywriting 原则（清晰度、利益导向、具体性）
 - 整合 copy-editing 原则（7次扫描优化）
 - 强化核心洞察提取（行业深度分析）
@@ -19,13 +26,13 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from collections import Counter
 
 
-class WorldClassDigestAgentV8:
-    """世界顶级AI新闻简报生成器 v8.0"""
+class WorldClassDigestAgentV9:
+    """世界顶级AI新闻简报生成器 v9.0 - 6分类系统"""
 
     def __init__(self, config: Dict[str, Any], prompts: Dict[str, Any]):
         self.config = config
         self.prompts = prompts
-        self.name = "world_class_digest_v8"
+        self.name = "world_class_digest_v9"
         self.llm = self._init_llm()
 
         # 翻译配置
@@ -33,7 +40,7 @@ class WorldClassDigestAgentV8:
         self.translate_enabled = agent_config.get("translate_enabled", True)
         self.batch_size = agent_config.get("batch_size", 5)
 
-        self.log(f"v8.0初始化完成，整合 copywriting + copy-editing 原则")
+        self.log(f"v9.0初始化完成 - 6分类系统 + 30数据源 + Top5截取")
 
     def _init_llm(self) -> ChatOpenAI:
         """初始化LLM"""
@@ -76,12 +83,12 @@ class WorldClassDigestAgentV8:
             return None
 
     def log(self, message: str, level: str = "INFO"):
-        logger.log(level, f"[WorldClassDigestAgentV8] {message}")
+        logger.log(level, f"[WorldClassDigestAgentV9] {message}")
 
     def execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
-        """执行简报生成"""
+        """执行简报生成 (v9.0: 6分类系统)"""
         try:
-            self.log("开始生成世界顶级AI新闻简报 v8.0...")
+            self.log("开始生成世界顶级AI新闻简报 v9.0 (6分类系统)...")
 
             # 使用 scored_trends
             scored_trends = state.get("scored_trends", {})
@@ -89,7 +96,7 @@ class WorldClassDigestAgentV8:
             source_status = state.get("source_status", {})
 
             # 生成简报
-            digest = self._generate_world_class_digest_v8(
+            digest = self._generate_world_class_digest_v9(
                 scored_trends,
                 editors_pick,
                 source_status
@@ -109,13 +116,13 @@ class WorldClassDigestAgentV8:
                 "current_step": "world_class_digest_failed"
             }
 
-    def _generate_world_class_digest_v8(
+    def _generate_world_class_digest_v9(
         self,
         scored_trends: Dict[str, Dict],
         editors_pick: List[Dict],
         source_status: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """生成世界顶级AI新闻简报 v8.0"""
+        """生成世界顶级AI新闻简报 v9.0 (6分类系统)"""
 
         today = datetime.now()
         issue_number = today.strftime("%Y%m%d")
@@ -655,11 +662,20 @@ PLACEHOLDER_NEWS_CONTENT
     ) -> Dict[str, Any]:
         """生成JSON格式数据 v8.0"""
 
-        # 构建分类数据
+        # 构建分类数据 (v9.0: 6分类系统)
         categories = []
         category_id_map = {
-            "📈 行业动态": ("industry", "产业动态", "📈"),
-            "🎓 学术前沿": ("academic", "学术前沿", "🎓"),
+            # v9.0: 6分类系统
+            "📚 学术前沿": ("academic_frontier", "学术前沿", "📚"),
+            "🛠️ 开发工具": ("dev_tools", "开发工具", "🛠️"),
+            "🦾 AI Agent": ("ai_agent", "AI Agent", "🦾"),
+            "💼 企业应用": ("enterprise_apps", "企业应用", "💼"),
+            "🌐 消费产品": ("consumer_apps", "消费产品", "🌐"),
+            "📰 行业资讯": ("industry_news", "行业资讯", "📰"),
+
+            # v8.0: 旧分类（向后兼容）
+            "📈 行业动态": ("industry", "行业动态", "📈"),
+            "🎓 学术突破": ("academic", "学术突破", "🎓"),
             "🔬 技术创新": ("tech", "技术创新", "🔬"),
             "🛠️ AI工具/产品": ("product", "产品工具", "🛠️"),
             "💼 AI应用": ("application", "行业应用", "💼")
@@ -732,7 +748,9 @@ PLACEHOLDER_NEWS_CONTENT
                 "word_count": len(markdown_content),
                 "reading_time": f"{max(5, total_count * 12 // 60)}分钟",
                 "total_items": total_count,
-                "version": "v8.0"
+                "version": "v9.0",
+                "category_system": "6分类",
+                "categories": ["学术前沿", "开发工具", "AI Agent", "企业应用", "消费产品", "行业资讯"]
             },
             "editors_pick": editors_pick_data,
             "categories": categories,
@@ -744,10 +762,29 @@ PLACEHOLDER_NEWS_CONTENT
         }
 
     def _get_category_name(self, key: str) -> str:
-        """获取分类中文名"""
+        """
+        获取分类中文名 (v9.0: 6分类系统)
+
+        新6分类:
+        - 📚 学术前沿
+        - 🛠️ 开发工具
+        - 🦾 AI Agent
+        - 💼 企业应用
+        - 🌐 消费产品
+        - 📰 行业资讯
+        """
         mapping = {
-            "📈 行业动态": "产业动态",
-            "🎓 学术前沿": "学术前沿",
+            # v9.0: 6分类系统
+            "📚 学术前沿": "学术前沿",
+            "🛠️ 开发工具": "开发工具",
+            "🦾 AI Agent": "AI Agent",
+            "💼 企业应用": "企业应用",
+            "🌐 消费产品": "消费产品",
+            "📰 行业资讯": "行业资讯",
+
+            # v8.0: 旧分类（向后兼容）
+            "📈 行业动态": "行业动态",
+            "🎓 学术突破": "学术突破",
             "🔬 技术创新": "技术创新",
             "🛠️ AI工具/产品": "产品工具",
             "💼 AI应用": "行业应用"

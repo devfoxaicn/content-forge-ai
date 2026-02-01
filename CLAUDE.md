@@ -6,6 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Project Root**: `/Users/z/Documents/work/content-forge-ai` (adjust if different)
 
+**Quick Setup**:
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Copy environment template
+cp .env.example .env
+
+# 3. Edit .env and add ZHIPUAI_API_KEY
+# Get key from: https://open.bigmodel.cn/
+```
+
 ## Quick Reference
 
 **Essential Commands**:
@@ -17,13 +29,21 @@ export PYTHONPATH=/Users/z/Documents/work/content-forge-ai
 # Run once (recommended for daily AI news digest)
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode auto --once
 
-# ========== Series Mode (100-episode blog series) ==========
-# View progress
+# ========== Series Mode (Two 100-episode series: LLM + ML) ==========
+# View progress (LLM series - default)
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --progress
-# Generate single episode
+# View progress (ML series)
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --progress --series-config config/ml_topics_100_complete.json
+# Generate single episode (LLM series)
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1
+# Generate single episode (ML series)
+PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --episode 1 --series-config config/ml_topics_100_complete.json
 # Generate range
 PYTHONPATH=/Users/z/Documents/work/content-forge-ai python src/main.py --mode series --all --start 1 --end 10
+
+# ========== Batch Generation (ML Series - Parallel Execution) ==========
+# Run batch generation script (3 parallel processes)
+./batch_generate_ml_series.sh
 
 # ========== Tests ==========
 cd test
@@ -33,26 +53,48 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 
 **Core Files**:
 - `src/main.py` - Unified entry point (use `--mode` to switch)
-- `config/config.yaml` - Main config (LLM, agents, data sources)
-- `config/blog_topics_100_complete.json` - 100-episode content plan
-- `config/prompts.yaml` - Agent system prompt templates
+- `src/auto_orchestrator.py` - LangGraph workflow orchestration (auto mode)
+- `src/series_orchestrator.py` - Series mode orchestrator
+- `src/state.py` - State definition (WorkflowState TypedDict)
+- `src/agents/` - 18 agent implementations (base, trend analyzers, generators, quality checkers)
+- `src/data_sources/` - 30 data source integrations (NEW 2026-02-01)
 - `src/utils/storage_v2.py` - Unified storage (StorageFactory)
+- `src/utils/series_manager.py` - Series management tools
 - `src/utils/api_config.py` - API configuration manager
+- `src/utils/time_filter.py` - 24h time filtering utility (NEW 2026-02-01)
+- `config/config.yaml` - Main config (LLM, agents, data sources)
+- `config/blog_topics_100_complete.json` - LLM 100-episode content plan
+- `config/ml_topics_100_complete.json` - ML 100-episode content plan
+- `config/prompts.yaml` - Agent system prompt templates
+- `docs/DATA_SOURCES.md` - Complete data source documentation (NEW 2026-02-01)
 
 **Key Architecture Points**:
-1. **Two-Mode Architecture** (only 2 implemented): Auto (Chinese digest), Series (100 episodes)
-2. **Auto Mode**: Multiple data sources → 分类组织 → 评分筛选 → 全中文简报
-3. **Series Mode**: 7-layer quality pipeline with staged longform generation
-4. **DailyStorage**: Only creates `raw/` and `digest/` directories
-5. **Immutable State Updates**: Use `{**state, **updates}` pattern
-6. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
+1. **Two-Mode Architecture** (only 2 implemented): Auto (Chinese digest), Series (200 episodes across 2 series)
+2. **Dual Series Structure**: LLM Series (100 episodes) + ML Series (100 episodes)
+3. **Auto Mode**: Multiple data sources → 分类组织 → 评分筛选 → 全中文简报
+4. **Series Mode**: 7-layer quality pipeline with staged longform generation
+5. **DailyStorage**: Only creates `raw/` and `digest/` directories
+6. **Immutable State Updates**: Use `{**state, **updates}` pattern
+7. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
 
 ## Deployment Automation
 
 **GitHub Actions** - Automated deployment (3x daily):
-- **Schedule**: 6:00, 12:00, 18:00 Beijing Time (via `.github/workflows/daily-content.yml`)
+- **Schedule**: 6:00, 12:00, 18:00 Beijing Time (via `.github/workflows/daily-digest.yml`)
 - **Workflow**: Runs auto mode → commits changes → pushes to GitHub
 - **Timeout**: 90 minutes (configured in workflow YAML)
+
+**Commit Message Pattern**:
+```bash
+# Format used by GitHub Actions and run_and_commit.sh
+feat: AI内容自动生成 - YYYY-MM-DD
+
+生成时间: HH:MM:SS (北京时间)
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
 
 **run_and_commit.sh** - Manual deployment script:
 ```bash
@@ -79,24 +121,50 @@ ContentForge AI is a LangChain/LangGraph-based automated content production syst
 - **Output**: `data/daily/YYYYMMDD/digest/digest_YYYYMMDD.md` (全中文, with structured JSON)
 
 **Series Mode**:
-- 100-episode technical blog series (episodes 1-100)
-- 7-layer quality assurance pipeline
-- Staged longform generation (outline → sections → summary)
+- **Two 100-episode series**: LLM Series (episodes 1-100) + ML Series (episodes 1-100)
+- **7-layer quality assurance pipeline**
+- **Staged longform generation** (outline → sections → summary)
+- **Configurable via `--series-config` flag** to switch between LLM and ML series
 
 ## Environment Setup
 
 **Required API Keys** (`.env`):
 - `ZHIPUAI_API_KEY` - Primary LLM provider (https://open.bigmodel.cn/)
 
-**Optional Keys**:
+**Optional Keys** (existing):
 - `TAVILY_API_KEY` - Web search (for ResearchAgent)
 - `NEWSAPI_KEY` - NewsAPI.org data source
 - `OPENAI_API_KEY` - Backup LLM
 
+**Optional Keys** (NEW 2026-02-01):
+- `PRODUCT_HUNT_API_KEY` - Product Hunt OAuth token (https://api.producthunt.com/v2/docs)
+- `GITHUB_TOKEN` - GitHub Personal Access Token (https://github.com/settings/tokens)
+- `HUGGINGFACE_TOKEN` - Hugging Face token (https://huggingface.co/settings/tokens)
+- `SEMANTIC_SCHOLAR_API_KEY` - Semantic Scholar API key (https://www.semanticscholar.org/product/api)
+- `OPENALEX_EMAIL` - OpenAlex email (free, recommended)
+- `REDDIT_CLIENT_ID/SECRET` - Reddit API credentials (https://www.reddit.com/prefs/apps)
+
 **Dependencies**:
 ```bash
-pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arxiv praw
+# Core dependencies from requirements.txt
+pip install langgraph>=0.2.0 langchain>=0.3.0 langchain-openai>=0.2.0
+pip install loguru pyyaml python-dotenv pydantic>=2.0.0
+pip install arxiv>=2.1.0 feedparser>=6.0.10 praw>=7.7.0
+
+# New data sources (2026-02-01)
+pip install requests beautifulsoup4
 ```
+
+**New Data Sources (2026-02-01)**:
+The system now integrates **30 data sources** across 6 categories:
+- **📚 Academic Frontier** (6): arXiv, Semantic Scholar, OpenAlex, Papers with Code, OpenReview, DBLP
+- **🛠️ Dev Tools** (5): Hugging Face Hub, PyPI, npm, GitHub Releases, Framework RSS
+- **🦾 AI Agent** (5): GitHub Trending, Product Hunt, Reddit AI, Hacker News, Awesome AI Agents
+- **💼 Enterprise AI** (4): TechCrunch, VentureBeat, AI Business, InfoQ
+- **🌐 Consumer Apps** (4): Product Hunt, a16z Top 100, Hacker News, App Stores
+- **📰 Industry News** (6): NewsAPI, MIT Review, The Gradient, MarkTechPost, Stanford HAI, Accenture
+
+See `docs/DATA_SOURCES.md` for complete API documentation and implementation details.
 
 ## Auto Mode Architecture
 
@@ -167,6 +235,65 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
 ...
 ```
 
+## ML Series Architecture
+
+The ML Series (`config/ml_topics_100_complete.json`) provides 100 episodes covering machine learning and deep learning, organized into 10 sub-series:
+
+**ML Series Structure**:
+| Sub-series | Episodes | Focus |
+|------------|----------|-------|
+| `ml_series_1_foundation` | 1-10 | 机器学习基础 (Math foundations, algorithms) |
+| `ml_series_2_deep_learning` | 11-20 | 深度学习基础 (Neural networks, training) |
+| `ml_series_3_computer_vision` | 21-30 | 计算机视觉 (CNNs, image processing) |
+| `ml_series_4_nlp` | 31-40 | 自然语言处理 (Text processing, NLP basics) |
+| `ml_series_5_rl` | 41-50 | 强化学习 (RL agents, policies) |
+| `ml_series_6_recommendation` | 51-60 | 推荐系统 (Collaborative filtering, deep learning) |
+| `ml_series_7_optimization` | 61-70 | 模型优化 (Hyperparameter tuning) |
+| `ml_series_8_traditional_ml` | 71-80 | 传统机器学习 (SVM, trees, clustering) |
+| `ml_series_9_feature_eng` | 81-90 | 特征工程 (Feature selection, extraction) |
+| `ml_series_10_advanced` | 91-100 | 高级ML主题 (Ensemble, interpretability) |
+
+**Storage Structure for ML Series**:
+```
+data/series/ML_series/
+├── ml_series_1_ml_foundation/
+│   ├── episode_001/
+│   │   └── longform/
+│   │       └── ep001_..._article.md
+│   └── series_metadata.json
+└── ...
+```
+
+**Path Management**: ML series use `ml_series_X` IDs with paths managed by `SeriesPathManager`. The category is automatically detected (`get_series_category()` returns "ML_series" for `ml_series_*` IDs).
+
+## Batch Generation Scripts
+
+**`batch_generate_ml_series.sh`** - Parallel ML episode generation:
+```bash
+# Run batch generation (3 parallel processes by default)
+./batch_generate_ml_series.sh
+
+# Features:
+# - Configurable parallelism (PARALLELISM=3)
+# - PID tracking for process management
+# - Automatic retry on failure
+# - Progress logging to logs/batch_generate/
+# - Episode list configurable via EPISODES array
+```
+
+**`monitor_and_launch_next.sh`** - Workflow monitoring script:
+```bash
+# Monitors running tasks and auto-launches next episodes
+# when previous ones complete
+./monitor_and_launch_next.sh
+
+# Features:
+# - Checks task completion by scanning output files
+# - Auto-launches next episodes from NEXT_EPISODES array
+# - 30-second polling interval
+# - Marks completed/failed tasks for tracking
+```
+
 ## Command Reference
 
 **Auto Mode**:
@@ -176,9 +303,11 @@ pip install langgraph langchain langchain-openai loguru pyyaml python-dotenv arx
 **Series Mode**:
 - `--mode series --progress` - 查看进度
 - `--mode series --episode INT` - 生成指定集
+- `--mode series --episode INT --series-config PATH` - 生成指定系列 (LLM/ML)
 - `--mode series --all` - 生成全部
 - `--start INT` - Start episode (default: 1)
 - `--end INT` - End episode (default: 100)
+- `--series-config PATH` - 指定配置文件 (default: `config/blog_topics_100_complete.json`)
 
 ## Architecture Overview
 
@@ -474,7 +603,7 @@ series_id = SeriesPathManager.get_series_id_from_path("series_1_llm_foundation")
 
 **Series Folder Format**: `series_X_descriptive_name` (v2.5 improvement for semantic paths)
 
-**Complete Series List**:
+**LLM Series List** (episodes 1-100):
 - `series_1_llm_foundation` (1-10) - LLM Principles
 - `series_2_rag_technique` (11-18) - RAG Practice
 - `series_3_agent_development` (19-26) - Agent Development
@@ -486,11 +615,27 @@ series_id = SeriesPathManager.get_series_id_from_path("series_1_llm_foundation")
 - `series_9_ai_applications` (71-85) - AI Application Scenarios
 - `series_10_ai_infrastructure` (86-100) - AI Infrastructure
 
-**Series Path Mapping** (hardcoded): `src/utils/series_manager.py:156-167` (SeriesPathManager.SERIES_NAME_MAP)
+**ML Series List** (episodes 1-100):
+- `ml_series_1_ml_foundation` (1-10) - 机器学习基础
+- `ml_series_2_deep_learning_foundation` (11-20) - 深度学习基础
+- `ml_series_3_computer_vision` (21-30) - 计算机视觉
+- `ml_series_4_natural_language_processing` (31-40) - 自然语言处理
+- `ml_series_5_reinforcement_learning` (41-50) - 强化学习
+- `ml_series_6_recommendation_systems` (51-60) - 推荐系统
+- `ml_series_7_model_optimization` (61-70) - 模型优化
+- `ml_series_8_traditional_ml` (71-80) - 传统机器学习
+- `ml_series_9_feature_engineering` (81-90) - 特征工程
+- `ml_series_10_advanced_ml_topics` (91-100) - 高级ML主题
+
+**Series Path Mapping** (hardcoded): `src/utils/series_manager.py:156-179` (SeriesPathManager.SERIES_NAME_MAP)
 
 **Important**: Adding new series requires updating both:
-1. `config/blog_topics_100_complete.json` - Add series info and topics
+1. `config/blog_topics_100_complete.json` or `config/ml_topics_100_complete.json` - Add series info and topics
 2. `SeriesPathManager.SERIES_NAME_MAP` - Add path mapping
+
+**Category Detection**: `SeriesPathManager.get_series_category()` automatically detects whether a series is LLM or ML based on the `series_id` prefix:
+- `series_*` → "LLM_series"
+- `ml_series_*` → "ML_series"
 
 ### Claude Code Skills Directory
 
@@ -910,15 +1055,19 @@ agents:
 
 ---
 
-**Version**: v8.0 (current implementation)
-**Updated**: 2026-01-28
+**Version**: v9.2 (current implementation)
+**Updated**: 2026-02-01
 
 ## Version Notes
 
 **Important Version Context**:
-- **v8.0** (current): Auto and Series modes optimized with skills integration, 3x daily GitHub Actions
+- **v9.2** (current): 6-category system, prioritize latest data, guarantee 30 items daily
+- **v9.0**: 5-category → 6-category重构, 新增 🦾 AI Agent 分类, 30个数据源分类映射
+- **v8.1**: Added ML Series (100 episodes), batch generation scripts, dual-series architecture
+- **v8.0**: Auto and Series modes optimized with skills integration, 3x daily GitHub Actions
 - `config/config.yaml` header shows v2.5 (outdated, not updated)
-- Features include v7.0 innovations (NewsScoringAgent, 6-dimensional scoring) plus v8.0 improvements
+- Features include v7.0 innovations (NewsScoringAgent, 6-dimensional scoring) plus v8.0-v9.2 improvements
+- **Dual Series Architecture**: LLM Series (100 episodes) + ML Series (100 episodes) = 200 episodes total
 - **Only 2 modes implemented**: Auto and Series. Custom/Refine modes documented in config but NOT coded
 - **Always verify actual implementation in source code** - documented features may differ from deployed version
 
@@ -926,17 +1075,36 @@ agents:
 
 This CLAUDE.md has been improved with:
 
-1. **Removed Custom/Refine mode documentation** - These modes are NOT implemented
-2. **Corrected agent availability** - Only 6 agents exported by default (not 16)
-3. **Updated storage structure** - Removed custom/refine directories
-4. **Added GitHub Actions deployment** - 3x daily automated execution (6:00, 12:00, 18:00)
-5. **Updated agent dependencies** - Separated Auto (v8.0) and Series mode agents
-6. **Fixed state flow documentation** - Removed references to non-existent social content agents
-7. **Added agent import warning** - Quality agents require manual import
-8. **Corrected version information** - Reflects v8.0 reality
+1. **v9.2 Updates** (2026-02-01):
+   - **6-Category System**: 📚 学术前沿, 🛠️ 开发工具, 🦾 AI Agent, 💼 企业应用, 🌐 消费产品, 📰 行业资讯
+   - **30 Data Sources**: Integrated across 6 categories with comprehensive documentation
+   - **Prioritize Latest Data**: Sort by timestamp (newest first), guarantee 30 items daily (6×5)
+   - **Removed 24h Restriction**: Allow older content to fill gaps, ensure daily output quota
+   - **Enhanced Time Parsing**: Support for RSS/Atom/HTTP Date formats in `time_filter.py`
+   - **New Data Sources**: Added 10 new sources (Semantic Scholar, Hugging Face, PyPI, npm, etc.)
+
+2. **v8.1 Updates** (2026-01-31):
+   - **Added ML Series documentation** - 100 episodes covering ML/DL topics
+   - **Added batch generation scripts** - `batch_generate_ml_series.sh` for parallel execution
+   - **Added workflow monitoring** - `monitor_and_launch_next.sh` for auto-launching episodes
+   - **Updated Series Path Management** - ML series paths and category detection
+   - **Updated command reference** - `--series-config` flag for switching between LLM/ML series
+
+3. **v8.0 Updates** (2026-01-28):
+   - Removed Custom/Refine mode documentation - These modes are NOT implemented
+   - Corrected agent availability - Only 6 agents exported by default (not 16)
+   - Updated storage structure - Removed custom/refine directories
+   - Added GitHub Actions deployment - 3x daily automated execution (6:00, 12:00, 18:00)
+   - Updated agent dependencies - Separated Auto (v8.0) and Series mode agents
+   - Fixed state flow documentation - Removed references to non-existent social content agents
+   - Added agent import warning - Quality agents require manual import
+   - Corrected version information - Reflects v8.0 reality
 
 **Recommended Actions**:
-1. Only use Auto and Series modes - Custom/Refine are not available
-2. Import quality agents directly when needed: `from src.agents.code_review_agent import CodeReviewAgent`
-3. Test in mock mode first before running with live APIs
-4. Verify agent availability in `src/agents/__init__.py` before use
+1. Use `--series-config` flag to switch between LLM and ML series
+2. Use batch generation scripts for parallel ML episode generation
+3. Only use Auto and Series modes - Custom/Refine are not available
+4. Import quality agents directly when needed: `from src.agents.code_review_agent import CodeReviewAgent`
+5. Test in mock mode first before running with live APIs
+6. Verify agent availability in `src/agents/__init__.py` before use
+7. Check `docs/DATA_SOURCES.md` for complete 30 data source documentation (v9.2)

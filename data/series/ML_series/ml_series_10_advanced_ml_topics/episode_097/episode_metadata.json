@@ -1,0 +1,18 @@
+{
+  "id": "ml_topic_097",
+  "series_id": "ml_series_10",
+  "episode": 97,
+  "title": "神经符号AI与可解释性",
+  "description": "深度学习与符号推理结合。神经符号模型、可微分逻辑。可解释性技术：LIME、SHAP、Attention可视化。因果推断、反事实解释，以及在医疗、金融高风险场景中的应用。",
+  "keywords": [
+    "神经符号AI",
+    "可解释性",
+    "LIME",
+    "SHAP",
+    "符号推理",
+    "因果解释"
+  ],
+  "difficulty": "前沿",
+  "estimated_words": 14000,
+  "status": "pending"
+}

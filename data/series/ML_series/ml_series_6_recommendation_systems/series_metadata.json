@@ -1,0 +1,210 @@
+{
+  "series_info": {
+    "id": "ml_series_6_recommendation_systems",
+    "name": "推荐系统系列",
+    "description": "推荐算法架构与工业实践",
+    "topic_count": 10,
+    "difficulty": "综合应用",
+    "priority": 6,
+    "status": "in_progress"
+  },
+  "topics": [
+    {
+      "id": "ml_topic_051",
+      "series_id": "ml_series_6",
+      "episode": 51,
+      "title": "推荐系统导论：架构与评估",
+      "description": "推荐系统的核心价值。召回、排序、重排三层架构。离线评估（AUC、NDCG、MAP）与在线评估（CTR、CVR、GMV）。A/B测试、用户调研。",
+      "keywords": [
+        "推荐系统",
+        "召回",
+        "排序",
+        "重排",
+        "AUC",
+        "NDCG",
+        "A/B测试"
+      ],
+      "difficulty": "入门",
+      "estimated_words": 13000,
+      "status": "completed",
+      "completed_at": "2026-01-28"
+    },
+    {
+      "id": "ml_topic_052",
+      "series_id": "ml_series_6",
+      "episode": 52,
+      "title": "协同过滤算法深入解析",
+      "description": "用户-物品矩阵的稀疏性挑战。User-based、Item-based CF。矩阵分解：SVD、SVD++、ALS。隐语义模型，以及在Netflix Prize、电商推荐中的应用。",
+      "keywords": [
+        "协同过滤",
+        "矩阵分解",
+        "SVD",
+        "ALS",
+        "隐语义",
+        "Netflix Prize"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "completed",
+      "completed_at": "2026-01-29"
+    },
+    {
+      "id": "ml_topic_053",
+      "series_id": "ml_series_6",
+      "episode": 53,
+      "title": "深度学习推荐模型：从Wide&Deep到DLRM",
+      "description": "Wide&Deep、DeepFM、xDeepFM、DCN。序列推荐：GRU4Rec、BERT4Rec、SASRec。多任务学习：ESMM、MMOE、PLE。YouTube、阿里巴巴推荐架构解析。",
+      "keywords": [
+        "Wide&Deep",
+        "DeepFM",
+        "DCN",
+        "序列推荐",
+        "GRU4Rec",
+        "SASRec",
+        "多任务学习"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 16000,
+      "status": "completed",
+      "completed_at": "2026-01-29"
+    },
+    {
+      "id": "ml_topic_054",
+      "series_id": "ml_series_6",
+      "episode": 54,
+      "title": "召回算法与索引技术",
+      "description": "大规模召回的挑战。双塔模型、DSSM、YouTube召回。Faiss、HNSW近似最近邻搜索。向量检索、倒排索引、多路召回，以及在亿级商品召回中的实践。",
+      "keywords": [
+        "召回",
+        "双塔模型",
+        "DSSM",
+        "Faiss",
+        "HNSW",
+        "向量检索",
+        "倒排索引"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 15000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_055",
+      "series_id": "ml_series_6",
+      "episode": 55,
+      "title": "排序学习Learning to Rank",
+      "description": "LTR的三个范式：Pointwise、Pairwise、Listwise。LambdaMART、LambdaRank。深度LTR模型、多目标排序。在搜索排名、信息流排序中的应用。",
+      "keywords": [
+        "排序学习",
+        "LTR",
+        "LambdaMART",
+        "LambdaRank",
+        "Pointwise",
+        "Pairwise",
+        "Listwise"
+      ],
+      "difficulty": "进阶",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_056",
+      "series_id": "ml_series_6",
+      "episode": 56,
+      "title": "重排策略与多样性优化",
+      "description": "MMR、MMR多样性算法。业务规则重排、多臂老虎机探索。惊喜感推荐、 serendipity。长尾物品曝光、公平性考量，以及在信息流、短视频推荐中的应用。",
+      "keywords": [
+        "重排",
+        "多样性",
+        "MMR",
+        "多臂老虎机",
+        "惊喜感",
+        "长尾",
+        "公平性"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 13500,
+      "status": "completed",
+      "completed_at": "2026-01-29"
+    },
+    {
+      "id": "ml_topic_057",
+      "series_id": "ml_series_6",
+      "episode": 57,
+      "title": "冷启动与用户画像",
+      "description": "新用户、新物品冷启动。基于内容、基于人口统计、基于社交的冷启动策略。用户标签体系、兴趣建模、用户生命周期。在注册转化、新人引导中的应用。",
+      "keywords": [
+        "冷启动",
+        "用户画像",
+        "兴趣建模",
+        "用户标签",
+        "生命周期",
+        "新人引导"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_058",
+      "series_id": "ml_series_6",
+      "episode": 58,
+      "title": "实时推荐与在线学习",
+      "description": "实时流计算架构。Flink、Spark Streaming实时特征工程。在线学习、增量更新。实时反馈闭环、曝光去偏，以及在直播推荐、即时互动中的应用。",
+      "keywords": [
+        "实时推荐",
+        "在线学习",
+        "Flink",
+        "流计算",
+        "增量更新",
+        "反馈闭环"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 14500,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_059",
+      "series_id": "ml_series_6",
+      "episode": 59,
+      "title": "推荐系统评估与AB测试",
+      "description": "离线评估陷阱：Simpson悖论、选择偏差、数据泄漏。在线AB测试设计：分流、实验时长、统计显著性。CUPED、DeltaDelta、增量评估，以及在业务迭代中的最佳实践。",
+      "keywords": [
+        "AB测试",
+        "评估指标",
+        "Simpson悖论",
+        "CUPED",
+        "统计显著性",
+        "增量评估"
+      ],
+      "difficulty": "实践",
+      "estimated_words": 14000,
+      "status": "pending"
+    },
+    {
+      "id": "ml_topic_060",
+      "series_id": "ml_series_6",
+      "episode": 60,
+      "title": "大模型与推荐系统的融合",
+      "description": "LLM4Rec：大模型做推荐。生成式推荐、多模态推荐、对话式推荐。Prompt Engineering在推荐中的应用。RLHF与推荐对齐，以及在下一代推荐系统中的实践。",
+      "keywords": [
+        "LLM4Rec",
+        "大模型推荐",
+        "生成式推荐",
+        "对话推荐",
+        "多模态",
+        "RLHF"
+      ],
+      "difficulty": "前沿",
+      "estimated_words": 15000,
+      "status": "pending"
+    }
+  ],
+  "statistics": {
+    "total_episodes": 10,
+    "completed_episodes": 4,
+    "total_estimated_words": 144000,
+    "completion_rate": 40.0,
+    "start_date": "2026-01-28",
+    "end_date": "2026-01-29"
+  }
+}
