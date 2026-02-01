@@ -47,7 +47,7 @@ jobs:
       - name: Verify code version
         run: |
           echo "检查代码版本..."
-          grep -A 2 "insights_list" src/agents/world_class_digest_agent_v8.py || echo "⚠️ 代码可能未更新"
+          grep "v9.2" src/agents/trend_categorizer_agent.py && echo "✅ v9.2 6分类系统确认" || echo "⚠️ 代码版本未确认"
 
       - name: Run daily digest generation
         env:
