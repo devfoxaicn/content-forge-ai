@@ -1,6 +1,6 @@
 name: AI Daily Digest Generator
 
-# 触发条件：每天定时执行 + 手动触发
+# 触发条件: 每天定时执行 + 手动触发
 on:
   schedule:
     # 早上6点（北京时间 06:00 = UTC 22:00）
