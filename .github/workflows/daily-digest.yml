@@ -129,28 +129,34 @@ jobs:
             git push
 
             echo "✅ 数据已成功提交到 GitHub!"
-
-            # 触发 ai-insights 仓库的同步
-            echo "🔄 触发 ai-insights 同步..."
-            curl -X POST \
-              -H "Accept: application/vnd.github.v3+json" \
-              -H "Authorization: token ${{ secrets.AI_INSIGHTS_SYNC_PAT }}" \
-              https://api.github.com/repos/Ming-H/ai-insights/dispatches \
-              -d '{"event_type":"content-updated"}'
-            echo "✅ 已触发 ai-insights 同步"
           fi
 
-      # 7. 触发 ai-insights 同步（如果没有新数据也尝试触发）
+      # 7. 触发 ai-insights 同步
       - name: Trigger ai-insights sync
-        if: always() && steps.check-data.outputs.has_digest == 'true'
+        if: steps.check-data.outputs.has_digest == 'true'
         run: |
           echo "🔄 触发 ai-insights 内容同步..."
-          curl -X POST \
+
+          # 触发 repository_dispatch
+          response=$(curl -s -w "\n%{http_code}" -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.AI_INSIGHTS_SYNC_PAT }}" \
             https://api.github.com/repos/Ming-H/ai-insights/dispatches \
-            -d '{"event_type":"content-updated"}'
-          echo "✅ 已触发 ai-insights 同步"
+            -d '{"event_type":"content-updated"}')
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+
+          if [ "$http_code" = "204" ]; then
+            echo "✅ 已成功触发 ai-insights 同步"
+          else
+            echo "⚠️ 触发失败，HTTP code: $http_code"
+            echo "请检查 AI_INSIGHTS_SYNC_PAT Secret 是否正确配置"
+            exit 1
+          fi
 
       # 8. 生成摘要报告
       - name: Summary report
