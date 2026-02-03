@@ -129,9 +129,30 @@ jobs:
             git push
 
             echo "✅ 数据已成功提交到 GitHub!"
+
+            # 触发 ai-insights 仓库的同步
+            echo "🔄 触发 ai-insights 同步..."
+            curl -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: token ${{ secrets.AI_INSIGHTS_SYNC_PAT }}" \
+              https://api.github.com/repos/Ming-H/ai-insights/dispatches \
+              -d '{"event_type":"content-updated"}'
+            echo "✅ 已触发 ai-insights 同步"
           fi
 
-      # 7. 生成摘要报告
+      # 7. 触发 ai-insights 同步（如果没有新数据也尝试触发）
+      - name: Trigger ai-insights sync
+        if: always() && steps.check-data.outputs.has_digest == 'true'
+        run: |
+          echo "🔄 触发 ai-insights 内容同步..."
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.AI_INSIGHTS_SYNC_PAT }}" \
+            https://api.github.com/repos/Ming-H/ai-insights/dispatches \
+            -d '{"event_type":"content-updated"}'
+          echo "✅ 已触发 ai-insights 同步"
+
+      # 8. 生成摘要报告
       - name: Summary report
         if: always()
         env:
