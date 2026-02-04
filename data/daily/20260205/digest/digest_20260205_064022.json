@@ -1,0 +1,781 @@
+{
+  "metadata": {
+    "title": "AI每日热点 · 2026年02月05日",
+    "issue_number": "20260205",
+    "publish_date": "2026-02-05",
+    "generated_at": "2026-02-05T06:35:46.322105",
+    "word_count": 10550,
+    "reading_time": "6分钟",
+    "total_items": 30,
+    "version": "v9.0",
+    "category_system": "6分类",
+    "categories": [
+      "学术前沿",
+      "开发工具",
+      "AI Agent",
+      "企业应用",
+      "消费产品",
+      "行业资讯"
+    ]
+  },
+  "editors_pick": [
+    {
+      "id": "ep_001",
+      "title": "Powering tax donations with AI powered personalized recommendations",
+      "title_cn": "TRUSTBANK发布Choice AI：利用个性化推荐简化家乡税捐赠",
+      "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system hel",
+      "summary_cn": "TRUSTBANK携手Recursive打造Choice AI，基于OpenAI模型提供对话式推荐，简化Furusato Nozei（家乡税）捐赠发现流程，利用多Agent系统优化体验。",
+      "url": "https://openai.com/index/trustbank",
+      "source": "OpenAI Blog",
+      "category": "AI Agent",
+      "importance_score": 57.0,
+      "published_at": "Tue, 27 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 1
+    },
+    {
+      "id": "ep_002",
+      "title": "Keeping your data safe when an AI agent clicks a link",
+      "title_cn": "OpenAI推出安全机制：防止AI Agent点击链接导致数据泄露",
+      "summary": "Learn how OpenAI protects user data when AI agents open links, preventing URL-based data exfiltration and prompt injection with built-in safeguards.",
+      "summary_cn": "OpenAI介绍如何在AI Agent打开链接时保护用户数据，通过内置安全防护机制，有效阻止基于URL的数据渗漏和提示注入攻击，确保交互安全。",
+      "url": "https://openai.com/index/ai-agent-link-safety",
+      "source": "OpenAI Blog",
+      "category": "AI Agent",
+      "importance_score": 56.6,
+      "published_at": "Wed, 28 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 2
+    },
+    {
+      "id": "ep_003",
+      "title": "VfL Wolfsburg turns ChatGPT into a club-wide capability",
+      "title_cn": "沃尔夫斯堡俱乐部全面应用ChatGPT，提升效率且保留足球基因",
+      "summary": "By focusing on people, not pilots, the Bundesliga club is scaling efficiency, creativity, and knowledge—without losing its football identity.",
+      "summary_cn": "德甲沃尔夫斯堡俱乐部全面部署ChatGPT，聚焦人员应用而非试点，在大幅提升效率、创造力与知识管理的同时，成功保留了俱乐部的足球特色。",
+      "url": "https://openai.com/index/vfl-wolfsburg",
+      "source": "OpenAI Blog",
+      "category": "行业资讯",
+      "importance_score": 56.1,
+      "published_at": "Wed, 04 Fe",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 3
+    },
+    {
+      "id": "ep_004",
+      "title": "Introducing Prism",
+      "title_cn": "Prism发布免费LaTeX工作区：集成GPT-5.2，助力科研写作与协作",
+      "summary": "Prism is a free LaTeX-native workspace with GPT-5.2 built in, helping researchers write, collaborate, and reason in one place.",
+      "summary_cn": "Prism推出免费原生LaTeX工作区，内置GPT-5.2模型，让研究人员在一个平台内完成写作、协作与逻辑推理，大幅提升科研效率。",
+      "url": "https://openai.com/index/introducing-prism",
+      "source": "OpenAI Blog",
+      "category": "学术前沿",
+      "importance_score": 55.9,
+      "published_at": "Tue, 27 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 4
+    },
+    {
+      "id": "ep_005",
+      "title": "Unlocking the Codex harness: how we built the App Server",
+      "title_cn": "详解Codex App Server：利用双向JSON-RPC API实现Agent嵌入与流式控制",
+      "summary": "Learn how to embed the Codex agent using the Codex App Server, a bidirectional JSON-RPC API powering streaming progress, tool use, approvals, and diffs.",
+      "summary_cn": "介绍Codex App Server的构建方法，利用双向JSON-RPC API嵌入Codex Agent，实现流式进度追踪、工具调用、审批及差异对比功能。",
+      "url": "https://openai.com/index/unlocking-the-codex-harness",
+      "source": "OpenAI Blog",
+      "category": "开发工具",
+      "importance_score": 55.9,
+      "published_at": "Wed, 04 Fe",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 5
+    }
+  ],
+  "categories": [
+    {
+      "id": "academic_frontier",
+      "name": "学术前沿",
+      "icon": "📚",
+      "count": 5,
+      "items": [
+        {
+          "id": "academic_frontier_4c8111",
+          "title": "Introducing Prism",
+          "title_cn": "Prism发布：内置GPT-5.2的免费LaTeX科研工作空间",
+          "summary": "Prism is a free LaTeX-native workspace with GPT-5.2 built in, helping researchers write, collaborate, and reason in one place.",
+          "summary_cn": "Prism推出免费LaTeX原生工作空间，内置GPT-5.2，助力研究人员在一个平台上高效完成写作、协作与推理。",
+          "url": "https://openai.com/index/introducing-prism",
+          "source": "OpenAI Blog",
+          "category": "学术前沿",
+          "importance_score": 55.9,
+          "published_at": "Tue, 27 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_2529a6",
+          "title": "EMEA Youth & Wellbeing Grant",
+          "title_cn": "50万欧元基金开放申请：资助AI时代青年安全研究",
+          "summary": "Apply for the EMEA Youth & Wellbeing Grant, a €500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
+          "summary_cn": "EMEA青年与健康基金开放申请，提供50万欧元资助，支持非政府组织和研究人员推进AI时代的青少年安全与福祉。",
+          "url": "https://openai.com/index/emea-youth-and-wellbeing-grant",
+          "source": "OpenAI Blog",
+          "category": "学术前沿",
+          "importance_score": 55.6,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_b63456",
+          "title": "How to Evaluate Jailbreak Methods: A Case Study with the StrongREJECT Benchmark",
+          "title_cn": "如何评估越狱攻击？StrongREJECT基准测试案例分析",
+          "summary": "When we began studying jailbreak evaluations, we found a fascinating paper claiming that you could jailbreak frontier LLMs simply by translating forbidden prompts into obscure languages. Excited by th",
+          "summary_cn": "探讨越狱评估方法，以StrongREJECT基准为例，分析通过将提示词翻译为冷门语言来绕过前沿LLM安全机制的有效性。",
+          "url": "http://bair.berkeley.edu/blog/2024/08/28/strong-reject/",
+          "source": "BAIR Blog",
+          "category": "学术前沿",
+          "importance_score": 53.0,
+          "published_at": "Wed, 28 Au",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_671c2c",
+          "title": "How to Become an AI Engineer in 2026: A Self-Study Roadmap",
+          "title_cn": "2026年AI工程师自学指南：必备技能、工具与项目路线图",
+          "summary": "Want to become an AI engineer in 2026? This step-by-step roadmap breaks down the skills, tools, and projects you need.",
+          "summary_cn": "想在2026年成为AI工程师？这份分步指南详细拆解了所需的技能栈、开发工具及实战项目，助你规划职业发展。",
+          "url": "https://www.kdnuggets.com/how-to-become-an-ai-engineer-in-2026-a-self-study-roadmap",
+          "source": "KDnuggets",
+          "category": "学术前沿",
+          "importance_score": 42.5,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_c7d79f",
+          "title": "Agent Trace: Cursor Proposes an Open Specification for AI Code Attribution",
+          "title_cn": "Cursor发布Agent Trace规范：确立AI生成代码归属标准",
+          "summary": "Cursor has published Agent Trace, a draft open specification aimed at standardizing how AI-generated code is attributed in software projects. Released as a Request for Comments (RFC), the proposal def",
+          "summary_cn": "Cursor发布Agent Trace开放规范草案，旨在标准化软件项目中AI生成代码的归属标注，目前已作为征求意见稿（RFC）发布。",
+          "url": "https://www.infoq.com/news/2026/02/agent-trace-cursor/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "学术前沿",
+          "importance_score": 42.3,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "dev_tools",
+      "name": "开发工具",
+      "icon": "🛠️",
+      "count": 5,
+      "items": [
+        {
+          "id": "dev_tools_17032f",
+          "title": "Unlocking the Codex harness: how we built the App Server",
+          "title_cn": "Codex App Server构建指南：实现Agent双向交互与流式更新",
+          "summary": "Learn how to embed the Codex agent using the Codex App Server, a bidirectional JSON-RPC API powering streaming progress, tool use, approvals, and diffs.",
+          "summary_cn": "揭秘Codex App Server构建过程，通过双向JSON-RPC API实现Agent嵌入，支持流式进度追踪、工具使用及审批差异对比。",
+          "url": "https://openai.com/index/unlocking-the-codex-harness",
+          "source": "OpenAI Blog",
+          "category": "开发工具",
+          "importance_score": 55.9,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_65af66",
+          "title": "AssetOpsBench: Bridging the Gap Between AI Agent Benchmarks and Industrial Reality",
+          "title_cn": "AssetOpsBench：填补AI Agent基准测试与工业实战鸿沟",
+          "summary": "AssetOpsBench: Bridging the Gap Between AI Agent Benchmarks and Industrial Reality",
+          "summary_cn": "AssetOpsBench旨在填补AI Agent基准测试与工业现实之间的鸿沟，提供更贴近实际应用的模型评估标准。",
+          "url": "https://huggingface.co/blog/ibm-research/assetopsbench-playground-on-hugging-face",
+          "source": "Hugging Face",
+          "category": "开发工具",
+          "importance_score": 45.9,
+          "published_at": "Wed, 21 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_185396",
+          "title": "We Got Claude to Build CUDA Kernels and teach open models!",
+          "title_cn": "实战：利用Claude构建CUDA内核并训练开源模型",
+          "summary": "We Got Claude to Build CUDA Kernels and teach open models!",
+          "summary_cn": "利用Claude构建CUDA内核并生成训练数据，成功提升开源模型性能，展示Agent在代码优化与模型教学中的应用。",
+          "url": "https://huggingface.co/blog/upskill",
+          "source": "Hugging Face",
+          "category": "开发工具",
+          "importance_score": 45.4,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_f3e237",
+          "title": "5 Open Source Image Editing AI Models",
+          "title_cn": "5款开源AI图像编辑模型：实时处理与推理驱动",
+          "summary": "From real-time edits to reasoning-driven image transformations, this guide breaks down five open source AI models that are quietly reshaping how images are created and edited.",
+          "summary_cn": "深入解析5款开源AI图像编辑模型，从实时处理到推理驱动变换，这些工具正在重塑图像创作流程。",
+          "url": "https://www.kdnuggets.com/5-open-source-image-editing-ai-models",
+          "source": "KDnuggets",
+          "category": "开发工具",
+          "importance_score": 43.0,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_2a10ae",
+          "title": "Bindu Reddy: Navigating the Path to AGI",
+          "title_cn": "Abacus.AI CEO畅谈AGI路径与场景模型选择",
+          "summary": "How the Abacus.AI CEO Views Artificial General Intelligence and the Best AI Models for Every Use Case",
+          "summary_cn": "Abacus.AI CEO Bindu Reddy探讨通往通用人工智能(AGI)的路径，并针对不同应用场景推荐最佳AI模型。",
+          "url": "https://www.kdnuggets.com/2026/02/abacus/bindu-reddy-navigating-the-path-to-agi",
+          "source": "KDnuggets",
+          "category": "开发工具",
+          "importance_score": 42.1,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "ai_agent",
+      "name": "AI Agent",
+      "icon": "🦾",
+      "count": 5,
+      "items": [
+        {
+          "id": "ai_agent_3e5fe9",
+          "title": "Powering tax donations with AI powered personalized recommendations",
+          "title_cn": "TRUSTBANK推出Choice AI：基于人工智能(AI)推荐简化税收捐赠",
+          "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system hel",
+          "summary_cn": "TRUSTBANK与Recursive合作，利用OpenAI模型构建Choice AI，通过多Agent系统提供个性化对话推荐，大幅简化Furusato Nozei捐赠流程。",
+          "url": "https://openai.com/index/trustbank",
+          "source": "OpenAI Blog",
+          "category": "AI Agent",
+          "importance_score": 57.0,
+          "published_at": "Tue, 27 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_3ea2d5",
+          "title": "Keeping your data safe when an AI agent clicks a link",
+          "title_cn": "OpenAI加强人工智能(AI) Agent安全防护：防止点击链接引发数据泄露",
+          "summary": "Learn how OpenAI protects user data when AI agents open links, preventing URL-based data exfiltration and prompt injection with built-in safeguards.",
+          "summary_cn": "OpenAI详解内置安全机制，有效防止AI Agent打开链接时发生URL数据泄露和提示注入攻击，全方位保障用户数据安全。",
+          "url": "https://openai.com/index/ai-agent-link-safety",
+          "source": "OpenAI Blog",
+          "category": "AI Agent",
+          "importance_score": 56.6,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_a5308d",
+          "title": "MMCTAgent: Enabling multimodal reasoning over large video and image collections",
+          "title_cn": "MMCTAgent发布：基于AutoGen框架，实现大型视频图像库多模态推理",
+          "summary": "MMCTAgent enables dynamic multimodal reasoning with iterative planning and reflection. Built on Microsoft’s AutoGen framework, it integrates language, vision, and temporal understanding for complex ta",
+          "summary_cn": "基于微软AutoGen框架，MMCTAgent通过迭代规划实现动态多模态推理，整合语言、视觉及时间理解，高效处理大型视频图像集。",
+          "url": "https://www.microsoft.com/en-us/research/blog/mmctagent-enabling-multimodal-reasoning-over-large-video-and-image-collections/",
+          "source": "Microsoft Research",
+          "category": "AI Agent",
+          "importance_score": 53.6,
+          "published_at": "Wed, 12 No",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_f82f05",
+          "title": "From guardrails to governance: A CEO’s guide for securing agentic systems",
+          "title_cn": "CEO安全指南：从防御规则到治理体系，全方位保障Agent系统安全",
+          "summary": "The previous article in this series, “Rules fail at the prompt, succeed at the boundary,” focused on the first AI-orchestrated espionage campaign and the failure of prompt-level control. This article ",
+          "summary_cn": "针对首个AI策划间谍活动，本文探讨企业如何超越基础防御规则，建立全面治理体系，确保Agent系统安全稳定运行。",
+          "url": "https://www.technologyreview.com/2026/02/04/1131014/from-guardrails-to-governance-a-ceos-guide-for-securing-agentic-systems/",
+          "source": "MIT Technology Review",
+          "category": "AI Agent",
+          "importance_score": 51.3,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_3b5c6b",
+          "title": "Vercel Introduces Skills.sh, an Open Ecosystem for Agent Commands",
+          "title_cn": "Vercel推出Skills.sh：为人工智能(AI) Agent命令构建标准化开源生态",
+          "summary": "Vercel has released Skills.sh, an open-source tool designed to provide AI agents with a standardized way to execute reusable actions, or skills, through the command line. By Daniel Dominguez",
+          "summary_cn": "Vercel发布开源工具Skills.sh，为AI Agent提供通过命令行执行可复用操作的标准化方式，构建开放且互操作的命令生态。",
+          "url": "https://www.infoq.com/news/2026/02/vercel-agent-skills/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "AI Agent",
+          "importance_score": 42.8,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "enterprise_apps",
+      "name": "企业应用",
+      "icon": "💼",
+      "count": 5,
+      "items": [
+        {
+          "id": "enterprise_apps_ad2118",
+          "title": "The next chapter for AI in the EU",
+          "title_cn": "OpenAI发布欧盟经济蓝图 2.0：加速欧洲AI普及与增长",
+          "summary": "OpenAI launches the EU Economic Blueprint 2.0 with new data, partnerships, and initiatives to accelerate AI adoption, skills, and growth across Europe.",
+          "summary_cn": "OpenAI推出欧盟经济蓝图 2.0，利用新数据与合作伙伴关系，加速欧洲全境的AI普及、技能培养及经济增长。",
+          "url": "https://openai.com/index/the-next-chapter-for-ai-in-the-eu",
+          "source": "OpenAI Blog",
+          "category": "企业应用",
+          "importance_score": 55.8,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_72162a",
+          "title": "ElevenLabs raises $500M from Sequoia at an $11 billion valuation",
+          "title_cn": "ElevenLabs获红杉5亿美元融资，估值达110亿美元",
+          "summary": "ElevenLabs' valuation has raised more than three times in the last 12 months.",
+          "summary_cn": "ElevenLabs完成5亿美元融资，由红杉领投，估值达110亿美元，过去12个月内估值增长超三倍。",
+          "url": "https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 46.1,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_e1109d",
+          "title": "Exclusive: Positron raises $230M Series B to take on Nvidia’s AI chips",
+          "title_cn": "Positron融资2.3亿美元挑战Nvidia，获卡塔尔投资局注资",
+          "summary": "The investment comes from backers including the Qatar Investment Authority as demand for chips beyond Nvidia soars and as Qatar aims to build out its AI infrastructure.",
+          "summary_cn": "Positron完成2.3亿美元B轮融资，获卡塔尔投资局支持，旨在打造AI芯片以挑战Nvidia，满足市场对多元化芯片需求。",
+          "url": "https://techcrunch.com/2026/02/04/exclusive-positron-raises-230m-series-b-to-take-on-nvidias-ai-chips/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 46.1,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_aa341a",
+          "title": "Amazon to begin testing AI tools for film and TV production next month",
+          "title_cn": "Amazon MGM Studios将于3月测试影视制作AI工具",
+          "summary": "Amazon MGM Studios will reportedly begin a closed beta program in March to test its AI tools to help with film and TV production.",
+          "summary_cn": "Amazon MGM Studios宣布将于3月启动封闭测试，推出专为影视制作设计的AI工具，旨在辅助并加速内容生产流程。",
+          "url": "https://techcrunch.com/2026/02/04/amazon-to-begin-testing-ai-tools-for-film-and-tv-production-next-month/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 45.6,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_d5be1f",
+          "title": "Alexa+, Amazon’s AI assistant, is now available to everyone in the US",
+          "title_cn": "Amazon AI助手Alexa+全美上线，Prime会员免费使用",
+          "summary": "Amazon opens Alexa+ to everyone in the U.S. The AI feature is free for Prime members across devices, and free for everyone on mobile and web.",
+          "summary_cn": "Amazon正式向全美用户开放AI助手Alexa+，Prime会员可在所有设备上免费使用，移动端及网页端用户亦无需付费。",
+          "url": "https://techcrunch.com/2026/02/04/alexa-amazons-ai-assistant-is-now-available-to-everyone-in-the-u-s/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 45.6,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "consumer_apps",
+      "name": "消费产品",
+      "icon": "🌐",
+      "count": 5,
+      "items": [
+        {
+          "id": "consumer_apps_670e24",
+          "title": "Promptions helps make AI prompting more precise with dynamic UI controls",
+          "title_cn": "Promptions引入动态UI控件：无需长指令即可精准控制AI生成",
+          "summary": "Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape outputs quickly without writing long instructions.\nTh",
+          "summary_cn": "Promptions允许开发者在聊天界面添加动态控件，让用户无需编写冗长指令，就能精准引导生成式AI输出。",
+          "url": "https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/",
+          "source": "Microsoft Research",
+          "category": "消费产品",
+          "importance_score": 52.5,
+          "published_at": "Wed, 10 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_1b9c12",
+          "title": "Defending against Prompt Injection with Structured Queries (StruQ) and Preference Optimization (SecAlign)",
+          "title_cn": "新方案StruQ与SecAlign：有效防御LLM提示词注入攻击",
+          "summary": "Recent advances in Large Language Models (LLMs) enable exciting LLM-integrated applications. However, as LLMs have improved, so have the attacks against them. Prompt injection attack is listed as the ",
+          "summary_cn": "研究提出结构化查询和偏好优化技术，有效抵御针对LLM的提示词注入攻击，增强大模型应用安全性。",
+          "url": "http://bair.berkeley.edu/blog/2025/04/11/prompt-injection-defense/",
+          "source": "BAIR Blog",
+          "category": "消费产品",
+          "importance_score": 52.4,
+          "published_at": "Fri, 11 Ap",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_f2c3f4",
+          "title": "OpenAI Launches Prism, a Free LaTeX-Native Workspace with Integrated GPT-5.2",
+          "title_cn": "OpenAI推出免费LaTeX工具Prism：集成GPT-5.2辅助学术写作",
+          "summary": "OpenAI has released Prism, a free, cloud-based LaTeX workspace designed for academic writing and collaboration, with GPT-5.2 integrated directly into the authoring environment. The platform combines d",
+          "summary_cn": "OpenAI发布免费云端LaTeX工作区Prism，深度集成GPT-5.2，专为提升学术写作与协作效率而设计。",
+          "url": "https://www.infoq.com/news/2026/01/openai-prism/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "消费产品",
+          "importance_score": 43.1,
+          "published_at": "Sat, 31 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_ef70fa",
+          "title": "5 Android Apps for Code Editing",
+          "title_cn": "5款最佳安卓代码编辑应用：支持调试与快速修复",
+          "summary": "From debugging to quick fixes, here are the top Android apps every developer should have on their phone.",
+          "summary_cn": "盘点5款开发者必备的安卓代码编辑应用，涵盖调试到快速修复功能，让手机变身便携开发工具。",
+          "url": "https://www.kdnuggets.com/5-android-apps-for-code-editing",
+          "source": "KDnuggets",
+          "category": "消费产品",
+          "importance_score": 42.5,
+          "published_at": "Mon, 02 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_73079d",
+          "title": "OpenEverest: Open Source Platform for Database Automation",
+          "title_cn": "Percona发布开源平台OpenEverest：实现数据库自动化部署",
+          "summary": "Percona recently announced OpenEverest, an open-source platform for automated database provisioning and management that supports multiple database technologies. Launched initially as Percona Everest, ",
+          "summary_cn": "Percona推出开源数据库自动化平台OpenEverest，支持多种数据库技术的自动配置与管理，简化运维工作。",
+          "url": "https://www.infoq.com/news/2026/01/openeverest-kubernetes-databases/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "消费产品",
+          "importance_score": 42.0,
+          "published_at": "Sat, 31 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "industry_news",
+      "name": "行业资讯",
+      "icon": "📰",
+      "count": 5,
+      "items": [
+        {
+          "id": "industry_news_91b900",
+          "title": "VfL Wolfsburg turns ChatGPT into a club-wide capability",
+          "title_cn": "德甲沃尔夫斯堡全面部署ChatGPT，提升全队效率与创造力",
+          "summary": "By focusing on people, not pilots, the Bundesliga club is scaling efficiency, creativity, and knowledge—without losing its football identity.",
+          "summary_cn": "德甲沃尔夫斯堡俱乐部将ChatGPT转化为全队能力，通过以人为本的策略提升效率与知识共享，在数字化转型中保持足球本色。",
+          "url": "https://openai.com/index/vfl-wolfsburg",
+          "source": "OpenAI Blog",
+          "category": "行业资讯",
+          "importance_score": 56.1,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_8aaef9",
+          "title": "AGI Is Not Multimodal",
+          "title_cn": "AGI不仅仅是Multimodal：Terry Winograd批判语言模型缺失具身理解",
+          "summary": "&quot;In projecting language back as the model for thought, we lose sight of the tacit embodied understanding that undergirds our intelligence.&quot; &#x2013;Terry WinogradThe recent successes of gene",
+          "summary_cn": "Terry Winograd指出，仅凭语言模型无法实现真正的AGI，我们需要关注支撑智能的具身理解，而非单纯的多模态能力。",
+          "url": "https://thegradient.pub/agi-is-not-multimodal/",
+          "source": "The Gradient",
+          "category": "行业资讯",
+          "importance_score": 45.0,
+          "published_at": "Wed, 04 Ju",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_c493aa",
+          "title": "Google Introduces Agentic Vision in Gemini 3 Flash for Active Image Understanding",
+          "title_cn": "Gemini 3 Flash引入Agentic Vision，主动识别芯片序列号等细节",
+          "summary": "Frontier multimodal models usually process an image in a single pass. If they miss a serial number on a chip or a small symbol on a building plan, they often guess. Google’s new Agentic Vision capabil",
+          "summary_cn": "Google在Gemini 3 Flash中推出Agentic Vision，通过多次主动扫描替代单次处理，精准识别图像微小细节，避免模型猜测导致的错误。",
+          "url": "https://www.marktechpost.com/2026/02/04/google-introduces-agentic-vision-in-gemini-3-flash-for-active-image-understanding/",
+          "source": "MarkTechPost",
+          "category": "行业资讯",
+          "importance_score": 44.1,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_5ff8ec",
+          "title": "A Coding Implementation to Train Safety-Critical Reinforcement Learning Agents Offline Using Conservative Q-Learning with d3rlpy and Fixed Historical Data",
+          "title_cn": "利用Conservative Q-Learning离线训练安全关键型Agent，避免实时探索风险",
+          "summary": "In this tutorial, we build a safety-critical reinforcement learning pipeline that learns entirely from fixed, offline data rather than live exploration. We design a custom environment, generate a beha",
+          "summary_cn": "本教程演示使用d3rlpy和固定历史数据构建安全关键型强化学习管线，通过Conservative Q-Learning离线训练Agent，确保安全与稳定。",
+          "url": "https://www.marktechpost.com/2026/02/03/a-coding-implementation-to-train-safety-critical-reinforcement-learning-agents-offline-using-conservative-q-learning-with-d3rlpy-and-fixed-historical-data/",
+          "source": "MarkTechPost",
+          "category": "行业资讯",
+          "importance_score": 43.2,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_216c96",
+          "title": "Presentation: Beyond the Warehouse: Why BigQuery Alone Won’t Solve Your Data Problems",
+          "title_cn": "仅靠BigQuery无法解决数据问题：成本与延迟瓶颈需新架构",
+          "summary": "Sarah Usher discusses the architectural \"breaking point\" where warehouses like BigQuery struggle with latency and cost. She explains the necessity of a conceptual data lifecycle (Raw, Curated, Use Cas",
+          "summary_cn": "Sarah Usher指出BigQuery存在延迟与成本的架构临界点，阐述为何仅靠仓库不够，必须建立包含原始、加工和用例的完整数据生命周期。",
+          "url": "https://www.infoq.com/presentations/bigquery-data-challenges/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "行业资讯",
+          "importance_score": 42.0,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    }
+  ],
+  "core_insights": [
+    "Agent框架向多模态与实时交互演进，但数据泄露风险倒逼安全升级，意味着开发者需重视防护架构。",
+    "AI正从通用聊天下沉至税务、科研等专业场景，专用工作流将成为SaaS厂商突围的关键差异化路径。",
+    "交互范式从复杂指令转向动态UI控件，降低用户上手门槛，意味着未来产品竞争力在于体验而非模型参数。"
+  ],
+  "deep_observation": "当德甲沃尔夫斯堡利用ChatGPT制定战术时，OpenAI却在修补Agent可能因点击链接而泄露数据的安全漏洞。这种反差揭示了当前AI发展的核心矛盾：在向多模态实时交互极速狂飙的同时，数据安全的边界正面临前所未有的考验。\n\n显然，通用大模型的“万金油”时代正在终结，行业正在向垂直纵深突进。TRUSTBANK推出Choice AI简化税务捐赠，Prism则将GPT-5.2植入LaTeX科研空间，这些案例表明，SaaS厂商的突围关键已不在于堆砌参数，而在于能否构建专用工作流。AI正从“陪聊”下沉为处理税务、科研等专业场景的生产力工具，这种场景化落地能力将成为新的护城河。\n\n与之相伴的交互范式也在悄然重构。Codex App Server指南中提到的双向交互与流式更新，暗示了Agent框架正从静态指令转向动态UI控件。这种转变大幅降低了用户的上手门槛，意味着未来的产品竞争力将不再是晦涩的模型参数，而是直观流畅的体验。在这个新阶段，谁能平衡好Agent的实时交互能力与安全架构，谁才能真正定义下一代AI应用。",
+  "trending_topics": [
+    {
+      "name": "新闻",
+      "count": 30,
+      "trend": "rising"
+    },
+    {
+      "name": "AI资讯",
+      "count": 30,
+      "trend": "rising"
+    }
+  ],
+  "sources": [
+    {
+      "name": "TechCrunch AI",
+      "count": 15
+    },
+    {
+      "name": "MIT Technology Review",
+      "count": 10
+    },
+    {
+      "name": "OpenAI Blog",
+      "count": 15
+    },
+    {
+      "name": "arXiv",
+      "count": 15
+    },
+    {
+      "name": "BAIR Blog",
+      "count": 10
+    },
+    {
+      "name": "Microsoft Research",
+      "count": 10
+    },
+    {
+      "name": "MarkTechPost",
+      "count": 10
+    },
+    {
+      "name": "KDnuggets",
+      "count": 10
+    },
+    {
+      "name": "AI Business",
+      "count": 12
+    },
+    {
+      "name": "The Gradient",
+      "count": 8
+    },
+    {
+      "name": "InfoQ",
+      "count": 12
+    },
+    {
+      "name": "Hugging Face",
+      "count": 10
+    },
+    {
+      "name": "Hacker News",
+      "count": 11
+    }
+  ],
+  "markdown_content": "# AI每日热点 · 2026年02月05日\n\n> **期号**: #20260205  |  **阅读时间**: ~6分钟  |  **精选**: 30条\n\n---\n\n## 💡 核心洞察\n\n- Agent框架向多模态与实时交互演进，但数据泄露风险倒逼安全升级，意味着开发者需重视防护架构。\n- AI正从通用聊天下沉至税务、科研等专业场景，专用工作流将成为SaaS厂商突围的关键差异化路径。\n- 交互范式从复杂指令转向动态UI控件，降低用户上手门槛，意味着未来产品竞争力在于体验而非模型参数。\n\n---\n\n## 📰 深度观察\n\n当德甲沃尔夫斯堡利用ChatGPT制定战术时，OpenAI却在修补Agent可能因点击链接而泄露数据的安全漏洞。这种反差揭示了当前AI发展的核心矛盾：在向多模态实时交互极速狂飙的同时，数据安全的边界正面临前所未有的考验。\n\n显然，通用大模型的“万金油”时代正在终结，行业正在向垂直纵深突进。TRUSTBANK推出Choice AI简化税务捐赠，Prism则将GPT-5.2植入LaTeX科研空间，这些案例表明，SaaS厂商的突围关键已不在于堆砌参数，而在于能否构建专用工作流。AI正从“陪聊”下沉为处理税务、科研等专业场景的生产力工具，这种场景化落地能力将成为新的护城河。\n\n与之相伴的交互范式也在悄然重构。Codex App Server指南中提到的双向交互与流式更新，暗示了Agent框架正从静态指令转向动态UI控件。这种转变大幅降低了用户的上手门槛，意味着未来的产品竞争力将不再是晦涩的模型参数，而是直观流畅的体验。在这个新阶段，谁能平衡好Agent的实时交互能力与安全架构，谁才能真正定义下一代AI应用。\n\n---\n\n## ⭐ 编辑精选 (Editor's Picks)\n\n### 1. TRUSTBANK发布Choice AI：利用个性化推荐简化家乡税捐赠\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文链接](https://openai.com/index/trustbank)\n\n**核心内容**: TRUSTBANK携手Recursive打造Choice AI，基于OpenAI模型提供对话式推荐，简化Furusato Nozei（家乡税）捐赠发现流程，利用多Agent系统优化体验。\n\n---\n\n### 2. OpenAI推出安全机制：防止AI Agent点击链接导致数据泄露\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文链接](https://openai.com/index/ai-agent-link-safety)\n\n**核心内容**: OpenAI介绍如何在AI Agent打开链接时保护用户数据，通过内置安全防护机制，有效阻止基于URL的数据渗漏和提示注入攻击，确保交互安全。\n\n---\n\n### 3. 沃尔夫斯堡俱乐部全面应用ChatGPT，提升效率且保留足球基因\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文链接](https://openai.com/index/vfl-wolfsburg)\n\n**核心内容**: 德甲沃尔夫斯堡俱乐部全面部署ChatGPT，聚焦人员应用而非试点，在大幅提升效率、创造力与知识管理的同时，成功保留了俱乐部的足球特色。\n\n---\n\n### 4. Prism发布免费LaTeX工作区：集成GPT-5.2，助力科研写作与协作\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文链接](https://openai.com/index/introducing-prism)\n\n**核心内容**: Prism推出免费原生LaTeX工作区，内置GPT-5.2模型，让研究人员在一个平台内完成写作、协作与逻辑推理，大幅提升科研效率。\n\n---\n\n### 5. 详解Codex App Server：利用双向JSON-RPC API实现Agent嵌入与流式控制\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文链接](https://openai.com/index/unlocking-the-codex-harness)\n\n**核心内容**: 介绍Codex App Server的构建方法，利用双向JSON-RPC API嵌入Codex Agent，实现流式进度追踪、工具调用、审批及差异对比功能。\n\n---\n\n## 📊 热门话题\n\n| 话题 | 相关新闻 | 趋势 |\n|------|---------|------|\n| 新闻 | 30条 | 📈 上升 |\n| AI资讯 | 30条 | 📈 上升 |\n\n---\n\n## 🔍 分类热点\n\n### 📚 学术前沿 (5条)\n\n#### 1. Prism发布：内置GPT-5.2的免费LaTeX科研工作空间\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://openai.com/index/introducing-prism)\n\n**摘要**: Prism推出免费LaTeX原生工作空间，内置GPT-5.2，助力研究人员在一个平台上高效完成写作、协作与推理。\n\n---\n\n#### 2. 50万欧元基金开放申请：资助AI时代青年安全研究\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://openai.com/index/emea-youth-and-wellbeing-grant)\n\n**摘要**: EMEA青年与健康基金开放申请，提供50万欧元资助，支持非政府组织和研究人员推进AI时代的青少年安全与福祉。\n\n---\n\n#### 3. 如何评估越狱攻击？StrongREJECT基准测试案例分析\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 53/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/08/28/strong-reject/)\n\n**摘要**: 探讨越狱评估方法，以StrongREJECT基准为例，分析通过将提示词翻译为冷门语言来绕过前沿LLM安全机制的有效性。\n\n---\n\n#### 4. 2026年AI工程师自学指南：必备技能、工具与项目路线图\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.kdnuggets.com/how-to-become-an-ai-engineer-in-2026-a-self-study-roadmap)\n\n**摘要**: 想在2026年成为AI工程师？这份分步指南详细拆解了所需的技能栈、开发工具及实战项目，助你规划职业发展。\n\n---\n\n#### 5. Cursor发布Agent Trace规范：确立AI生成代码归属标准\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.infoq.com/news/2026/02/agent-trace-cursor/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: Cursor发布Agent Trace开放规范草案，旨在标准化软件项目中AI生成代码的归属标注，目前已作为征求意见稿（RFC）发布。\n\n---\n\n### 🛠️ 开发工具 (5条)\n\n#### 1. Codex App Server构建指南：实现Agent双向交互与流式更新\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://openai.com/index/unlocking-the-codex-harness)\n\n**摘要**: 揭秘Codex App Server构建过程，通过双向JSON-RPC API实现Agent嵌入，支持流式进度追踪、工具使用及审批差异对比。\n\n---\n\n#### 2. AssetOpsBench：填补AI Agent基准测试与工业实战鸿沟\n\n> 📰 **Hugging Face**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://huggingface.co/blog/ibm-research/assetopsbench-playground-on-hugging-face)\n\n**摘要**: AssetOpsBench旨在填补AI Agent基准测试与工业现实之间的鸿沟，提供更贴近实际应用的模型评估标准。\n\n---\n\n#### 3. 实战：利用Claude构建CUDA内核并训练开源模型\n\n> 📰 **Hugging Face**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://huggingface.co/blog/upskill)\n\n**摘要**: 利用Claude构建CUDA内核并生成训练数据，成功提升开源模型性能，展示Agent在代码优化与模型教学中的应用。\n\n---\n\n#### 4. 5款开源AI图像编辑模型：实时处理与推理驱动\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.kdnuggets.com/5-open-source-image-editing-ai-models)\n\n**摘要**: 深入解析5款开源AI图像编辑模型，从实时处理到推理驱动变换，这些工具正在重塑图像创作流程。\n\n---\n\n#### 5. Abacus.AI CEO畅谈AGI路径与场景模型选择\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.kdnuggets.com/2026/02/abacus/bindu-reddy-navigating-the-path-to-agi)\n\n**摘要**: Abacus.AI CEO Bindu Reddy探讨通往通用人工智能(AGI)的路径，并针对不同应用场景推荐最佳AI模型。\n\n---\n\n### 🦾 AI Agent (5条)\n\n#### 1. TRUSTBANK推出Choice AI：基于人工智能(AI)推荐简化税收捐赠\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 57/100  |  🔗 [原文](https://openai.com/index/trustbank)\n\n**摘要**: TRUSTBANK与Recursive合作，利用OpenAI模型构建Choice AI，通过多Agent系统提供个性化对话推荐，大幅简化Furusato Nozei捐赠流程。\n\n---\n\n#### 2. OpenAI加强人工智能(AI) Agent安全防护：防止点击链接引发数据泄露\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文](https://openai.com/index/ai-agent-link-safety)\n\n**摘要**: OpenAI详解内置安全机制，有效防止AI Agent打开链接时发生URL数据泄露和提示注入攻击，全方位保障用户数据安全。\n\n---\n\n#### 3. MMCTAgent发布：基于AutoGen框架，实现大型视频图像库多模态推理\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 53/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/mmctagent-enabling-multimodal-reasoning-over-large-video-and-image-collections/)\n\n**摘要**: 基于微软AutoGen框架，MMCTAgent通过迭代规划实现动态多模态推理，整合语言、视觉及时间理解，高效处理大型视频图像集。\n\n---\n\n#### 4. CEO安全指南：从防御规则到治理体系，全方位保障Agent系统安全\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://www.technologyreview.com/2026/02/04/1131014/from-guardrails-to-governance-a-ceos-guide-for-securing-agentic-systems/)\n\n**摘要**: 针对首个AI策划间谍活动，本文探讨企业如何超越基础防御规则，建立全面治理体系，确保Agent系统安全稳定运行。\n\n---\n\n#### 5. Vercel推出Skills.sh：为人工智能(AI) Agent命令构建标准化开源生态\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.infoq.com/news/2026/02/vercel-agent-skills/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: Vercel发布开源工具Skills.sh，为AI Agent提供通过命令行执行可复用操作的标准化方式，构建开放且互操作的命令生态。\n\n---\n\n### 💼 企业应用 (5条)\n\n#### 1. OpenAI发布欧盟经济蓝图 2.0：加速欧洲AI普及与增长\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://openai.com/index/the-next-chapter-for-ai-in-the-eu)\n\n**摘要**: OpenAI推出欧盟经济蓝图 2.0，利用新数据与合作伙伴关系，加速欧洲全境的AI普及、技能培养及经济增长。\n\n---\n\n#### 2. ElevenLabs获红杉5亿美元融资，估值达110亿美元\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/)\n\n**摘要**: ElevenLabs完成5亿美元融资，由红杉领投，估值达110亿美元，过去12个月内估值增长超三倍。\n\n---\n\n#### 3. Positron融资2.3亿美元挑战Nvidia，获卡塔尔投资局注资\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/exclusive-positron-raises-230m-series-b-to-take-on-nvidias-ai-chips/)\n\n**摘要**: Positron完成2.3亿美元B轮融资，获卡塔尔投资局支持，旨在打造AI芯片以挑战Nvidia，满足市场对多元化芯片需求。\n\n---\n\n#### 4. Amazon MGM Studios将于3月测试影视制作AI工具\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/amazon-to-begin-testing-ai-tools-for-film-and-tv-production-next-month/)\n\n**摘要**: Amazon MGM Studios宣布将于3月启动封闭测试，推出专为影视制作设计的AI工具，旨在辅助并加速内容生产流程。\n\n---\n\n#### 5. Amazon AI助手Alexa+全美上线，Prime会员免费使用\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/alexa-amazons-ai-assistant-is-now-available-to-everyone-in-the-u-s/)\n\n**摘要**: Amazon正式向全美用户开放AI助手Alexa+，Prime会员可在所有设备上免费使用，移动端及网页端用户亦无需付费。\n\n---\n\n### 🌐 消费产品 (5条)\n\n#### 1. Promptions引入动态UI控件：无需长指令即可精准控制AI生成\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 52/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/)\n\n**摘要**: Promptions允许开发者在聊天界面添加动态控件，让用户无需编写冗长指令，就能精准引导生成式AI输出。\n\n---\n\n#### 2. 新方案StruQ与SecAlign：有效防御LLM提示词注入攻击\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 52/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2025/04/11/prompt-injection-defense/)\n\n**摘要**: 研究提出结构化查询和偏好优化技术，有效抵御针对LLM的提示词注入攻击，增强大模型应用安全性。\n\n---\n\n#### 3. OpenAI推出免费LaTeX工具Prism：集成GPT-5.2辅助学术写作\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.infoq.com/news/2026/01/openai-prism/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: OpenAI发布免费云端LaTeX工作区Prism，深度集成GPT-5.2，专为提升学术写作与协作效率而设计。\n\n---\n\n#### 4. 5款最佳安卓代码编辑应用：支持调试与快速修复\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.kdnuggets.com/5-android-apps-for-code-editing)\n\n**摘要**: 盘点5款开发者必备的安卓代码编辑应用，涵盖调试到快速修复功能，让手机变身便携开发工具。\n\n---\n\n#### 5. Percona发布开源平台OpenEverest：实现数据库自动化部署\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.infoq.com/news/2026/01/openeverest-kubernetes-databases/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: Percona推出开源数据库自动化平台OpenEverest，支持多种数据库技术的自动配置与管理，简化运维工作。\n\n---\n\n### 📰 行业资讯 (5条)\n\n#### 1. 德甲沃尔夫斯堡全面部署ChatGPT，提升全队效率与创造力\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文](https://openai.com/index/vfl-wolfsburg)\n\n**摘要**: 德甲沃尔夫斯堡俱乐部将ChatGPT转化为全队能力，通过以人为本的策略提升效率与知识共享，在数字化转型中保持足球本色。\n\n---\n\n#### 2. AGI不仅仅是Multimodal：Terry Winograd批判语言模型缺失具身理解\n\n> 📰 **The Gradient**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://thegradient.pub/agi-is-not-multimodal/)\n\n**摘要**: Terry Winograd指出，仅凭语言模型无法实现真正的AGI，我们需要关注支撑智能的具身理解，而非单纯的多模态能力。\n\n---\n\n#### 3. Gemini 3 Flash引入Agentic Vision，主动识别芯片序列号等细节\n\n> 📰 **MarkTechPost**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://www.marktechpost.com/2026/02/04/google-introduces-agentic-vision-in-gemini-3-flash-for-active-image-understanding/)\n\n**摘要**: Google在Gemini 3 Flash中推出Agentic Vision，通过多次主动扫描替代单次处理，精准识别图像微小细节，避免模型猜测导致的错误。\n\n---\n\n#### 4. 利用Conservative Q-Learning离线训练安全关键型Agent，避免实时探索风险\n\n> 📰 **MarkTechPost**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.marktechpost.com/2026/02/03/a-coding-implementation-to-train-safety-critical-reinforcement-learning-agents-offline-using-conservative-q-learning-with-d3rlpy-and-fixed-historical-data/)\n\n**摘要**: 本教程演示使用d3rlpy和固定历史数据构建安全关键型强化学习管线，通过Conservative Q-Learning离线训练Agent，确保安全与稳定。\n\n---\n\n#### 5. 仅靠BigQuery无法解决数据问题：成本与延迟瓶颈需新架构\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.infoq.com/presentations/bigquery-data-challenges/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n**摘要**: Sarah Usher指出BigQuery存在延迟与成本的架构临界点，阐述为何仅靠仓库不够，必须建立包含原始、加工和用例的完整数据生命周期。\n\n---\n\n## 📚 数据来源\n\n- **TechCrunch AI**: 15条\n- **MIT Technology Review**: 10条\n- **OpenAI Blog**: 15条\n- **arXiv**: 15条\n- **BAIR Blog**: 10条\n- **Microsoft Research**: 10条\n- **MarkTechPost**: 10条\n- **KDnuggets**: 10条\n- **AI Business**: 12条\n- **The Gradient**: 8条\n- **InfoQ**: 12条\n- **Hugging Face**: 10条\n- **Hacker News**: 11条\n\n---\n\n*🤖 Generated by [ContentForge AI](https://github.com/devfoxaicn/content-forge-ai)*\n"
+}
