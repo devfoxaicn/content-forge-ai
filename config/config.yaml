@@ -21,7 +21,45 @@ llm:
 # ==================== Agent配置 ====================
 agents:
   # ========== 核心Agent（每日简报自动生成） ==========
-  # AI热点分析Agent（数据获取）
+  # v11.0: 并发数据获取Agent（性能提升10倍，推荐使用）
+  concurrent_fetch:
+    enabled: true  # 设为true启用并发模式，设为false使用同步模式
+    max_concurrent: 10      # 最大并发数（避免被封禁）
+    timeout_per_source: 15  # 单个源超时时间（秒）
+    retry_failed: true      # 失败是否重试
+    max_retries: 2          # 最大重试次数
+    rate_limit: 5           # 每秒请求数限制
+
+  # v11.0: 时效性智能加权Agent（确保最新内容优先展示）
+  time_weight:
+    enabled: true  # 设为true启用时效性加权
+    weight_mode: "dynamic"  # dynamic(动态推荐) | linear(线性) | exponential(指数)
+    max_hours: 72          # 超过72小时的新闻时效分为0
+    boost_latest: 2.0      # 1小时内新闻的加成倍数
+
+  # v11.0: 轻量级事实核查Agent（仅Top10，使用LLM内置知识）
+  auto_fact_check:
+    enabled: true  # 设为true启用事实核查
+    check_top_n: 10        # 仅核查Top10
+    use_tavily: false      # 仅使用LLM内置知识（不使用Tavily）
+    confidence_threshold: 0.7  # 置信度阈值
+
+  # v11.0: 内容增强Agent（为重要新闻补充背景和影响分析）
+  content_enhancer:
+    enabled: true  # 设为true启用内容增强
+    extract_full_content: true  # 使用trafilatura提取完整内容
+    min_importance_score: 70    # 重要性>=70才增强
+    enable_background: true     # 生成背景分析
+    enable_impact: true         # 生成影响分析
+
+  # v11.0: 翻译精炼Agent（提升中文简报可读性）
+  translation_refiner:
+    enabled: true  # 设为true启用翻译精炼
+    apply_strunk_rules: true    # 应用Strunk原则
+    terminology_check: true     # 术语一致性检查
+    readability_target: 60      # 目标可读性分数
+
+  # v10.1: AI热点分析Agent（同步模式，向后兼容）
   ai_trend_analyzer:
     enabled: true
     mock_mode: false
@@ -46,6 +84,25 @@ agents:
       - "the_gradient"       # The Gradient (AI研究期刊)
       - "infoq_ai"           # InfoQ AI (技术媒体)
       - "hugging_face_blog"  # Hugging Face Blog (官方)
+      # ========== 新增实时数据源 (v10.0) ==========
+      - "newsdata_io"        # NewsData.io (实时新闻API，秒级更新)
+      - "reddit_stream"      # Reddit (实时社区讨论)
+      - "github_trending"    # GitHub Trending (开发者关注热点)
+      # ========== 新增免费RSS数据源 (v10.1) ==========
+      - "ai_news"            # AI News (顶级AI新闻媒体，免费RSS)
+      - "the_decoder"        # The Decoder (AI专业新闻，免费RSS)
+      - "qbitai"             # 量子位 (中文AI第一媒体，免费RSS)
+      - "jiqizhixin"         # 机器之心 (深度AI报道，免费RSS)
+      - "wired_ai_v2"        # Wired AI (AI专题新闻，免费RSS)
+      - "venturebeat_ai_v2"  # VentureBeat AI (AI商业新闻，免费RSS)
+      - "google_ai_blog_v2"  # Google AI Blog (官方AI动态，免费RSS)
+      - "deepmind_blog_v2"   # Google DeepMind (顶级研究，免费RSS)
+      - "arxiv_cl"           # arXiv NLP (自然语言处理论文，免费RSS)
+      - "arxiv_cv"           # arXiv CV (计算机视觉论文，免费RSS)
+      - "arxiv_lg"           # arXiv ML (机器学习论文，免费RSS)
+      - "reddit_ml_rss"      # Reddit ML (机器学习社区，免费RSS)
+      - "reddit_ai_rss"      # Reddit AI (AI讨论社区，免费RSS)
+      - "towards_data_science" # Towards Data Science (数据科学文章，免费RSS)
 
     # 热点配置
     max_trends: 20
@@ -60,21 +117,22 @@ agents:
     max_topics: 20
     temperature: 0.6
 
-  # 新闻评分Agent（v7.0新增）
+  # 新闻评分Agent（v7.0新增，v11.0优化权重）
   news_scoring:
     enabled: true
     max_items: 30  # 最终筛选的新闻数量
     min_per_category: 2  # 每个分类至少保留2条
     max_per_category: 8  # 每个分类最多保留8条
 
-    # 评分权重（总和100）
+    # 评分权重（总和100）- v11.0优化：提升时效性和质量权重
     scoring_weights:
-      source_authority: 30  # 来源权威度
-      engagement: 20  # 互动数据
-      freshness: 15  # 时效性
-      category_balance: 15  # 分类平衡
-      content_quality: 10  # 内容质量
-      diversity: 10  # 多样性
+      source_authority: 25  # 来源权威度（30% → 25%）
+      engagement: 15  # 互动数据（20% → 15%）
+      freshness: 25  # 时效性（15% → 25%）⬆️
+      category_balance: 10  # 分类平衡（15% → 10%）
+      content_quality: 15  # 内容质量（10% → 15%）⬆️
+      diversity: 5  # 多样性（10% → 5%）
+      fact_confidence: 5  # 事实置信度（新增）⬆️
 
   # 世界顶级简报Agent（v7.0）
   world_class_digest:

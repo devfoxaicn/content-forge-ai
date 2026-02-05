@@ -40,6 +40,17 @@ google-generativeai>=0.3.0
 feedparser>=6.0.10
 praw>=7.7.0
 
+# ------------------ 异步HTTP/并发获取 (v11.0新增) ------------------
+aiohttp>=3.9.0
+asyncio-throttle>=1.0.0
+nest-asyncio>=1.5.0
+
+# ------------------ 内容增强 (v11.0新增) ------------------
+trafilatura>=1.6.0
+textstat>=0.7.3
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
 # ------------------ 搜索服务 ------------------
 # tavily-python==0.7.18  # Daily 模式不需要，移除以避免依赖冲突
 

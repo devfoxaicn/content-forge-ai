@@ -155,6 +155,9 @@ class WorldClassDigestAgentV9:
         # 第4步：生成深度观察（新增）
         deep_observation = self._generate_deep_observation(all_items, core_insights)
 
+        # 第4.5步：生成副标题（单句摘要）
+        subtitle = self._generate_subtitle(all_items, core_insights)
+
         # 第5步：生成Markdown内容（应用 copy-editing 7次扫描）
         markdown_content = self._generate_markdown_v8(
             scored_trends,
@@ -165,7 +168,8 @@ class WorldClassDigestAgentV9:
             source_status,
             today,
             issue_number,
-            total_count
+            total_count,
+            subtitle
         )
 
         # 第6步：生成JSON数据
@@ -179,10 +183,63 @@ class WorldClassDigestAgentV9:
             today,
             issue_number,
             total_count,
-            markdown_content
+            markdown_content,
+            subtitle
         )
 
         return json_data
+
+    def _generate_subtitle(self, items: List[Dict], core_insights: List[str]) -> str:
+        """生成副标题（单句摘要）"""
+        if not self.llm or not items:
+            return ""
+
+        # 选择最重要的5条新闻
+        top_items = sorted(items, key=lambda x: x.get("importance_score", 0), reverse=True)[:5]
+
+        news_summary = "\n".join([
+            f"- {item.get('title_cn', item.get('title', ''))}"
+            for item in top_items
+        ])
+
+        # 准备核心洞察列表
+        insights_list = "\n".join([f"- {insight}" for insight in core_insights[:3]])
+
+        prompt = f"""你是资深科技媒体主编，基于今日AI新闻生成一个一句话副标题。
+
+【今日重要新闻】
+{news_summary}
+
+【核心洞察】
+{insights_list}
+
+请生成一个副标题（30-50字），要求：
+1. **一句话概括**：不要使用逗号、句号分隔
+2. **突出亮点**：点出今天最重要的趋势或事件
+3. **具体化**：包含具体数字、公司名、技术名
+4. **利益导向**：暗示"这对读者意味着什么"
+
+【优秀示例】
+❌ "AI行业今天有很多重要新闻"
+✅ "OpenAI GPT-5发布引领大模型新周期 Meta开源新模型性能媲美GPT-4"
+✅ "多模态Agent成热点 DeepMind强化学习突破 Gemini支持100万tokens"
+
+直接输出副标题内容（不要引号、不要额外说明）："""
+
+        try:
+            response = self.llm.invoke([HumanMessage(content=prompt)])
+            result = response.content.strip()
+
+            # 清理可能的引号和标点
+            result = result.strip('"').strip("'").strip("。").strip(".")
+
+            if len(result) < 20 or len(result) > 80:
+                return ""
+
+            return result
+        except Exception as e:
+            self.log(f"副标题生成失败: {e}", "DEBUG")
+            return ""
 
     def _enhance_news_items_v8(self, items: List[Dict]) -> List[Dict]:
         """为新闻条目增强信息 v8.0（应用 copywriting 原则）"""
@@ -538,7 +595,8 @@ PLACEHOLDER_NEWS_CONTENT
         source_status: Dict[str, Any],
         today: datetime,
         issue_number: str,
-        total_count: int
+        total_count: int,
+        subtitle: str = ""
     ) -> str:
         """生成Markdown格式简报 v8.0"""
 
@@ -546,6 +604,11 @@ PLACEHOLDER_NEWS_CONTENT
 
         # ========== Header ==========
         parts.append(f"# AI每日热点 · {today.strftime('%Y年%m月%d日')}\n\n")
+
+        # 添加副标题（如果有）
+        if subtitle:
+            parts.append(f"> 💡 {subtitle}\n\n")
+
         parts.append(f"> **期号**: #{issue_number}  |  **阅读时间**: ~{max(5, total_count * 12 // 60)}分钟  |  **精选**: {total_count}条\n\n")
         parts.append("---\n\n")
 
@@ -555,11 +618,21 @@ PLACEHOLDER_NEWS_CONTENT
             for insight in core_insights:
                 parts.append(f"- {insight}\n")
             parts.append("\n---\n\n")
+        else:
+            # 添加友好提示
+            parts.append("## 💡 核心洞察\n\n")
+            parts.append("> 💡 今日新闻数量较少，暂未生成核心洞察\n\n")
+            parts.append("---\n\n")
 
         # ========== 深度观察（新增） ==========
         if deep_observation:
             parts.append("## 📰 深度观察\n\n")
             parts.append(f"{deep_observation}\n\n")
+            parts.append("---\n\n")
+        else:
+            # 添加友好提示
+            parts.append("## 📰 深度观察\n\n")
+            parts.append("> 💡 今日热点数量不足，暂未生成深度观察文章\n\n")
             parts.append("---\n\n")
 
         # ========== 编辑精选 ==========
@@ -574,9 +647,15 @@ PLACEHOLDER_NEWS_CONTENT
                 score = item.get("importance_score", 0)
                 background = item.get("background", "")
                 impact = item.get("impact", "")
+                tags = item.get("tags", [])
 
                 parts.append(f"### {i}. {title}\n\n")
                 parts.append(f"> 📰 **{source}**  |  ⭐ **重要性**: {int(score)}/100  |  🔗 [原文链接]({url})\n\n")
+
+                # 添加关键信息标签
+                if tags:
+                    tags_str = " | ".join([f"🏷️ {tag}" for tag in tags[:5]])
+                    parts.append(f"> 🔑 **关键信息**: {tags_str}\n\n")
 
                 if summary:
                     parts.append(f"**核心内容**: {summary}\n\n")
@@ -588,6 +667,11 @@ PLACEHOLDER_NEWS_CONTENT
                     parts.append(f"**行业影响**: {impact}\n\n")
 
                 parts.append("---\n\n")
+        else:
+            # 添加友好提示
+            parts.append("## ⭐ 编辑精选 (Editor's Picks)\n\n")
+            parts.append("> 💡 今日暂无特别精选内容，请查看分类热点获取更多资讯\n\n")
+            parts.append("---\n\n")
 
         # ========== 热门话题 ==========
         if trending_topics:
@@ -619,9 +703,15 @@ PLACEHOLDER_NEWS_CONTENT
                 score = item.get("importance_score", 0)
                 background = item.get("background", "")
                 impact = item.get("impact", "")
+                tags = item.get("tags", [])
 
                 parts.append(f"#### {i}. {title}\n\n")
                 parts.append(f"> 📰 **{source}**  |  ⭐ **重要性**: {int(score)}/100  |  🔗 [原文]({url})\n\n")
+
+                # 添加关键信息标签
+                if tags:
+                    tags_str = " | ".join([f"🏷️ {tag}" for tag in tags[:5]])
+                    parts.append(f"> 🔑 **关键信息**: {tags_str}\n\n")
 
                 if summary:
                     parts.append(f"**摘要**: {summary}\n\n")
@@ -637,9 +727,18 @@ PLACEHOLDER_NEWS_CONTENT
         # ========== 数据来源 ==========
         parts.append("## 📚 数据来源\n\n")
         success_sources = [s for s, status in source_status.items() if status.get("success", False)]
-        for source in success_sources:
-            count = source_status[source].get("count", 0)
-            parts.append(f"- **{source}**: {count}条\n")
+
+        if not success_sources:
+            parts.append("> ⚠️ 暂无数据源，请检查网络连接或API配置\n\n")
+        else:
+            for source in success_sources:
+                count = source_status[source].get("count", 0)
+                parts.append(f"- **{source}**: {count}条\n")
+
+            # 添加友好提示
+            if len(success_sources) < 10:
+                parts.append(f"\n> 💡 提示：部分数据源可能暂时不可用，获取到 {len(success_sources)} 个数据源\n\n")
+
         parts.append("\n---\n\n")
 
         # ========== Footer ==========
@@ -658,7 +757,8 @@ PLACEHOLDER_NEWS_CONTENT
         today: datetime,
         issue_number: str,
         total_count: int,
-        markdown_content: str
+        markdown_content: str,
+        subtitle: str = ""
     ) -> Dict[str, Any]:
         """生成JSON格式数据 v8.0"""
 
@@ -742,6 +842,7 @@ PLACEHOLDER_NEWS_CONTENT
         return {
             "metadata": {
                 "title": f"AI每日热点 · {today.strftime('%Y年%m月%d日')}",
+                "subtitle": subtitle,  # 新增副标题
                 "issue_number": issue_number,
                 "publish_date": today.strftime("%Y-%m-%d"),
                 "generated_at": today.isoformat(),

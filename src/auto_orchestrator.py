@@ -17,6 +17,11 @@ from langgraph.graph import StateGraph, END
 # 本地imports
 from src.state import create_initial_state, update_state, add_agent_to_order, calculate_execution_time
 from src.agents.ai_trend_analyzer_real import RealAITrendAnalyzerAgent
+from src.agents.concurrent_fetch_agent import ConcurrentFetchAgent  # v11.0: 并发数据获取
+from src.agents.time_weight_agent import TimeWeightAgent  # v11.0: 时效性加权
+from src.agents.auto_fact_check_agent import AutoFactCheckAgent  # v11.0: 轻量级事实核查
+from src.agents.content_enhancer_agent import ContentEnhancerAgent  # v11.0: 内容增强
+from src.agents.translation_refiner_agent import TranslationRefinerAgent  # v11.0: 翻译精炼
 from src.agents.trend_categorizer_agent import TrendCategorizerAgent
 from src.agents.news_scoring_agent import NewsScoringAgent
 from src.agents.world_class_digest_agent_v8 import WorldClassDigestAgentV9  # v9.0: 6分类系统
@@ -109,15 +114,26 @@ class AutoContentOrchestrator:
             )
 
     def _init_agents(self) -> Dict[str, Any]:
-        """初始化所有Agent（Auto模式 v8.0：世界顶级中文新闻简报）"""
+        """初始化所有Agent（Auto模式 v11.0：并发数据获取 + 时效性加权 + 6分类系统 + 质量保证）"""
         agents = {}
         agents_config = self.config.get("agents", {})
 
-        # Auto模式初始化新的Agent链
-        # 1. AI热点分析Agent（真实API版本）
-        if agents_config.get("ai_trend_analyzer", {}).get("enabled", True):
+        # ========== 数据获取层 ==========
+        # v11.0: 优先使用并发数据获取Agent
+        if agents_config.get("concurrent_fetch", {}).get("enabled", False):
+            agents["concurrent_fetch"] = ConcurrentFetchAgent(self.config, self.prompts)
+            logger.info("使用 ConcurrentFetchAgent（并发模式）")
+        # 降级到同步模式（向后兼容）
+        elif agents_config.get("ai_trend_analyzer", {}).get("enabled", True):
             agents["ai_trend_analyzer"] = RealAITrendAnalyzerAgent(self.config, self.prompts)
+            logger.info("使用 RealAITrendAnalyzerAgent（同步模式）")
 
+        # v11.0: 时效性智能加权Agent
+        if agents_config.get("time_weight", {}).get("enabled", False):
+            agents["time_weight"] = TimeWeightAgent(self.config, self.prompts)
+            logger.info("使用 TimeWeightAgent（时效性加权）")
+
+        # ========== 分类评分层 ==========
         # 2. 热点分类Agent
         if agents_config.get("trends_digest", {}).get("enabled", True):
             agents["trend_categorizer"] = TrendCategorizerAgent(self.config, self.prompts)
@@ -126,6 +142,23 @@ class AutoContentOrchestrator:
         if agents_config.get("news_scoring", {}).get("enabled", True):
             agents["news_scoring"] = NewsScoringAgent(self.config, self.prompts)
 
+        # ========== 质量保证层 ==========
+        # v11.0: 轻量级事实核查Agent
+        if agents_config.get("auto_fact_check", {}).get("enabled", False):
+            agents["auto_fact_check"] = AutoFactCheckAgent(self.config, self.prompts)
+            logger.info("使用 AutoFactCheckAgent（事实核查）")
+
+        # v11.0: 内容增强Agent
+        if agents_config.get("content_enhancer", {}).get("enabled", False):
+            agents["content_enhancer"] = ContentEnhancerAgent(self.config, self.prompts)
+            logger.info("使用 ContentEnhancerAgent（内容增强）")
+
+        # v11.0: 翻译精炼Agent
+        if agents_config.get("translation_refiner", {}).get("enabled", False):
+            agents["translation_refiner"] = TranslationRefinerAgent(self.config, self.prompts)
+            logger.info("使用 TranslationRefinerAgent（翻译精炼）")
+
+        # ========== 输出生成层 ==========
         # 4. 世界顶级中文简报Agent v9.0（6分类系统 + 30数据源 + Top5截取）
         if agents_config.get("world_class_digest", {}).get("enabled", True):
             agents["world_class_digest"] = WorldClassDigestAgentV9(self.config, self.prompts)
@@ -133,38 +166,83 @@ class AutoContentOrchestrator:
         # 注意：Auto模式下不初始化长文本、小红书、Twitter等Agent
         # 如需生成完整内容，请使用 Series 模式
 
-        logger.info(f"Auto模式 v9.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
+        logger.info(f"Auto模式 v11.0 已初始化 {len(agents)} 个Agent: {list(agents.keys())}")
         return agents
 
     def _build_workflow(self) -> StateGraph:
-        """构建自动化工作流（Auto模式 v9.0：6分类系统 + 世界顶级中文新闻简报）"""
+        """构建自动化工作流（Auto模式 v11.0：完整质量保证流程）"""
         workflow = StateGraph(dict)
 
         # 添加Agent节点
         for agent_name, agent in self.agents.items():
             workflow.add_node(agent_name, self._create_agent_node(agent))
 
-        # 定义执行顺序：AI热点分析 → 热点分类 → 新闻评分 → 世界顶级简报 → END
-        if "ai_trend_analyzer" in self.agents:
+        # v11.0: 定义执行顺序（完整工作流）
+        # concurrent_fetch → time_weight → trend_categorizer → news_scoring
+        # → auto_fact_check → content_enhancer → translation_refiner → world_class_digest → END
+
+        # 确定入口点（并发或同步）
+        if "concurrent_fetch" in self.agents:
+            workflow.set_entry_point("concurrent_fetch")
+            last_node = "concurrent_fetch"
+            logger.info("工作流入口: concurrent_fetch (并发模式)")
+        elif "ai_trend_analyzer" in self.agents:
             workflow.set_entry_point("ai_trend_analyzer")
-
-            # 热点分类Agent
             last_node = "ai_trend_analyzer"
-            if "trend_categorizer" in self.agents:
-                workflow.add_edge(last_node, "trend_categorizer")
+            logger.info("工作流入口: ai_trend_analyzer (同步模式)")
+        else:
+            # 如果没有数据获取Agent，直接从后续流程开始
+            if "time_weight" in self.agents:
+                workflow.set_entry_point("time_weight")
+                last_node = "time_weight"
+            elif "trend_categorizer" in self.agents:
+                workflow.set_entry_point("trend_categorizer")
                 last_node = "trend_categorizer"
+            else:
+                logger.warning("没有可用的数据获取或分类Agent")
+                return workflow.compile()
 
-            # 新闻评分Agent（新增 v7.0）
-            if "news_scoring" in self.agents:
-                workflow.add_edge(last_node, "news_scoring")
-                last_node = "news_scoring"
+        # 时效性智能加权Agent
+        if "time_weight" in self.agents:
+            workflow.add_edge(last_node, "time_weight")
+            last_node = "time_weight"
+            logger.info("工作流: 添加时效性加权")
 
-            # 世界顶级中文简报Agent
-            if "world_class_digest" in self.agents:
-                workflow.add_edge(last_node, "world_class_digest")
-                last_node = "world_class_digest"
+        # 热点分类Agent
+        if "trend_categorizer" in self.agents:
+            workflow.add_edge(last_node, "trend_categorizer")
+            last_node = "trend_categorizer"
 
-            workflow.add_edge(last_node, END)
+        # 新闻评分Agent
+        if "news_scoring" in self.agents:
+            workflow.add_edge(last_node, "news_scoring")
+            last_node = "news_scoring"
+
+        # v11.0: 质量保证层
+        # 轻量级事实核查Agent
+        if "auto_fact_check" in self.agents:
+            workflow.add_edge(last_node, "auto_fact_check")
+            last_node = "auto_fact_check"
+            logger.info("工作流: 添加事实核查")
+
+        # 内容增强Agent
+        if "content_enhancer" in self.agents:
+            workflow.add_edge(last_node, "content_enhancer")
+            last_node = "content_enhancer"
+            logger.info("工作流: 添加内容增强")
+
+        # 翻译精炼Agent
+        if "translation_refiner" in self.agents:
+            workflow.add_edge(last_node, "translation_refiner")
+            last_node = "translation_refiner"
+            logger.info("工作流: 添加翻译精炼")
+
+        # 世界顶级中文简报Agent
+        if "world_class_digest" in self.agents:
+            workflow.add_edge(last_node, "world_class_digest")
+            last_node = "world_class_digest"
+
+        workflow.add_edge(last_node, END)
 
         return workflow.compile()
 
