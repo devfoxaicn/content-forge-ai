@@ -61,6 +61,25 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             "arxiv_news": "arxiv_news" in sources_config,
             # 科技新闻（过滤产品类）
             "hackernews": "hackernews" in sources_config,
+            # ========== 新增实时数据源 (v10.0) ==========
+            "newsdata_io": "newsdata_io" in sources_config,
+            "reddit_stream": "reddit_stream" in sources_config,
+            "github_trending": "github_trending" in sources_config,
+            # ========== 新增免费RSS数据源 (v10.1) ==========
+            "ai_news": "ai_news" in sources_config,
+            "the_decoder": "the_decoder" in sources_config,
+            "qbitai": "qbitai" in sources_config,
+            "jiqizhixin": "jiqizhixin" in sources_config,
+            "wired_ai_v2": "wired_ai_v2" in sources_config,
+            "venturebeat_ai_v2": "venturebeat_ai_v2" in sources_config,
+            "google_ai_blog_v2": "google_ai_blog_v2" in sources_config,
+            "deepmind_blog_v2": "deepmind_blog_v2" in sources_config,
+            "arxiv_cl": "arxiv_cl" in sources_config,
+            "arxiv_cv": "arxiv_cv" in sources_config,
+            "arxiv_lg": "arxiv_lg" in sources_config,
+            "reddit_ml_rss": "reddit_ml_rss" in sources_config,
+            "reddit_ai_rss": "reddit_ai_rss" in sources_config,
+            "towards_data_science": "towards_data_science" in sources_config,
         }
 
         # 获取配置
@@ -615,6 +634,282 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                 "message": "未启用"
             }
 
+        # ========== 新增实时数据源 (v10.0) ==========
+
+        # 26. NewsData.io（实时新闻API，秒级更新）
+        if self.sources["newsdata_io"]:
+            newsdata_trends = self._get_newsdata_io_trends()
+            all_trends.extend(newsdata_trends)
+            self.source_status["NewsData.io"] = {
+                "success": len(newsdata_trends) > 0,
+                "count": len(newsdata_trends),
+                "message": "正常" if len(newsdata_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["NewsData.io"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 27. Reddit Stream（实时社区讨论）
+        if self.sources["reddit_stream"]:
+            reddit_trends = self._get_reddit_ai_stream()
+            all_trends.extend(reddit_trends)
+            self.source_status["Reddit"] = {
+                "success": len(reddit_trends) > 0,
+                "count": len(reddit_trends),
+                "message": "正常" if len(reddit_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Reddit"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 28. GitHub Trending（开发者关注热点）
+        if self.sources["github_trending"]:
+            github_trends = self._get_github_ai_trending()
+            all_trends.extend(github_trends)
+            self.source_status["GitHub Trending"] = {
+                "success": len(github_trends) > 0,
+                "count": len(github_trends),
+                "message": "正常" if len(github_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["GitHub Trending"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # ========== 新增免费RSS数据源 (v10.1) ==========
+
+        # 29. AI News（顶级AI新闻媒体，免费RSS）
+        if self.sources["ai_news"]:
+            ai_news_trends = self._get_ai_news_trends()
+            all_trends.extend(ai_news_trends)
+            self.source_status["AI News"] = {
+                "success": len(ai_news_trends) > 0,
+                "count": len(ai_news_trends),
+                "message": "正常" if len(ai_news_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["AI News"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 30. The Decoder（AI专业新闻，免费RSS）
+        if self.sources["the_decoder"]:
+            decoder_trends = self._get_the_decoder_trends()
+            all_trends.extend(decoder_trends)
+            self.source_status["The Decoder"] = {
+                "success": len(decoder_trends) > 0,
+                "count": len(decoder_trends),
+                "message": "正常" if len(decoder_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["The Decoder"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 31. 量子位（中文AI第一媒体，免费RSS）
+        if self.sources["qbitai"]:
+            qbitai_trends = self._get_qbitai_trends()
+            all_trends.extend(qbitai_trends)
+            self.source_status["量子位"] = {
+                "success": len(qbitai_trends) > 0,
+                "count": len(qbitai_trends),
+                "message": "正常" if len(qbitai_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["量子位"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 32. 机器之心（深度AI报道，免费RSS）
+        if self.sources["jiqizhixin"]:
+            jiqizhixin_trends = self._get_jiqizhixin_trends()
+            all_trends.extend(jiqizhixin_trends)
+            self.source_status["机器之心"] = {
+                "success": len(jiqizhixin_trends) > 0,
+                "count": len(jiqizhixin_trends),
+                "message": "正常" if len(jiqizhixin_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["机器之心"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 33. Wired AI v2（AI专题新闻，免费RSS）
+        if self.sources["wired_ai_v2"]:
+            wired_ai_v2_trends = self._get_wired_ai_trends_v2()
+            all_trends.extend(wired_ai_v2_trends)
+            self.source_status["Wired AI"] = {
+                "success": len(wired_ai_v2_trends) > 0,
+                "count": len(wired_ai_v2_trends),
+                "message": "正常" if len(wired_ai_v2_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Wired AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 34. VentureBeat AI v2（AI商业新闻，免费RSS）
+        if self.sources["venturebeat_ai_v2"]:
+            venturebeat_v2_trends = self._get_venturebeat_ai_trends_v2()
+            all_trends.extend(venturebeat_v2_trends)
+            self.source_status["VentureBeat AI (RSS)"] = {
+                "success": len(venturebeat_v2_trends) > 0,
+                "count": len(venturebeat_v2_trends),
+                "message": "正常" if len(venturebeat_v2_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["VentureBeat AI (RSS)"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 35. Google AI Blog v2（官方AI动态，免费RSS）
+        if self.sources["google_ai_blog_v2"]:
+            google_ai_v2_trends = self._get_google_ai_blog_v2()
+            all_trends.extend(google_ai_v2_trends)
+            self.source_status["Google AI Blog (RSS)"] = {
+                "success": len(google_ai_v2_trends) > 0,
+                "count": len(google_ai_v2_trends),
+                "message": "正常" if len(google_ai_v2_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Google AI Blog (RSS)"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 36. Google DeepMind（顶级研究，免费RSS）
+        if self.sources["deepmind_blog_v2"]:
+            deepmind_v2_trends = self._get_deepmind_blog_v2()
+            all_trends.extend(deepmind_v2_trends)
+            self.source_status["Google DeepMind"] = {
+                "success": len(deepmind_v2_trends) > 0,
+                "count": len(deepmind_v2_trends),
+                "message": "正常" if len(deepmind_v2_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Google DeepMind"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 37. arXiv NLP（自然语言处理论文，免费RSS）
+        if self.sources["arxiv_cl"]:
+            arxiv_cl_trends = self._get_arxiv_cl_trends()
+            all_trends.extend(arxiv_cl_trends)
+            self.source_status["arXiv NLP"] = {
+                "success": len(arxiv_cl_trends) > 0,
+                "count": len(arxiv_cl_trends),
+                "message": "正常" if len(arxiv_cl_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["arXiv NLP"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 38. arXiv CV（计算机视觉论文，免费RSS）
+        if self.sources["arxiv_cv"]:
+            arxiv_cv_trends = self._get_arxiv_cv_trends()
+            all_trends.extend(arxiv_cv_trends)
+            self.source_status["arXiv CV"] = {
+                "success": len(arxiv_cv_trends) > 0,
+                "count": len(arxiv_cv_trends),
+                "message": "正常" if len(arxiv_cv_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["arXiv CV"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 39. arXiv ML（机器学习论文，免费RSS）
+        if self.sources["arxiv_lg"]:
+            arxiv_lg_trends = self._get_arxiv_lg_trends()
+            all_trends.extend(arxiv_lg_trends)
+            self.source_status["arXiv ML"] = {
+                "success": len(arxiv_lg_trends) > 0,
+                "count": len(arxiv_lg_trends),
+                "message": "正常" if len(arxiv_lg_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["arXiv ML"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 40. Reddit ML RSS（机器学习社区，免费RSS）
+        if self.sources["reddit_ml_rss"]:
+            reddit_ml_trends = self._get_reddit_ml_trends()
+            all_trends.extend(reddit_ml_trends)
+            self.source_status["Reddit ML"] = {
+                "success": len(reddit_ml_trends) > 0,
+                "count": len(reddit_ml_trends),
+                "message": "正常" if len(reddit_ml_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Reddit ML"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 41. Reddit AI RSS（AI讨论社区，免费RSS）
+        if self.sources["reddit_ai_rss"]:
+            reddit_ai_trends = self._get_reddit_ai_trends_v2()
+            all_trends.extend(reddit_ai_trends)
+            self.source_status["Reddit AI"] = {
+                "success": len(reddit_ai_trends) > 0,
+                "count": len(reddit_ai_trends),
+                "message": "正常" if len(reddit_ai_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Reddit AI"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
+        # 42. Towards Data Science（数据科学文章，免费RSS）
+        if self.sources["towards_data_science"]:
+            tds_trends = self._get_towards_data_science_trends()
+            all_trends.extend(tds_trends)
+            self.source_status["Towards Data Science"] = {
+                "success": len(tds_trends) > 0,
+                "count": len(tds_trends),
+                "message": "正常" if len(tds_trends) > 0 else "无数据"
+            }
+        else:
+            self.source_status["Towards Data Science"] = {
+                "success": False,
+                "count": 0,
+                "message": "未启用"
+            }
+
         # 不再排序、去重、过滤，保留所有数据源的完整内容
         # 按数据源组织返回
         trends_by_source = {
@@ -641,7 +936,26 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             "InfoQ": [],
             "Hugging Face": [],
             "arXiv": [],
-            "Hacker News": []
+            "Hacker News": [],
+            # 新增实时数据源 (v10.0)
+            "NewsData.io": [],
+            "Reddit": [],
+            "GitHub Trending": [],
+            # 新增免费RSS数据源 (v10.1)
+            "AI News": [],
+            "The Decoder": [],
+            "量子位": [],
+            "机器之心": [],
+            "Wired AI": [],
+            "VentureBeat AI (RSS)": [],
+            "Google AI Blog (RSS)": [],
+            "Google DeepMind": [],
+            "arXiv NLP": [],
+            "arXiv CV": [],
+            "arXiv ML": [],
+            "Reddit ML": [],
+            "Reddit AI": [],
+            "Towards Data Science": []
         }
 
         # 将热点按数据源分类
@@ -696,6 +1010,42 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                 trends_by_source["arXiv"].append(trend)
             elif "Hacker" in source:
                 trends_by_source["Hacker News"].append(trend)
+            # 新增实时数据源 (v10.0)
+            elif "NewsData.io" in source:
+                trends_by_source["NewsData.io"].append(trend)
+            elif "Reddit" in source:
+                trends_by_source["Reddit"].append(trend)
+            elif "GitHub" in source:
+                trends_by_source["GitHub Trending"].append(trend)
+            # 新增免费RSS数据源 (v10.1)
+            elif "AI News" in source:
+                trends_by_source["AI News"].append(trend)
+            elif "The Decoder" in source:
+                trends_by_source["The Decoder"].append(trend)
+            elif "量子位" in source:
+                trends_by_source["量子位"].append(trend)
+            elif "机器之心" in source:
+                trends_by_source["机器之心"].append(trend)
+            elif "Wired AI" in source:
+                trends_by_source["Wired AI"].append(trend)
+            elif "VentureBeat AI (RSS)" in source:
+                trends_by_source["VentureBeat AI (RSS)"].append(trend)
+            elif "Google AI Blog (RSS)" in source:
+                trends_by_source["Google AI Blog (RSS)"].append(trend)
+            elif "Google DeepMind" in source:
+                trends_by_source["Google DeepMind"].append(trend)
+            elif "arXiv NLP" in source:
+                trends_by_source["arXiv NLP"].append(trend)
+            elif "arXiv CV" in source:
+                trends_by_source["arXiv CV"].append(trend)
+            elif "arXiv ML" in source:
+                trends_by_source["arXiv ML"].append(trend)
+            elif "Reddit ML" in source:
+                trends_by_source["Reddit ML"].append(trend)
+            elif "Reddit AI" in source:
+                trends_by_source["Reddit AI"].append(trend)
+            elif "Towards Data Science" in source:
+                trends_by_source["Towards Data Science"].append(trend)
 
         total_count = sum(len(trends) for trends in trends_by_source.values())
 
@@ -1011,12 +1361,15 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                             heat_score += 5
                             break
 
+                    # 解析时间戳（使用TimeFilter工具）
+                    timestamp_iso = self._parse_published_date(published)
+
                     trends.append({
                         "title": title,
                         "description": description or title[:200],
                         "url": url,
                         "source": f"NewsAPI ({source_name})",
-                        "timestamp": published[:10] if published else datetime.now().strftime("%Y-%m-%d"),
+                        "timestamp": timestamp_iso,
                         "metrics": {
                             "published": published,
                             "source": source_name,
@@ -1084,12 +1437,15 @@ class RealAITrendAnalyzerAgent(BaseAgent):
                         if any(company.lower() in title.lower() for company in companies):
                             heat_score += 10
 
+                    # 解析时间戳（使用TimeFilter工具）
+                    timestamp_iso = self._parse_published_date(published)
+
                     trends.append({
                         "title": title,
                         "description": description or title[:200],
                         "url": url,
                         "source": source_name,
-                        "timestamp": published[:10] if published else datetime.now().strftime("%Y-%m-%d"),
+                        "timestamp": timestamp_iso,
                         "metrics": {
                             "published": published,
                             "type": item_type
@@ -1427,6 +1783,374 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             self.log(f"Hugging Face Blog RSS解析失败: {e}", "ERROR")
             return []
 
+    # ========== 新增实时数据源 (v10.0) ==========
+
+    def _get_newsdata_io_trends(self, max_results: int = 20) -> List[Dict[str, Any]]:
+        """从NewsData.io获取实时AI新闻（秒级更新，比NewsAPI更快）"""
+        api_key = os.getenv("NEWSDATA_IO_API_KEY")
+        if not api_key:
+            self.log("未配置NEWSDATA_IO_API_KEY，跳过NewsData.io", "WARNING")
+            return []
+
+        try:
+            url = "https://newsdata.io/api/1/news"
+            params = {
+                "apikey": api_key,
+                "q": "artificial intelligence OR AI OR machine learning OR deep learning OR LLM OR ChatGPT OR GPT OR Claude OR Gemini",
+                "language": "en,zh",
+                "category": "technology,science,business",
+                "size": max_results
+            }
+
+            response = self._safe_request(url, timeout=20, params=params)
+            if not response:
+                return []
+
+            data = response.json()
+
+            if data.get("status") != "success":
+                self.log(f"NewsData.io返回失败: {data}", "WARNING")
+                return []
+
+            trends = []
+            for item in data.get("results", []):
+                # 解析发布时间
+                pub_date_str = item.get("pubDate", "")
+                try:
+                    if pub_date_str:
+                        pub_time = datetime.fromisoformat(pub_date_str.replace("Z", "+00:00"))
+                        # 计算时效性分数（越新越高）
+                        hours_ago = (datetime.now(pub_time.tzinfo) - pub_time).total_seconds() / 3600
+                        freshness_score = max(0, 100 - hours_ago * 2)
+                    else:
+                        freshness_score = 50
+                except:
+                    freshness_score = 50
+
+                trends.append({
+                    "title": item["title"],
+                    "description": item.get("description", "")[:500],
+                    "url": item["link"],
+                    "source": f"NewsData.io - {item.get('source', 'Unknown')}",
+                    "published_date": pub_date_str,
+                    "heat_score": freshness_score,
+                    "timestamp": pub_date_str
+                })
+
+            self.log(f"NewsData.io: 获取 {len(trends)} 条实时新闻")
+            return trends
+
+        except Exception as e:
+            self.log(f"NewsData.io请求失败: {e}", "ERROR")
+            return []
+
+    def _get_reddit_ai_stream(self, max_results: int = 15) -> List[Dict[str, Any]]:
+        """从Reddit AI相关subreddit获取实时热点（社区讨论，更新极快）"""
+        try:
+            import praw
+
+            reddit_client_id = os.getenv("REDDIT_CLIENT_ID")
+            reddit_client_secret = os.getenv("REDDIT_CLIENT_SECRET")
+
+            if not reddit_client_id or not reddit_client_secret:
+                self.log("未配置REDDIT_CLIENT_ID或REDDIT_CLIENT_SECRET，跳过Reddit", "WARNING")
+                return []
+
+            reddit = praw.Reddit(
+                client_id=reddit_client_id,
+                client_secret=reddit_client_secret,
+                user_agent="ContentForgeAI/1.0"
+            )
+
+            trends = []
+            subreddits = ["MachineLearning", "artificial", "ChatGPT", "LocalLLaMA"]
+
+            for sub_name in subreddits:
+                try:
+                    subreddit = reddit.subreddit(sub_name)
+
+                    # 获取热门帖子（实时更新）
+                    for post in subreddit.hot(limit=max_results // len(subreddits)):
+                        # 计算时效性分数
+                        created_time = datetime.fromtimestamp(post.created_utc)
+                        hours_ago = (datetime.now() - created_time).total_seconds() / 3600
+                        freshness_score = max(0, 100 - hours_ago * 3)
+
+                        # 综合分数：upvotes + 时效性
+                        engagement_score = min(100, post.score / 10)
+                        heat_score = (freshness_score * 0.6 + engagement_score * 0.4)
+
+                        # 描述：使用selftext或URL
+                        description = post.selftext[:500] if post.selftext else post.url
+
+                        trends.append({
+                            "title": post.title,
+                            "description": description,
+                            "url": f"https://reddit.com{post.permalink}",
+                            "source": f"Reddit r/{sub_name}",
+                            "published_date": created_time.isoformat(),
+                            "heat_score": heat_score,
+                            "timestamp": created_time.isoformat(),
+                            "comments_count": post.num_comments,
+                            "upvotes": post.score
+                        })
+                except Exception as e:
+                    self.log(f"Reddit r/{sub_name}获取失败: {e}", "WARNING")
+                    continue
+
+            self.log(f"Reddit: 获取 {len(trends)} 条实时热点")
+            return trends
+
+        except ImportError:
+            self.log("未安装praw库，跳过Reddit数据源 (pip install praw)", "WARNING")
+            return []
+        except Exception as e:
+            self.log(f"Reddit请求失败: {e}", "ERROR")
+            return []
+
+    def _get_github_ai_trending(self, max_results: int = 20) -> List[Dict[str, Any]]:
+        """从GitHub获取AI相关热门项目（开发者关注热点）"""
+        try:
+            # GitHub Search API
+            url = "https://api.github.com/search/repositories"
+            params = {
+                "q": "artificial intelligence OR machine learning OR LLM OR chatgpt OR transformer language:python",
+                "sort": "updated",
+                "order": "desc",
+                "per_page": max_results
+            }
+
+            response = self._safe_request(url, timeout=15, params=params)
+            if not response:
+                return []
+
+            data = response.json()
+            trends = []
+
+            for repo in data.get("items", []):
+                # 检查是否为AI相关
+                desc = repo.get("description", "").lower()
+                topics = [t.lower() for t in repo.get("topics", [])]
+                combined_text = f"{desc} {' '.join(topics)}"
+
+                ai_keywords = ["ai", "machine learning", "deep learning", "llm", "gpt", "chatgpt",
+                             "transformer", "neural network", "nlp", "computer vision", "reinforcement"]
+
+                # 至少包含一个AI关键词
+                if not any(keyword in combined_text for keyword in ai_keywords):
+                    continue
+
+                # 计算热度分数
+                stars_score = min(100, repo.get("stargazers_count", 0) / 100)
+                forks_score = min(100, repo.get("forks_count", 0) / 50)
+                heat_score = (stars_score * 0.7 + forks_score * 0.3)
+
+                # 获取最新更新时间
+                updated_at = repo.get("updated_at", "")
+
+                trends.append({
+                    "title": repo["name"],
+                    "description": repo.get("description", ""),
+                    "url": repo["html_url"],
+                    "source": "GitHub Trending",
+                    "published_date": updated_at,
+                    "heat_score": heat_score,
+                    "timestamp": updated_at,
+                    "stars": repo.get("stargazers_count", 0),
+                    "forks": repo.get("forks_count", 0)
+                })
+
+            self.log(f"GitHub Trending: 获取 {len(trends)} 个热门AI项目")
+            return trends
+
+        except Exception as e:
+            self.log(f"GitHub Trending请求失败: {e}", "ERROR")
+            return []
+
+    # ========== 新增免费RSS数据源 (v10.1) ==========
+
+    def _get_ai_news_trends(self) -> List[Dict[str, Any]]:
+        """从AI News获取实时AI新闻（顶级AI新闻媒体，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.artificialintelligence-news.com/feed/rss/",
+                source_name="AI News",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"AI News RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_the_decoder_trends(self) -> List[Dict[str, Any]]:
+        """从The Decoder获取AI新闻（AI专业新闻媒体，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://the-decoder.com/feed/",
+                source_name="The Decoder",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"The Decoder RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_qbitai_trends(self) -> List[Dict[str, Any]]:
+        """从量子位获取中文AI新闻（中文AI第一媒体，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.qbitai.com/feed",
+                source_name="量子位",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"量子位RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_jiqizhixin_trends(self) -> List[Dict[str, Any]]:
+        """从机器之心获取AI新闻（深度AI报道，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.jiqizhixin.com/rss",
+                source_name="机器之心",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"机器之心RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_wired_ai_trends_v2(self) -> List[Dict[str, Any]]:
+        """从Wired AI获取AI专题新闻（免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.wired.com/feed/tag/ai/latest/rss",
+                source_name="Wired AI",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"Wired AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_venturebeat_ai_trends_v2(self) -> List[Dict[str, Any]]:
+        """从VentureBeat AI获取AI商业新闻（免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://venturebeat.com/category/ai/feed/",
+                source_name="VentureBeat AI",
+                item_type="news",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"VentureBeat AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_google_ai_blog_v2(self) -> List[Dict[str, Any]]:
+        """从Google AI Blog获取官方AI动态（免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://blog.google/technology/ai/rss/",
+                source_name="Google AI Blog",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"Google AI Blog RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_deepmind_blog_v2(self) -> List[Dict[str, Any]]:
+        """从Google DeepMind获取顶级研究动态（免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://deepmind.google/blog/feed/",
+                source_name="Google DeepMind",
+                item_type="news",
+                max_items=10
+            )
+        except Exception as e:
+            self.log(f"Google DeepMind RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_arxiv_cl_trends(self) -> List[Dict[str, Any]]:
+        """从arXiv获取NLP论文（cs.CL分类，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://arxiv.org/rss/cs.CL",
+                source_name="arXiv NLP",
+                item_type="academic",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"arXiv NLP RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_arxiv_cv_trends(self) -> List[Dict[str, Any]]:
+        """从arXiv获取计算机视觉论文（cs.CV分类，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://arxiv.org/rss/cs.CV",
+                source_name="arXiv CV",
+                item_type="academic",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"arXiv CV RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_arxiv_lg_trends(self) -> List[Dict[str, Any]]:
+        """从arXiv获取机器学习论文（cs.LG分类，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://arxiv.org/rss/cs.LG",
+                source_name="arXiv ML",
+                item_type="academic",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"arXiv ML RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_reddit_ml_trends(self) -> List[Dict[str, Any]]:
+        """从Reddit r/MachineLearning获取社区热点（免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.reddit.com/r/MachineLearning/.rss",
+                source_name="Reddit ML",
+                item_type="community",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"Reddit ML RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_reddit_ai_trends_v2(self) -> List[Dict[str, Any]]:
+        """从Reddit r/artificial获取AI讨论（免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://www.reddit.com/r/artificial/.rss",
+                source_name="Reddit AI",
+                item_type="community",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"Reddit AI RSS解析失败: {e}", "ERROR")
+            return []
+
+    def _get_towards_data_science_trends(self) -> List[Dict[str, Any]]:
+        """从Towards Data Science获取数据科学文章（Medium出版，免费RSS）"""
+        try:
+            return self._get_rss_trends(
+                rss_url="https://towardsdatascience.com/feed",
+                source_name="Towards Data Science",
+                item_type="blog",
+                max_items=15
+            )
+        except Exception as e:
+            self.log(f"Towards Data Science RSS解析失败: {e}", "ERROR")
+            return []
+
     # ==================== 辅助方法 ====================
 
     def _init_category_keywords(self):
@@ -1597,6 +2321,65 @@ class RealAITrendAnalyzerAgent(BaseAgent):
 
         return unique_trends
 
+    def _deduplicate_trends_v2(self, trends: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """增强的去重逻辑 - 基于URL和标题相似度（v10.1新增）"""
+        try:
+            import difflib
+            from urllib.parse import urlparse
+        except ImportError:
+            # 如果difflib不可用，回退到简单版本
+            return self._deduplicate_trends(trends)
+
+        seen_urls = set()
+        seen_titles_normalized = {}
+        unique_trends = []
+
+        for trend in trends:
+            url = trend.get("url", "")
+            title = trend.get("title", "").strip().lower()
+
+            # 标准化标题：移除多余空格、标点
+            title_normalized = title.replace("  ", " ").replace("   ", " ")
+            title_normalized = ''.join(c for c in title_normalized if c.isalnum() or c.isspace())
+
+            # 1. URL去重（最准确，同一URL必然是重复）
+            if url and url in seen_urls:
+                continue
+
+            # 2. 标题相似度检查（处理同源新闻）
+            is_similar = False
+            for seen_id, seen_title in seen_titles_normalized.items():
+                # 计算相似度（使用SequenceMatcher）
+                similarity = difflib.SequenceMatcher(None, title_normalized, seen_title).ratio()
+
+                # 85%相似度视为重复
+                if similarity > 0.85:
+                    is_similar = True
+                    # 如果新标题更长且更详细，可以替换旧的（可选）
+                    if len(title) > len(seen_id) and len(title) - len(seen_id) > 10:
+                        # 找到并替换旧的
+                        for i, ut in enumerate(unique_trends):
+                            if ut.get("title", "").strip().lower() == seen_id:
+                                unique_trends[i] = trend
+                                seen_titles_normalized[title_normalized] = title_normalized
+                                seen_urls.add(url)
+                                break
+                    break
+
+            if not is_similar:
+                unique_trends.append(trend)
+                if url:
+                    seen_urls.add(url)
+                seen_titles_normalized[title_normalized] = title_normalized
+
+        # 记录去重统计
+        original_count = len(trends)
+        unique_count = len(unique_trends)
+        if original_count > unique_count:
+            self.log(f"去重：{original_count}条 → {unique_count}条 (移除{original_count - unique_count}条重复)")
+
+        return unique_trends
+
     def _save_trends(self, trends_by_source: Dict[str, List[Dict[str, Any]]]):
         """保存热点分析结果到raw目录"""
         try:
@@ -1624,3 +2407,35 @@ class RealAITrendAnalyzerAgent(BaseAgent):
             self.log(f"热点分析已保存: {filepath}")
         except Exception as e:
             self.log(f"保存热点分析失败: {str(e)}", "WARNING")
+
+    def _parse_published_date(self, published_date: str) -> str:
+        """
+        解析各种格式的发布日期并返回ISO格式字符串
+
+        Args:
+            published_date: 原始发布日期字符串
+
+        Returns:
+            ISO格式的时间戳字符串 (YYYY-MM-DD HH:MM:SS)
+        """
+        if not published_date:
+            return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        try:
+            # 使用 TimeFilter 工具解析时间戳
+            from src.utils.time_filter import TimeFilter
+            time_filter = TimeFilter(hours=24)  # 创建实例，时间窗口不重要
+            dt = time_filter._parse_timestamp(published_date)
+
+            if dt:
+                # 移除时区信息以保持与其他代码的兼容性（使用naive datetime）
+                dt_naive = dt.replace(tzinfo=None)
+                return dt_naive.strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                # 解析失败，使用当前时间
+                self.log(f"时间解析失败，使用当前时间: {published_date}", "DEBUG")
+                return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        except Exception as e:
+            self.log(f"时间解析异常: {published_date}, 错误: {e}", "WARNING")
+            return datetime.now().strftime("%Y-%m-%d %H:%M:%S")

@@ -300,12 +300,16 @@ class ConcurrentFetchAgent(BaseAgent):
                     description = re.sub(r'<[^>]+>', '', description)
                     description = description.strip()[:300]
 
+                # 解析时间戳（使用TimeFilter工具）
+                published = entry.get("published", "")
+                timestamp_iso = self._parse_published_date(published)
+
                 trends.append({
                     "title": title,
                     "description": description or title[:200],
                     "url": entry.get("link", ""),
                     "source": source_name,
-                    "timestamp": entry.get("published", "")[:10] if entry.get("published") else datetime.now().strftime("%Y-%m-%d"),
+                    "timestamp": timestamp_iso,
                     "heat_score": 60,
                     "tags": ["新闻", "AI资讯"]
                 })
@@ -488,6 +492,38 @@ class ConcurrentFetchAgent(BaseAgent):
     async def _fetch_github_trending_async(self):
         """GitHub Trending API"""
         return await asyncio.to_thread(self.trend_analyzer._get_github_ai_trending)
+
+    def _parse_published_date(self, published_date: str) -> str:
+        """
+        解析各种格式的发布日期并返回ISO格式字符串
+
+        Args:
+            published_date: 原始发布日期字符串
+
+        Returns:
+            ISO格式的时间戳字符串 (YYYY-MM-DD HH:MM:SS)
+        """
+        if not published_date:
+            return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        try:
+            # 使用 TimeFilter 工具解析时间戳
+            from src.utils.time_filter import TimeFilter
+            time_filter = TimeFilter(hours=24)
+            dt = time_filter._parse_timestamp(published_date)
+
+            if dt:
+                # 移除时区信息以保持与其他代码的兼容性（使用naive datetime）
+                dt_naive = dt.replace(tzinfo=None)
+                return dt_naive.strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                # 解析失败，使用当前时间
+                self.log(f"时间解析失败，使用当前时间: {published_date}", "DEBUG")
+                return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        except Exception as e:
+            self.log(f"时间解析异常: {published_date}, 错误: {e}", "WARNING")
+            return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def _log_source_summary(self):
         """打印数据源状态汇总"""
