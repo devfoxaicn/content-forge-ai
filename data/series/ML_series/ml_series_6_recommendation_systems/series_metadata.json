@@ -46,7 +46,7 @@
       "difficulty": "进阶",
       "estimated_words": 14500,
       "status": "completed",
-      "completed_at": "2026-01-29"
+      "completed_at": "2026-02-10"
     },
     {
       "id": "ml_topic_053",
@@ -66,7 +66,7 @@
       "difficulty": "进阶",
       "estimated_words": 16000,
       "status": "completed",
-      "completed_at": "2026-01-29"
+      "completed_at": "2026-02-10"
     },
     {
       "id": "ml_topic_054",
@@ -85,7 +85,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 15000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-02-10"
     },
     {
       "id": "ml_topic_055",
@@ -104,7 +105,8 @@
       ],
       "difficulty": "进阶",
       "estimated_words": 14500,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-02-10"
     },
     {
       "id": "ml_topic_056",
@@ -178,7 +180,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 14000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-31"
     },
     {
       "id": "ml_topic_060",
@@ -201,10 +204,10 @@
   ],
   "statistics": {
     "total_episodes": 10,
-    "completed_episodes": 4,
+    "completed_episodes": 7,
     "total_estimated_words": 144000,
-    "completion_rate": 40.0,
+    "completion_rate": 70.0,
     "start_date": "2026-01-28",
-    "end_date": "2026-01-29"
+    "end_date": "2026-02-10"
   }
 }

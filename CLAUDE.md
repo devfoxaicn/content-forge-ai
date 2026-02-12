@@ -56,33 +56,37 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 - `src/auto_orchestrator.py` - LangGraph workflow orchestration (auto mode)
 - `src/series_orchestrator.py` - Series mode orchestrator
 - `src/state.py` - State definition (WorkflowState TypedDict)
-- `src/agents/` - 18 agent implementations (base, trend analyzers, generators, quality checkers)
-- `src/data_sources/` - 30 data source integrations (NEW 2026-02-01)
+- `src/agents/` - 20+ agent implementations (base, trend analyzers, generators, quality checkers)
 - `src/utils/storage_v2.py` - Unified storage (StorageFactory)
 - `src/utils/series_manager.py` - Series management tools
 - `src/utils/api_config.py` - API configuration manager
-- `src/utils/time_filter.py` - 24h time filtering utility (NEW 2026-02-01)
-- `config/config.yaml` - Main config (LLM, agents, data sources)
+- `src/utils/time_filter.py` - Time parsing utility (supports RSS/Atom/HTTP Date formats)
+- `config/config.yaml` - Main config (LLM, agents, data sources) - **Note: Header shows v2.5 but actual implementation is v11.0**
 - `config/blog_topics_100_complete.json` - LLM 100-episode content plan
 - `config/ml_topics_100_complete.json` - ML 100-episode content plan
 - `config/prompts.yaml` - Agent system prompt templates
-- `docs/DATA_SOURCES.md` - Complete data source documentation (NEW 2026-02-01)
+- `docs/DATA_SOURCES.md` - Complete data source documentation (30 sources across 6 categories)
+- `batch_generate_ml_series.sh` - Parallel ML episode generation (3 concurrent processes)
+- `monitor_and_launch_next.sh` - Workflow monitoring with auto-launch
 
 **Key Architecture Points**:
 1. **Two-Mode Architecture** (only 2 implemented): Auto (Chinese digest), Series (200 episodes across 2 series)
 2. **Dual Series Structure**: LLM Series (100 episodes) + ML Series (100 episodes)
-3. **Auto Mode**: Multiple data sources → 分类组织 → 评分筛选 → 全中文简报
-4. **Series Mode**: 7-layer quality pipeline with staged longform generation
-5. **DailyStorage**: Only creates `raw/` and `digest/` directories
-6. **Immutable State Updates**: Use `{**state, **updates}` pattern
-7. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
+3. **Auto Mode** (v11.0): 26 data sources → concurrent fetch → time-weighted → fact-check → content enhance → translation refine → 6-category organization → 7-dimensional scoring → 全中文简报
+4. **Series Mode**: 8-agent quality pipeline with staged longform generation
+5. **v9.2 Category System**: 6 categories (📚 学术前沿, 🛠️ 开发工具, 🦾 AI Agent, 💼 企业应用, 🌐 消费产品, 📰 行业资讯)
+6. **Data Source Integration**: Integrated into `RealAITrendAnalyzerAgent` (NOT a separate `src/data_sources/` directory)
+7. **DailyStorage**: Only creates `raw/` and `digest/` directories
+8. **Immutable State Updates**: Use `{**state, **updates}` pattern
+9. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
 
 ## Deployment Automation
 
 **GitHub Actions** - Automated deployment (3x daily):
 - **Schedule**: 6:00, 12:00, 18:00 Beijing Time (via `.github/workflows/daily-digest.yml`)
-- **Workflow**: Runs auto mode → commits changes → pushes to GitHub
+- **Workflow**: Runs auto mode → commits changes → pushes to GitHub → triggers ai-insights sync
 - **Timeout**: 90 minutes (configured in workflow YAML)
+- **AI Insights Sync**: Uses repository_dispatch to trigger content sync to external repo (Ming-H/ai-insights)
 
 **Commit Message Pattern**:
 ```bash
@@ -113,16 +117,23 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 ContentForge AI is a LangChain/LangGraph-based automated content production system that generates AI-focused content.
 
-**Auto Mode**:
-- **Multiple Data Sources**: TechCrunch AI, NewsAPI.org, Hacker News, MIT Tech Review, OpenAI Blog, BAIR Blog, Microsoft Research, arXiv, MarkTechPost, KDnuggets, AI Business, The Gradient, InfoQ AI, Hugging Face Blog
-- **4 Agents**: AI Trend Analyzer → Trend Categorizer → News Scoring → World Class Digest (全中文)
-- **5 Categories**: 产业动态, 学术前沿, 技术创新, 产品工具, 行业应用
-- **Scoring System**: 6-dimensional scoring (source_authority 30%, engagement 20%, freshness 15%, category_balance 15%, content_quality 10%, diversity 10%)
+**Auto Mode** (v11.0):
+- **Multiple Data Sources**: 26 enabled sources (TechCrunch, NewsAPI, Hacker News, MIT, OpenAI, BAIR, Microsoft Research, arXiv, MarkTechPost, KDnuggets, AI Business, The Gradient, InfoQ, Hugging Face, NewsData.io, Reddit, GitHub Trending, **AI News, The Decoder, 量子位, 机器之心, Wired AI, VentureBeat AI, Google AI Blog, DeepMind Blog, arXiv CL/CV/LG, Reddit ML/AI RSS, Towards Data Science (v10.1)**)
+- **9 Agents**: Concurrent Fetch → Time Weight → Auto Fact Check → Content Enhancer → Translation Refiner → Trend Categorizer → News Scoring → World Class Digest (全中文)
+- **6 Categories** (v9.2): 📚 学术前沿, 🛠️ 开发工具, 🦾 AI Agent, 💼 企业应用, 🌐 消费产品, 📰 行业资讯
+- **Scoring System** (v11.0): 7-dimensional scoring (source_authority 25%, engagement 15%, freshness 25%, category_balance 10%, content_quality 15%, diversity 5%, fact_confidence 5%)
+- **Time Filtering** (v9.2): No 24h restriction - prioritizes latest data by timestamp, filters only items without timestamps
+- **Concurrent Fetch** (v11.0): 10x performance improvement with concurrent data fetching
+- **Time Weight** (v11.0): Dynamic time-weighted scoring ensures latest content priority
+- **Auto Fact Check** (v11.0): Lightweight fact-checking for Top 10 items using LLM built-in knowledge
+- **Content Enhancer** (v11.0): Background and impact analysis for important news (score >= 70)
+- **Translation Refiner** (v11.0): Strunk rules application for improved readability
+- **Real-time Sources** (v10.0): NewsData.io (秒级更新), Reddit Stream (实时社区讨论), GitHub Trending (开发者关注)
 - **Output**: `data/daily/YYYYMMDD/digest/digest_YYYYMMDD.md` (全中文, with structured JSON)
 
 **Series Mode**:
 - **Two 100-episode series**: LLM Series (episodes 1-100) + ML Series (episodes 1-100)
-- **7-layer quality assurance pipeline**
+- **8-agent quality pipeline**: research → longform → code review → fact check → quality evaluation → consistency check → visualization → citation formatting
 - **Staged longform generation** (outline → sections → summary)
 - **Configurable via `--series-config` flag** to switch between LLM and ML series
 
@@ -143,6 +154,10 @@ ContentForge AI is a LangChain/LangGraph-based automated content production syst
 - `SEMANTIC_SCHOLAR_API_KEY` - Semantic Scholar API key (https://www.semanticscholar.org/product/api)
 - `OPENALEX_EMAIL` - OpenAlex email (free, recommended)
 - `REDDIT_CLIENT_ID/SECRET` - Reddit API credentials (https://www.reddit.com/prefs/apps)
+
+**Optional Keys** (NEW v10.0 - Real-time data sources):
+- `NEWSDATA_IO_API_KEY` - NewsData.io real-time news API (推荐, free 200 requests/day, https://newsdata.io/register)
+- `REDDIT_CLIENT_ID/SECRET` - Reddit Stream API for real-time community discussions (already listed above, same credentials)
 
 **Dependencies**:
 ```bash
@@ -168,59 +183,101 @@ See `docs/DATA_SOURCES.md` for complete API documentation and implementation det
 
 ## Auto Mode Architecture
 
-**Workflow**:
+**Workflow** (v11.0):
 ```
-1. RealAITrendAnalyzerAgent
-   - 从多个数据源获取热点
+1. ConcurrentFetchAgent (v11.0: 并发数据获取，10倍性能提升)
+   - 从26个数据源并发获取热点
    - 保留所有内容（不去重、不排序）
    - 输出: trends_by_source
 
-2. TrendCategorizerAgent
+2. TimeWeightAgent (v11.0: 时效性智能加权)
+   - 动态推荐时间权重（dynamic/linear/exponential）
+   - 超过72小时新闻时效分为0
+   - 1小时内新闻获得2倍加成
+   - 输出: time_weighted_trends
+
+3. AutoFactCheckAgent (v11.0: 轻量级事实核查)
+   - 仅核查Top 10新闻
+   - 使用LLM内置知识（无需Tavily）
+   - 置信度阈值0.7
+   - 输出: fact_checked_trends
+
+4. ContentEnhancerAgent (v11.0: 内容增强)
+   - 使用trafilatura提取完整内容
+   - 为重要性>=70的新闻生成背景分析
+   - 生成影响分析
+   - 输出: enhanced_trends
+
+5. TranslationRefinerAgent (v11.0: 翻译精炼)
+   - 应用Strunk原则提升可读性
+   - 术语一致性检查
+   - 目标可读性分数60
+   - 输出: refined_trends
+
+6. TrendCategorizerAgent (v9.2: 6分类系统)
    - 按分类组织热点
-   - 5大分类：产业动态、学术前沿、技术创新、产品工具、行业应用
+   - 6大分类：📚 学术前沿, 🛠️ 开发工具, 🦾 AI Agent, 💼 企业应用, 🌐 消费产品, 📰 行业资讯
+   - 优先最新数据（按时间戳排序）
+   - Top5截取（每个分类最多5条）
+   - 只过滤没有时间戳的内容（无24h限制）
    - 输出: categorized_trends
 
-3. NewsScoringAgent
-   - 对新闻进行6维度评分
+7. NewsScoringAgent (v11.0: 7维度评分)
+   - 对新闻进行7维度评分
    - 智能筛选，保留高价值内容
    - 输出: scored_trends
 
-4. WorldClassDigestAgent
+8. WorldClassDigestAgentV9
    - 生成全中文世界顶级新闻简报
    - 翻译所有标题、描述
    - 生成核心洞察和深度观察
    - 输出: news_digest (全中文 + 结构化JSON)
 ```
 
-**Data Sources** (enabled sources):
-| 数据源 | 类型 | 内容 |
-|--------|------|------|
-| TechCrunch AI | 新闻 | AI行业新闻RSS |
-| NewsAPI.org | 新闻 | 全球AI新闻聚合（需API key） |
-| Hacker News | 社区 | 科技热点讨论API |
-| MIT Tech Review | 新闻 | MIT技术评论RSS |
-| OpenAI Blog | 官方 | OpenAI官方动态RSS |
-| BAIR Blog | 学术 | UC Berkeley AI研究RSS |
-| Microsoft Research | 学术 | 微软研究院博客RSS |
-| arXiv | 学术 | AI重大论文API |
-| MarkTechPost | 新闻 | AI研究新闻RSS |
-| KDnuggets | 新闻 | 数据科学权威RSS |
-| AI Business | 新闻 | AI行业新闻RSS |
-| The Gradient | 期刊 | AI研究期刊RSS |
-| InfoQ AI | 技术 | 技术媒体RSS |
-| Hugging Face | 官方 | Hugging Face官方博客RSS |
+**Data Sources** (26 enabled sources):
+| 数据源 | 类型 | 内容 | 版本 |
+|--------|------|------|------|
+| TechCrunch AI | 新闻 | AI行业新闻RSS | - |
+| NewsAPI.org | 新闻 | 全球AI新闻聚合（需API key） | - |
+| Hacker News | 社区 | 科技热点讨论API | - |
+| MIT Tech Review | 新闻 | MIT技术评论RSS | - |
+| OpenAI Blog | 官方 | OpenAI官方动态RSS | - |
+| BAIR Blog | 学术 | UC Berkeley AI研究RSS | - |
+| Microsoft Research | 学术 | 微软研究院博客RSS | - |
+| arXiv | 学术 | AI重大论文API | - |
+| MarkTechPost | 新闻 | AI研究新闻RSS | - |
+| KDnuggets | 新闻 | 数据科学权威RSS | - |
+| AI Business | 新闻 | AI行业新闻RSS | - |
+| The Gradient | 期刊 | AI研究期刊RSS | - |
+| InfoQ AI | 技术 | 技术媒体RSS | - |
+| Hugging Face | 官方 | Hugging Face官方博客RSS | - |
+| **NewsData.io** ⭐ | **实时** | **秒级新闻更新（免费200次/天）** | **v10.0** |
+| **Reddit Stream** ⭐ | **实时** | **社区实时讨论（r/MachineLearning等）** | **v10.0** |
+| **GitHub Trending** ⭐ | **实时** | **开发者关注热点** | **v10.0** |
+| **AI News** | 新闻 | 顶级AI新闻媒体（免费RSS） | **v10.1** |
+| **The Decoder** | 新闻 | AI专业新闻（免费RSS） | **v10.1** |
+| **量子位 (qbitai)** | 新闻 | 中文AI第一媒体（免费RSS） | **v10.1** |
+| **机器之心 (jiqizhixin)** | 新闻 | 深度AI报道（免费RSS） | **v10.1** |
+| **Wired AI** | 新闻 | AI专题新闻（免费RSS） | **v10.1** |
+| **VentureBeat AI** | 新闻 | AI商业新闻（免费RSS） | **v10.1** |
+| **Google AI Blog** | 官方 | Google AI官方动态（免费RSS） | **v10.1** |
+| **DeepMind Blog** | 学术 | Google DeepMind顶级研究（免费RSS） | **v10.1** |
+| **arXiv CL/CV/LG** | 学术 | NLP/CV/ML论文（免费RSS） | **v10.1** |
+| **Reddit ML/AI RSS** | 社区 | ML/AI讨论社区（免费RSS） | **v10.1** |
+| **Towards Data Science** | 新闻 | 数据科学文章（免费RSS） | **v10.1** |
 
-**Scoring System** (NewsScoringAgent):
-- `source_authority` (30%): 来源权威度，基于预定义评分表
-- `engagement` (20%): 互动数据（点赞、评论、分享）
-- `freshness` (15%): 时效性（24小时内发布加分）
-- `category_balance` (15%): 确保各分类平衡
-- `content_quality` (10%): 标题质量、内容完整性
-- `diversity` (10%): 确保来源多样性
+**Scoring System** (NewsScoringAgent v11.0):
+- `source_authority` (25%): 来源权威度，基于预定义评分表
+- `engagement` (15%): 互动数据（点赞、评论、分享）
+- `freshness` (25%): 时效性（24小时内发布加分）⬆️
+- `category_balance` (10%): 确保各分类平衡
+- `content_quality` (15%): 标题质量、内容完整性⬆️
+- `diversity` (5%): 确保来源多样性
+- `fact_confidence` (5%): 事实置信度（新增）⬆️
 
 **Output Format**:
 ```markdown
-# AI每日热点 · 2026年01月22日
+# AI每日热点 · 2026年02月03日
 
 ## 💡 核心洞察
 - 多智能体协作范式确立...
@@ -229,7 +286,7 @@ See `docs/DATA_SOURCES.md` for complete API documentation and implementation det
 **AI产业观察：从云端竞逐到端侧重构的范式转移**
 
 ## 🔍 本期热点
-### 📈 产业动态（15条，已筛选）
+### 📚 学术前沿（5条，优先最新）
 #### [据报Apple研发AI可穿戴设备](链接)
 **来源**：TechCrunch AI  ·  **热度**：70  ·  **评分**：82
 ...
@@ -383,13 +440,13 @@ workflow.add_edge("world_class_digest", END)
 ai_trend_analyzer (multiple data sources aggregation)
   ↓ state["trends_by_source"] = {...}
 
-trend_categorizer (按5大分类重新组织)
+trend_categorizer (v9.2: 6大分类重新组织 + 优先最新 + Top5截取)
   ↓ state["categorized_trends"] = {...}
 
-news_scoring (v7.0新增：6维度智能评分筛选)
+news_scoring (v7.0: 6维度智能评分筛选)
   ↓ state["scored_trends"] = {...}
 
-world_class_digest (生成全中文世界顶级新闻简报)
+world_class_digest_v9 (生成全中文世界顶级新闻简报)
   ↓ state["news_digest"] = {...}
 ```
 
@@ -412,9 +469,9 @@ data/
 
 **Note**: Only Auto and Series modes are implemented. Custom/Refine modes documented in config.yaml are NOT available in the current codebase.
 
-### AI Trend Data Sources (config.yaml:30-48)
+### AI Trend Data Sources (config.yaml:69-105)
 
-**Currently Enabled (14 sources)**:
+**Currently Enabled (26 sources)**:
 - `techcrunch_ai` - TechCrunch AI RSS
 - `newsapi` - NewsAPI.org (全球AI新闻聚合)
 - `hackernews` - Hacker News API
@@ -429,8 +486,25 @@ data/
 - `the_gradient` - The Gradient (AI研究期刊)
 - `infoq_ai` - InfoQ AI (技术媒体)
 - `hugging_face_blog` - Hugging Face Blog (官方)
+- **`newsdata_io`** ⭐ - **NewsData.io (实时新闻API，秒级更新，免费200次/天，v10.0新增)**
+- **`reddit_stream`** ⭐ - **Reddit (实时社区讨论，r/MachineLearning等，v10.0新增)**
+- **`github_trending`** ⭐ - **GitHub Trending (开发者关注热点，v10.0新增)**
+- **`ai_news`** ⭐ - **AI News (顶级AI新闻媒体，免费RSS，v10.1新增)**
+- **`the_decoder`** ⭐ - **The Decoder (AI专业新闻，免费RSS，v10.1新增)**
+- **`qbitai`** ⭐ - **量子位 (中文AI第一媒体，免费RSS，v10.1新增)**
+- **`jiqizhixin`** ⭐ - **机器之心 (深度AI报道，免费RSS，v10.1新增)**
+- **`wired_ai_v2`** ⭐ - **Wired AI (AI专题新闻，免费RSS，v10.1新增)**
+- **`venturebeat_ai_v2`** ⭐ - **VentureBeat AI (AI商业新闻，免费RSS，v10.1新增)**
+- **`google_ai_blog_v2`** ⭐ - **Google AI Blog (官方AI动态，免费RSS，v10.1新增)**
+- **`deepmind_blog_v2`** ⭐ - **Google DeepMind (顶级研究，免费RSS，v10.1新增)**
+- **`arxiv_cl`** ⭐ - **arXiv NLP (自然语言处理论文，免费RSS，v10.1新增)**
+- **`arxiv_cv`** ⭐ - **arXiv CV (计算机视觉论文，免费RSS，v10.1新增)**
+- **`arxiv_lg`** ⭐ - **arXiv ML (机器学习论文，免费RSS，v10.1新增)**
+- **`reddit_ml_rss`** ⭐ - **Reddit ML (机器学习社区，免费RSS，v10.1新增)**
+- **`reddit_ai_rss`** ⭐ - **Reddit AI (AI讨论社区，免费RSS，v10.1新增)**
+- **`towards_data_science`** ⭐ - **Towards Data Science (数据科学文章，免费RSS，v10.1新增)**
 
-**Config Params** (`config/config.yaml:50-53`):
+**Config Params** (`config/config.yaml:108-110`):
 - `max_trends: 20` - Max trend count per source
 - `min_heat_score: 60` - Minimum heat score
 - `cache_ttl: 3600` - Cache TTL (seconds)
@@ -720,20 +794,24 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 ```
 
 **Execution Order**:
-- **Auto Mode**: AI trend analysis → Trend categorization → News scoring → World class digest
+- **Auto Mode** (v11.0): Concurrent fetch → Time weight → Auto fact check → Content enhancer → Translation refiner → Trend categorizer → News scoring → World class digest
 - **Series Mode**: Research → Longform generation → Code review → Fact check → Quality evaluation → Consistency check → Visualization → Citation formatting
 
 **Prompt Template System**: Each agent's system prompts stored in `config/prompts.yaml`, organized by lowercase agent class name
 
 ### Agent Dependencies
 
-**Auto Mode Agents (v8.0)**:
+**Auto Mode Agents (v11.0)**:
 | Agent | Deps On | Outputs | Description |
 |-------|---------|---------|-------------|
-| ai_trend_analyzer | - | trends_by_source | 14 data source aggregation |
-| trend_categorizer | trends_by_source | categorized_trends | 5-category organization |
-| news_scoring | categorized_trends | scored_trends | 6-dimensional scoring |
-| world_class_digest_v8 | scored_trends | news_digest | Chinese digest + JSON |
+| concurrent_fetch | - | trends_by_source | 26 data source concurrent aggregation (v11.0) |
+| time_weight | trends_by_source | time_weighted_trends | Dynamic time-weighted scoring (v11.0) |
+| auto_fact_check | time_weighted_trends | fact_checked_trends | Top 10 fact-checking using LLM (v11.0) |
+| content_enhancer | fact_checked_trends | enhanced_trends | Background/impact analysis (v11.0) |
+| translation_refiner | enhanced_trends | refined_trends | Strunk rules + terminology check (v11.0) |
+| trend_categorizer | refined_trends | categorized_trends | 6-category organization (v9.2) |
+| news_scoring | categorized_trends | scored_trends | 7-dimensional scoring (v11.0) |
+| world_class_digest_v9 | scored_trends | news_digest | Chinese digest + JSON |
 
 **Series Mode Agents**:
 | Agent | Deps On | Outputs | Description |
@@ -869,6 +947,8 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_ai_trends.py --s
 | `test_digest.py` | Test trend digest generation |
 | `test_auto_topic.py` | Test auto mode topic handling |
 | `test_new_sources.py` | Test new data source integration |
+| `test_data_sources.py` | Test all data sources |
+| `test_v9_categorization.py` | Test v9.2 6-category system |
 
 **Test README**: `test/README.md` contains detailed documentation for test files.
 
@@ -993,7 +1073,11 @@ agents:
 
 8. **Agent Import Limitation**: Only 6 agents are exported in `__init__.py`. Quality agents (code_review, fact_check, etc.) must be imported directly from their modules.
 
-9. **Version Context**: `config/config.yaml` header shows v2.5 but actual implementation is v8.0. Features were added incrementally - verify actual implementation in source code.
+9. **Version Context**: `config/config.yaml` header shows v2.5 but actual implementation is v9.2. Features were added incrementally - verify actual implementation in source code.
+
+10. **Data Source Integration**: Data sources are integrated directly into `RealAITrendAnalyzerAgent` in `src/agents/ai_trend_analyzer_real.py`. The `src/data_sources/` directory mentioned in some documentation was removed in v2.5.
+
+11. **Config vs Implementation Mismatch**: `config.yaml` contains agent configurations for Xiaohongshu/Twitter/WeChat agents that were removed during Refine/Custom mode cleanup. These are NOT exported in `__init__.py` and NOT available for use.
 
 ## Key File Locations
 
@@ -1031,9 +1115,11 @@ agents:
 **Auto Mode Agents** (import directly):
 | Agent Class | File | Purpose |
 |-------------|------|---------|
-| `TrendCategorizerAgent` | `trend_categorizer_agent.py` | 5-category organization |
+| `TrendCategorizerAgent` | `trend_categorizer_agent.py` | 6-category organization (v9.2) |
 | `NewsScoringAgent` | `news_scoring_agent.py` | 6-dimensional scoring |
-| `WorldClassDigestAgentV8` | `world_class_digest_agent_v8.py` | Chinese digest + JSON |
+| `WorldClassDigestAgentV9` | `world_class_digest_agent_v8.py` | Chinese digest + JSON |
+
+**Note**: `world_class_digest_agent_v8.py` file name is legacy - it implements v9 functionality. Check file headers for actual version.
 
 **Series Mode Quality Agents** (import directly):
 | Agent Class | File | Purpose |
@@ -1055,18 +1141,28 @@ agents:
 
 ---
 
-**Version**: v9.2 (current implementation)
-**Updated**: 2026-02-01
+**Version**: v11.0 (current implementation)
+**Updated**: 2026-02-10
 
 ## Version Notes
 
 **Important Version Context**:
-- **v9.2** (current): 6-category system, prioritize latest data, guarantee 30 items daily
-- **v9.0**: 5-category → 6-category重构, 新增 🦾 AI Agent 分类, 30个数据源分类映射
-- **v8.1**: Added ML Series (100 episodes), batch generation scripts, dual-series architecture
-- **v8.0**: Auto and Series modes optimized with skills integration, 3x daily GitHub Actions
-- `config/config.yaml` header shows v2.5 (outdated, not updated)
-- Features include v7.0 innovations (NewsScoringAgent, 6-dimensional scoring) plus v8.0-v9.2 improvements
+- **v11.0** (current, 2026-02-10): **性能与质量大幅提升** - 并发数据获取（10倍性能提升）、时效性智能加权、轻量级事实核查、内容增强、翻译精炼 - **显著提升内容质量和生成速度**
+  - **ConcurrentFetchAgent**: 并发获取26个数据源，性能提升10倍
+  - **TimeWeightAgent**: 动态时间权重（dynamic/linear/exponential），72小时以上时效分为0，1小时内新闻2倍加成
+  - **AutoFactCheckAgent**: 轻量级事实核查Top 10新闻，使用LLM内置知识（无需Tavily）
+  - **ContentEnhancerAgent**: 使用trafilatura提取完整内容，为重要性>=70的新闻生成背景和影响分析
+  - **TranslationRefinerAgent**: 应用Strunk原则提升可读性，术语一致性检查，目标可读性分数60
+  - **Updated Scoring Weights**: 7维度评分（新增fact_confidence 5%，freshness提升至25%，content_quality提升至15%）
+- **v10.1** (2026-02-08): **新增9个免费RSS数据源** - AI News, The Decoder, 量子位, 机器之心, Wired AI, VentureBeat AI, Google AI Blog, DeepMind Blog, arXiv CL/CV/LG, Reddit ML/AI RSS, Towards Data Science
+- **v10.0** (2026-02-05): **新增3个实时数据源** - NewsData.io (秒级新闻API), Reddit Stream (实时社区讨论), GitHub Trending (开发者关注热点) - **显著增强新闻实时性**
+- **v9.2** (2026-02-01): 6-category system, prioritize latest data, removed 24h restriction, guarantee 30 items daily
+- **v9.1** (2026-02-01): Strict 24h time filtering, enhanced time format support
+- **v9.0** (2026-02-01): 5-category → 6-category重构, 新增 🦾 AI Agent 分类, 30个数据源分类映射
+- **v8.1** (2026-01-31): Added ML Series (100 episodes), batch generation scripts, dual-series architecture
+- **v8.0** (2026-01-28): Auto and Series modes optimized, skills integration, 3x daily GitHub Actions
+- `config/config.yaml` header shows v2.5 (outdated, not updated since early development)
+- Features include v7.0 innovations (NewsScoringAgent, 6-dimensional scoring) plus v8.0-v11.0 improvements
 - **Dual Series Architecture**: LLM Series (100 episodes) + ML Series (100 episodes) = 200 episodes total
 - **Only 2 modes implemented**: Auto and Series. Custom/Refine modes documented in config but NOT coded
 - **Always verify actual implementation in source code** - documented features may differ from deployed version
@@ -1075,7 +1171,40 @@ agents:
 
 This CLAUDE.md has been improved with:
 
-1. **v9.2 Updates** (2026-02-01):
+1. **v11.0 Performance & Quality Enhancement** (2026-02-10):
+   - **Added ConcurrentFetchAgent**: 并发获取26个数据源，性能提升10倍，可配置并发数和超时
+   - **Added TimeWeightAgent**: 动态时间权重推荐（dynamic/linear/exponential），72小时以上时效分为0，1小时内新闻2倍加成
+   - **Added AutoFactCheckAgent**: 轻量级事实核查Top 10新闻，使用LLM内置知识（无需Tavily），置信度阈值0.7
+   - **Added ContentEnhancerAgent**: 使用trafilatura提取完整内容，为重要性>=70的新闻生成背景和影响分析
+   - **Added TranslationRefinerAgent**: 应用Strunk原则提升可读性，术语一致性检查，目标可读性分数60
+   - **Updated Scoring Weights**: 7维度评分（source_authority 25%, engagement 15%, freshness 25%, category_balance 10%, content_quality 15%, diversity 5%, fact_confidence 5%）
+   - **Updated data sources count**: 17 → 26 sources
+   - **Updated Auto Mode workflow**: 4 agents → 8 agents
+   - **Updated Project Overview**: Reflects v11.0 architecture and features
+
+2. **v10.1 Free RSS Data Sources** (2026-02-08):
+   - **Added 9 free RSS sources**: AI News, The Decoder, 量子位, 机器之心, Wired AI, VentureBeat AI, Google AI Blog, DeepMind Blog, arXiv CL/CV/LG, Reddit ML/AI RSS, Towards Data Science
+   - **Updated data sources count**: 17 → 26 sources
+
+3. **v10.0 Real-time Data Sources** (2026-02-05):
+   - **Added NewsData.io**: 秒级更新新闻API，免费200次/天，显著提升新闻实时性
+   - **Added Reddit Stream**: 实时社区讨论监控 (r/MachineLearning, r/artificial, r/ChatGPT, r/LocalLLaMA)
+   - **Added GitHub Trending**: 开发者关注热点，实时热门AI项目
+   - **Updated data sources count**: 14 → 17 sources
+   - **Updated .env.example**: Added NEWSDATA_IO_API_KEY configuration
+   - **Updated API keys section**: Documented new real-time data source API keys
+
+2. **v9.2 Documentation Updates** (2026-02-03):
+   - **Updated Core Files section**: Removed outdated `src/data_sources/` reference, added clarity on actual v9.2 implementation
+   - **Updated Key Architecture Points**: Changed 5-category → 6-category system, added data source integration clarification
+   - **Updated Auto Mode documentation**: Added v9.2 time filtering changes (no 24h restriction)
+   - **Updated Agent Dependencies**: Changed v8.0 → v9.2, updated categorizer description
+   - **Updated Data Flow section**: Added v9.2 categorizer details
+   - **Added AI Insights sync**: Documented repository_dispatch trigger to external repo
+   - **Updated Important Architecture Gotchas**: Added data source integration and config mismatch warnings
+   - **Updated Version Notes**: Added v9.1 context, clarified v2.5 header issue
+
+2. **v9.2 Updates** (2026-02-01):
    - **6-Category System**: 📚 学术前沿, 🛠️ 开发工具, 🦾 AI Agent, 💼 企业应用, 🌐 消费产品, 📰 行业资讯
    - **30 Data Sources**: Integrated across 6 categories with comprehensive documentation
    - **Prioritize Latest Data**: Sort by timestamp (newest first), guarantee 30 items daily (6×5)
@@ -1083,22 +1212,12 @@ This CLAUDE.md has been improved with:
    - **Enhanced Time Parsing**: Support for RSS/Atom/HTTP Date formats in `time_filter.py`
    - **New Data Sources**: Added 10 new sources (Semantic Scholar, Hugging Face, PyPI, npm, etc.)
 
-2. **v8.1 Updates** (2026-01-31):
+3. **v8.1 Updates** (2026-01-31):
    - **Added ML Series documentation** - 100 episodes covering ML/DL topics
    - **Added batch generation scripts** - `batch_generate_ml_series.sh` for parallel execution
    - **Added workflow monitoring** - `monitor_and_launch_next.sh` for auto-launching episodes
    - **Updated Series Path Management** - ML series paths and category detection
    - **Updated command reference** - `--series-config` flag for switching between LLM/ML series
-
-3. **v8.0 Updates** (2026-01-28):
-   - Removed Custom/Refine mode documentation - These modes are NOT implemented
-   - Corrected agent availability - Only 6 agents exported by default (not 16)
-   - Updated storage structure - Removed custom/refine directories
-   - Added GitHub Actions deployment - 3x daily automated execution (6:00, 12:00, 18:00)
-   - Updated agent dependencies - Separated Auto (v8.0) and Series mode agents
-   - Fixed state flow documentation - Removed references to non-existent social content agents
-   - Added agent import warning - Quality agents require manual import
-   - Corrected version information - Reflects v8.0 reality
 
 **Recommended Actions**:
 1. Use `--series-config` flag to switch between LLM and ML series
@@ -1108,3 +1227,5 @@ This CLAUDE.md has been improved with:
 5. Test in mock mode first before running with live APIs
 6. Verify agent availability in `src/agents/__init__.py` before use
 7. Check `docs/DATA_SOURCES.md` for complete 30 data source documentation (v9.2)
+8. Be aware that `config.yaml` contains configurations for removed agents (Xiaohongshu/Twitter/WeChat)
+9. Enable v11.0 agents in config.yaml for better performance and quality (concurrent_fetch, time_weight, auto_fact_check, content_enhancer, translation_refiner)

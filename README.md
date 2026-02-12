@@ -39,7 +39,7 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/devfoxaicn/content-forge-ai.git
+git clone https://github.com/Ming-H/content-forge-ai.git
 cd content-forge-ai
 
 # 2. 创建虚拟环境
@@ -147,7 +147,7 @@ python src/main.py --mode series --all --start 1 --end 10
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/devfoxaicn/content-forge-ai.git
+git clone https://github.com/Ming-H/content-forge-ai.git
 cd content-forge-ai
 
 # 2. 安装依赖

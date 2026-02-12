@@ -1,0 +1,827 @@
+{
+  "metadata": {
+    "title": "AI每日热点 · 2026年02月05日",
+    "subtitle": "OpenAI解析Agent安全与Codex流式API发布推动企业构筑全链路风控以加速AI深度嵌入垂直业务",
+    "issue_number": "20260205",
+    "publish_date": "2026-02-05",
+    "generated_at": "2026-02-05T20:10:06.550932",
+    "word_count": 12214,
+    "reading_time": "6分钟",
+    "total_items": 30,
+    "version": "v9.0",
+    "category_system": "6分类",
+    "categories": [
+      "学术前沿",
+      "开发工具",
+      "AI Agent",
+      "企业应用",
+      "消费产品",
+      "行业资讯"
+    ]
+  },
+  "editors_pick": [
+    {
+      "id": "ep_001",
+      "title": "Powering tax donations with AI powered personalized recommendations",
+      "title_cn": "TRUSTBANK推出Choice AI：利用OpenAI模型简化税收捐赠发现",
+      "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system hel",
+      "summary_cn": "TRUSTBANK与Recursive合作，基于OpenAI模型构建Choice AI，通过个性化对话推荐简化Furusato Nozei捐赠发现，多Agent系统提升效率。",
+      "url": "https://openai.com/index/trustbank",
+      "source": "OpenAI Blog",
+      "category": "AI Agent",
+      "importance_score": 56.75,
+      "published_at": "Tue, 27 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 1
+    },
+    {
+      "id": "ep_002",
+      "title": "Keeping your data safe when an AI agent clicks a link",
+      "title_cn": "OpenAI揭秘：如何防止AI Agent点击链接导致数据泄露",
+      "summary": "Learn how OpenAI protects user data when AI agents open links, preventing URL-based data exfiltration and prompt injection with built-in safeguards.",
+      "summary_cn": "OpenAI详述当AI Agent打开链接时如何保护用户数据，通过内置安全防护措施有效防止URL数据泄露和提示注入攻击。",
+      "url": "https://openai.com/index/ai-agent-link-safety",
+      "source": "OpenAI Blog",
+      "category": "AI Agent",
+      "importance_score": 56.15,
+      "published_at": "Wed, 28 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 2
+    },
+    {
+      "id": "ep_003",
+      "title": "Unlocking the Codex harness: how we built the App Server",
+      "title_cn": "OpenAI推出Codex App Server：通过双向JSON-RPC API嵌入Agent",
+      "summary": "Learn how to embed the Codex agent using the Codex App Server, a bidirectional JSON-RPC API powering streaming progress, tool use, approvals, and diffs.",
+      "summary_cn": "解析如何利用Codex App Server嵌入Codex agent，该双向JSON-RPC API支持流式进度、工具调用、审批及代码差异对比。",
+      "url": "https://openai.com/index/unlocking-the-codex-harness",
+      "source": "OpenAI Blog",
+      "category": "开发工具",
+      "importance_score": 55.1,
+      "published_at": "Wed, 04 Fe",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 3
+    },
+    {
+      "id": "ep_004",
+      "title": "The next chapter for AI in the EU",
+      "title_cn": "OpenAI发布欧盟经济蓝图2.0：加速欧洲AI应用与增长",
+      "summary": "OpenAI launches the EU Economic Blueprint 2.0 with new data, partnerships, and initiatives to accelerate AI adoption, skills, and growth across Europe.",
+      "summary_cn": "OpenAI发布欧盟经济蓝图2.0，利用新数据、合作伙伴关系及多项倡议，加速推动欧洲全境的AI应用普及及经济增长。",
+      "url": "https://openai.com/index/the-next-chapter-for-ai-in-the-eu",
+      "source": "OpenAI Blog",
+      "category": "企业应用",
+      "importance_score": 54.95,
+      "published_at": "Wed, 28 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 4
+    },
+    {
+      "id": "ep_005",
+      "title": "EMEA Youth & Wellbeing Grant",
+      "title_cn": "OpenAI设立50万欧元基金：资助EMEA地区AI时代青年福祉研究",
+      "summary": "Apply for the EMEA Youth & Wellbeing Grant, a €500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
+      "summary_cn": "OpenAI开放申请EMEA青年与福祉拨款，该50万欧元项目旨在资助NGO及研究人员，推进AI时代的青年安全与福祉。",
+      "url": "https://openai.com/index/emea-youth-and-wellbeing-grant",
+      "source": "OpenAI Blog",
+      "category": "学术前沿",
+      "importance_score": 54.65,
+      "published_at": "Wed, 28 Ja",
+      "tags": [
+        "新闻",
+        "AI资讯"
+      ],
+      "background": "",
+      "impact": "",
+      "pick_rank": 5
+    }
+  ],
+  "categories": [
+    {
+      "id": "academic_frontier",
+      "name": "学术前沿",
+      "icon": "📚",
+      "count": 5,
+      "items": [
+        {
+          "id": "academic_frontier_3289e2",
+          "title": "EMEA Youth & Wellbeing Grant",
+          "title_cn": "EMEA启动青年福利资助：50万欧元支持AI时代安全研究",
+          "summary": "Apply for the EMEA Youth & Wellbeing Grant, a €500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
+          "summary_cn": "EMEA启动50万欧元青年福利资助计划，面向NGO及研究人员，申请现已开放，旨在推动AI时代下的青年安全与福祉。",
+          "url": "https://openai.com/index/emea-youth-and-wellbeing-grant",
+          "source": "OpenAI Blog",
+          "category": "学术前沿",
+          "importance_score": 54.65,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_3424d8",
+          "title": "How to Evaluate Jailbreak Methods: A Case Study with the StrongREJECT Benchmark",
+          "title_cn": "利用冷门语言绕过LLM限制：StrongREJECT基准评估越狱方法",
+          "summary": "When we began studying jailbreak evaluations, we found a fascinating paper claiming that you could jailbreak frontier LLMs simply by translating forbidden prompts into obscure languages. Excited by th",
+          "summary_cn": "本文探讨LLM越狱评估方法，研究发现将提示词翻译为冷门语言即可绕过前沿模型限制，并结合StrongREJECT基准进行实测分析。",
+          "url": "http://bair.berkeley.edu/blog/2024/08/28/strong-reject/",
+          "source": "BAIR Blog",
+          "category": "学术前沿",
+          "importance_score": 52.75,
+          "published_at": "Wed, 28 Au",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_45f443",
+          "title": "OpenClaw's OpenDoor problem is so bad that installing malware yourself might save time",
+          "title_cn": "OpenClaw曝严重漏洞：操纵文档即可接管AI Agent并植入后门",
+          "summary": "The popular open-source AI agent OpenClaw, formerly known as Clawdbot, can be completely taken over through manipulated documents. Security researchers show how attackers can install a permanent backd",
+          "summary_cn": "热门开源AI Agent OpenClaw曝严重漏洞，攻击者只需通过操纵文档即可完全接管系统并植入永久后门，安全专家警告风险极高。",
+          "url": "https://the-decoder.com/openclaws-opendoor-problem-is-so-bad-that-installing-malware-yourself-might-save-time/",
+          "source": "The Decoder",
+          "category": "学术前沿",
+          "importance_score": 44.6,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_1851cc",
+          "title": "How to Become an AI Engineer in 2026: A Self-Study Roadmap",
+          "title_cn": "2026年AI工程师自学指南：必备技能、工具与项目路线图",
+          "summary": "Want to become an AI engineer in 2026? This step-by-step roadmap breaks down the skills, tools, and projects you need.",
+          "summary_cn": "发布2026年AI工程师自学路线图，详细拆解成为AI工程师所需的技能栈、核心工具及实战项目，助你规划职业发展。",
+          "url": "https://www.kdnuggets.com/how-to-become-an-ai-engineer-in-2026-a-self-study-roadmap",
+          "source": "KDnuggets",
+          "category": "学术前沿",
+          "importance_score": 44.0,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "academic_frontier_773458",
+          "title": "Agent Trace: Cursor Proposes an Open Specification for AI Code Attribution",
+          "title_cn": "Cursor推出Agent Trace规范：制定AI代码归属标准",
+          "summary": "Cursor has published Agent Trace, a draft open specification aimed at standardizing how AI-generated code is attributed in software projects. Released as a Request for Comments (RFC), the proposal def",
+          "summary_cn": "Cursor发布Agent Trace开源规范草案，旨在标准化软件项目中AI生成代码的归属方式，推动行业建立透明代码追踪机制。",
+          "url": "https://www.infoq.com/news/2026/02/agent-trace-cursor/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "学术前沿",
+          "importance_score": 43.7,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "dev_tools",
+      "name": "开发工具",
+      "icon": "🛠️",
+      "count": 5,
+      "items": [
+        {
+          "id": "dev_tools_13dbe6",
+          "title": "Unlocking the Codex harness: how we built the App Server",
+          "title_cn": "Codex App Server发布：双向API实现Agent流式集成",
+          "summary": "Learn how to embed the Codex agent using the Codex App Server, a bidirectional JSON-RPC API powering streaming progress, tool use, approvals, and diffs.",
+          "summary_cn": "本文介绍如何通过Codex App Server（双向JSON-RPC API）嵌入Codex Agent，实现流式进度、工具调用及代码审批功能。",
+          "url": "https://openai.com/index/unlocking-the-codex-harness",
+          "source": "OpenAI Blog",
+          "category": "开发工具",
+          "importance_score": 55.1,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_c6ae1e",
+          "title": "OpenAI hires Anthropic's Dylan Scandinaro to lead AI safety as \"extremely powerful models\" loom",
+          "title_cn": "OpenAI挖角Anthropic高管Dylan，出任AI安全负责人",
+          "summary": "OpenAI has filled its \"Head of Preparedness\" position with Dylan Scandinaro, who previously worked on AI safety at competitor Anthropic.\nThe article OpenAI hires Anthropic&#039;s Dylan Scandinaro to l",
+          "summary_cn": "OpenAI任命前Anthropic员工Dylan Scandinaro为“备战部门”负责人，应对即将到来的极具破坏力的AI模型带来的安全挑战。",
+          "url": "https://the-decoder.com/openai-hires-anthropics-dylan-scandinaro-to-lead-ai-safety-as-extremely-powerful-models-loom/",
+          "source": "The Decoder",
+          "category": "开发工具",
+          "importance_score": 45.05,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_4dd350",
+          "title": "Alibaba's Qwen3-Coder-Next delivers solid coding performance in a compact package",
+          "title_cn": "阿里发布Qwen3-Coder-Next：30亿参数实现大模型级性能",
+          "summary": "Alibaba's new coding model Qwen3-Coder-Next achieves the performance of significantly larger models with only 3 billion active parameters.\nThe article Alibaba&#039;s Qwen3-Coder-Next delivers solid co",
+          "summary_cn": "阿里发布编程模型Qwen3-Coder-Next，仅用30亿参数即可匹敌大得多的模型，在紧凑体积下实现高效代码生成。",
+          "url": "https://the-decoder.com/alibabas-qwen3-coder-next-delivers-solid-coding-performance-in-a-compact-package/",
+          "source": "The Decoder",
+          "category": "开发工具",
+          "importance_score": 44.75,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_250d0f",
+          "title": "5 Open Source Image Editing AI Models",
+          "title_cn": "5款开源图像编辑AI模型盘点：实时编辑重塑创作流程",
+          "summary": "From real-time edits to reasoning-driven image transformations, this guide breaks down five open source AI models that are quietly reshaping how images are created and edited.",
+          "summary_cn": "本指南盘点5款开源AI图像编辑模型，涵盖实时编辑与推理驱动变换，正悄然改变图像的创建与编辑方式。",
+          "url": "https://www.kdnuggets.com/5-open-source-image-editing-ai-models",
+          "source": "KDnuggets",
+          "category": "开发工具",
+          "importance_score": 44.75,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "dev_tools_5098f4",
+          "title": "Bindu Reddy: Navigating the Path to AGI",
+          "title_cn": "Abacus.AI CEO Bindu Reddy：解读通向AGI之路与模型选择",
+          "summary": "How the Abacus.AI CEO Views Artificial General Intelligence and the Best AI Models for Every Use Case",
+          "summary_cn": "Abacus.AI CEO Bindu Reddy分享对通用人工智能(AGI)的见解，并针对不同使用场景推荐最合适的AI模型。",
+          "url": "https://www.kdnuggets.com/2026/02/abacus/bindu-reddy-navigating-the-path-to-agi",
+          "source": "KDnuggets",
+          "category": "开发工具",
+          "importance_score": 43.4,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "ai_agent",
+      "name": "AI Agent",
+      "icon": "🦾",
+      "count": 5,
+      "items": [
+        {
+          "id": "ai_agent_70ca88",
+          "title": "Powering tax donations with AI powered personalized recommendations",
+          "title_cn": "TRUSTBANK与Recursive合作推出Choice AI：简化故乡纳税推荐流程",
+          "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system hel",
+          "summary_cn": "TRUSTBANK与Recursive利用OpenAI模型构建Choice AI，通过个性化对话推荐大幅简化Furusato Nozei礼品发现流程，提升捐赠体验。",
+          "url": "https://openai.com/index/trustbank",
+          "source": "OpenAI Blog",
+          "category": "AI Agent",
+          "importance_score": 56.75,
+          "published_at": "Tue, 27 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_008997",
+          "title": "Keeping your data safe when an AI agent clicks a link",
+          "title_cn": "OpenAI详解如何保护Agent点击链接时的数据安全",
+          "summary": "Learn how OpenAI protects user data when AI agents open links, preventing URL-based data exfiltration and prompt injection with built-in safeguards.",
+          "summary_cn": "OpenAI利用内置安全机制，防止AI Agent打开链接时发生URL数据渗漏和提示词注入，确保用户数据在Agent浏览网页时的安全性。",
+          "url": "https://openai.com/index/ai-agent-link-safety",
+          "source": "OpenAI Blog",
+          "category": "AI Agent",
+          "importance_score": 56.15,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_11733d",
+          "title": "From guardrails to governance: A CEO’s guide for securing agentic systems",
+          "title_cn": "从护栏到治理：CEO如何构建安全的Agent系统",
+          "summary": "The previous article in this series, “Rules fail at the prompt, succeed at the boundary,” focused on the first AI-orchestrated espionage campaign and the failure of prompt-level control. This article ",
+          "summary_cn": "鉴于首例AI间谍活动暴露的提示词层控制失效，本文为CEO提供指南，阐述如何从单纯的护栏转向边界治理，全面保障Agent系统安全。",
+          "url": "https://www.technologyreview.com/2026/02/04/1131014/from-guardrails-to-governance-a-ceos-guide-for-securing-agentic-systems/",
+          "source": "MIT Technology Review",
+          "category": "AI Agent",
+          "importance_score": 51.2,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_51d1cb",
+          "title": "A new platform lets AI agents pay humans to do the real-world work they can't",
+          "title_cn": "Rentahuman.ai：AI Agent可雇佣人类完成现实任务",
+          "summary": "On Rentahuman.ai, AI agents can hire people for real-world tasks, from holding signs to picking up packages. It sounds absurd, but it shows what happens when language models stop just talking and star",
+          "summary_cn": "平台Rentahuman.ai允许AI Agent雇佣人类处理举牌、取包裹等现实任务，标志着大模型从单纯对话转向物理世界行动的新阶段。",
+          "url": "https://the-decoder.com/a-new-platform-lets-ai-agents-pay-humans-to-do-the-real-world-work-they-cant/",
+          "source": "The Decoder",
+          "category": "AI Agent",
+          "importance_score": 44.6,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "ai_agent_daba60",
+          "title": "Vercel Introduces Skills.sh, an Open Ecosystem for Agent Commands",
+          "title_cn": "Vercel推出Skills.sh：建立Agent命令的开放生态系统",
+          "summary": "Vercel has released Skills.sh, an open-source tool designed to provide AI agents with a standardized way to execute reusable actions, or skills, through the command line. By Daniel Dominguez",
+          "summary_cn": "Vercel发布开源工具Skills.sh，为AI Agent提供通过命令行执行可重用动作的标准化方式，旨在构建一个开放的Agent命令生态系统。",
+          "url": "https://www.infoq.com/news/2026/02/vercel-agent-skills/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "AI Agent",
+          "importance_score": 44.45,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "enterprise_apps",
+      "name": "企业应用",
+      "icon": "💼",
+      "count": 5,
+      "items": [
+        {
+          "id": "enterprise_apps_22e863",
+          "title": "The next chapter for AI in the EU",
+          "title_cn": "OpenAI发布欧盟经济蓝图2.0：加速AI普及与技能增长",
+          "summary": "OpenAI launches the EU Economic Blueprint 2.0 with new data, partnerships, and initiatives to accelerate AI adoption, skills, and growth across Europe.",
+          "summary_cn": "OpenAI发布欧盟经济蓝图2.0，通过新数据和合作伙伴关系，全力加速欧洲AI技术的采用、人才培养及经济长期增长。",
+          "url": "https://openai.com/index/the-next-chapter-for-ai-in-the-eu",
+          "source": "OpenAI Blog",
+          "category": "企业应用",
+          "importance_score": 54.95,
+          "published_at": "Wed, 28 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_ca5c75",
+          "title": "Google’s Gemini app has surpassed 750M monthly active users",
+          "title_cn": "Google Gemini月活用户突破7.5亿，竞逐AI市场主导权",
+          "summary": "Google revealed a significant milestone for its Gemini app, announcing over 750 million monthly active users as it competes with ChatGPT and Meta AI.",
+          "summary_cn": "Google宣布Gemini应用月活用户突破7.5亿，在与ChatGPT和Meta AI的激烈竞争中达成了这一重要里程碑。",
+          "url": "https://techcrunch.com/2026/02/04/googles-gemini-app-has-surpassed-750m-monthly-active-users/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 48.35,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_e61b2f",
+          "title": "Exclusive: Positron raises $230M Series B to take on Nvidia’s AI chips",
+          "title_cn": "Positron获2.3亿美元B轮融资，致力挑战Nvidia AI芯片地位",
+          "summary": "The investment comes from backers including the Qatar Investment Authority as demand for chips beyond Nvidia soars and as Qatar aims to build out its AI infrastructure.",
+          "summary_cn": "Positron获卡塔尔投资局等领投2.3亿美元，旨在满足市场对非Nvidia AI芯片的激增需求，助力AI基础设施建设。",
+          "url": "https://techcrunch.com/2026/02/04/exclusive-positron-raises-230m-series-b-to-take-on-nvidias-ai-chips/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 47.0,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_8207d3",
+          "title": "Alphabet won’t talk about the Google-Apple AI deal, even to investors",
+          "title_cn": "Alphabet CEO拒谈与Apple AI交易，财报会上回避投资者提问",
+          "summary": "Alphabet CEO skipped an analyst's question about Apple on the company's earnings call.",
+          "summary_cn": "Alphabet CEO在财报电话会上回避分析师关于与Apple AI合作的提问，拒绝透露更多交易细节，引发市场关注。",
+          "url": "https://techcrunch.com/2026/02/04/alphabet-wont-talk-about-the-google-apple-ai-deal-even-to-investors/",
+          "source": "TechCrunch AI",
+          "category": "企业应用",
+          "importance_score": 46.25,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "enterprise_apps_d23d55",
+          "title": "Strengthening our partnership with the UK government to support prosperity and security in the AI era",
+          "title_cn": "深化与英国政府合作，共同维护AI时代的繁荣与安全",
+          "summary": "Deepening our partnership with the UK government to support prosperity and security in the AI era",
+          "summary_cn": "双方宣布深化合作伙伴关系，旨在AI时代共同支持安全与繁荣，通过技术创新推动经济增长与社会福祉。",
+          "url": "https://deepmind.google/blog/strengthening-our-partnership-with-the-uk-government-to-support-prosperity-and-security-in-the-ai-era/",
+          "source": "Google DeepMind",
+          "category": "企业应用",
+          "importance_score": 42.5,
+          "published_at": "Wed, 10 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "consumer_apps",
+      "name": "消费产品",
+      "icon": "🌐",
+      "count": 5,
+      "items": [
+        {
+          "id": "consumer_apps_c56dce",
+          "title": "Promptions helps make AI prompting more precise with dynamic UI controls",
+          "title_cn": "Promptions引入动态UI控件：无需长指令即可精准引导AI",
+          "summary": "Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape outputs quickly without writing long instructions.\nTh",
+          "summary_cn": "Promptions允许开发者在聊天界面添加动态控件，用户无需编写复杂指令，即可快速引导生成式AI输出，提升提示词精准度。",
+          "url": "https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/",
+          "source": "Microsoft Research",
+          "category": "消费产品",
+          "importance_score": 52.0,
+          "published_at": "Wed, 10 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_93b30e",
+          "title": "Nous Research's NousCoder-14B is an open-source coding model landing right in the Claude Code moment",
+          "title_cn": "Nous Research发布NousCoder-14B：性能媲美Claude的开源编程模型",
+          "summary": "Nous Research, the open-source artificial intelligence startup backed by crypto venture firm Paradigm, released a new competitive programming model on Monday that it says matches or exceeds several la",
+          "summary_cn": "Nous Research发布开源编程模型NousCoder-14B，据称性能匹配或超越现有顶尖闭源模型，为开发者提供免费的高效替代方案。",
+          "url": "https://venturebeat.com/technology/nous-researchs-nouscoder-14b-is-an-open-source-coding-model-landing-right-in",
+          "source": "VentureBeat AI",
+          "category": "消费产品",
+          "importance_score": 46.75,
+          "published_at": "Wed, 07 Ja",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_b3ad7a",
+          "title": "Anthropic pledges to keep Claude ad-free while OpenAI moves forward with ChatGPT advertising",
+          "title_cn": "Anthropic承诺Claude永久无广告，与OpenAI商业化路径分道扬镳",
+          "summary": "Anthropic says Claude will stay ad-free, unlike OpenAI's ChatGPT, but the company is exploring other ways to monetize AI conversations.\nThe article Anthropic pledges to keep Claude ad-free while OpenA",
+          "summary_cn": "Anthropic承诺Claude保持无广告，与ChatGPT引入广告不同。公司正探索非广告模式将AI对话变现，确保用户体验纯粹性。",
+          "url": "https://the-decoder.com/anthropic-pledges-to-keep-claude-ad-free-while-openai-moves-forward-with-chatgpt-advertising/",
+          "source": "The Decoder",
+          "category": "消费产品",
+          "importance_score": 45.5,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_c3385c",
+          "title": "Chinese AI video model Kling 3.0 takes another step toward usable creative assets",
+          "title_cn": "可灵AI发布3.0模型：支持更长视频及4K生成，角色一致性提升",
+          "summary": "Kling AI launches video model 3.0 with longer clips, improved character consistency, and 4K image generation.\nThe article Chinese AI video model Kling 3.0 takes another step toward usable creative ass",
+          "summary_cn": "Kling AI发布视频模型3.0，支持更长时长片段和4K画质生成。更新显著提升了角色一致性，推动AI视频素材向商用标准迈进。",
+          "url": "https://the-decoder.com/chinese-ai-video-model-kling-3-0-takes-another-step-toward-usable-creative-assets/",
+          "source": "The Decoder",
+          "category": "消费产品",
+          "importance_score": 44.6,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "consumer_apps_a536a8",
+          "title": "From blogosphere to the AI & Big Data Expo: Rackspace and operational AI",
+          "title_cn": "Rackspace探讨运营AI瓶颈：如何解决数据混乱与高昂成本",
+          "summary": "In a recent blog output, Rackspace refers to the bottlenecks familiar to many readers: messy data, unclear ownership, governance gaps, and the cost of running models once they become part of productio",
+          "summary_cn": "Rackspace指出AI落地面临核心瓶颈：数据混乱、所有权不清及治理缺失。解决模型投入生产后的运行成本也是关键挑战。",
+          "url": "https://www.artificialintelligence-news.com/news/combing-the-rackspace-blogfiles-for-operational-ai-pointers/",
+          "source": "AI News",
+          "category": "消费产品",
+          "importance_score": 43.4,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    },
+    {
+      "id": "industry_news",
+      "name": "行业资讯",
+      "icon": "📰",
+      "count": 5,
+      "items": [
+        {
+          "id": "industry_news_a04f01",
+          "title": "AGI Is Not Multimodal",
+          "title_cn": "为何AGI不仅是多模态：Terry Winograd反思语言模型与智能本质",
+          "summary": "&quot;In projecting language back as the model for thought, we lose sight of the tacit embodied understanding that undergirds our intelligence.&quot; &#x2013;Terry WinogradThe recent successes of gene",
+          "summary_cn": "Terry Winograd指出，将语言视为思维模型会让我们忽视支撑智能的隐性具身理解，深刻反思生成式AI的局限性。",
+          "url": "https://thegradient.pub/agi-is-not-multimodal/",
+          "source": "The Gradient",
+          "category": "行业资讯",
+          "importance_score": 46.15,
+          "published_at": "Wed, 04 Ju",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_47f9d3",
+          "title": "A Coding Implementation to Train Safety-Critical Reinforcement Learning Agents Offline Using Conservative Q-Learning with d3rlpy and Fixed Historical Data",
+          "title_cn": "离线强化学习教程：使用CQL和固定历史数据训练安全Agent",
+          "summary": "In this tutorial, we build a safety-critical reinforcement learning pipeline that learns entirely from fixed, offline data rather than live exploration. We design a custom environment, generate a beha",
+          "summary_cn": "本教程介绍如何利用d3rlpy构建离线RL管道，通过Conservative Q-Learning从固定历史数据中训练安全关键Agent，无需实时探索。",
+          "url": "https://www.marktechpost.com/2026/02/03/a-coding-implementation-to-train-safety-critical-reinforcement-learning-agents-offline-using-conservative-q-learning-with-d3rlpy-and-fixed-historical-data/",
+          "source": "MarkTechPost",
+          "category": "行业资讯",
+          "importance_score": 44.65,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_dcf84e",
+          "title": "Gemini 3 Flash: frontier intelligence built for speed",
+          "title_cn": "Google发布Gemini 3 Flash：具备前沿智能的高速模型，成本大幅降低",
+          "summary": "Gemini 3 Flash offers frontier intelligence built for speed at a fraction of the cost.",
+          "summary_cn": "Google推出Gemini 3 Flash模型，以前沿智能为特点，提供高速响应能力，且成本显著降低，适合高频应用场景。",
+          "url": "https://deepmind.google/blog/gemini-3-flash-frontier-intelligence-built-for-speed/",
+          "source": "Google DeepMind",
+          "category": "行业资讯",
+          "importance_score": 44.45,
+          "published_at": "Wed, 17 De",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_6615db",
+          "title": "Presentation: Beyond the Warehouse: Why BigQuery Alone Won’t Solve Your Data Problems",
+          "title_cn": "超越数据仓库：为何仅靠BigQuery无法解决延迟与成本难题",
+          "summary": "Sarah Usher discusses the architectural \"breaking point\" where warehouses like BigQuery struggle with latency and cost. She explains the necessity of a conceptual data lifecycle (Raw, Curated, Use Cas",
+          "summary_cn": "Sarah Usher指出BigQuery在延迟和成本上的架构“断点”，阐述建立概念化数据生命周期的必要性，解决单一数据仓库的局限。",
+          "url": "https://www.infoq.com/presentations/bigquery-data-challenges/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering",
+          "source": "InfoQ",
+          "category": "行业资讯",
+          "importance_score": 43.25,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        },
+        {
+          "id": "industry_news_2135c4",
+          "title": "光顾赚钱不搞研究，OpenAI元老级高管现离职潮，Mark Chen紧急回应",
+          "title_cn": "OpenAI重心转向商业化引不满：元老级高管离职潮爆发，合作受阻",
+          "summary": "和老黄的合作也不顺利",
+          "summary_cn": "OpenAI被指“光顾赚钱不搞研究”，引发元老级高管离职潮。高管Mark Chen紧急回应，同时曝出与英伟达的合作进展并不顺利。",
+          "url": "https://www.qbitai.com/2026/02/376356.html",
+          "source": "量子位",
+          "category": "行业资讯",
+          "importance_score": 42.2,
+          "published_at": "Wed, 04 Fe",
+          "tags": [
+            "新闻",
+            "AI资讯"
+          ],
+          "background": "",
+          "impact": ""
+        }
+      ]
+    }
+  ],
+  "core_insights": [
+    "Agent安全重心由文本过滤转向交互控制，实时点击保护与流式API成为刚需，意味着企业部署需构筑动态风控。",
+    "越狱手段多样化倒逼治理升级，单纯护栏不再适用，意味着企业需构建覆盖数据流与操作行为的全链路安全体系。",
+    "交互从长指令向动态UI控件演进，大幅降低使用门槛，意味着AI正从通用对话工具加速深度嵌入垂直业务流。",
+    "硬件挑战者入局与用户规模激增并行，算力成本优化迫切，预示着AI基础设施将走向多元化以支撑普惠应用。"
+  ],
+  "deep_observation": "当OpenAI开始详述如何保护Agent的每一次“鼠标点击”时，这并非多此一举，而是标志着AI风控重心的彻底迁移。Agent时代最大的风险已不再是生成错误的文本，而是执行错误的操作。\n\n这一趋势直接体现在Codex App Server发布的双向流式API与OpenAI对点击链接安全的详解上。显然，单纯的内容过滤已成过去式，实时交互控制与流式集成成为刚需，企业急需构建覆盖数据流与操作行为的全链路安全体系。越狱手段的多样化正在倒逼治理升级，仅靠“护栏”已无法拦截动态环境下的恶意攻击。\n\n在应用层面，TRUSTBANK与Recursive推出的Choice AI揭示了交互逻辑的进化。通过动态UI控件替代复杂的长指令，纳税推荐等垂直业务的门槛被大幅降低，AI正从通用对话工具加速演变为业务流的“隐形操作员”。结合OpenAI发布的欧盟经济蓝图，这种普惠化野心预示着用户规模的激增，进而倒逼算力成本优化与基础设施的多元化。未来，AI的竞争将不仅是模型的比拼，更是风控深度与基础设施韧性的较量。",
+  "trending_topics": [
+    {
+      "name": "新闻",
+      "count": 30,
+      "trend": "rising"
+    },
+    {
+      "name": "AI资讯",
+      "count": 30,
+      "trend": "rising"
+    }
+  ],
+  "sources": [
+    {
+      "name": "TechCrunch AI",
+      "count": 15
+    },
+    {
+      "name": "NewsAPI",
+      "count": 19
+    },
+    {
+      "name": "Hacker News",
+      "count": 12
+    },
+    {
+      "name": "MIT Technology Review",
+      "count": 10
+    },
+    {
+      "name": "OpenAI Blog",
+      "count": 15
+    },
+    {
+      "name": "BAIR Blog",
+      "count": 10
+    },
+    {
+      "name": "Microsoft Research",
+      "count": 10
+    },
+    {
+      "name": "arXiv",
+      "count": 12
+    },
+    {
+      "name": "MarkTechPost",
+      "count": 10
+    },
+    {
+      "name": "KDnuggets",
+      "count": 10
+    },
+    {
+      "name": "AI Business",
+      "count": 12
+    },
+    {
+      "name": "The Gradient",
+      "count": 8
+    },
+    {
+      "name": "InfoQ",
+      "count": 12
+    },
+    {
+      "name": "GitHub Trending",
+      "count": 6
+    },
+    {
+      "name": "AI News",
+      "count": 12
+    },
+    {
+      "name": "The Decoder",
+      "count": 10
+    },
+    {
+      "name": "量子位",
+      "count": 10
+    },
+    {
+      "name": "机器之心",
+      "count": 12
+    },
+    {
+      "name": "Wired AI",
+      "count": 10
+    },
+    {
+      "name": "VentureBeat AI (RSS)",
+      "count": 7
+    },
+    {
+      "name": "Google DeepMind",
+      "count": 10
+    },
+    {
+      "name": "arXiv NLP",
+      "count": 15
+    },
+    {
+      "name": "arXiv CV",
+      "count": 15
+    },
+    {
+      "name": "arXiv ML",
+      "count": 15
+    }
+  ],
+  "markdown_content": "# AI每日热点 · 2026年02月05日\n\n> 💡 OpenAI解析Agent安全与Codex流式API发布推动企业构筑全链路风控以加速AI深度嵌入垂直业务\n\n> **期号**: #20260205  |  **阅读时间**: ~6分钟  |  **精选**: 30条\n\n---\n\n## 💡 核心洞察\n\n- Agent安全重心由文本过滤转向交互控制，实时点击保护与流式API成为刚需，意味着企业部署需构筑动态风控。\n- 越狱手段多样化倒逼治理升级，单纯护栏不再适用，意味着企业需构建覆盖数据流与操作行为的全链路安全体系。\n- 交互从长指令向动态UI控件演进，大幅降低使用门槛，意味着AI正从通用对话工具加速深度嵌入垂直业务流。\n- 硬件挑战者入局与用户规模激增并行，算力成本优化迫切，预示着AI基础设施将走向多元化以支撑普惠应用。\n\n---\n\n## 📰 深度观察\n\n当OpenAI开始详述如何保护Agent的每一次“鼠标点击”时，这并非多此一举，而是标志着AI风控重心的彻底迁移。Agent时代最大的风险已不再是生成错误的文本，而是执行错误的操作。\n\n这一趋势直接体现在Codex App Server发布的双向流式API与OpenAI对点击链接安全的详解上。显然，单纯的内容过滤已成过去式，实时交互控制与流式集成成为刚需，企业急需构建覆盖数据流与操作行为的全链路安全体系。越狱手段的多样化正在倒逼治理升级，仅靠“护栏”已无法拦截动态环境下的恶意攻击。\n\n在应用层面，TRUSTBANK与Recursive推出的Choice AI揭示了交互逻辑的进化。通过动态UI控件替代复杂的长指令，纳税推荐等垂直业务的门槛被大幅降低，AI正从通用对话工具加速演变为业务流的“隐形操作员”。结合OpenAI发布的欧盟经济蓝图，这种普惠化野心预示着用户规模的激增，进而倒逼算力成本优化与基础设施的多元化。未来，AI的竞争将不仅是模型的比拼，更是风控深度与基础设施韧性的较量。\n\n---\n\n## ⭐ 编辑精选 (Editor's Picks)\n\n### 1. TRUSTBANK推出Choice AI：利用OpenAI模型简化税收捐赠发现\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文链接](https://openai.com/index/trustbank)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**核心内容**: TRUSTBANK与Recursive合作，基于OpenAI模型构建Choice AI，通过个性化对话推荐简化Furusato Nozei捐赠发现，多Agent系统提升效率。\n\n---\n\n### 2. OpenAI揭秘：如何防止AI Agent点击链接导致数据泄露\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文链接](https://openai.com/index/ai-agent-link-safety)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**核心内容**: OpenAI详述当AI Agent打开链接时如何保护用户数据，通过内置安全防护措施有效防止URL数据泄露和提示注入攻击。\n\n---\n\n### 3. OpenAI推出Codex App Server：通过双向JSON-RPC API嵌入Agent\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文链接](https://openai.com/index/unlocking-the-codex-harness)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**核心内容**: 解析如何利用Codex App Server嵌入Codex agent，该双向JSON-RPC API支持流式进度、工具调用、审批及代码差异对比。\n\n---\n\n### 4. OpenAI发布欧盟经济蓝图2.0：加速欧洲AI应用与增长\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 54/100  |  🔗 [原文链接](https://openai.com/index/the-next-chapter-for-ai-in-the-eu)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**核心内容**: OpenAI发布欧盟经济蓝图2.0，利用新数据、合作伙伴关系及多项倡议，加速推动欧洲全境的AI应用普及及经济增长。\n\n---\n\n### 5. OpenAI设立50万欧元基金：资助EMEA地区AI时代青年福祉研究\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 54/100  |  🔗 [原文链接](https://openai.com/index/emea-youth-and-wellbeing-grant)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**核心内容**: OpenAI开放申请EMEA青年与福祉拨款，该50万欧元项目旨在资助NGO及研究人员，推进AI时代的青年安全与福祉。\n\n---\n\n## 📊 热门话题\n\n| 话题 | 相关新闻 | 趋势 |\n|------|---------|------|\n| 新闻 | 30条 | 📈 上升 |\n| AI资讯 | 30条 | 📈 上升 |\n\n---\n\n## 🔍 分类热点\n\n### 📚 学术前沿 (5条)\n\n#### 1. EMEA启动青年福利资助：50万欧元支持AI时代安全研究\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](https://openai.com/index/emea-youth-and-wellbeing-grant)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: EMEA启动50万欧元青年福利资助计划，面向NGO及研究人员，申请现已开放，旨在推动AI时代下的青年安全与福祉。\n\n---\n\n#### 2. 利用冷门语言绕过LLM限制：StrongREJECT基准评估越狱方法\n\n> 📰 **BAIR Blog**  |  ⭐ **重要性**: 52/100  |  🔗 [原文](http://bair.berkeley.edu/blog/2024/08/28/strong-reject/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 本文探讨LLM越狱评估方法，研究发现将提示词翻译为冷门语言即可绕过前沿模型限制，并结合StrongREJECT基准进行实测分析。\n\n---\n\n#### 3. OpenClaw曝严重漏洞：操纵文档即可接管AI Agent并植入后门\n\n> 📰 **The Decoder**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://the-decoder.com/openclaws-opendoor-problem-is-so-bad-that-installing-malware-yourself-might-save-time/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 热门开源AI Agent OpenClaw曝严重漏洞，攻击者只需通过操纵文档即可完全接管系统并植入永久后门，安全专家警告风险极高。\n\n---\n\n#### 4. 2026年AI工程师自学指南：必备技能、工具与项目路线图\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://www.kdnuggets.com/how-to-become-an-ai-engineer-in-2026-a-self-study-roadmap)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 发布2026年AI工程师自学路线图，详细拆解成为AI工程师所需的技能栈、核心工具及实战项目，助你规划职业发展。\n\n---\n\n#### 5. Cursor推出Agent Trace规范：制定AI代码归属标准\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.infoq.com/news/2026/02/agent-trace-cursor/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Cursor发布Agent Trace开源规范草案，旨在标准化软件项目中AI生成代码的归属方式，推动行业建立透明代码追踪机制。\n\n---\n\n### 🛠️ 开发工具 (5条)\n\n#### 1. Codex App Server发布：双向API实现Agent流式集成\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 55/100  |  🔗 [原文](https://openai.com/index/unlocking-the-codex-harness)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 本文介绍如何通过Codex App Server（双向JSON-RPC API）嵌入Codex Agent，实现流式进度、工具调用及代码审批功能。\n\n---\n\n#### 2. OpenAI挖角Anthropic高管Dylan，出任AI安全负责人\n\n> 📰 **The Decoder**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://the-decoder.com/openai-hires-anthropics-dylan-scandinaro-to-lead-ai-safety-as-extremely-powerful-models-loom/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: OpenAI任命前Anthropic员工Dylan Scandinaro为“备战部门”负责人，应对即将到来的极具破坏力的AI模型带来的安全挑战。\n\n---\n\n#### 3. 阿里发布Qwen3-Coder-Next：30亿参数实现大模型级性能\n\n> 📰 **The Decoder**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://the-decoder.com/alibabas-qwen3-coder-next-delivers-solid-coding-performance-in-a-compact-package/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 阿里发布编程模型Qwen3-Coder-Next，仅用30亿参数即可匹敌大得多的模型，在紧凑体积下实现高效代码生成。\n\n---\n\n#### 4. 5款开源图像编辑AI模型盘点：实时编辑重塑创作流程\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://www.kdnuggets.com/5-open-source-image-editing-ai-models)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 本指南盘点5款开源AI图像编辑模型，涵盖实时编辑与推理驱动变换，正悄然改变图像的创建与编辑方式。\n\n---\n\n#### 5. Abacus.AI CEO Bindu Reddy：解读通向AGI之路与模型选择\n\n> 📰 **KDnuggets**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.kdnuggets.com/2026/02/abacus/bindu-reddy-navigating-the-path-to-agi)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Abacus.AI CEO Bindu Reddy分享对通用人工智能(AGI)的见解，并针对不同使用场景推荐最合适的AI模型。\n\n---\n\n### 🦾 AI Agent (5条)\n\n#### 1. TRUSTBANK与Recursive合作推出Choice AI：简化故乡纳税推荐流程\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文](https://openai.com/index/trustbank)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: TRUSTBANK与Recursive利用OpenAI模型构建Choice AI，通过个性化对话推荐大幅简化Furusato Nozei礼品发现流程，提升捐赠体验。\n\n---\n\n#### 2. OpenAI详解如何保护Agent点击链接时的数据安全\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 56/100  |  🔗 [原文](https://openai.com/index/ai-agent-link-safety)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: OpenAI利用内置安全机制，防止AI Agent打开链接时发生URL数据渗漏和提示词注入，确保用户数据在Agent浏览网页时的安全性。\n\n---\n\n#### 3. 从护栏到治理：CEO如何构建安全的Agent系统\n\n> 📰 **MIT Technology Review**  |  ⭐ **重要性**: 51/100  |  🔗 [原文](https://www.technologyreview.com/2026/02/04/1131014/from-guardrails-to-governance-a-ceos-guide-for-securing-agentic-systems/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 鉴于首例AI间谍活动暴露的提示词层控制失效，本文为CEO提供指南，阐述如何从单纯的护栏转向边界治理，全面保障Agent系统安全。\n\n---\n\n#### 4. Rentahuman.ai：AI Agent可雇佣人类完成现实任务\n\n> 📰 **The Decoder**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://the-decoder.com/a-new-platform-lets-ai-agents-pay-humans-to-do-the-real-world-work-they-cant/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 平台Rentahuman.ai允许AI Agent雇佣人类处理举牌、取包裹等现实任务，标志着大模型从单纯对话转向物理世界行动的新阶段。\n\n---\n\n#### 5. Vercel推出Skills.sh：建立Agent命令的开放生态系统\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://www.infoq.com/news/2026/02/vercel-agent-skills/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Vercel发布开源工具Skills.sh，为AI Agent提供通过命令行执行可重用动作的标准化方式，旨在构建一个开放的Agent命令生态系统。\n\n---\n\n### 💼 企业应用 (5条)\n\n#### 1. OpenAI发布欧盟经济蓝图2.0：加速AI普及与技能增长\n\n> 📰 **OpenAI Blog**  |  ⭐ **重要性**: 54/100  |  🔗 [原文](https://openai.com/index/the-next-chapter-for-ai-in-the-eu)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: OpenAI发布欧盟经济蓝图2.0，通过新数据和合作伙伴关系，全力加速欧洲AI技术的采用、人才培养及经济长期增长。\n\n---\n\n#### 2. Google Gemini月活用户突破7.5亿，竞逐AI市场主导权\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 48/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/googles-gemini-app-has-surpassed-750m-monthly-active-users/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Google宣布Gemini应用月活用户突破7.5亿，在与ChatGPT和Meta AI的激烈竞争中达成了这一重要里程碑。\n\n---\n\n#### 3. Positron获2.3亿美元B轮融资，致力挑战Nvidia AI芯片地位\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 47/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/exclusive-positron-raises-230m-series-b-to-take-on-nvidias-ai-chips/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Positron获卡塔尔投资局等领投2.3亿美元，旨在满足市场对非Nvidia AI芯片的激增需求，助力AI基础设施建设。\n\n---\n\n#### 4. Alphabet CEO拒谈与Apple AI交易，财报会上回避投资者提问\n\n> 📰 **TechCrunch AI**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://techcrunch.com/2026/02/04/alphabet-wont-talk-about-the-google-apple-ai-deal-even-to-investors/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Alphabet CEO在财报电话会上回避分析师关于与Apple AI合作的提问，拒绝透露更多交易细节，引发市场关注。\n\n---\n\n#### 5. 深化与英国政府合作，共同维护AI时代的繁荣与安全\n\n> 📰 **Google DeepMind**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://deepmind.google/blog/strengthening-our-partnership-with-the-uk-government-to-support-prosperity-and-security-in-the-ai-era/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 双方宣布深化合作伙伴关系，旨在AI时代共同支持安全与繁荣，通过技术创新推动经济增长与社会福祉。\n\n---\n\n### 🌐 消费产品 (5条)\n\n#### 1. Promptions引入动态UI控件：无需长指令即可精准引导AI\n\n> 📰 **Microsoft Research**  |  ⭐ **重要性**: 52/100  |  🔗 [原文](https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Promptions允许开发者在聊天界面添加动态控件，用户无需编写复杂指令，即可快速引导生成式AI输出，提升提示词精准度。\n\n---\n\n#### 2. Nous Research发布NousCoder-14B：性能媲美Claude的开源编程模型\n\n> 📰 **VentureBeat AI**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://venturebeat.com/technology/nous-researchs-nouscoder-14b-is-an-open-source-coding-model-landing-right-in)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Nous Research发布开源编程模型NousCoder-14B，据称性能匹配或超越现有顶尖闭源模型，为开发者提供免费的高效替代方案。\n\n---\n\n#### 3. Anthropic承诺Claude永久无广告，与OpenAI商业化路径分道扬镳\n\n> 📰 **The Decoder**  |  ⭐ **重要性**: 45/100  |  🔗 [原文](https://the-decoder.com/anthropic-pledges-to-keep-claude-ad-free-while-openai-moves-forward-with-chatgpt-advertising/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Anthropic承诺Claude保持无广告，与ChatGPT引入广告不同。公司正探索非广告模式将AI对话变现，确保用户体验纯粹性。\n\n---\n\n#### 4. 可灵AI发布3.0模型：支持更长视频及4K生成，角色一致性提升\n\n> 📰 **The Decoder**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://the-decoder.com/chinese-ai-video-model-kling-3-0-takes-another-step-toward-usable-creative-assets/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Kling AI发布视频模型3.0，支持更长时长片段和4K画质生成。更新显著提升了角色一致性，推动AI视频素材向商用标准迈进。\n\n---\n\n#### 5. Rackspace探讨运营AI瓶颈：如何解决数据混乱与高昂成本\n\n> 📰 **AI News**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.artificialintelligence-news.com/news/combing-the-rackspace-blogfiles-for-operational-ai-pointers/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Rackspace指出AI落地面临核心瓶颈：数据混乱、所有权不清及治理缺失。解决模型投入生产后的运行成本也是关键挑战。\n\n---\n\n### 📰 行业资讯 (5条)\n\n#### 1. 为何AGI不仅是多模态：Terry Winograd反思语言模型与智能本质\n\n> 📰 **The Gradient**  |  ⭐ **重要性**: 46/100  |  🔗 [原文](https://thegradient.pub/agi-is-not-multimodal/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Terry Winograd指出，将语言视为思维模型会让我们忽视支撑智能的隐性具身理解，深刻反思生成式AI的局限性。\n\n---\n\n#### 2. 离线强化学习教程：使用CQL和固定历史数据训练安全Agent\n\n> 📰 **MarkTechPost**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://www.marktechpost.com/2026/02/03/a-coding-implementation-to-train-safety-critical-reinforcement-learning-agents-offline-using-conservative-q-learning-with-d3rlpy-and-fixed-historical-data/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: 本教程介绍如何利用d3rlpy构建离线RL管道，通过Conservative Q-Learning从固定历史数据中训练安全关键Agent，无需实时探索。\n\n---\n\n#### 3. Google发布Gemini 3 Flash：具备前沿智能的高速模型，成本大幅降低\n\n> 📰 **Google DeepMind**  |  ⭐ **重要性**: 44/100  |  🔗 [原文](https://deepmind.google/blog/gemini-3-flash-frontier-intelligence-built-for-speed/)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Google推出Gemini 3 Flash模型，以前沿智能为特点，提供高速响应能力，且成本显著降低，适合高频应用场景。\n\n---\n\n#### 4. 超越数据仓库：为何仅靠BigQuery无法解决延迟与成本难题\n\n> 📰 **InfoQ**  |  ⭐ **重要性**: 43/100  |  🔗 [原文](https://www.infoq.com/presentations/bigquery-data-challenges/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=AI%2C+ML+%26+Data+Engineering)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: Sarah Usher指出BigQuery在延迟和成本上的架构“断点”，阐述建立概念化数据生命周期的必要性，解决单一数据仓库的局限。\n\n---\n\n#### 5. OpenAI重心转向商业化引不满：元老级高管离职潮爆发，合作受阻\n\n> 📰 **量子位**  |  ⭐ **重要性**: 42/100  |  🔗 [原文](https://www.qbitai.com/2026/02/376356.html)\n\n> 🔑 **关键信息**: 🏷️ 新闻 | 🏷️ AI资讯\n\n**摘要**: OpenAI被指“光顾赚钱不搞研究”，引发元老级高管离职潮。高管Mark Chen紧急回应，同时曝出与英伟达的合作进展并不顺利。\n\n---\n\n## 📚 数据来源\n\n- **TechCrunch AI**: 15条\n- **NewsAPI**: 19条\n- **Hacker News**: 12条\n- **MIT Technology Review**: 10条\n- **OpenAI Blog**: 15条\n- **BAIR Blog**: 10条\n- **Microsoft Research**: 10条\n- **arXiv**: 12条\n- **MarkTechPost**: 10条\n- **KDnuggets**: 10条\n- **AI Business**: 12条\n- **The Gradient**: 8条\n- **InfoQ**: 12条\n- **GitHub Trending**: 6条\n- **AI News**: 12条\n- **The Decoder**: 10条\n- **量子位**: 10条\n- **机器之心**: 12条\n- **Wired AI**: 10条\n- **VentureBeat AI (RSS)**: 7条\n- **Google DeepMind**: 10条\n- **arXiv NLP**: 15条\n- **arXiv CV**: 15条\n- **arXiv ML**: 15条\n\n---\n\n*🤖 Generated by [ContentForge AI](https://github.com/devfoxaicn/content-forge-ai)*\n"
+}

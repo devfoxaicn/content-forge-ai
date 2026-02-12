@@ -197,14 +197,15 @@
       ],
       "difficulty": "前沿",
       "estimated_words": 14500,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-30"
     }
   ],
   "statistics": {
     "total_episodes": 10,
-    "completed_episodes": 7,
+    "completed_episodes": 8,
     "total_estimated_words": 144500,
-    "completion_rate": 70.0,
+    "completion_rate": 80.0,
     "start_date": "2026-01-29",
     "end_date": "2026-01-30"
   }

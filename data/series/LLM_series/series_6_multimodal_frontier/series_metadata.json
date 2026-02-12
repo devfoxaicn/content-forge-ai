@@ -1,6 +1,6 @@
 {
   "series_info": {
-    "id": "series_6",
+    "id": "series_6_multimodal_frontier",
     "name": "多模态与前沿技术系列",
     "description": "了解多模态模型与最新AI技术趋势",
     "topic_count": 10,
@@ -222,7 +222,7 @@
     "total_episodes": 10,
     "completed_episodes": 10,
     "total_estimated_words": 117000,
-    "completion_rate": "100.0",
+    "completion_rate": 100.0,
     "start_date": "2026-01-11",
     "end_date": "2026-01-15"
   }

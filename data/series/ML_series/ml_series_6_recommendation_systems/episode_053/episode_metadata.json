@@ -1,0 +1,20 @@
+{
+  "id": "ml_topic_053",
+  "series_id": "ml_series_6",
+  "episode": 53,
+  "title": "深度学习推荐模型：从Wide&Deep到DLRM",
+  "description": "Wide&Deep、DeepFM、xDeepFM、DCN。序列推荐：GRU4Rec、BERT4Rec、SASRec。多任务学习：ESMM、MMOE、PLE。YouTube、阿里巴巴推荐架构解析。",
+  "keywords": [
+    "Wide&Deep",
+    "DeepFM",
+    "DCN",
+    "序列推荐",
+    "GRU4Rec",
+    "SASRec",
+    "多任务学习"
+  ],
+  "difficulty": "进阶",
+  "estimated_words": 16000,
+  "status": "completed",
+  "completed_at": "2026-01-29"
+}

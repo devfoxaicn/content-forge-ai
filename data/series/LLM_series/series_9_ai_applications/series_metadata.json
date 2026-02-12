@@ -1,6 +1,6 @@
 {
   "series_info": {
-    "id": "series_9",
+    "id": "series_9_ai_applications",
     "name": "AI应用场景实战系列",
     "description": "垂直行业AI应用落地案例与最佳实践",
     "topic_count": 15,
@@ -159,7 +159,7 @@
       "difficulty": "实践",
       "estimated_words": 14000,
       "status": "completed",
-      "completed_at": "2026-01-13"
+      "completed_at": "2026-01-14"
     },
     {
       "id": "topic_079",
@@ -216,7 +216,7 @@
       "difficulty": "实践",
       "estimated_words": 12000,
       "status": "completed",
-      "completed_at": "2026-01-14"
+      "completed_at": "2026-01-28"
     },
     {
       "id": "topic_082",
@@ -299,8 +299,8 @@
     "total_episodes": 15,
     "completed_episodes": 14,
     "total_estimated_words": 199000,
-    "completion_rate": "93.3",
+    "completion_rate": 93.3,
     "start_date": "2026-01-09",
-    "end_date": "2026-01-14"
+    "end_date": "2026-01-28"
   }
 }

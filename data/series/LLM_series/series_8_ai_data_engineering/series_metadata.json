@@ -1,6 +1,6 @@
 {
   "series_info": {
-    "id": "series_8",
+    "id": "series_8_ai_data_engineering",
     "name": "AI数据处理与工程系列",
     "description": "AI数据工程全流程：从采集到优化",
     "topic_count": 10,
@@ -204,7 +204,7 @@
     "total_episodes": 10,
     "completed_episodes": 10,
     "total_estimated_words": 130000,
-    "completion_rate": "100.0",
+    "completion_rate": 100.0,
     "start_date": "2026-01-12",
     "end_date": "2026-01-15"
   }

@@ -26,7 +26,7 @@
       "difficulty": "入门",
       "estimated_words": 14000,
       "status": "completed",
-      "completed_at": "2026-01-28"
+      "completed_at": "2026-01-31"
     },
     {
       "id": "ml_topic_082",
@@ -120,7 +120,8 @@
       ],
       "difficulty": "实践",
       "estimated_words": 14000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-31"
     },
     {
       "id": "ml_topic_087",
@@ -199,10 +200,10 @@
   ],
   "statistics": {
     "total_episodes": 10,
-    "completed_episodes": 4,
+    "completed_episodes": 5,
     "total_estimated_words": 141000,
-    "completion_rate": 40.0,
+    "completion_rate": 50.0,
     "start_date": "2026-01-28",
-    "end_date": "2026-01-29"
+    "end_date": "2026-01-31"
   }
 }

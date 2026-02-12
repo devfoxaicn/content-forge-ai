@@ -26,7 +26,8 @@
       ],
       "difficulty": "前沿",
       "estimated_words": 15000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-02-10"
     },
     {
       "id": "ml_topic_092",
@@ -154,7 +155,8 @@
       ],
       "difficulty": "前沿",
       "estimated_words": 14000,
-      "status": "pending"
+      "status": "completed",
+      "completed_at": "2026-01-31"
     },
     {
       "id": "ml_topic_099",
@@ -195,10 +197,10 @@
   ],
   "statistics": {
     "total_episodes": 10,
-    "completed_episodes": 0,
+    "completed_episodes": 2,
     "total_estimated_words": 146500,
-    "completion_rate": 0.0,
-    "start_date": null,
-    "end_date": null
+    "completion_rate": 20.0,
+    "start_date": "2026-01-31",
+    "end_date": "2026-02-10"
   }
 }
