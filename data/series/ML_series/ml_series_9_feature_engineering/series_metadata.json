@@ -45,7 +45,7 @@
       "difficulty": "进阶",
       "estimated_words": 15000,
       "status": "completed",
-      "completed_at": "2026-01-28"
+      "completed_at": "2026-02-12"
     },
     {
       "id": "ml_topic_083",
@@ -65,7 +65,7 @@
       "difficulty": "进阶",
       "estimated_words": 14500,
       "status": "completed",
-      "completed_at": "2026-01-28"
+      "completed_at": "2026-02-12"
     },
     {
       "id": "ml_topic_084",
@@ -203,7 +203,7 @@
     "completed_episodes": 5,
     "total_estimated_words": 141000,
     "completion_rate": 50.0,
-    "start_date": "2026-01-28",
-    "end_date": "2026-01-31"
+    "start_date": "2026-01-29",
+    "end_date": "2026-02-12"
   }
 }
