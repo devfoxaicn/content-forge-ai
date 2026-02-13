@@ -4,7 +4,7 @@
 
 这个项目包含专门为写作工作定制的Claude Code Skills，存储在 `.claude/skills/` 目录下。
 
-### ✨ 写作相关Skills (11个)
+### ✨ 写作相关Skills (12个)
 
 | 技能 | 用途 | 适用场景 |
 |------|------|----------|
@@ -19,6 +19,7 @@
 | **email-sequence** | 邮件序列 | 欢迎邮件、培育序列 |
 | **notebooklm** | Google NotebookLM查询 | 文档研究、引用验证 |
 | **x-article-publisher** | 发布到X (Twitter) Articles | Markdown文章自动发布 |
+| **tech-diagram-generator** | 技术图表生成 | 神经网络架构、数据流图、算法流程图 |
 
 ### 🏰 Novel-OS 小说创作系统
 
@@ -43,7 +44,8 @@ content-forge-ai/
 │       ├── marketing-psychology/
 │       ├── email-sequence/
 │       ├── notebooklm/            # Google NotebookLM集成
-│       └── x-article-publisher/   # X文章发布
+│       ├── x-article-publisher/   # X文章发布
+│       └── tech-diagram-generator/ # 技术图表生成 (NEW)
 │
 ├── .novel-os/                     # Novel-OS小说创作系统
 │   ├── instructions/              # 核心指令模板
@@ -79,6 +81,9 @@ content-forge-ai/
 
 # 编辑润色
 "使用 copy-editing 优化这篇文章"
+
+# 生成技术图表
+"使用 tech-diagram-generator 生成 Transformer 架构图"
 ```
 
 ---
