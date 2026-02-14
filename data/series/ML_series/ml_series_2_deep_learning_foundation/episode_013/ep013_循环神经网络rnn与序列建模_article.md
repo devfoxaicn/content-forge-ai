@@ -959,6 +959,12 @@ RNN与序列建模的发展史，本质上是一场对“长程依赖”与“�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Long Short-Term Memory](https://www.bioinf.jku.at/publications/older/2604.pdf) - Hochreiter & Schmidhuber, 1997
+[Sequence to Sequence Learning](https://arxiv.org/abs/1409.3215) - Sutskever et al., 2014
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

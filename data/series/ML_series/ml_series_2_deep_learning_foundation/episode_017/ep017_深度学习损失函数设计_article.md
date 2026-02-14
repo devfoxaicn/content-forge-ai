@@ -872,6 +872,15 @@ $\tau$ 的值直接影响着概率分布的平滑度：
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+**核心论文**：
+- [Machine Learning](https://www.nature.com/articles/nature14539) - Nature 2015 深度学习综述
+- [Deep Learning](https://www.deeplearningbook.org/) - Goodfellow, Bengio, Courville
+
+**开源工具**：
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

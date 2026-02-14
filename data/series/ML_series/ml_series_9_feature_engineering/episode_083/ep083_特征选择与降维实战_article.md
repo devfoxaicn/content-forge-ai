@@ -1135,6 +1135,14 @@ Scikit-learn依然是核心主力，其`feature_selection`模块功能完备。�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Feature Engineering for Machine Learning](https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/) - O'Reilly
+[sklearn.feature_selection](https://scikit-learn.org/stable/modules/feature_selection.html) - 官方文档
+[PCA on sklearn](https://scikit-learn.org/stable/modules/decomposition.html#pca) - 官方文档
+[Dimensionality Reduction: A Comparative Review](https://www.mdpi.com/1407064) - 2021
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

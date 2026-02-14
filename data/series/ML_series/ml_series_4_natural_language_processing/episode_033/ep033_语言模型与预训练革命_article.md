@@ -846,6 +846,14 @@ Hugging Face Transformers生态是目前的首选，其Model Hub涵盖了从GPT�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf) - GPT-2, 2019
+[GPT-4 Technical Report](https://arxiv.org/abs/2303.08774) - OpenAI, 2023
+[BERT: Pre-training of Deep Bidirectional Transformers](https://arxiv.org/abs/1810.04805) - Google, 2018
+[RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692) - Facebook, 2019
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

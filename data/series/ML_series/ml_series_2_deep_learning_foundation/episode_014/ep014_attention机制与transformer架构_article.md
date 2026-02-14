@@ -892,6 +892,12 @@ Attention机制与Transformer架构不仅是技术的更迭，更是AI范式的�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Attention Is All You Need](https://arxiv.org/abs/1706.03762) - Vaswani et al., 2017
+[BERT: Pre-training of Deep Bidirectional Transformers](https://arxiv.org/abs/1810.04805) - Devlin et al., 2018
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

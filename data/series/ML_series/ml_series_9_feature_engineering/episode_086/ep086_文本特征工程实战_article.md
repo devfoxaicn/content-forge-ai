@@ -1078,6 +1078,12 @@ $$ Score_{final}(w) = \lambda \cdot Score_{TF-IDF}(w) + (1-\lambda) \cdot Score_
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Feature Engineering for Machine Learning](https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/) - O'Reilly
+[sklearn.feature_selection](https://scikit-learn.org/stable/modules/feature_selection.html) - 官方文档
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

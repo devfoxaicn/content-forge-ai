@@ -850,9 +850,23 @@ Embedding技术将这些稀疏向量映射到低维的稠密实数向量空间�
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
 **延伸阅读**：
-- 官方文档和GitHub仓库
-- 社区最佳实践案例
-- 相关技术论文和研究报告
+
+**核心论文**：
+- [Learning to Rank for Information Retrieval](https://link.springer.com/book/10.1007/978-3-642-14267-7) - Tie-Yan Liu, Springer 2011
+- [From RankNet to LambdaRank to LambdaMART](https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/) - Burges et al., Microsoft Research 2010
+- [ListNet: A Listwise Approach to Learning to Rank](https://dl.acm.org/doi/10.1145/1273496.1273513) - Cao et al., ICML 2007
+- [AdaRank: A Boosting Algorithm for Information Retrieval](https://dl.acm.org/doi/10.1145/1277741.1277809) - Xu & Li, SIGIR 2007
+
+**开源工具**：
+- [XGBoost Learning to Rank](https://xgboost.readthedocs.io/en/latest/tutorials/learning_to_rank.html) - 官方LTR文档
+- [LightGBM Ranking](https://lightgbm.readthedocs.io/en/latest/Parameters.html#learning-task-parameters) - 微软高效排序框架
+- [TF-Ranking](https://github.com/tensorflow/ranking) - Google开源TensorFlow排序库
+- [RankLib](https://sourceforge.net/p/lemur/wiki/RankLib/) - 经典LTR算法集合
+
+**数据集**：
+- [MSLR-WEB](https://www.microsoft.com/en-us/research/project/mslr/) - Microsoft Learning to Rank数据集
+- [LETOR](https://www.microsoft.com/en-us/research/project/letor-learning-rank-information-retrieval/) - 经典基准数据集
+- [Yahoo Learning to Rank Challenge](https://webscope.sandbox.yahoo.com/catalog.php?datatype=c) - Yahoo LTR挑战赛数据
 
 **互动交流**：欢迎在评论区分享你的观点和经验，让我们一起探讨技术的未来！
 

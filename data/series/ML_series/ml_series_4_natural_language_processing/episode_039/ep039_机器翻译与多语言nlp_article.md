@@ -787,6 +787,12 @@ Zero-shot翻译与低资源语言翻译，本质上是多语言预训练模型�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/) - Jurafsky & Martin
+[Natural Language Processing with Transformers](https://www.oreilly.com/library/view/natural-language-processing/9781098136789/) - O'Reilly
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

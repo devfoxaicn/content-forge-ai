@@ -1090,6 +1090,13 @@ def select_model(scene_type, hardware_tier):
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Rich feature hierarchies for accurate object detection](https://arxiv.org/abs/1311.2524) - R-CNN, 2014
+[You Only Look Once](https://arxiv.org/abs/1506.02640) - YOLO, 2015
+[Faster R-CNN](https://arxiv.org/abs/1506.01497) - Ren et al., 2015
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

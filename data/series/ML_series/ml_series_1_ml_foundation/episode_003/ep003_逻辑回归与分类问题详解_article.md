@@ -1081,6 +1081,12 @@ $$ C \propto \frac{1}{\lambda} $$
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Logistic Regression](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression) - scikit-learn
+[Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-and-machine-learning/) - Bishop, Springer
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

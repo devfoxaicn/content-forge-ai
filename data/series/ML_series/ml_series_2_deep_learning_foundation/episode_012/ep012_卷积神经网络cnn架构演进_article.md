@@ -774,6 +774,13 @@ SE-Block的设计极其精妙：它首先通过“Squeeze”操作（全局平�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[ImageNet Classification with Deep CNNs](https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html) - AlexNet, 2012
+[Very Deep Convolutional Networks](https://arxiv.org/abs/1409.1556) - VGGNet, 2014
+[Deep Residual Learning](https://arxiv.org/abs/1512.03385) - ResNet, 2015
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

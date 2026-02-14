@@ -988,6 +988,15 @@ HBOS是一种基于直方图的无监督方法。它为每个维度构建直方�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Rich feature hierarchies for accurate object detection](https://arxiv.org/abs/1311.2524) - R-CNN, 2014
+[You Only Look Once](https://arxiv.org/abs/1506.02640) - YOLO, 2015
+[Faster R-CNN](https://arxiv.org/abs/1506.01497) - Ren et al., 2015
+[Isolation Forest](https://ieeexplore.ieee.org/document/4781136) - Liu et al., 2008
+[Anomaly Detection Survey](https://arxiv.org/abs/1901.03407) - 2019
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

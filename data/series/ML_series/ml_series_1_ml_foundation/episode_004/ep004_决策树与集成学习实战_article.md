@@ -839,6 +839,14 @@ XGBoost通过L1/L2约束，强行压缩了这些极端的预测值，使得每�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Classification and Regression Trees](https://www.taylorfrancis.com/books/mono/10.1201/9781315139470/classification-regression-trees-leo-breiman) - Breiman et al.
+[XGBoost Documentation](https://xgboost.readthedocs.io/) - 陈天奇等
+[Ensemble Methods in Machine Learning](https://www.sciencedirect.com/science/article/pii/S0893608000000124) - Dietterich, 2000
+[Random Forests](https://link.springer.com/article/10.1023/A:1010933404324) - Breiman, 2001
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

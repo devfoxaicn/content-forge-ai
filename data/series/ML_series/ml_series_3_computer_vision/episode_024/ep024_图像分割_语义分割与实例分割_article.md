@@ -894,6 +894,12 @@ TensorRT是NVIDIA推出的高性能深度学习推理优化器，它支持**FP16
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Fully Convolutional Networks for Semantic Segmentation](https://arxiv.org/abs/1411.4038) - FCN, 2014
+[U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597) - 2015
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

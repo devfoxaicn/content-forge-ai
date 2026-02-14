@@ -1005,6 +1005,15 @@ Python生态依旧是首选：`Scikit-learn`适合构建标准化的机器学习
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[The Elements of Statistical Learning](https://hastie.su.domains/ElemStatLearn/) - Hastie et al., Springer
+[Linear Regression in scikit-learn](https://scikit-learn.org/stable/modules/linear_model.html) - 官方文档
+[Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book.html) - Sutton & Barto
+[Playing Atari with Deep Reinforcement Learning](https://arxiv.org/abs/1312.5602) - DQN, 2013
+[Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347) - PPO, 2017
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

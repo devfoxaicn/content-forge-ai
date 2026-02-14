@@ -895,6 +895,12 @@ DQN不仅是算法的技术突破，更是AI从“感知”迈向“决策”的
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Human-level control through deep reinforcement learning](https://www.nature.com/articles/nature14236) - Nature 2015
+[Deep Q-Network](https://arxiv.org/abs/1312.5602) - Mnih et al., 2013
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

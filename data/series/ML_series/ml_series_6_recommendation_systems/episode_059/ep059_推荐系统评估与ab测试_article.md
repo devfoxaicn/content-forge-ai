@@ -937,6 +937,13 @@ CUPED等方差缩减技术的应用，让我们在处理离线数据时更加从
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Matrix Factorization Techniques for Recommender Systems](https://ieeexplore.ieee.org/document/5197422) - Koren et al., 2009
+[Wide & Deep Learning for Recommender Systems](https://arxiv.org/abs/1606.07792) - Google, 2016
+[DeepFM: A Factorization-Machine based Neural Network](https://arxiv.org/abs/1703.04247) - 2017
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

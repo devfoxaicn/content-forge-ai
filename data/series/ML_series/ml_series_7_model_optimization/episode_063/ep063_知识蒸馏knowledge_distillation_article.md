@@ -873,6 +873,12 @@ DistilBERT是Hugging Face推出的经典蒸馏案例，旨在压缩原始BERT模
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) - Hinton et al., 2015
+[Knowledge Distillation Survey](https://arxiv.org/abs/2006.05525) - 2020
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

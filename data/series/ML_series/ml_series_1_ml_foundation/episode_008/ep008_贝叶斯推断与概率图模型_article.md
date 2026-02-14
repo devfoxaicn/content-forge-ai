@@ -861,6 +861,12 @@ PGM的应用核心在于“关系建模”与“风险量化”。目前主要�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Probabilistic Programming & Bayesian Methods for Hackers](https://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/) - 开源书籍
+[PyMC3 Documentation](https://docs.pymc.io/) - 贝叶斯建模框架
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

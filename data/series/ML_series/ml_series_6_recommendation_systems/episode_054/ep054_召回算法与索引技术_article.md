@@ -1045,6 +1045,12 @@ index_hnsw = faiss.IndexHNSWFlat(d, 32) # M=32 (连接度)
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[Approximate Nearest Neighbor Search](https://arxiv.org/abs/1603.09320) - FAISS
+[Efficient and robust approximate nearest neighbor search](https://ieeexplore.ieee.org/document/7001931) - HNSW
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例

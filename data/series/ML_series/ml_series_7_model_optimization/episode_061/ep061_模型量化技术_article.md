@@ -1391,3 +1391,10 @@ class AdaptiveQuantization(nn.Module):
 2. Zhou et al. "Incremental Network Quantization: Towards Lossless CNNs with Low-Precision Weights" (2017)
 3. TensorRT Developer Guide: https://docs.nvidia.com/deeplearning/tensorrt/
 4. PyTorch Quantization: https://pytorch.org/docs/stable/quantization.html
+
+
+
+**延伸阅读**：
+
+[Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877) - Google, 2017
+[ONNX Runtime Quantization](https://onnxruntime.ai/docs/performance/quantization.html) - Microsoft

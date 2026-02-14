@@ -798,6 +798,12 @@ PCA白化是解决这一问题的利器。它不仅利用PCA去除了特征间�
 
 **关于作者**：本文由ContentForge AI自动生成，基于最新的AI技术热点分析。
 
+
+**延伸阅读**：
+
+[PCA on sklearn](https://scikit-learn.org/stable/modules/decomposition.html#pca) - 官方文档
+[Dimensionality Reduction: A Comparative Review](https://www.mdpi.com/1407064) - 2021
+
 **延伸阅读**：
 - 官方文档和GitHub仓库
 - 社区最佳实践案例
