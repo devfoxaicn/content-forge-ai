@@ -1,4 +1,6 @@
-# ContentForge AI 写作技能配置
+# ContentForge AI Skills 目录
+
+> **完整目录**: 参见 [docs/SKILLS_CATALOG.md](../../docs/SKILLS_CATALOG.md) 包含项目本地、用户级、插件级全部 Skills
 
 ## 📂 项目本地Skills
 
