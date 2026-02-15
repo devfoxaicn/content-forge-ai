@@ -1,0 +1,496 @@
+{
+  "version": "3.0.0",
+  "updated": "2026-02-14",
+  "description": "ContentForge AI Skills 注册表 - 世界级内容生成工厂",
+
+  "categories": {
+    "content_creation": {
+      "name": "内容创作",
+      "icon": "📝",
+      "description": "用于生成内容的核心 Skills",
+      "skills": [
+        {
+          "id": "content-research-writer",
+          "name": "深度研究与写作",
+          "description": "研究、大纲、写作、引用 - 适合技术文章",
+          "keywords": ["技术", "研究", "深度", "教程", "指南", "分析", "原理解析"],
+          "location": "project",
+          "priority": 1,
+          "suitable_for": ["tech_blog", "weixin", "zhihu"],
+          "recommended_for": ["技术", "AI", "编程", "架构", "原理"]
+        },
+        {
+          "id": "copywriting",
+          "name": "营销文案",
+          "description": "营销转化、文案驱动 - 适合产品推广",
+          "keywords": ["营销", "转化", "销售", "推广", "产品", "落地页", "广告"],
+          "location": "project",
+          "priority": 2,
+          "suitable_for": ["marketing_copy"],
+          "recommended_for": ["产品", "营销", "推广", "销售"]
+        },
+        {
+          "id": "scriptwriting",
+          "name": "剧本/视频脚本",
+          "description": "短视频脚本、口语化 - 适合视频内容",
+          "keywords": ["视频", "脚本", "口语", "抖音", "短视频", "分镜", "旁白"],
+          "location": "project",
+          "priority": 3,
+          "suitable_for": ["video_script", "douyin"],
+          "recommended_for": ["视频", "抖音", "短视频", "口语"]
+        },
+        {
+          "id": "social-content",
+          "name": "社交媒体内容",
+          "description": "社交平台内容创作 - 适合小红书/微博",
+          "keywords": ["社交", "小红书", "微博", "朋友圈", "种草", "分享"],
+          "location": "project",
+          "priority": 4,
+          "suitable_for": ["xiaohongshu", "linkedin"],
+          "recommended_for": ["小红书", "社交", "种草", "分享"]
+        },
+        {
+          "id": "email-sequence",
+          "name": "邮件序列",
+          "description": "邮件营销、自动化流程 - 适合邮件内容",
+          "keywords": ["邮件", "订阅", "培育", "转化", "Newsletter", "序列"],
+          "location": "project",
+          "priority": 5,
+          "suitable_for": ["email_sequence"],
+          "recommended_for": ["邮件", "Newsletter", "订阅"]
+        },
+        {
+          "id": "writing-clearly-and-concisely",
+          "name": "清晰简洁写作",
+          "description": "Strunk 原则润色 - 适合所有内容优化",
+          "keywords": ["润色", "简洁", "清晰", "优化", "编辑"],
+          "location": "project",
+          "priority": 6,
+          "suitable_for": ["all"]
+        },
+        {
+          "id": "scientific-writing",
+          "name": "学术论文",
+          "description": "深度研究和学术稿件写作 - 严谨正式",
+          "keywords": ["学术", "论文", "研究", "引用", "严谨"],
+          "location": "external",
+          "source": "github:K-Dense-AI/claude-scientific-skills",
+          "install_command": "npx skills add K-Dense-AI/claude-scientific-skills --skill scientific-writing",
+          "priority": 7,
+          "suitable_for": ["academic"],
+          "recommended_for": ["学术", "论文", "研究"]
+        },
+        {
+          "id": "seo-content",
+          "name": "SEO内容",
+          "description": "关键词优化、搜索引擎友好 - 适合网站内容",
+          "keywords": ["SEO", "关键词", "搜索", "排名", "优化"],
+          "location": "external",
+          "source": "skills.rest/seo-content",
+          "priority": 8,
+          "suitable_for": ["seo_content"],
+          "recommended_for": ["SEO", "关键词", "搜索排名"]
+        }
+      ]
+    },
+
+    "platform_adaptation": {
+      "name": "平台适配",
+      "icon": "📱",
+      "description": "将内容适配到不同平台的 Skills",
+      "skills": [
+        {
+          "id": "platform-adaptation",
+          "name": "通用平台适配",
+          "description": "多平台内容适配 - 支持知乎/抖音等",
+          "keywords": ["适配", "改编", "多平台", "转换"],
+          "location": "project",
+          "platforms": ["zhihu", "douyin", "weibo"]
+        },
+        {
+          "id": "xiaohongshu-auto-publisher",
+          "name": "小红书发布",
+          "description": "9图3:4，emoji风格，IP插画",
+          "platform": "xiaohongshu",
+          "image_count": 9,
+          "image_ratio": "3:4",
+          "style": "emoji丰富，口语化，个人经验分享"
+        },
+        {
+          "id": "wechat-auto-publisher",
+          "name": "微信发布",
+          "description": "1图21:9，深度专业",
+          "platform": "weixin",
+          "image_count": 1,
+          "image_ratio": "21:9",
+          "style": "专业权威，深度分析"
+        },
+        {
+          "id": "x-article-publisher",
+          "name": "X/Twitter发布",
+          "description": "Thread格式，口语化",
+          "platform": "twitter",
+          "format": "thread",
+          "max_per_tweet": 280,
+          "style": "Thread格式，钩子驱动"
+        }
+      ]
+    },
+
+    "enhancement": {
+      "name": "增强功能",
+      "icon": "⚡",
+      "description": "可选的内容增强功能",
+      "skills": [
+        {
+          "id": "tech-diagram-generator",
+          "name": "技术图表",
+          "description": "Mermaid/ASCII图表 - 适合技术文章",
+          "keywords": ["技术", "架构", "流程", "图表", "可视化", "原理"],
+          "suitable_for": ["tech_blog", "weixin", "zhihu"],
+          "recommended_for": ["技术", "架构", "流程", "原理"]
+        },
+        {
+          "id": "copy-editing",
+          "name": "文案编辑",
+          "description": "语法、风格、可读性优化",
+          "keywords": ["编辑", "润色", "优化", "语法", "风格"],
+          "suitable_for": ["all"]
+        },
+        {
+          "id": "marketing-psychology",
+          "name": "心理触发器",
+          "description": "稀缺性、社会认同等营销心理学",
+          "keywords": ["心理", "营销", "转化", "说服", "影响"],
+          "suitable_for": ["marketing_copy", "xiaohongshu"],
+          "recommended_for": ["营销", "转化", "产品"]
+        },
+        {
+          "id": "fact_check",
+          "name": "事实核查",
+          "description": "双阶段事实核查（事前+事后）",
+          "keywords": ["核查", "验证", "准确", "事实", "数据"],
+          "suitable_for": ["all"],
+          "recommended_for": ["技术", "数据", "研究"]
+        },
+        {
+          "id": "seo_optimize",
+          "name": "SEO优化",
+          "description": "关键词优化、元数据生成",
+          "keywords": ["SEO", "关键词", "元数据", "搜索"],
+          "suitable_for": ["tech_blog", "weixin"],
+          "recommended_for": ["网站", "SEO", "搜索"]
+        },
+        {
+          "id": "translation",
+          "name": "多语言翻译",
+          "description": "中/英/日/韩多语言支持",
+          "keywords": ["翻译", "多语言", "国际化"],
+          "suitable_for": ["all"],
+          "recommended_for": ["国际化", "翻译", "多语言"]
+        }
+      ]
+    },
+
+    "image_generation": {
+      "name": "配图生成",
+      "icon": "🎨",
+      "description": "不同风格的配图生成选项",
+      "styles": [
+        {
+          "id": "tech_abstract",
+          "name": "科技抽象",
+          "description": "代码流、电路纹理、冷色调",
+          "colors": ["blue", "purple", "cyan"],
+          "skill": "document-skills:algorithmic-art",
+          "suitable_for": ["技术", "编程", "AI", "数据", "算法", "深度学习"],
+          "recommended_for": ["技术", "AI", "编程", "算法"]
+        },
+        {
+          "id": "dark_minimal",
+          "name": "暗黑极简",
+          "description": "深色背景、稀疏光点、冷峻克制",
+          "colors": ["black", "white", "gray"],
+          "skill": "document-skills:algorithmic-art",
+          "suitable_for": ["极简", "专业", "高端", "设计", "架构"],
+          "recommended_for": ["专业", "高端", "极简", "架构"]
+        },
+        {
+          "id": "soft_gradient",
+          "name": "柔和渐变",
+          "description": "温暖色调、舒适感",
+          "colors": ["orange", "pink", "yellow"],
+          "skill": "document-skills:algorithmic-art",
+          "suitable_for": ["生活", "情感", "温馨", "故事", "体验"],
+          "recommended_for": ["生活", "情感", "温馨", "故事"]
+        },
+        {
+          "id": "illustration",
+          "name": "手绘插画",
+          "description": "IP形象、趣味性强",
+          "skill": "xiaohongshu-auto-publisher",
+          "suitable_for": ["小红书", "轻松", "趣味", "种草", "分享"],
+          "recommended_for": ["小红书", "轻松", "趣味", "种草"]
+        },
+        {
+          "id": "professional",
+          "name": "专业商务",
+          "description": "简洁专业、企业感",
+          "colors": ["navy", "white", "gold"],
+          "skill": "external-dalle",
+          "suitable_for": ["商务", "企业", "B2B", "报告"],
+          "recommended_for": ["商务", "企业", "B2B", "报告"]
+        },
+        {
+          "id": "3d_render",
+          "name": "3D渲染",
+          "description": "立体质感、现代感",
+          "skill": "external-midjourney",
+          "suitable_for": ["产品", "科技", "未来", "创新"],
+          "recommended_for": ["产品", "科技", "未来", "创新"]
+        }
+      ]
+    },
+
+    "publishing_tools": {
+      "name": "发布工具",
+      "icon": "🚀",
+      "description": "一键发布到各平台的工具",
+      "skills": [
+        {
+          "id": "wechat-article-publisher",
+          "name": "微信公众号发布器",
+          "description": "一键将Markdown发布到微信公众号草稿",
+          "platform": "weixin",
+          "location": "external",
+          "source": "github:iamzifei/wechat-article-publisher-skill",
+          "install_command": "npx skill add github:iamzifei/wechat-article-publisher-skill",
+          "status": "available"
+        },
+        {
+          "id": "red-publisher",
+          "name": "小红书发布器",
+          "description": "一键发布图片和笔记到小红书",
+          "platform": "xiaohongshu",
+          "location": "external",
+          "source": "github:iamzifei/red-publisher-skill",
+          "install_command": "npx skill add github:iamzifei/red-publisher-skill",
+          "status": "available"
+        },
+        {
+          "id": "ai-content-publisher",
+          "name": "AI内容发布器",
+          "description": "一键生成高质量AI文章并发布至微信公众号",
+          "platform": "weixin",
+          "location": "external",
+          "source": "skills.rest/ai-content-publisher",
+          "status": "available"
+        }
+      ]
+    },
+
+    "research_tools": {
+      "name": "研究工具",
+      "icon": "🔍",
+      "description": "辅助研究的工具",
+      "skills": [
+        {
+          "id": "notebooklm",
+          "name": "NotebookLM",
+          "description": "Google NotebookLM 知识库查询",
+          "keywords": ["知识库", "查询", "研究", "笔记"],
+          "suitable_for": ["tech_blog", "weixin", "zhihu"]
+        }
+      ]
+    }
+  },
+
+  "platforms": {
+    "xiaohongshu": {
+      "name": "小红书",
+      "icon": "📕",
+      "image_count": 9,
+      "image_ratio": "3:4",
+      "style": "emoji丰富，口语化",
+      "max_length": 2000,
+      "description": "轻松活泼，个人经验分享，适合种草类内容",
+      "skill": "social-content",
+      "publisher": "red-publisher"
+    },
+    "weixin": {
+      "name": "微信公众号",
+      "icon": "💚",
+      "image_count": 1,
+      "image_ratio": "21:9",
+      "style": "专业权威，深度分析",
+      "max_length": 5000,
+      "description": "深度专业，适合长篇技术或商业分析",
+      "skill": "platform-adaptation",
+      "publisher": "wechat-article-publisher"
+    },
+    "zhihu": {
+      "name": "知乎",
+      "icon": "🔵",
+      "image_count": 1,
+      "image_ratio": "16:9",
+      "style": "问答干货，深度分析",
+      "max_length": 5000,
+      "description": "问答风格，干货为主，适合知识分享",
+      "skill": "platform-adaptation"
+    },
+    "twitter": {
+      "name": "Twitter/X",
+      "icon": "🐦",
+      "image_count": 1,
+      "image_ratio": "16:9",
+      "style": "Thread格式，口语化",
+      "max_length": "280 chars/tweet",
+      "description": "Thread 格式，钩子驱动，适合快速传播",
+      "skill": "x-article-publisher"
+    },
+    "douyin": {
+      "name": "抖音",
+      "icon": "🎵",
+      "image_count": 1,
+      "image_ratio": "9:16",
+      "style": "短视频脚本",
+      "max_length": 1500,
+      "description": "短视频脚本，口语化，钩子驱动",
+      "skill": "scriptwriting"
+    },
+    "linkedin": {
+      "name": "LinkedIn",
+      "icon": "💼",
+      "image_count": 1,
+      "image_ratio": "1.91:1",
+      "style": "职业专业",
+      "max_length": 3000,
+      "description": "职业专业，适合职场和商业内容",
+      "skill": "social-content"
+    },
+    "weibo": {
+      "name": "微博",
+      "icon": "🟠",
+      "image_count": 9,
+      "image_ratio": "1:1",
+      "style": "热点话题，短平快",
+      "max_length": 2000,
+      "description": "热点话题，适合快速传播和互动",
+      "skill": "platform-adaptation"
+    },
+    "medium": {
+      "name": "Medium",
+      "icon": "📝",
+      "image_count": 1,
+      "image_ratio": "16:9",
+      "style": "英文深度，故事化",
+      "max_length": 7000,
+      "description": "英文深度内容，适合国际读者",
+      "skill": "platform-adaptation"
+    }
+  },
+
+  "content_styles": {
+    "tech_blog": {
+      "name": "技术博客",
+      "icon": "📄",
+      "description": "简洁直接、干货分享",
+      "max_length": 3000,
+      "emoji_density": "none",
+      "tone": "technical",
+      "skill": "content-research-writer"
+    },
+    "xiaohongshu": {
+      "name": "小红书风格",
+      "icon": "📕",
+      "description": "轻松活泼、emoji丰富",
+      "max_length": 2000,
+      "emoji_density": "high",
+      "tone": "casual",
+      "skill": "social-content"
+    },
+    "weixin": {
+      "name": "公众号风格",
+      "icon": "💚",
+      "description": "专业权威、深度分析",
+      "max_length": 5000,
+      "emoji_density": "low",
+      "tone": "professional",
+      "skill": "platform-adaptation"
+    },
+    "video_script": {
+      "name": "视频脚本",
+      "icon": "🎬",
+      "description": "口语化、短视频脚本",
+      "max_length": 1500,
+      "emoji_density": "medium",
+      "tone": "conversational",
+      "skill": "scriptwriting"
+    },
+    "marketing_copy": {
+      "name": "营销文案",
+      "icon": "📢",
+      "description": "营销转化、文案驱动",
+      "max_length": 2000,
+      "emoji_density": "low",
+      "tone": "persuasive",
+      "skill": "copywriting"
+    },
+    "email_sequence": {
+      "name": "邮件序列",
+      "icon": "📧",
+      "description": "邮件营销、自动化流程",
+      "max_length": 1500,
+      "emoji_density": "none",
+      "tone": "professional_friendly",
+      "skill": "email-sequence"
+    },
+    "academic": {
+      "name": "学术论文",
+      "icon": "🎓",
+      "description": "严谨正式、引用规范",
+      "max_length": 8000,
+      "emoji_density": "none",
+      "tone": "formal",
+      "skill": "scientific-writing",
+      "location": "external"
+    },
+    "seo_content": {
+      "name": "SEO内容",
+      "icon": "🔍",
+      "description": "关键词优化、搜索引擎友好",
+      "max_length": 2500,
+      "emoji_density": "low",
+      "tone": "informative",
+      "skill": "seo-content",
+      "location": "external"
+    }
+  },
+
+  "smart_recommendations": {
+    "topic_keywords_mapping": {
+      "tech_blog": ["技术", "AI", "编程", "架构", "原理", "算法", "深度学习", "机器学习", "LLM", "RAG", "Agent"],
+      "xiaohongshu": ["小红书", "种草", "分享", "生活", "体验", "推荐", "好物"],
+      "weixin": ["公众号", "深度", "分析", "行业", "趋势", "商业"],
+      "video_script": ["视频", "抖音", "短视频", "口语", "教程"],
+      "marketing_copy": ["营销", "产品", "推广", "销售", "转化"],
+      "academic": ["学术", "论文", "研究", "引用", "严谨"]
+    },
+    "platform_recommendations": {
+      "tech_blog": ["zhihu", "weixin", "twitter"],
+      "xiaohongshu": ["xiaohongshu"],
+      "weixin": ["weixin", "zhihu"],
+      "video_script": ["douyin", "xiaohongshu"],
+      "marketing_copy": ["xiaohongshu", "weibo", "weixin"],
+      "academic": ["zhihu", "medium"]
+    },
+    "image_style_recommendations": {
+      "tech_blog": ["dark_minimal", "tech_abstract"],
+      "xiaohongshu": ["illustration", "soft_gradient"],
+      "weixin": ["dark_minimal", "professional"],
+      "video_script": ["soft_gradient", "illustration"],
+      "marketing_copy": ["professional", "3d_render"],
+      "academic": ["dark_minimal", "tech_abstract"]
+    }
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-02-14",
+  "description": "外部 Skills 注册表 - 可从 GitHub/skills.rest 安装的 Skills",
+
+  "sources": {
+    "github": {
+      "description": "GitHub 上的开源 Skills",
+      "install_prefix": "npx skill add github:"
+    },
+    "skills_rest": {
+      "description": "skills.rest 平台上的 Skills",
+      "url": "https://skills.rest",
+      "total_skills": 87000
+    },
+    "npm": {
+      "description": "NPM 包形式的 Skills",
+      "install_prefix": "npx skills add"
+    }
+  },
+
+  "categories": {
+    "publishing": {
+      "name": "发布工具",
+      "icon": "🚀",
+      "skills": [
+        {
+          "id": "wechat-article-publisher",
+          "name": "微信公众号发布器",
+          "description": "一键将Markdown或HTML文章发布到微信公众号草稿",
+          "source": "github:iamzifei/wechat-article-publisher-skill",
+          "author": "iamzifei",
+          "version": "v1.1.0",
+          "platform": "weixin",
+          "features": [
+            "Markdown 转微信公众号格式",
+            "HTML 富文本支持",
+            "图片上传",
+            "草稿保存"
+          ],
+          "install_command": "npx skill add github:iamzifei/wechat-article-publisher-skill",
+          "requirements": {
+            "wechat_appid": "微信公众号 AppID",
+            "wechat_secret": "微信公众号 Secret"
+          },
+          "status": "available"
+        },
+        {
+          "id": "red-publisher",
+          "name": "小红书发布器",
+          "description": "一键发布图片和笔记到小红书",
+          "source": "github:iamzifei/red-publisher-skill",
+          "author": "iamzifei",
+          "version": "v3.0.0",
+          "platform": "xiaohongshu",
+          "features": [
+            "多图发布（最多9张）",
+            "笔记内容编辑",
+            "话题标签",
+            "定时发布"
+          ],
+          "install_command": "npx skill add github:iamzifei/red-publisher-skill",
+          "requirements": {
+            "xiaohongshu_cookie": "小红书登录 Cookie"
+          },
+          "status": "available"
+        },
+        {
+          "id": "ai-content-publisher",
+          "name": "AI内容发布器",
+          "description": "一键生成高质量AI文章并发布至微信公众号",
+          "source": "skills.rest/ai-content-publisher",
+          "platform": "weixin",
+          "features": [
+            "AI 自动生成内容",
+            "一键发布",
+            "多平台支持"
+          ],
+          "status": "available"
+        }
+      ]
+    },
+
+    "writing": {
+      "name": "写作增强",
+      "icon": "📝",
+      "skills": [
+        {
+          "id": "scientific-writing",
+          "name": "学术写作",
+          "description": "深度研究和学术稿件写作，使用两阶段过程",
+          "source": "github:K-Dense-AI/claude-scientific-skills",
+          "author": "K-Dense-AI",
+          "features": [
+            "学术研究方法",
+            "引用格式化",
+            "文献管理",
+            "论文结构优化"
+          ],
+          "install_command": "npx skills add K-Dense-AI/claude-scientific-skills --skill scientific-writing",
+          "status": "available"
+        },
+        {
+          "id": "content-research-writer-external",
+          "name": "深度研究与写作（外部版）",
+          "description": "研究、大纲、写作、引用 - 完整的内容创作流程",
+          "source": "github:ComposioHQ/awesome-claude-skills",
+          "author": "ComposioHQ",
+          "features": [
+            "自动研究收集",
+            "大纲生成",
+            "引用管理",
+            "实时反馈"
+          ],
+          "install_command": "npx skills add ComposioHQ/awesome-claude-skills --skill content-research-writer",
+          "status": "available"
+        }
+      ]
+    },
+
+    "marketing": {
+      "name": "营销技能",
+      "icon": "📢",
+      "skills": [
+        {
+          "id": "marketing-skills",
+          "name": "营销技能包",
+          "description": "专注于营销任务的AI agent技能集合，适合技术营销人员和创始人",
+          "source": "github:coreyhaines31/marketingskills",
+          "author": "coreyhaines31",
+          "features": [
+            "营销策略制定",
+            "内容营销",
+            "SEO优化",
+            "社交媒体营销"
+          ],
+          "install_command": "npx skill add github:coreyhaines31/marketingskills",
+          "status": "available"
+        },
+        {
+          "id": "seo-content",
+          "name": "SEO内容生成",
+          "description": "生成能排名且易读的SEO内容",
+          "source": "skills.rest/seo-content",
+          "features": [
+            "关键词分析",
+            "内容优化",
+            "元数据生成",
+            "搜索排名优化"
+          ],
+          "status": "available"
+        }
+      ]
+    },
+
+    "productivity": {
+      "name": "生产力工具",
+      "icon": "⚡",
+      "skills": [
+        {
+          "id": "claude-skills-alirezarezvani",
+          "name": "生产就绪技能包",
+          "description": "可重用的专业能力包，包含最佳实践、分析工具和战略框架",
+          "source": "github:alirezarezvani/claude-skills",
+          "author": "alirezarezvani",
+          "features": [
+            "最佳实践模板",
+            "分析工具",
+            "战略框架",
+            "工作流优化"
+          ],
+          "install_command": "git clone https://github.com/alirezarezvani/claude-skills && cd claude-skills && npm install",
+          "status": "available"
+        },
+        {
+          "id": "walletconnect-skills",
+          "name": "集中化技能库",
+          "description": "共享Claude Code的集中化仓库，包含自定义斜杠命令和提示模板",
+          "source": "github:WalletConnect/skills",
+          "author": "WalletConnect",
+          "features": [
+            "自定义斜杠命令",
+            "提示模板",
+            "工作流自动化"
+          ],
+          "status": "available"
+        }
+      ]
+    },
+
+    "development": {
+      "name": "开发工具",
+      "icon": "🛠️",
+      "skills": [
+        {
+          "id": "vercel-agent-skills",
+          "name": "开放代理技能工具",
+          "description": "使用npx skills命令的开放代理技能工具",
+          "source": "github:vercel-labs/skills",
+          "author": "vercel-labs",
+          "features": [
+            "Skills 安装管理",
+            "Skills 列表查看",
+            "版本控制"
+          ],
+          "install_command": "npx skills add vercel-labs/agent-skills",
+          "status": "available"
+        },
+        {
+          "id": "openskills",
+          "name": "通用技能加载器",
+          "description": "AI编码代理的通用技能加载器",
+          "source": "github:numman-ali/openskills",
+          "author": "numman-ali",
+          "features": [
+            "本地 Skills 加载",
+            "远程 Skills 安装",
+            "Skills 依赖管理"
+          ],
+          "install_command": "npx openskills install github:username/skill-repo",
+          "status": "available"
+        }
+      ]
+    }
+  },
+
+  "awesome_lists": [
+    {
+      "name": "Awesome Claude Skills",
+      "source": "github:ComposioHQ/awesome-claude-skills",
+      "description": "Claude Skills 精选列表",
+      "skills_count": 50
+    },
+    {
+      "name": "Awesome Claude Skills (travisvn)",
+      "source": "github:travisvn/awesome-claude-skills",
+      "description": "Claude Skills 精选列表（另一个版本）"
+    },
+    {
+      "name": "Awesome Claude Skills (BehiSecc)",
+      "source": "github:BehiSecc/awesome-claude-skills",
+      "description": "Claude Skills 精选列表（社区维护）"
+    }
+  ],
+
+  "installation_guide": {
+    "github_skills": {
+      "method": "npx skill add github:{owner}/{repo}",
+      "examples": [
+        "npx skill add github:iamzifei/wechat-article-publisher-skill",
+        "npx skill add github:iamzifei/red-publisher-skill",
+        "npx skill add github:coreyhaines31/marketingskills"
+      ]
+    },
+    "skills_rest": {
+      "method": "访问 https://skills.rest 搜索并安装",
+      "note": "目前有 87,000+ 个可用技能"
+    },
+    "local_skills": {
+      "method": "将 Skill 文件夹放到 .claude/skills/ 目录",
+      "structure": ".claude/skills/{skill-name}/SKILL.md"
+    }
+  },
+
+  "quick_install_script": {
+    "filename": "install-external-skills.sh",
+    "content": "#!/bin/bash\n\necho \"🔧 安装外部 Skills...\"\n\n# 微信公众号发布\nnpx skill add github:iamzifei/wechat-article-publisher-skill\n\n# 小红书发布\nnpx skill add github:iamzifei/red-publisher-skill\n\n# 营销技能包\nnpx skill add github:coreyhaines31/marketingskills\n\n# 学术写作\nnpx skills add K-Dense-AI/claude-scientific-skills --skill scientific-writing\n\necho \"✅ 外部 Skills 安装完成!\""
+  }
+}

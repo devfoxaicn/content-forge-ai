@@ -85,6 +85,19 @@ class WorkflowState(TypedDict):
     image_suggestions: Optional[List[ImageSuggestion]]
     quality_report: Optional[QualityReport]
 
+    # Topic模式专用字段
+    content_style: Optional[str]  # 内容风格: xiaohongshu/weixin/tech_blog/video_script
+    image_style: Optional[str]  # 配图风格: tech_abstract/dark_minimal/soft_gradient/illustration
+    platforms: Optional[List[str]]  # 目标平台列表
+    enable_fact_check: Optional[bool]  # 是否启用事实核查
+    enable_image: Optional[bool]  # 是否启用配图生成
+    research_data: Optional[Dict[str, Any]]  # 调研数据
+    research_report: Optional[str]  # 调研报告
+    article: Optional[str]  # 长文本文章
+    fact_check_result: Optional[Dict[str, Any]]  # 事实核查结果
+    platform_outputs: Optional[Dict[str, str]]  # 多平台适配输出
+    image_outputs: Optional[Dict[str, Any]]  # 配图输出
+
     # 最终输出
     final_output: Optional[Dict[str, Any]]
 
@@ -104,7 +117,13 @@ def create_initial_state(
     target_audience: str = "大众用户",
     content_type: str = "干货分享",
     keywords: Optional[List[str]] = None,
-    config: Optional[Dict[str, Any]] = None
+    config: Optional[Dict[str, Any]] = None,
+    # Topic模式参数
+    content_style: Optional[str] = None,
+    image_style: Optional[str] = None,
+    platforms: Optional[List[str]] = None,
+    enable_fact_check: bool = True,
+    enable_image: bool = True
 ) -> WorkflowState:
     """
     创建初始工作流状态
@@ -115,6 +134,11 @@ def create_initial_state(
         content_type: 内容类型
         keywords: 关键词列表
         config: 配置字典
+        content_style: 内容风格 (topic模式专用)
+        image_style: 配图风格 (topic模式专用)
+        platforms: 目标平台列表 (topic模式专用)
+        enable_fact_check: 是否启用事实核查 (topic模式专用)
+        enable_image: 是否启用配图生成 (topic模式专用)
 
     Returns:
         WorkflowState: 初始状态
@@ -152,6 +176,19 @@ def create_initial_state(
         recommended_title=None,
         image_suggestions=None,
         quality_report=None,
+
+        # Topic模式专用字段
+        content_style=content_style,
+        image_style=image_style,
+        platforms=platforms,
+        enable_fact_check=enable_fact_check,
+        enable_image=enable_image,
+        research_data=None,
+        research_report=None,
+        article=None,
+        fact_check_result=None,
+        platform_outputs=None,
+        image_outputs=None,
 
         # 最终输出
         final_output=None,

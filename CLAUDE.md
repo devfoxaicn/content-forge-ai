@@ -78,7 +78,7 @@ PYTHONPATH=/Users/z/Documents/work/content-forge-ai python test_storage.py
 6. **Data Source Integration**: Integrated into `RealAITrendAnalyzerAgent` (NOT a separate `src/data_sources/` directory)
 7. **DailyStorage**: Only creates `raw/` and `digest/` directories
 8. **Immutable State Updates**: Use `{**state, **updates}` pattern
-9. **Claude Code Skills**: `.claude/skills/` contains custom skills for enhanced Claude Code functionality
+9. **Claude Code Skills**: `.claude/skills/` contains custom skills including `topic-creator`, `content-validator`, `de-ai-humanizer`, `quality-scorer` for enhanced content generation
 
 ## Deployment Automation
 
@@ -365,6 +365,15 @@ data/series/ML_series/
 - `--start INT` - Start episode (default: 1)
 - `--end INT` - End episode (default: 100)
 - `--series-config PATH` - 指定配置文件 (default: `config/blog_topics_100_complete.json`)
+
+**Claude Code Skills** (invoke with `/skill-name`):
+- `/topic-creator` - 交互式话题内容生成（8种风格、6种配图、8个平台）
+- `/content-validator` - 三层内容验证系统
+- `/de-ai-humanizer` - 四层去AI化处理
+- `/quality-scorer` - 5维度质量评分和爆款标题生成
+- `/copywriting` - 营销文案生成
+- `/platform-adaptation` - 中文平台适配（小红书、微信、知乎等）
+- See `.claude/skills/README.md` for complete skills documentation
 
 ## Architecture Overview
 
@@ -826,18 +835,32 @@ def _call_agent_safely(agent_name: str, state: Dict[str, Any]) -> Dict[str, Any]
 | citation_formatter_agent | longform_article | formatted_citations | GB/T 7714-2015 format |
 
 **Available Exported Agents** (from `src/agents/__init__.py`):
-- BaseAgent
-- RealAITrendAnalyzerAgent
-- TrendsDigestAgent
-- LongFormGeneratorAgent
-- TitleOptimizerAgent
-- ImageGeneratorAgent
+All agents are now properly exported and accessible via `from src.agents import ...`:
 
-**Note**: Many agent files exist in `src/agents/` (16 total) but are NOT exported in `__init__.py`. Agents like `XiaohongshuRefinerAgent` and `TwitterGeneratorAgent` were removed during Refine/Custom mode cleanup. To use additional agents, manually import them from their modules.
+**Core**:
+- BaseAgent, AgentStatus, AgentMetrics, with_retry
+
+**Auto Mode** (v11.0):
+- RealAITrendAnalyzerAgent, ConcurrentFetchAgent
+- TimeWeightAgent, AutoFactCheckAgent, ContentEnhancerAgent, TranslationRefinerAgent
+- TrendCategorizerAgent, NewsScoringAgent
+- TrendsDigestAgent, WorldClassDigestAgentV9, NewsDigestAgent
+
+**Series Mode**:
+- LongFormGeneratorAgent, ResearchAgent
+- CodeReviewAgent, FactCheckAgent, QualityEvaluatorAgent
+- ConsistencyCheckerAgent, VisualizationGeneratorAgent, CitationFormatterAgent
+- SeriesContentEvaluatorAgent
+
+**Quality & Utility**:
+- SEOOptimizerAgent, ContentQualityScorer
+- TitleOptimizerAgent, ImageGeneratorAgent
+
+**Agent Registry**: Use `get_agent_class(name)` to get agent classes by name (e.g., "research", "longform_generator")
 
 ### Critical Notes
 
-1. **Agent Import Requirement**: Only 6 agents are exported by default. To use quality assurance agents (code_review, fact_check, etc.), import directly: `from src.agents.code_review_agent import CodeReviewAgent`
+1. **All Agents Now Exported**: As of the latest update, all agents are properly exported in `src/agents/__init__.py`. Use `from src.agents import AgentName` or `get_agent_class("agent_name")`.
 
 2. **Longform Generator Needs Research Data**: `longform_generator` prioritizes `research_data`; if unavailable, generates based only on `selected_ai_topic`
 
@@ -1071,7 +1094,7 @@ agents:
 
 7. **LLM Provider Base URL**: ZhipuAI uses a special coding endpoint: `https://open.bigmodel.cn/api/coding/paas/v4/` (NOT the standard API endpoint). This is configured in `config.yaml`.
 
-8. **Agent Import Limitation**: Only 6 agents are exported in `__init__.py`. Quality agents (code_review, fact_check, etc.) must be imported directly from their modules.
+8. **Agent Exports**: All agents are now properly exported in `__init__.py`. Use `from src.agents import AgentName` or `get_agent_class("name")` for dynamic access.
 
 9. **Version Context**: `config/config.yaml` header shows v2.5 but actual implementation is v9.2. Features were added incrementally - verify actual implementation in source code.
 
@@ -1102,37 +1125,54 @@ agents:
 
 ### Agent Classes (src/agents/)
 
-**Exported Agents** (available via `from src.agents import ...`):
+All agents are now exported in `__init__.py` and accessible via `from src.agents import ...`:
+
+**Core**:
 | Agent Class | File | Purpose |
 |-------------|------|---------|
 | `BaseAgent` | `base.py` | Agent base class |
-| `RealAITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | AI trend analysis (14 data sources) |
-| `TrendsDigestAgent` | `trends_digest_agent.py` | Trend digest generation |
-| `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
-| `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
-| `ImageGeneratorAgent` | `image_generator.py` | Image prompt generation |
+| `AgentStatus`, `AgentMetrics` | `base.py` | Status/metrics types |
+| `with_retry` | `base.py` | Retry decorator |
 
-**Auto Mode Agents** (import directly):
+**Auto Mode** (v11.0):
 | Agent Class | File | Purpose |
 |-------------|------|---------|
+| `RealAITrendAnalyzerAgent` | `ai_trend_analyzer_real.py` | Multi-source trend analysis |
+| `ConcurrentFetchAgent` | `concurrent_fetch_agent.py` | Concurrent data fetching (10x faster) |
+| `TimeWeightAgent` | `time_weight_agent.py` | Dynamic time-weighted scoring |
+| `AutoFactCheckAgent` | `auto_fact_check_agent.py` | Lightweight fact-checking |
+| `ContentEnhancerAgent` | `content_enhancer_agent.py` | Background/impact analysis |
+| `TranslationRefinerAgent` | `translation_refiner_agent.py` | Strunk rules + terminology |
 | `TrendCategorizerAgent` | `trend_categorizer_agent.py` | 6-category organization (v9.2) |
-| `NewsScoringAgent` | `news_scoring_agent.py` | 6-dimensional scoring |
+| `NewsScoringAgent` | `news_scoring_agent.py` | 7-dimensional scoring |
+| `TrendsDigestAgent` | `trends_digest_agent.py` | Trend digest generation |
 | `WorldClassDigestAgentV9` | `world_class_digest_agent_v8.py` | Chinese digest + JSON |
 
-**Note**: `world_class_digest_agent_v8.py` file name is legacy - it implements v9 functionality. Check file headers for actual version.
+**Note**: `world_class_digest_agent_v8.py` file name is legacy - it implements v9 functionality.
 
-**Series Mode Quality Agents** (import directly):
+**Series Mode**:
 | Agent Class | File | Purpose |
 |-------------|------|---------|
 | `ResearchAgent` | `research_agent.py` | Web search deep research |
+| `LongFormGeneratorAgent` | `longform_generator.py` | Longform generation (staged) |
 | `CodeReviewAgent` | `code_review_agent.py` | Code quality review |
 | `FactCheckAgent` | `fact_check_agent.py` | Fact verification |
 | `QualityEvaluatorAgent` | `quality_evaluator_agent.py` | Comprehensive quality assessment |
 | `ConsistencyCheckerAgent` | `consistency_checker_agent.py` | Terminology/citation check |
 | `VisualizationGeneratorAgent` | `visualization_generator_agent.py` | Auto-generate Mermaid diagrams |
 | `CitationFormatterAgent` | `citation_formatter_agent.py` | GB/T 7714-2015 format |
+| `SeriesContentEvaluatorAgent` | `series_content_evaluator.py` | Series content evaluation |
 
-**Note**: Files for Xiaohongshu/Twitter/WeChat agents exist but were removed during Refine/Custom mode cleanup and are NOT exported.
+**Quality & Utility**:
+| Agent Class | File | Purpose |
+|-------------|------|---------|
+| `SEOOptimizerAgent` | `seo_optimizer_agent.py` | SEO optimization |
+| `ContentQualityScorer` | `content_quality_scorer.py` | Content quality scoring |
+| `TitleOptimizerAgent` | `title_optimizer.py` | Title optimization |
+| `ImageGeneratorAgent` | `image_generator.py` | Image prompt generation |
+
+**Agent Registry**: Use `get_agent_class(name)` to get agent classes by name. Available names:
+`concurrent_fetch`, `time_weight`, `auto_fact_check`, `content_enhancer`, `translation_refiner`, `trend_categorizer`, `news_scoring`, `world_class_digest`, `research`, `longform_generator`, `code_review`, `fact_check`, `quality_evaluator`, `consistency_checker`, `visualization_generator`, `citation_formatter`, `seo_optimizer`, `content_quality_scorer`
 
 ## Related Documentation
 
@@ -1142,7 +1182,7 @@ agents:
 ---
 
 **Version**: v11.0 (current implementation)
-**Updated**: 2026-02-10
+**Updated**: 2026-02-15
 
 ## Version Notes
 
@@ -1171,7 +1211,14 @@ agents:
 
 This CLAUDE.md has been improved with:
 
-1. **v11.0 Performance & Quality Enhancement** (2026-02-10):
+1. **Documentation Update** (2026-02-15):
+   - **Updated Agent Exports**: All agents are now properly exported in `src/agents/__init__.py` (was previously documented as only 6)
+   - **Added Agent Registry**: Use `get_agent_class(name)` for dynamic agent access
+   - **Added Skills Commands**: Documented `/topic-creator`, `/content-validator`, `/de-ai-humanizer`, `/quality-scorer` skills
+   - **Updated Agent Classes table**: Complete list of all exported agents with files
+   - **Removed outdated advice**: No longer need to import quality agents directly
+
+2. **v11.0 Performance & Quality Enhancement** (2026-02-10):
    - **Added ConcurrentFetchAgent**: 并发获取26个数据源，性能提升10倍，可配置并发数和超时
    - **Added TimeWeightAgent**: 动态时间权重推荐（dynamic/linear/exponential），72小时以上时效分为0，1小时内新闻2倍加成
    - **Added AutoFactCheckAgent**: 轻量级事实核查Top 10新闻，使用LLM内置知识（无需Tavily），置信度阈值0.7
@@ -1223,9 +1270,8 @@ This CLAUDE.md has been improved with:
 1. Use `--series-config` flag to switch between LLM and ML series
 2. Use batch generation scripts for parallel ML episode generation
 3. Only use Auto and Series modes - Custom/Refine are not available
-4. Import quality agents directly when needed: `from src.agents.code_review_agent import CodeReviewAgent`
+4. All agents are now exported in `src/agents/__init__.py` - use `from src.agents import AgentName` or `get_agent_class("name")`
 5. Test in mock mode first before running with live APIs
-6. Verify agent availability in `src/agents/__init__.py` before use
-7. Check `docs/DATA_SOURCES.md` for complete 30 data source documentation (v9.2)
-8. Be aware that `config.yaml` contains configurations for removed agents (Xiaohongshu/Twitter/WeChat)
-9. Enable v11.0 agents in config.yaml for better performance and quality (concurrent_fetch, time_weight, auto_fact_check, content_enhancer, translation_refiner)
+6. Check `docs/DATA_SOURCES.md` for complete 30 data source documentation (v9.2)
+7. Be aware that `config.yaml` contains configurations for removed agents (Xiaohongshu/Twitter/WeChat)
+8. Enable v11.0 agents in config.yaml for better performance and quality (concurrent_fetch, time_weight, auto_fact_check, content_enhancer, translation_refiner)

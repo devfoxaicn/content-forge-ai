@@ -308,6 +308,136 @@ class SeriesStorage(BaseStorage):
         return filepath
 
 
+class TopicStorage(BaseStorage):
+    """Topic 模式存储
+
+    路径结构：
+    data/topic/YYYYMMDD/{topic_name}/
+    ├── research_report.md   # 调研报告（含事前核查）
+    ├── article.md           # 长文本文章
+    ├── fact_check.md        # 事后核查报告
+    ├── platforms/           # 多平台适配
+    │   ├── xiaohongshu.md
+    │   ├── weixin.md
+    │   └── zhihu.md
+    └── images/              # 配图
+        ├── cover.png
+        └── chapter_*.png
+    """
+
+    def __init__(
+        self,
+        topic_name: str,
+        date_str: Optional[str] = None,
+        base_dir: str = "data"
+    ):
+        """
+        初始化 Topic 存储
+
+        Args:
+            topic_name: 话题名称
+            date_str: 日期字符串 (YYYYMMDD)，默认为今天
+            base_dir: 基础存储目录
+        """
+        super().__init__(base_dir)
+
+        # 清理话题名称（用于目录名）
+        self.topic_name = self._sanitize_name(topic_name)
+
+        if date_str:
+            self.date_str = date_str
+        else:
+            self.date_str = _get_now_beijing_time().strftime("%Y%m%d")
+
+        # 创建 topic/{日期}/{话题} 目录
+        self.topic_dir = self.base_dir / "topic" / self.date_str / self.topic_name
+        self.topic_dir.mkdir(parents=True, exist_ok=True)
+
+        # 创建子目录
+        self._create_topic_subdirs(self.topic_dir)
+
+    def _sanitize_name(self, name: str) -> str:
+        """清理名称，只保留安全字符"""
+        import re
+        # 移除或替换不安全的字符
+        name = re.sub(r'[^\w\u4e00-\u9fff\-]', '_', name)
+        # 移除连续的下划线
+        name = re.sub(r'_+', '_', name)
+        # 移除首尾的下划线
+        name = name.strip('_')
+        # 限制长度
+        return name[:50] if name else "untitled"
+
+    def _create_topic_subdirs(self, parent_dir: Path) -> None:
+        """创建 Topic 模式专用子目录"""
+        subdirs = ["platforms", "images"]
+        for subdir in subdirs:
+            (parent_dir / subdir).mkdir(exist_ok=True)
+
+    def get_root_dir(self) -> Path:
+        return self.topic_dir
+
+    def get_topic_dir(self) -> Path:
+        """获取话题目录路径"""
+        return self.topic_dir
+
+    def get_topic_name(self) -> str:
+        return self.topic_name
+
+    def get_date_string(self) -> str:
+        return self.date_str
+
+    def save_article(self, content: str) -> Path:
+        """保存长文本文章"""
+        filepath = self.topic_dir / "article.md"
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return filepath
+
+    def save_research_report(self, content: str) -> Path:
+        """保存调研报告（含事前核查）"""
+        filepath = self.topic_dir / "research_report.md"
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return filepath
+
+    def save_fact_check(self, content: str) -> Path:
+        """保存事后核查报告"""
+        filepath = self.topic_dir / "fact_check.md"
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return filepath
+
+    def save_platform_content(self, platform: str, content: str) -> Path:
+        """保存平台适配内容"""
+        platforms_dir = self.topic_dir / "platforms"
+        platforms_dir.mkdir(exist_ok=True)
+        filepath = platforms_dir / f"{platform}.md"
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return filepath
+
+    def save_image(self, image_data: bytes, filename: str) -> Path:
+        """保存图片"""
+        images_dir = self.topic_dir / "images"
+        images_dir.mkdir(exist_ok=True)
+        filepath = images_dir / filename
+        with open(filepath, 'wb') as f:
+            f.write(image_data)
+        return filepath
+
+    def get_image_path(self, filename: str) -> Path:
+        """获取图片路径"""
+        return self.topic_dir / "images" / filename
+
+    def save_metadata(self, metadata: dict) -> Path:
+        """保存话题元数据"""
+        filepath = self.topic_dir / "metadata.json"
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(metadata, f, ensure_ascii=False, indent=2)
+        return filepath
+
+
 class StorageFactory:
     """存储工厂类 - 统一创建存储实例"""
 
@@ -329,18 +459,28 @@ class StorageFactory:
         return SeriesStorage(series_id, episode_number, base_dir)
 
     @staticmethod
+    def create_topic(
+        topic_name: str,
+        date_str: Optional[str] = None,
+        base_dir: str = "data"
+    ) -> TopicStorage:
+        """创建 Topic 模式存储"""
+        return TopicStorage(topic_name, date_str, base_dir)
+
+    @staticmethod
     def create_storage(
-        mode: Literal["daily", "series"],
+        mode: Literal["daily", "series", "topic"],
         **kwargs
     ) -> BaseStorage:
         """
         通用存储创建方法
 
         Args:
-            mode: 存储模式 ("daily", "series")
+            mode: 存储模式 ("daily", "series", "topic")
             **kwargs: 模式特定参数
                 - daily: date (可选)
                 - series: series_id, episode_number
+                - topic: topic_name, date_str (可选)
 
         Returns:
             BaseStorage: 对应的存储实例
@@ -354,6 +494,12 @@ class StorageFactory:
             return StorageFactory.create_series(
                 series_id=kwargs["series_id"],
                 episode_number=kwargs["episode_number"],
+                base_dir=kwargs.get("base_dir", "data")
+            )
+        elif mode == "topic":
+            return StorageFactory.create_topic(
+                topic_name=kwargs["topic_name"],
+                date_str=kwargs.get("date_str"),
                 base_dir=kwargs.get("base_dir", "data")
             )
         else:
@@ -371,6 +517,7 @@ __all__ = [
     "BaseStorage",
     "DailyStorage",
     "SeriesStorage",
+    "TopicStorage",
     "StorageFactory",
     "get_storage",
 ]

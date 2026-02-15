@@ -331,6 +331,161 @@ storage:
     dir: "data/series"
     format: "json"
 
+  # 主题内容存储（Topic模式）
+  topic:
+    dir: "data/topic"
+    format: "json"
+
+# ==================== Topic模式配置 ====================
+topic_mode:
+  enabled: true
+  default_content_style: "tech_blog"  # 默认内容风格
+  default_image_style: "tech_abstract"  # 默认配图风格
+  default_platforms:  # 默认目标平台
+    - "xiaohongshu"
+    - "weixin"
+  default_enhancements:  # 默认增强功能
+    - "fact_check"
+
+  # 内容风格配置
+  content_styles:
+    xiaohongshu:
+      name: "小红书风格"
+      description: "轻松活泼、emoji丰富、个人经验分享"
+      max_length: 2000
+      tone: "casual"
+      emoji_density: "high"
+      skill: "social-content"
+    weixin:
+      name: "公众号/知乎风格"
+      description: "专业权威、深度分析、数据驱动"
+      max_length: 5000
+      tone: "professional"
+      emoji_density: "low"
+      skill: "platform-adaptation"
+    tech_blog:
+      name: "技术博客风格"
+      description: "简洁直接、干货分享、技术导向"
+      max_length: 3000
+      tone: "technical"
+      emoji_density: "none"
+      skill: "content-research-writer"
+    video_script:
+      name: "视频脚本风格"
+      description: "口语化、短视频脚本、钩子驱动"
+      max_length: 1500
+      tone: "conversational"
+      emoji_density: "medium"
+      skill: "scriptwriting"
+    marketing_copy:
+      name: "营销文案风格"
+      description: "营销转化、文案驱动、强调价值"
+      max_length: 2000
+      tone: "persuasive"
+      emoji_density: "low"
+      skill: "copywriting"
+    email_sequence:
+      name: "邮件序列风格"
+      description: "邮件营销、自动化流程、培育转化"
+      max_length: 1500
+      tone: "professional_friendly"
+      emoji_density: "none"
+      skill: "email-sequence"
+
+  # 配图风格配置
+  image_styles:
+    tech_abstract:
+      name: "科技抽象"
+      description: "代码流、电路纹理、冷色调"
+      colors: ["blue", "purple", "cyan"]
+      elements: ["circuit", "code", "particles"]
+      skill: "document-skills:algorithmic-art"
+    dark_minimal:
+      name: "暗黑极简"
+      description: "深色背景、稀疏光点、冷峻克制"
+      colors: ["black", "white", "gray"]
+      elements: ["dots", "lines", "minimal"]
+      skill: "document-skills:algorithmic-art"
+    soft_gradient:
+      name: "柔和渐变"
+      description: "温暖色调、舒适阅读感"
+      colors: ["orange", "pink", "yellow"]
+      elements: ["gradient", "soft", "warm"]
+      skill: "document-skills:algorithmic-art"
+    illustration:
+      name: "手绘插画"
+      description: "IP形象、趣味性强、适合社交平台"
+      colors: ["colorful"]
+      elements: ["cartoon", "fun", "playful"]
+      skill: "xiaohongshu-auto-publisher"  # 或 wechat-auto-publisher
+
+  # 平台配置
+  platforms:
+    xiaohongshu:
+      name: "小红书"
+      image_count: 9  # 1封面 + 8章节
+      image_ratio: "3:4"
+      skill: "xiaohongshu-auto-publisher"
+    weixin:
+      name: "微信公众号"
+      image_count: 1
+      image_ratio: "21:9"
+      skill: "wechat-auto-publisher"
+    zhihu:
+      name: "知乎"
+      image_count: 1
+      image_ratio: "16:9"
+      skill: "platform-adaptation"
+    twitter:
+      name: "Twitter/X"
+      image_count: 1
+      image_ratio: "16:9"
+      skill: "x-article-publisher"
+    douyin:
+      name: "抖音"
+      image_count: 1
+      image_ratio: "9:16"
+      skill: "platform-adaptation"
+    linkedin:
+      name: "LinkedIn"
+      image_count: 1
+      image_ratio: "1.91:1"
+      skill: "social-content"
+
+  # 增强功能配置
+  enhancements:
+    tech_diagrams:
+      name: "技术图表"
+      description: "生成 Mermaid/ASCII 技术图表"
+      skill: "tech-diagram-generator"
+    copy_edit:
+      name: "文案编辑"
+      description: "语法、风格、可读性优化"
+      skill: "copy-editing"
+    psychology_hooks:
+      name: "心理学触发器"
+      description: "添加心理触发器（稀缺性、社会认同等）"
+      skill: "marketing-psychology"
+    fact_check:
+      name: "事实核查"
+      description: "双阶段事实核查（事前+事后）"
+      skill: "internal"
+
+  # 事实核查配置
+  fact_check:
+    enable_pre_check: true  # 事前核查（调研阶段）
+    enable_post_check: true  # 事后核查（写作完成后）
+    confidence_threshold: 0.8
+    use_tavily: false  # 使用LLM内置知识
+
+  # 配图生成配置
+  image_generation:
+    enable: true
+    provider: "gemini"  # gemini / algorithmic_art
+    model: "gemini-2.0-flash-exp"
+    use_ip_characters: true  # 使用IP形象（插画风格）
+    ip_character_path: "pictures/"
+
 # ==================== 开发模式 ====================
 development:
   debug: false
