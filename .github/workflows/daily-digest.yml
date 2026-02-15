@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: daily-digest-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   generate-digest:
     runs-on: ubuntu-latest
@@ -77,6 +81,8 @@ jobs:
       - name: Check for new data
         id: check-data
         run: |
+          set -euo pipefail
+
           if [ -d "data/daily" ]; then
             echo "has_data=true" >> $GITHUB_OUTPUT
 
@@ -85,11 +91,11 @@ jobs:
             echo "latest_dir=$latest_dir" >> $GITHUB_OUTPUT
 
             # 检查是否有 digest 文件
-            if [ -f "data/daily/$latest_dir/digest/digest_"*".md" ]; then
+            digest_file=$(ls -t data/daily/$latest_dir/digest/digest_*.md 2>/dev/null | head -1 || true)
+            if [ -n "$digest_file" ]; then
               echo "has_digest=true" >> $GITHUB_OUTPUT
 
               # 显示生成内容摘要
-              digest_file=$(ls -t data/daily/$latest_dir/digest/digest_*.md | head -1)
               echo "digest_file=$digest_file" >> $GITHUB_OUTPUT
 
               # 提取标题
@@ -108,6 +114,7 @@ jobs:
         env:
           TZ: Asia/Shanghai
         run: |
+          set -euo pipefail
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
@@ -125,8 +132,23 @@ jobs:
             # 提交更改
             git commit -m "feat: AI内容自动生成 - $commit_date" -m "生成时间: $commit_time (北京时间)"
 
-            # 推送到远程仓库
-            git push
+            # 推送到远程仓库（带重试）
+            pushed=false
+            for attempt in 1 2 3; do
+              echo "Push attempt $attempt/3"
+              if git pull --rebase origin main && git push; then
+                pushed=true
+                break
+              fi
+
+              echo "Push attempt $attempt failed, retrying in 10 seconds..."
+              sleep 10
+            done
+
+            if [ "$pushed" != "true" ]; then
+              echo "❌ 推送失败：重试后仍未成功"
+              exit 1
+            fi
 
             echo "✅ 数据已成功提交到 GitHub!"
           fi
@@ -135,27 +157,37 @@ jobs:
       - name: Trigger ai-insights sync
         if: steps.check-data.outputs.has_digest == 'true'
         run: |
+          set -euo pipefail
           echo "🔄 触发 ai-insights 内容同步..."
 
-          # 触发 repository_dispatch
-          response=$(curl -s -w "\n%{http_code}" -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${{ secrets.AI_INSIGHTS_SYNC_PAT }}" \
-            https://api.github.com/repos/Ming-H/ai-insights/dispatches \
-            -d '{"event_type":"content-updated"}')
+          dispatch_ok=false
+          for attempt in 1 2 3 4 5; do
+            echo "Dispatch attempt $attempt/5"
+            response=$(curl -s -w "\n%{http_code}" -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: token ${{ secrets.AI_INSIGHTS_SYNC_PAT }}" \
+              https://api.github.com/repos/Ming-H/ai-insights/dispatches \
+              -d '{"event_type":"content-updated","client_payload":{"source":"content-forge-ai","latest_dir":"${{ steps.check-data.outputs.latest_dir }}"}}')
 
-          http_code=$(echo "$response" | tail -n1)
-          body=$(echo "$response" | sed '$d')
+            http_code=$(echo "$response" | tail -n1)
+            body=$(echo "$response" | sed '$d')
+            echo "HTTP Status: $http_code"
+            echo "Response: $body"
 
-          echo "HTTP Status: $http_code"
-          echo "Response: $body"
+            if [ "$http_code" = "204" ]; then
+              dispatch_ok=true
+              echo "✅ 已成功触发 ai-insights 同步"
+              break
+            fi
 
-          if [ "$http_code" = "204" ]; then
-            echo "✅ 已成功触发 ai-insights 同步"
-          else
-            echo "⚠️ 触发失败，HTTP code: $http_code"
-            echo "请检查 AI_INSIGHTS_SYNC_PAT Secret 是否正确配置"
-            exit 1
+            if [ "$attempt" -lt 5 ]; then
+              echo "Dispatch failed, retrying in 15 seconds..."
+              sleep 15
+            fi
+          done
+
+          if [ "$dispatch_ok" != "true" ]; then
+            echo "::warning::repository_dispatch 触发失败。ai-insights 定时同步将在下一轮自动兜底，请检查 AI_INSIGHTS_SYNC_PAT。"
           fi
 
       # 8. 生成摘要报告
